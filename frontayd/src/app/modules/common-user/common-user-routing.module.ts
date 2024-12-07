@@ -9,7 +9,7 @@ import { TransfersComponent } from './transfers/transfers.component';
 
 const routes: Routes = [
 {
-  path:'cuenta/:idcuenta', component: AccountComponent
+  path:'cuenta', component: AccountComponent
 },
 {
   path:'dashboard', component: DashboardComponent
@@ -18,7 +18,7 @@ const routes: Routes = [
   path:'pagos', component: PaymentsComponent
 },
 {
-  path:'transacciones/:idtrans', component: TransactionsComponent
+  path:'transacciones', component: TransactionsComponent
 },
 {
   path:'transferencia', component: TransfersComponent
