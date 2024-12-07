@@ -15,6 +15,12 @@
         <a routerLink="/user/pagos" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
       </div>
   
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Prestamos</h2>
+        <p class="mt-2 text-gray-600">Realiza los pagos a los prestamos al banco.</p>
+        <button [routerLink]="['/user/prestamos']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Editar</button>
+      </div>
+
       <div class="bg-blue-100 p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
         <h2 class="text-xl font-semibold text-blue-600">Transacciones</h2>
         <p class="mt-2 text-gray-600">Realiza cualquiera de tus transacciones bancarias ahora.</p>
@@ -27,7 +33,7 @@
         <p class="mt-2 text-gray-600">Realiza tus transferencias.</p>
         <button [routerLink]="['/user/transferencia']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Editar</button>
       </div>
-  
+
     </div>
   </div>
   

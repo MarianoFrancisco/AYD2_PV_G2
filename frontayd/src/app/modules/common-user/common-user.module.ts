@@ -7,7 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { TransfersComponent } from './transfers/transfers.component';
-
+import { LoanPaymentsComponent } from './loan-payments/loan-payments.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -17,7 +17,8 @@ import { TransfersComponent } from './transfers/transfers.component';
     DashboardComponent,
     PaymentsComponent,
     TransactionsComponent,
-    TransfersComponent
+    TransfersComponent,
+    LoanPaymentsComponent
   ]
 })
 export class CommonUserModule { }
