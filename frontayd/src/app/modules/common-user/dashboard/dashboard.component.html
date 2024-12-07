@@ -1,1 +1,33 @@
-<p>dashboard works!</p>
+<div class="container mx-auto px-4 py-6">
+    <h1 class="text-3xl font-semibold mb-6 text-center text-blue-600">Bienvenido a Money Bin</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+      <div class="bg-blue-100 p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold text-blue-600">Cuenta</h2>
+        <p class="mt-2 text-gray-600">Revisa tus estados de cuenta.</p>
+        <a routerLink="/user/cuenta" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+  
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Pagos</h2>
+        <p class="mt-2 text-gray-600">Realiza los pagos de cualquier servicio</p>
+        <a routerLink="/user/pagos" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+  
+      <div class="bg-blue-100 p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold text-blue-600">Transacciones</h2>
+        <p class="mt-2 text-gray-600">Realiza cualquiera de tus transacciones bancarias ahora.</p>
+        <a routerLink="/user/transacciones" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+  
+
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Transferencia</h2>
+        <p class="mt-2 text-gray-600">Realiza tus transferencias.</p>
+        <button [routerLink]="['/user/transferencia']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Editar</button>
+      </div>
+  
+    </div>
+  </div>
+  
