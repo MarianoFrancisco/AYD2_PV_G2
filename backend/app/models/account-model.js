@@ -33,7 +33,7 @@ const AccountModel = sequelize.define("accounts", {
 
 }, {
     tableName: "accounts",
-    timeStamps: false
+    timestamps: false
 
 })
 
