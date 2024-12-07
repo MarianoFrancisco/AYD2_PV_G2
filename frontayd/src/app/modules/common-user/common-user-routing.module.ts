@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { TransfersComponent } from './transfers/transfers.component';
+import {LoanPaymentsComponent} from './loan-payments/loan-payments.component'
 
 const routes: Routes = [
 {
@@ -22,6 +23,9 @@ const routes: Routes = [
 },
 {
   path:'transferencia', component: TransfersComponent
+},
+{
+  path:'prestamos', component: LoanPaymentsComponent
 }
 ];
 
