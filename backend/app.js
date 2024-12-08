@@ -10,6 +10,8 @@ import { fileURLToPath } from 'url';
 import accountRouter from "./app/routes/account.routes.js";
 import paymentServiceRouter from "./app/routes/payment-services.routes.js";
 
+import clientRouter from "./app/routes/client-info.routes.js";
+
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -24,7 +26,11 @@ const api = '/api';
 const showBalance = `${api}/account`;
 const paymentService = `${api}/payment-service`;
 
+const clientService = `${api}/client`;
+
 app.use(showBalance, accountRouter);
 app.use(paymentService, paymentServiceRouter);
+
+app.use(clientService, clientRouter);
 
 export default app;
