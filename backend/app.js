@@ -9,6 +9,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import accountRouter from "./app/routes/account.routes.js";
 import paymentServiceRouter from "./app/routes/payment-services.routes.js";
+import loanPaymentRouter from "./app/routes/loan-payment.routes.js";
 
 const app = express();
 
@@ -23,8 +24,10 @@ app.use('/signature', express.static(path.join(__dirname, 'img')));
 const api = '/api';
 const showBalance = `${api}/account`;
 const paymentService = `${api}/payment-service`;
+const loanPayment = `${api}/loan-payment`;
 
 app.use(showBalance, accountRouter);
 app.use(paymentService, paymentServiceRouter);
+app.use(loanPayment, loanPaymentRouter);
 
 export default app;
