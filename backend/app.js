@@ -11,6 +11,8 @@ import accountRouter from "./app/routes/account.routes.js";
 import paymentServiceRouter from "./app/routes/payment-services.routes.js";
 import loanPaymentRouter from "./app/routes/loan-payment.routes.js";
 
+import clientRouter from "./app/routes/client-info.routes.js";
+
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,8 +28,12 @@ const showBalance = `${api}/account`;
 const paymentService = `${api}/payment-service`;
 const loanPayment = `${api}/loan-payment`;
 
+const clientService = `${api}/client`;
+
 app.use(showBalance, accountRouter);
 app.use(paymentService, paymentServiceRouter);
 app.use(loanPayment, loanPaymentRouter);
+
+app.use(clientService, clientRouter);
 
 export default app;
