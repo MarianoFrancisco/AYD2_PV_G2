@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS users (
   cui CHAR(13) UNIQUE NOT NULL,
   email VARCHAR(100) UNIQUE,
   phone VARCHAR(15),
-  pin CHAR(6)
+  pin CHAR(6),
+  signature VARCHAR(255) NOT NULL
 );
 CREATE TABLE IF NOT EXISTS accounts (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -15,6 +16,7 @@ CREATE TABLE IF NOT EXISTS accounts (
   account_number CHAR(10) UNIQUE NOT NULL,
   balance DECIMAL(10, 2) DEFAULT 0 CHECK (balance >= 0),
   created_at BIGINT NOT NULL,
+  update_balance_at BIGINT NOT NULL
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS service_payments (
