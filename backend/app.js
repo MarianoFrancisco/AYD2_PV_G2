@@ -13,6 +13,8 @@ import loanPaymentRouter from "./app/routes/loan-payment.routes.js";
 
 import clientRouter from "./app/routes/client-info.routes.js";
 
+import depositRouter from './app/routes/deposit.routes.js';
+
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -30,10 +32,14 @@ const loanPayment = `${api}/loan-payment`;
 
 const clientService = `${api}/client`;
 
+const deposit = `${api}/deposit`;
+
 app.use(showBalance, accountRouter);
 app.use(paymentService, paymentServiceRouter);
 app.use(loanPayment, loanPaymentRouter);
 
 app.use(clientService, clientRouter);
+
+app.use(deposit, depositRouter);
 
 export default app;
