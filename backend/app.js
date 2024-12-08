@@ -15,6 +15,8 @@ import clientRouter from "./app/routes/client-info.routes.js";
 
 import depositRouter from './app/routes/deposit.routes.js';
 
+import withdrawalRouter from './app/routes/withdrawal.routes.js';
+
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -34,6 +36,8 @@ const clientService = `${api}/client`;
 
 const deposit = `${api}/deposit`;
 
+const withdrawal = `${api}/withdrawal`;
+
 app.use(showBalance, accountRouter);
 app.use(paymentService, paymentServiceRouter);
 app.use(loanPayment, loanPaymentRouter);
@@ -41,5 +45,7 @@ app.use(loanPayment, loanPaymentRouter);
 app.use(clientService, clientRouter);
 
 app.use(deposit, depositRouter);
+
+app.use(withdrawal, withdrawalRouter);
 
 export default app;
