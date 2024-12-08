@@ -1,5 +1,6 @@
 import ServicePaymentModel from '../models/service-payment.js';
 import AccountModel from '../models/account-model.js';
+import TransactionHistoryModel from '../models/transaction-history-model.js';
 import sequelize from '../../config/database-connection.js';
 
 /*
@@ -48,6 +49,14 @@ const save = async (req, res) => {
             { balance: accountModel.balance - amount },
             { transaction }
         );
+
+        await TransactionHistoryModel.create({
+            account_id: accountModel.id,
+            transaction_type: 'Pago de Servicio',
+            amount,
+            description: `Pago de servicio - ${service_name} (${service_code})`,
+            created_at: Math.floor(Date.now() / 1000)
+        }, { transaction });
 
         const voucher = {
             "account_number": accountModel.account_number,
