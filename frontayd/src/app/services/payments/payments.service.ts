@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Payments } from '../../interfaces/payments';
+import { Payments, ResponsePayments, VoucherPayments } from '../../interfaces/payments';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentsService {
-  private urlApi:string = 'http://localhost:300/'
+  private urlApi:string = 'http://localhost:5000/api/payment-service'
 
 
   constructor(private http: HttpClient) { }
 
-  sendPayment(data: Payments ){
-    this.http.post(this.urlApi,data)
+  //Metodo para envíar pago
+  sendPayment(data: Payments ): Observable<{payment: ResponsePayments, voucher: VoucherPayments}>{
+    //console.log(data)
+    return this.http.post<{payment: ResponsePayments, voucher: VoucherPayments}>(this.urlApi,data)
   }
 }
