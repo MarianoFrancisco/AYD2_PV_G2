@@ -26,9 +26,11 @@ const DepositModel = sequelize.define(
             allowNull: false,
         },
         created_at: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: DataTypes.NOW,
+            //type: DataTypes.DATE,
+            //allowNull: false,
+            //defaultValue: DataTypes.NOW,
+            type: DataTypes.BIGINT,
+            allowNull: false
         },
     },
     {
