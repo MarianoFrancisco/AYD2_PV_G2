@@ -1,62 +1,58 @@
-<div class="flex flex-col items-center  min-h-screen bg-gray-100 p-4">
-    <!-- Contenedor Principal -->
-    <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
-      <!-- Título -->
-      <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Consultar Saldo</h1>
-  
-      <!-- Formulario de Validación -->
-      <form class="space-y-4">
-        <!-- Campo de CUI -->
-        <div>
-          <label for="cui" class="block text-sm font-medium text-gray-600">CUI</label>
-          <input
-            type="text"
-            id="cui"
-            name="cui"
-            class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Ingrese su CUI"
-            required
-          />
-        </div>
-  
-        <!-- Campo de PIN -->
-        <div>
-          <label for="pin" class="block text-sm font-medium text-gray-600">PIN</label>
-          <input
-            type="password"
-            id="pin"
-            name="pin"
-            class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Ingrese su PIN"
-            required
-          />
-        </div>
-  
-        <!-- Botón de Validar -->
-        <div class="text-center">
-          <button
-            type="submit"
-            class="w-full px-4 py-2 bg-blue-500 text-white font-medium rounded-lg shadow hover:bg-blue-600"
-          >
-            Validar
-          </button>
-        </div>
-      </form>
-  
-      <!-- Información de Saldo (Se mostrará después de la validación) -->
-      <div class="mt-6 hidden" id="saldoInfo">
-        <!-- Saldo Actual -->
-        <div class="flex justify-between items-center border-b pb-4 mb-4">
-          <span class="text-lg font-medium text-gray-600">Saldo Actual:</span>
-          <span class="text-2xl font-bold text-green-500">$1,500.00</span>
-        </div>
-  
-        <!-- Fecha de Última Actualización -->
-        <div class="flex justify-between items-center">
-          <span class="text-lg font-medium text-gray-600">Última Actualización:</span>
-          <span class="text-gray-500">08/12/2024, 10:30 AM</span>
-        </div>
+<div class="flex flex-col items-center min-h-screen bg-gray-100 p-4">
+  <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Consultar Saldo</h1>
+
+    <!-- Formulario -->
+    <form class="space-y-4" (ngSubmit)="validarUsuario()">
+      <div>
+        <label for="cui" class="block text-sm font-medium text-gray-600">CUI</label>
+        <input
+          type="text"
+          id="cui"
+          name="cui"
+          [(ngModel)]="cui"
+          class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Ingrese su CUI"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="pin" class="block text-sm font-medium text-gray-600">PIN</label>
+        <input
+          type="password"
+          id="pin"
+          name="pin"
+          [(ngModel)]="pin"
+          class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Ingrese su PIN"
+          required
+        />
+      </div>
+
+      <div class="text-center">
+        <button
+          type="submit"
+          class="w-full px-4 py-2 bg-blue-500 text-white font-medium rounded-lg shadow hover:bg-blue-600"
+        >
+          Validar
+        </button>
+      </div>
+    </form>
+
+    <!-- Mensajes de Error 
+    <p *ngIf="errorMessage" class="text-red-500 text-center mt-4">{{ errorMessage }}</p>
+-->
+    <!-- Información del Saldo -->
+    <div *ngIf="saldo" class="mt-6">
+      <div class="flex justify-between items-center border-b pb-4 mb-4">
+        <span class="text-lg font-medium text-gray-600">Saldo Actual:</span>
+        <span class="text-2xl font-bold text-green-500">Q{{ saldo }}</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-lg font-medium text-gray-600">Última Actualización:</span>
+        <span class="text-gray-500">{{ ultimaActualizacion }}</span>
       </div>
     </div>
   </div>
-  
+</div>
