@@ -1,6 +1,7 @@
 import LoanPaymentModel from '../models/loan-payment.js';
 import LoanModel from '../models/loan-model.js';
 import AccountModel from '../models/account-model.js';
+import TransactionHistoryModel from '../models/transaction-history-model.js';
 import sequelize from '../../config/database-connection.js';
 
 /*
@@ -20,7 +21,7 @@ const save = async (req, res) => {
     try {
         const accountModel = await AccountModel.findOne({
             where: { user_id: userModel.id },
-            attributes: ['id', 'balance'],
+            attributes: ['id', 'balance', 'account_number'],
             transaction
         });
 
@@ -62,12 +63,27 @@ const save = async (req, res) => {
             { transaction }
         );
 
+        await TransactionHistoryModel.create({
+            account_id: accountModel.id,
+            transaction_type: 'Pago de Préstamo',
+            amount,
+            description: `Pago de préstamo - ${updatedLoan.state} (${loan_number})`,
+            created_at: Math.floor(Date.now() / 1000)
+        }, { transaction });
+
+        const voucher = {
+            "account_number": accountModel.account_number,
+            'name': userModel.name,
+            'signature': userModel.signature
+        }
+
         await transaction.commit();
 
         res.status(201).json({
             message: 'Loan payment completed successfully',
             payment,
-            loanState: updatedLoan.state
+            loanState: updatedLoan.state,
+            voucher
         });
     } catch (error) {
         await transaction.rollback();

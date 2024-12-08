@@ -64,3 +64,12 @@ CREATE TABLE IF NOT EXISTS deposits (
   created_at BIGINT NOT NULL,
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
+CREATE TABLE IF NOT EXISTS transaction_history (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  account_id INT NOT NULL,
+  transaction_type ENUM('Depósito', 'Retiro', 'Pago de Servicio', 'Pago de Préstamo') NOT NULL,
+  amount DECIMAL(10, 2) NOT NULL,
+  description VARCHAR(255),
+  created_at BIGINT NOT NULL,
+  FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
+);

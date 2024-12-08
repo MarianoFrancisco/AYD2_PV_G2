@@ -71,6 +71,7 @@ export const getClientInfo = async (req, res) => {
 */
 import AccountModel from '../models/account-model.js';
 import UserModel from '../models/user-model.js';
+import { getAllTransactions } from '../controllers/transaction-history-controller.js';
 
 export const getClientInfo = async (req, res) => {
     try {
@@ -90,10 +91,12 @@ export const getClientInfo = async (req, res) => {
             if (!account) {
                 return res.status(404).json({ message: 'Account not found' });
             }
+            const transactions = await getAllTransactions(account_number);
 
             return res.status(200).json({
                 message: 'Account found',
-                account: account,  // Retorna la cuenta encontrada
+                account: account,
+                transactions
             });
         }
 
@@ -111,10 +114,12 @@ export const getClientInfo = async (req, res) => {
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
+            const transactions = await getAllTransactions(user.accounts.account_number);
 
             return res.status(200).json({
                 message: 'User found',
-                user: user,  // Retorna la información del usuario
+                user: user,
+                transactions
             });
         }
 
