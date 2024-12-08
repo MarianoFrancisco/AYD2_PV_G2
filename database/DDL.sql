@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS accounts (
   account_number CHAR(10) UNIQUE NOT NULL,
   balance DECIMAL(10, 2) DEFAULT 0 CHECK (balance >= 0),
   created_at BIGINT NOT NULL,
-  update_balance_at BIGINT NOT NULL
+  update_balance_at BIGINT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS service_payments (
@@ -32,12 +32,11 @@ CREATE TABLE IF NOT EXISTS service_payments (
 );
 CREATE TABLE IF NOT EXISTS loans (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT NOT NULL,
   account_id INT NOT NULL,
   total_amount DECIMAL(12, 2) NOT NULL,
   remaining_balance DECIMAL(12, 2) NOT NULL,
+  state ENUM('Sin Pagar', 'Parcialmente Pagado', 'Pagado') NOT NULL,
   created_at BIGINT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS loan_payments (
