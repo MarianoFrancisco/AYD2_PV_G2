@@ -1,14 +1,8 @@
 import express from "express"
 import { getBalance } from "../controllers/account-controller.js"
-
+import validateUser from '../middleware/validate-user-middleware.js';
 
 const router = express.Router();
-router.get("/ShowBalance/:accountNumber", getBalance);
-
+router.get("/show-balance", validateUser('query'), getBalance);
 
 export default router;
-
-//router.put('/:id/close', protect, administratorProtect, closeBankAccount);
-//router.put('/:id/activate', protect, administratorProtect, activateBankAccount);
-
-// /:id -> parametro por ruta
