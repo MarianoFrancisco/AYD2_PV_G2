@@ -7,10 +7,10 @@
                 <label for="tipoPago" class="block text-sm/6 font-medium text-gray-900">Tipo de Pago: </label>
                 <div class="mt-2">
                     <select id="tipoPago" formControlName="tipoPago"  class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                        <option value="luz">Luz</option>
-                        <option value="agua">Agua</option>
-                        <option value="telefono">Teléfono</option>
-                        <option value="intenet">Internet</option>
+                        <option value="Luz">Luz</option>
+                        <option value="Agua">Agua</option>
+                        <option value="Teléfono">Teléfono</option>
+                        <option value="Internet">Internet</option>
                     </select>
                 </div>
             </div>
@@ -52,6 +52,7 @@
         <div class="mt-6 flex items-center justify-center gap-x-6">
             <button type="button" class="text-sm/6 font-semibold text-gray-900">Cancelar</button>
             <button type="submit" [disabled]="!paymentsForm.valid" class="rounded-md dark:bg-gray-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:dark:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark:bg-gray-800">Pagar</button>
+            <button type="button" (click)="generateVoucher()" class="rounded-md dark:bg-gray-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:dark:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark:bg-gray-800">Voucher</button>
         </div>
     </form>  
 </div>
