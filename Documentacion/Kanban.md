@@ -33,7 +33,6 @@
 ## Kanban-6
 - **Image:**
   ![Kanban-6](../Capturas/Jira/Kanban-6.JPG)
-- **Jira Link:** [General Jira Link](#)
 
 ---
 
