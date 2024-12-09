@@ -42,6 +42,7 @@ export class TransfersComponent {
       next: (response) => {
         this.receipt = response;
         Swal.fire('Éxito', 'Depósito realizado con éxito.', 'success');
+        this.limpiarFormulario();
       },
       error: (err) => {
         Swal.fire('Error', 'Hubo un problema al realizar el depósito.', 'error');
@@ -111,4 +112,8 @@ export class TransfersComponent {
     };
   }  
   
+  limpiarFormulario() {
+    this.accountNumber = '';
+    this.amount = null;
+  }
 }
