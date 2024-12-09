@@ -1,6 +1,6 @@
 export interface Loan_Payments {
-    loan_number: string,
-    amount:string,
+    loan_number: number,
+    amount:number,
     cui:string,
     pin:string
 }
