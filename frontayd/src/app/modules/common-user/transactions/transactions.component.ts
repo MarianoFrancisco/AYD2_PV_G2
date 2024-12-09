@@ -34,6 +34,7 @@ export class TransactionsComponent {
           if (response.message === 'OK') {
             this.generarRecibo(response);
             Swal.fire('Éxito', 'El retiro se realizó correctamente.', 'success');
+            this.limpiarFormulario();
           } else {
             Swal.fire('Error', 'No se pudo realizar el retiro.', 'error');
           }
@@ -102,5 +103,11 @@ export class TransactionsComponent {
     image.onerror = () => {
       Swal.fire('Error', 'No se pudo cargar la firma para el recibo.', 'error');
     };
+  }
+
+  limpiarFormulario() {
+    this.accountNumber = '';
+    this.amount = null;
+    this.withdrawalType = null;
   }
 }
