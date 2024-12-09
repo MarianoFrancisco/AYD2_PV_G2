@@ -131,7 +131,7 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ![Entidad relacion Peter Chen](../Capturas/DiagramaEntidadrelacionPeterChen.png)
 
-## Endpoints
+## G. Endpoints
 ### Base URL
 All endpoints share the base URL `/api`.
 
