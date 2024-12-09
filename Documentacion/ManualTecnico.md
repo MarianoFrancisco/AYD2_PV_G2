@@ -221,3 +221,132 @@ All endpoints share the base URL `/api`.
 - **Response:**
   - JSON object indicating the status of the payment.
 
+## H. Configuracion de entorno
+
+**Requisitos Previos:**
+
+Es necesario de asegurarnos de tener los siguientes elementos instalados y configurados:
+
+- Node.js (versión 16.x o superior): [Descarga Nodejs](https://nodejs.org/en)
+- Angular CLI (versión 15.x o superior) [Documentacion de angular](https://v17.angular.io/guide/setup-local)
+
+- MySQL Workbench o Cliente SQL para poder interactuar con la base de datos. [Descarga MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
+- Git para clonar los repositorios: [Descargar Git](https://git-scm.com/)
+
+- Instalacion de un IDE de preferencia como puede ser Visual Studio Code.
+
+
+**Configuracion del Frontend(Angular)**
+
+En la carpeta src/environments, verifica los archivos environment.ts (desarrollo) y environment.prod.ts (producción). Asegurando de incluir las URL correctas del backend, en este caso:
+environment.ts:
+
+```bash
+export const environment = {
+    production: false,
+    apiUrl: 'http://localhost:5000/api'
+};
+```
+
+**Configuracion del Backend(Nodejs)**
+
+Una vez descargado el archivo del backend, es necesario dirigirse a la ruta donde se encuentra el package.json y poner el siguiente comando:
+
+```bash
+npm install
+```
+
+En el mismo directorio hay que crear un archivo .env que tendra las variables para conectarse con la base de datos:
+
+```bash
+MYSQL_HOST=<host-de-la-bd>
+MYSQL_USER=<usuario-bd>
+MYSQL_PASSWORD=<contraseña-bd>
+MYSQL_DATABASE=<nombre-bd>
+MYSQL_PORT=3306
+PORT=<puerto-server>
+```
+
+**Inicializar la base de datos**
+
+En En la carpeta database se encuentran los scripts necesarios para la configuración y gestión de la base de datos. Estos archivos incluyen:
+
+- BD.sql: Contiene la estructura general para la creación inicial de la base de datos, definiendo su nombre y configuraciones principales.
+
+- DDL.sql: Define los elementos del modelo de datos, incluyendo la creación de tablas, índices, relaciones y restricciones (definición del esquema).
+
+- DML.sql: Contiene las instrucciones para insertar, actualizar o eliminar datos en la base de datos, estableciendo los valores iniciales requeridos para su correcto funcionamiento.
+
+Para poder acceder a la base de datos que se encuentra en una instancia de MySQL en la nube es necesario utilizar las credenciales necesarias, por medio de linea de comando:
+
+```bash
+mysql -h <host> -P <puerto> -u <usuario> -p
+```
+
+Y por medio de MySQL Workbench es creando una base de datos desde cero e ingresar las credenciales necesarias, como Host, puerto, password etc.
+
+
+
+## I. Instalacion y Despliegue
+
+**Instalacion de las carpetas frontend, backend y script de la base de datos**
+
+Una vez instalado git, es necesario clonar el repositorio donde se encuentra el proyecto:
+```bash
+git clone https://github.com/MarianoFrancisco/AYD2_PV_G2.git
+```
+
+**Descarga e iniciar frontend(angular)**
+
+Una vez tengamos ya instalado Node.js y npm(se puede verificar por medio de npm -v) que son fundamentales para ejecutar angular.
+
+Cuando descargas el proyecto Angular, lo más probable es que también descargaste el archivo package.json, que contiene las dependencias necesarias para ejecutar la aplicación. Se debe de navegar y dirigirse a la ruta donde se encuentra package.json y desde la terminal instalar las dependencias por medio de:
+
+```bash
+npm install
+```
+
+Una vez que las dependencias están instaladas, puedes ejecutar la aplicación de la siguiente manera:
+
+```bash
+ng serve
+```
+
+Una vez corriendo se puede navegar en http://localhost:4200/user/dashboard e interactuar con el proyecto.
+
+**Descarga e iniciar backend(node.js)**
+
+Antes de ejecutar un proyecto de Node.js, asegúrate de tener Node.js y npm instalados en tu máquina. Puedes verificar esto ejecutando los siguientes comandos en la terminal:
+
+```bash
+node -v
+npm -v
+```
+
+Cuando se descarga o se clona el proyecto, se encuentra un archivo llamado package.json, que contiene todas las dependencias que el proyecto necesita. Para instalar esas dependencias:
+
+```bash
+cd ruta/del/proyecto-backend
+
+npm install
+```
+
+Una vez que las dependencias estén instaladas y las variables de entorno configuradas, puedes iniciar el servidor de backend.
+
+```bash
+npm start
+```
+
+**Conexion a la base de datos**
+
+Para acceder a la base de datos, ya sea mediante línea de comandos o herramientas como MySQL Workbench, es imprescindible contar con las credenciales adecuadas para establecer una conexión con la base de datos alojada en la nube de AWS.
+
+Las credenciales necesarias vendrian siendo por ejemplo:
+
+```bash
+Connection Name: Money-bin
+Hostname: example.us-east-1.rds.amazonaws.com
+Username: <user-db>
+Port: 3306
+Password: <password-db>
+```
