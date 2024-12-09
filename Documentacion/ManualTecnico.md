@@ -126,3 +126,98 @@ La actividad principal del sistema es que clientes y encargados puedan realizar 
 ![Caso de uso](../Capturas/DiagramaBloques.png)
 
 Los clientes y encargados/empleados podran ejecutar su aplicacion de manera local en su PC con acceso a internet y este podra visualizarse en Angular, al momento de realizar las peticiones se haran por medio de un servidor API Rest alojado en Nodejs. La base de datos se encuentra alojada en un servicio RDS de AWS.
+
+## F. Diagrama entidad relacion
+
+![Entidad relacion Peter Chen](../Capturas/DiagramaEntidadRelacionPeterChen.png)
+
+## G. Endpoints
+### Base URL
+All endpoints share the base URL `/api`.
+
+### 1. **Show Balance**
+- **Route:** `/api/account/show-balance`
+- **Method:** `GET`
+- **Description:** Retrieves the account balance and the last update date.
+- **Query Parameters:**
+  - `cui` (string, required): Unique identifier for the user.
+  - `pin` (string, required): Personal Identification Number.
+- **Middleware:**
+  - `validateUser('query')`
+- **Response:**
+  - JSON object containing account balance and the last update timestamp.
+
+### 2. **Client Information**
+- **Route:** `/api/client/get-client-info`
+- **Method:** `GET`
+- **Description:** Retrieves account information and transaction history.
+- **Query Parameters:**
+  - `cui` (string, optional): Unique identifier for the user.
+  - `account_number` (string, optional): Account number.
+- **Response:**
+  - JSON object containing client details and transaction history.
+
+### 3. **Service Payment**
+- **Route:** `/api/payment-service`
+- **Method:** `POST`
+- **Description:** Processes service payments such as utility bills.
+- **Request Body:**
+  ```json
+  {
+      "service_name": "string (required)",
+      "service_code": "string (required)",
+      "amount": "number (required)",
+      "cui": "string (required)",
+      "pin": "string (required)"
+  }
+- **Middleware:**
+  - `validateUser('body')`
+- **Response:**
+  - JSON object indicating the status of the payment.
+
+### 4. **Loan Payment**
+- **Route:** `/api/payloan-payment`
+- **Method:** `POST`
+- **Description:** Processes loan payments.
+- **Request Body:**
+  ```json
+  {
+      "loan_number": "number (required)",
+      "amount": "number (required)",
+      "cui": "string (required)",
+      "pin": "string (required)"
+  }
+- **Middleware:**
+  - `validateUser('body')`
+- **Response:**
+  - JSON object indicating the status of the loan payment.
+
+### 5. **Deposit**
+- **Route:** `/api/deposit/deposit`
+- **Method:** `POST`
+- **Description:** Allows depositing money via cash or transfer.
+- **Request Body:**
+  ```json
+  {
+      "account_number": "string (required)",
+      "amount": "number (required)",
+      "deposit_type": "string (required)",
+      "target_account": "string (required)"
+  }
+- **Response:**
+  - JSON object indicating the status of the deposit.
+
+### 6. **Service Payment**
+- **Route:** `/api/withdrawal`
+- **Method:** `POST`
+- **Description:** Allows withdrawing money from an account.
+- **Request Body:**
+  ```json
+  {
+      "account_number": "string (required)",
+      "amount": "number (required)",
+      "withdrawal_type": "string (required)"
+  }
+- **Response:**
+  - JSON object indicating the status of the payment.
+
