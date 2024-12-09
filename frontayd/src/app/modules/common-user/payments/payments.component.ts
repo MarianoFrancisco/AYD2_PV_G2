@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angula
 import { PaymentsService } from '../../../services/payments/payments.service';
 import Swal from 'sweetalert2';
 import { ResponsePayments, VoucherPayments } from '../../../interfaces/payments';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-payments',
@@ -109,6 +110,62 @@ export class PaymentsComponent {
         title: 'Error',
         text: 'No tienes ningún voucher disponible.',
       });
+      return;
     }
+
+    const doc = new jsPDF
+    const signatureUrl = `http://localhost:5000/signature/${this.voucher.signature}`;
+
+    // Título del documento
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(17);
+    doc.text('Recibo de Pago de Servicios Money Bin', 105, 20, { align: 'center' });
+
+    // Fecha
+    doc.setFontSize(12);
+    doc.text('Fecha:', 20, 40);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`${this.payments.created_at}`, 50, 40);
+
+    // Servicio y código
+    doc.setFont('helvetica', 'bold');
+    doc.text('Servicio:', 20, 50);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`${this.payments.service_type}`, 50, 50);
+
+    doc.setFont('helvetica', 'bold');
+    doc.text('Código:', 130, 50);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`${this.payments.service_code}`, 160, 50);
+
+    // Cuenta y Monto
+    doc.setFont('helvetica', 'bold');
+    doc.text('Monto:', 20, 60);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Q.${this.payments.amount}`, 50, 60);
+  
+    doc.setFont('helvetica', 'bold');
+    doc.text('Cuenta:', 130, 60);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`${this.voucher.account_number}`, 160, 60);
+
+    // Firma
+    doc.setFont('helvetica', 'bold');
+    doc.text('Firma Empleado:', 20, 80);
+    const imgWidth = 50;
+    const imgHeight = 30;
+  
+    const image = new Image();
+    image.crossOrigin = 'Anonymous';
+    image.src = signatureUrl;
+  
+    image.onload = () => {
+      doc.addImage(image, 'PNG', 20, 90, imgWidth, imgHeight);
+      doc.save(`Servicio_${this.payments.service_type}_${this.payments.service_code}.pdf`);
+    };
+
+    image.onerror = () => {
+      Swal.fire('Error', 'No se pudo cargar la firma para el recibo.', 'error');
+    };
   }
 }
