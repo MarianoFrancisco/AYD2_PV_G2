@@ -7,6 +7,7 @@ import { PaymentsComponent } from './payments/payments.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { TransfersComponent } from './transfers/transfers.component';
 import {LoanPaymentsComponent} from './loan-payments/loan-payments.component'
+import { BalancesComponent } from './balances/balances.component';
 
 const routes: Routes = [
 {
@@ -26,6 +27,9 @@ const routes: Routes = [
 },
 {
   path:'prestamos', component: LoanPaymentsComponent
+},
+{
+  path:'balances', component: BalancesComponent
 }
 ];
 
