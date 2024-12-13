@@ -8,6 +8,8 @@
 | Mariano Francisco Camposeco Camposeco    | 202030987  |
 | David Enrique Lux Barrera                | 201931344  |
 
+## 1) Antecedentes
+El Banco **"Money Bin"** enfrenta problemas como procesos lentos al momento de realizar transacciones o consultas generando largas colas en el banco, errores humanos en las transacciones, falta de accesibilidad para los clientes y sistemas manuales que limitan la capacidad de realizar pagos, manejar cuentas y generar reportes.
 
 ## A. Core del negocio
 
