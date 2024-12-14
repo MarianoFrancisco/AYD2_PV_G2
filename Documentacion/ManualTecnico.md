@@ -91,6 +91,12 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 - Estándares de accesibilidad
 - Mostrar mensajes de error descriptivos para orientar al usuario.
 
+### **Escalabilidad:**
+- Despliegue del sistema en infraestructura en la nube.
+- La arquitectura debe permitir agregar nuevas funcionalidades sin impactar negativamente el rendimiento del sistema.
+
+### **Automatización:**
+- Despliegues automatizados
 
 ## 4) Diagrama de CDU expandidos
 
