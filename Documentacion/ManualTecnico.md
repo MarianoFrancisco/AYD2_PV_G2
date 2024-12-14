@@ -46,6 +46,21 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 - Los empleados podrán **actualizar la información** de los clientes.
 - El sistema debe permitir **agregar nuevos clientes** mediante un proceso de registro.
 
+#### **Gestión Operativa**
+- El sistema permite la búsqueda de cuentas de clientes por medio de su CUI o número de cuenta.
+- El sistema permite a los clientes crear nuevas tarjetas de crédito
+- El sistema permite el bloqueo y activación de tarjetas por pérdida, robo o fraude.
+- El administrador de sistemas debe poder registrar y asignar roles a los empleados.
+
+#### **Monitoreo de datos**
+- El sistema permite la visualización en tiempo real de las transacciones realizadas.
+- El sistema permite al supervisor generar diferentes reportes.
+- El sistema permite al supervisor aceptar diferentes solicitudes.
+
+#### **Generación de comprobantes**
+- El sistema permite generar comprobantes(voucher) de las transacciones realizadas.
+
+
 
 ### Requerimientos no funcionales
 
