@@ -11,3 +11,6 @@
 
 - **Kanban David Antecedentes:**
   ![Kanban-1](../Fase-1-Screenshot/DavidKanbanAntecedentes.png)
+
+- **Kanban Luis Antecedentes:**
+  ![Kanban-1](../Fase-1-Screenshot/LuisKanbanAntecedentes.jpg)
