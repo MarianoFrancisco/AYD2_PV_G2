@@ -16,48 +16,83 @@ La nueva plataforma propuesta busca automatizar procesos clave, fortalecer la se
 
 El objetivo es modernizar los servicios del banco, mejorar la eficiencia operativa, fortalecer la seguridad, y ofrecer una experiencia personalizada que aumente la confianza y satisfacción de los clientes, posicionando a Money Bin como un líder en innovación financiera.
 
-## A. Core del negocio
+## 2) Core del negocio
+### Descripcion:
+La actividad principal del sistema es que clientes y encargados puedan realizar diferentes transacciones y operaciones del banco desde una página web, con la finalidad de  optimizar los procesos bancarios tradicionales, resolviendo la problemática de las largas filas y no depender de procesos manuales. Para mantener y garantizar la seguridad al momento de realizar una transacción, se ha implementado la validación de identidad para minimizar el riesgo de fraude. La implementación de la plataforma también permitirá centralizar los datos y generar reportes con el fin de analizar y mejorar los aspectos no beneficiosos hacia la empresa.
 
+Entre las transacciones disponibles que pueden realizar los clientes se incluyen pagos, retiros y depósitos. Además, para brindar un mejor control financiero, los usuarios tienen la opción de generar comprobantes como registros de sus operaciones bancarias. Para  reducir la sobrecarga de trabajo que tienen los empleados cuentan con la función de buscar cuentas de clientes por su número de cuenta o por CUI, lo que facilita la localización de información de manera precisa y rápida.
+
+Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, algunos siendo la posibilidad de realizar cambios de divisas, gestionar préstamos, y habilitar cuentas en dólares. Ya que, estas funcionalidades aseguran que la plataforma no únicamente atienda las necesidades actuales de los clientes, sino que también esté preparada para adaptarse a futuros cambios en los sectores bancarios.
+
+**Caso de Uso de Alto Nivel**
 ![Caso de uso](../Capturas/AltoNivelMoneyBin.png)
 
-La actividad principal del sistema es que clientes y encargados puedan realizar diferentes transacciones y operaciones del banco desde una aplicacion web, con la finalidad de resolver el problema de largas filas y reducir la carga para los empleados. Para seguir manteniendo su trayectoria con la seguridad se ha implementado una funcion de validacion de identidad al momento de realizar una transaccion para evitar cualquier fraude. Entre las transacciones que pueden realizar los clientes son pagos, retiros y depositos, ademas para que los clientes tengan un registro de sus operaciones bancarias podra generar un comprobante. Para reducir la carga de los empleados cuentan con la funcion de buscar cuentas de clientes por su numero de cuenta o por CUI y asi poder localizarlas rapidamente.
+**Caso de Uso Primera Descomposicion**
+![Caso de uso](../Capturas/Diagrama-Descomposicion.png)
+
+## 3) Lista de requerimientos funcionales generales
+
+### Requerimientos funcionales
+#### **Autenticación**
+- El sistema debe permitir a los clientes autenticarse mediante su **CUI** y **PIN**.
+- El sistema debe ser capaz de reconocer si las credenciales ingresadas corresponden a un **cliente** o a un **empleado**.
+
+#### **Gestión de Cuentas**
+- Los empleados o encargados deben poder **consultar la información de todas las cuentas** de los clientes.
+- El sistema debe mostrar el **saldo de cuenta disponible** de cada cliente.
+- El administrador de sistemas podrá **proporcionar una nueva contraseña** a los empleados, cuando el supervisor lo indique.
+
+#### **Gestión de Usuarios**
+- Los empleados podrán **actualizar la información** de los clientes.
+- El sistema debe permitir **agregar nuevos clientes** mediante un proceso de registro.
+
+#### **Gestión Operativa**
+- El sistema permite la búsqueda de cuentas de clientes por medio de su CUI o número de cuenta.
+- El sistema permite a los clientes crear nuevas tarjetas de crédito
+- El sistema permite el bloqueo y activación de tarjetas por pérdida, robo o fraude.
+- El administrador de sistemas debe poder registrar y asignar roles a los empleados.
+
+#### **Monitoreo de datos**
+- El sistema permite la visualización en tiempo real de las transacciones realizadas.
+- El sistema permite al supervisor generar diferentes reportes.
+- El sistema permite al supervisor aceptar diferentes solicitudes.
+
+#### **Generación de comprobantes**
+- El sistema permite generar comprobantes(voucher) de las transacciones realizadas.
+
+### Gestión de transacciones:
+- El cajero deberá poder realizar pagos de servicios básicos (Agua, Luz, Teléfono e Internet)
+- El sistema permitirá pagos parciales o totales de los préstamos
+- El cliente deberá poder realizar depósitos y retiros, validando límites diarios y moneda
+- El sistema permitirá cambiar la moneda de quetzales a dólares.
 
 
-## B. Requerimientos funcionales
+### Requerimientos no funcionales
 
-1. El cliente o encargado deberá tener la posibilidad de consultar el saldo en su cuenta.
+### Seguridad:
+- Encriptación de datos sensibles como contraseñas.
+- El sistema contará con un modo de generar backups o respaldos de información cada cierto tiempo o cuando el administrador lo necesite.
+- Rollback al detectar transacciones fallidas.
 
-2. El sistema deberá contar con una opción de generar comprobante en formato PDF luego de realizar una transaccion.
+### Disponibilidad:
+- El sistema debe estar disponible 24/7 para todos los usuarios.
+- Debe contar con balanceadores de carga.
 
-3. El empleado deberá tener la opción de buscar una cuenta por su número de cuenta o CUI para poder visualizar su perfil
+### **Compatibilidad:**
+- Portable, ejecución adecuada en todos los  OS y navegadores.
+- La interfaz del sistema debe ser responsiva en cualquier dispositivo móvil
 
-4. Cada deposito que el cliente realice pordrá hacerlo por transferencia o por efectivo.
+### **Rendimiento:**
+- Realizar las transacciones en un tiempo máximo de 2 segundos.
+- El sistema debe ser capaz de procesar varias transacciones por segundo.
 
-5. El cliente deberá tener la posibliidad de realizar un retiro de dinero de su cuenta por ventanilla o por cajero automatico.
+### **Usabilidad:**
+- Ofrecer una experiencia intuitiva para los usuarios
+- Estándares de accesibilidad
+- Mostrar mensajes de error descriptivos para orientar al usuario.
 
-6. Cada pago de préstamo adquirido con el banco que realice el cliente deberá pdoer hacerlo parcial o completamente.
 
-7. El encargado deberá tener la posiblidad de realizar el pago de un servicio desde el sistema del banco.
-
-8. El sistema contara con un proceso de validacion de identidad al momento de realizar una transaccion.
-
-## C. Requerimientos no funcionales
-
-1. Los comprobantes generados se realizaran en un maximo de 1 segundo.
-
-2. Cada transaccion que se realice deberá procesarse en un maximo de 2 segundos.
-
-3. La interfaz de usuario deberá ser intuitiva y facil de utilizar para los clientes.
-
-4. Los usuarios dispondrán de un pin para garantizar mayor seguridad y privacidad en sus cuentas.
-
-5. El sitema deberá contar con autenticación y autorización para evitar fraudes al momento de realizar una transacción.
-
-6. La aplicacion deberá tener la posiblidad de ser ejecutado en cualquier navegador.
-
-7. El sistema deberá ser escalable para manejar un gran número de usuarios.
-
-## D. CDU expandidos
+## 4) Diagrama de CDU expandidos
 
 ***Caso de uso:*** Depositar dinero <br>
 ***Actores:*** Cliente <br>
