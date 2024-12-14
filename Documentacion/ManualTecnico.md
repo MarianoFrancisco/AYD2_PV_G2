@@ -73,9 +73,23 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 - Encriptación de datos sensibles como contraseñas.
 - El sistema contará con un modo de generar backups o respaldos de información cada cierto tiempo o cuando el administrador lo necesite.
 - Rollback al detectar transacciones fallidas.
+
 ### Disponibilidad:
 - El sistema debe estar disponible 24/7 para todos los usuarios.
 - Debe contar con balanceadores de carga.
+
+### **Compatibilidad:**
+- Portable, ejecución adecuada en todos los  OS y navegadores.
+- La interfaz del sistema debe ser responsiva en cualquier dispositivo móvil
+
+### **Rendimiento:**
+- Realizar las transacciones en un tiempo máximo de 2 segundos.
+- El sistema debe ser capaz de procesar varias transacciones por segundo.
+
+### **Usabilidad:**
+- Ofrecer una experiencia intuitiva para los usuarios
+- Estándares de accesibilidad
+- Mostrar mensajes de error descriptivos para orientar al usuario.
 
 
 ## 4) Diagrama de CDU expandidos

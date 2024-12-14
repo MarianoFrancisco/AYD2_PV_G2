@@ -15,3 +15,9 @@
 
 - **Mariano Requisitos:**
   ![Advances](../Fase-1-Screenshot/MarianoRequisitos.JPG)
+
+- **David Core del negocio:**
+  ![Advances](../Fase-1-Screenshot/DavidCoreNegocio.png)
+
+- **David Requerimientos:**
+  ![Advances](../Fase-1-Screenshot/DavidRequerimientos.png)
