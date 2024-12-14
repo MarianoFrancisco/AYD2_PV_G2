@@ -60,9 +60,23 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 #### **Generación de comprobantes**
 - El sistema permite generar comprobantes(voucher) de las transacciones realizadas.
 
+### Gestión de transacciones:
+- El cajero deberá poder realizar pagos de servicios básicos (Agua, Luz, Teléfono e Internet)
+- El sistema permitirá pagos parciales o totales de los préstamos
+- El cliente deberá poder realizar depósitos y retiros, validando límites diarios y moneda
+- El sistema permitirá cambiar la moneda de quetzales a dólares.
 
 
 ### Requerimientos no funcionales
+
+### Seguridad:
+- Encriptación de datos sensibles como contraseñas.
+- El sistema contará con un modo de generar backups o respaldos de información cada cierto tiempo o cuando el administrador lo necesite.
+- Rollback al detectar transacciones fallidas.
+### Disponibilidad:
+- El sistema debe estar disponible 24/7 para todos los usuarios.
+- Debe contar con balanceadores de carga.
+
 
 ## 4) Diagrama de CDU expandidos
 
