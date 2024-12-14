@@ -18,7 +18,7 @@ El objetivo es modernizar los servicios del banco, mejorar la eficiencia operati
 
 ## A. Core del negocio
 
-![Caso de uso](../Capturas/CasoUso.png)
+![Caso de uso](../Capturas/AltoNivelMoneyBin.png)
 
 La actividad principal del sistema es que clientes y encargados puedan realizar diferentes transacciones y operaciones del banco desde una aplicacion web, con la finalidad de resolver el problema de largas filas y reducir la carga para los empleados. Para seguir manteniendo su trayectoria con la seguridad se ha implementado una funcion de validacion de identidad al momento de realizar una transaccion para evitar cualquier fraude. Entre las transacciones que pueden realizar los clientes son pagos, retiros y depositos, ademas para que los clientes tengan un registro de sus operaciones bancarias podra generar un comprobante. Para reducir la carga de los empleados cuentan con la funcion de buscar cuentas de clientes por su numero de cuenta o por CUI y asi poder localizarlas rapidamente.
 
