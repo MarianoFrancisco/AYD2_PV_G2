@@ -100,7 +100,7 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 
 ## 4) Diagrama de CDU expandidos
 
-![Caso de uso](../Capturas/CasoUsoExpandidoV1.jpg)
+![Caso de uso](../Capturas/CasoUsoExpandidoV2.png)
 
 ## 5) Matrices de trazabilidad
 
