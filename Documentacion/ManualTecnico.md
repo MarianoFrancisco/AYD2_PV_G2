@@ -100,75 +100,11 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 
 ## 4) Diagrama de CDU expandidos
 
-***Caso de uso:*** Depositar dinero <br>
-***Actores:*** Cliente <br>
-***Proposito:*** Depositar una cantidad de dinero en una cuenta. <br>
-***Tipo:*** Primario <br>
-***Descripcion:*** El cliente puede realizar un deposito por medio de efectivo o por medio de transferencia. Cuando se realice por efectivo el empleado será encargado de pasar el dinero a la cuenta y cuando se realice por transferencia el mismo cliente podra realizar el depósito. <br>
-***Curso normal de los eventos:*** <br>
-1. El sistema pedira realizar una validacion del cliente para evitar fraudes.
-2. El sistema buscara que la informacion del cliente sea correcta.
-3. El cliente ingresara la siguiente informacion: Numero de cuenta, monto a depositar, fecha y hora del deposito, metodo de deposito.
-4. El sistema validara que la cuenta de origen tenga los fondos suficientes para realizar el deposito. 
-5. El sitema realizara el deposito y actualizara el saldo de la cuenta.
-6. El cliente podrá generar el comprobante en formato PDF.<br>
+![Caso de uso](../Capturas/CasoUsoExpandidoV1.jpg)
 
-***Cursos alternos:*** <br>
-***Linea 3:*** En caso de que el sistema no valide correctamente la informacion del cliente no se procedera a solicitar la informacion para realizar el deposito. <br>
-***Linea 5:*** El sistema no podra realizar el deposito por falta de fondos y se le notificara al cliente.
+## 5) Matrices de trazabilidad
 
-------------------------------------------
 
-***Caso de uso:*** Pagar prestamos <br>
-***Actores:*** Cliente <br>
-***Proposito:*** Pagar los prestamos adquiridos con el banco Money Bin. <br>
-***Tipo:*** Primario <br>
-***Descripcion:*** El cliente puede realizar el pago de sus prestamos de manera parcial o total. <br>
-***Curso normal de los eventos:*** <br>
-1. El sistema pedira realizar una validacion del cliente para evitar cualquier fraude.
-2. El sitema buscara que la informacion del cliente sea correcta.
-3. El cliente ingresara la siguiente informacion: Numero de cuenta del cliente, numero de prestamo, monto a pagar.
-4. El sistema efectuara el pago y notificara que el pago del prestamo se realizo de manera correcta.
-5. El cliente podrá generar el comprobante en formato PDF.<br>
-
-***Cursos alternos:*** <br>
-***Linea 3:*** En caso de que el sistema no valide correctamente la informacion del cliente no se procedera a solicitar la informacion para ralizar el pago del prestamo.
-
-------------------------------------------
-
-***Caso de uso:*** Pagar servicios <br>
-***Actores:*** Encargado/Empleado <br>
-***Proposito:*** Pagar los servicios basicos. <br>
-***Descripcion:*** El encargado podra realizar pagos de los servicios basicos en nombre de los clientes desde el sistema. Los servicios basicos son agua, luz, telefono e internet.<br>
-***Curso normal de los eventos:*** <br>
-1. El sistema pedira realizar una validacion del encargado donde ingrese el cui y pin para confirmar que el cliente exista en el sistema.
-2. El sistema buscara que la informacion sea correcta.
-3. El encargado debera ingresar la siguiente informacion: Nombre de la persona encargada del servicio, codigo de servicio y monto que debe pagar.
-4. El sistema realizara el pago del servicio.
-5. El encargado/empleado podra generar un comprobante del pago.<br>
-
-***Cursos alternos:*** <br>
-***Linea 3:*** En caso de que el sistema no valide correctamente la informacion del cliente no se procedera a solicitar la informacion para el pago del servicio y se le notificara al encargado/empleado.
-
-------------------------------------------
-
-***Caso de uso:*** Retirar dinero <br>
-***Actores:*** cliente <br>
-***Proposito:*** Retirar dinero de su cuenta. <br>
-***Descripcion:*** El cliente podra realizar un retiro de efectivo desde su cuenta por ventanilla o en cajero automatico.<br>
-***Curso normal de los eventos:*** <br>
-1. El sistema pedira realizar una validacion del cliente para evitar algun fraude.
-2. El sistema buscara que la informacion del cliente sea valida.
-3. El cliente debera ingresar la siguiente informacion: Numero de cuenta del cliente, monto a retirar y tipo de retiro
-
-4. El sistema buscara que el cliente tenga los fondos suficinetes para realizar el retiro.
-5. El sistema realizara el retiro del efectivo.
-6. El encargado/empleado podra generar un comprobante del pago.<br>
-
-***Cursos alternos:*** <br>
-***Linea 3:*** En caso de que el sistema no valide correctamente la informacion ingresada del cliente no se procedera a realizar el pago del servicio y se le notificara al encargado/empleado.
-***Linea 5:*** El sistema no realizara el retiro del efectivo en caso de no tener el saldo suficinete al solicitado y se le notificara al cliente. <br>
-***Linea 5:*** El empleado sera quien realice el retiro si el cliente decidio hacer su retiro por ventanilla.
 
 ## E. Arquitectura candidata (Diagrama de bloques)
 

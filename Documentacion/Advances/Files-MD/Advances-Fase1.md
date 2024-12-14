@@ -13,7 +13,7 @@
   ![Advances](../Fase-1-Screenshot/MarianoCoreNegocio.JPG)
   ![Advances](../Fase-1-Screenshot/MarianoCoreNegocio2.JPG)
 
-- **Mariano Requisitos:**
+- **Mariano Requerimientos:**
   ![Advances](../Fase-1-Screenshot/MarianoRequisitos.JPG)
 
 - **David Core del negocio:**
@@ -21,3 +21,6 @@
 
 - **David Requerimientos:**
   ![Advances](../Fase-1-Screenshot/DavidRequerimientos.png)
+
+- **Mariano Caso de uso Expandidos:**
+  ![Advances](../Fase-1-Screenshot/MarianoCasoUsoExpandido.jpeg)
