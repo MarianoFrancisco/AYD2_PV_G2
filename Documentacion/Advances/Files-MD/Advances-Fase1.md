@@ -4,7 +4,7 @@
   ![Kanban-1](../Fase-1-Screenshot/MarianoAntecedentes.png)
 
 - **David Antecedentes:**
-  ![Kanban-1](../Fase-1-Screenshot/DavidAntecedentes.png)
+  ![Kanban-1](../Fase-1-Screenshot/DavidAntecendentes.png)
 
 - **Luis Antecedentes:**
   ![Kanban-1](../Fase-1-Screenshot/LuisAntecedentes.png)
