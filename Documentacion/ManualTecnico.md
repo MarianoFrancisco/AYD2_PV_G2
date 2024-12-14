@@ -16,7 +16,7 @@ La nueva plataforma propuesta busca automatizar procesos clave, fortalecer la se
 
 El objetivo es modernizar los servicios del banco, mejorar la eficiencia operativa, fortalecer la seguridad, y ofrecer una experiencia personalizada que aumente la confianza y satisfacción de los clientes, posicionando a Money Bin como un líder en innovación financiera.
 
-## A. Core del negocio
+## 2) Core del negocio
 ### Descripcion:
 La actividad principal del sistema es que clientes y encargados puedan realizar diferentes transacciones y operaciones del banco desde una página web, con la finalidad de  optimizar los procesos bancarios tradicionales, resolviendo la problemática de las largas filas y no depender de procesos manuales. Para mantener y garantizar la seguridad al momento de realizar una transacción, se ha implementado la validación de identidad para minimizar el riesgo de fraude. La implementación de la plataforma también permitirá centralizar los datos y generar reportes con el fin de analizar y mejorar los aspectos no beneficiosos hacia la empresa.
 
@@ -30,41 +30,26 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 **Caso de Uso Primera Descomposicion**
 ![Caso de uso](../Capturas/Diagrama-Descomposicion.png)
 
-## B. Requerimientos funcionales
+## 3) Lista de requerimientos funcionales generales
 
-1. El cliente o encargado deberá tener la posibilidad de consultar el saldo en su cuenta.
+### Requerimientos funcionales
+#### **Autenticación**
+- El sistema debe permitir a los clientes autenticarse mediante su **CUI** y **PIN**.
+- El sistema debe ser capaz de reconocer si las credenciales ingresadas corresponden a un **cliente** o a un **empleado**.
 
-2. El sistema deberá contar con una opción de generar comprobante en formato PDF luego de realizar una transaccion.
+#### **Gestión de Cuentas**
+- Los empleados o encargados deben poder **consultar la información de todas las cuentas** de los clientes.
+- El sistema debe mostrar el **saldo de cuenta disponible** de cada cliente.
+- El administrador de sistemas podrá **proporcionar una nueva contraseña** a los empleados, cuando el supervisor lo indique.
 
-3. El empleado deberá tener la opción de buscar una cuenta por su número de cuenta o CUI para poder visualizar su perfil
+#### **Gestión de Usuarios**
+- Los empleados podrán **actualizar la información** de los clientes.
+- El sistema debe permitir **agregar nuevos clientes** mediante un proceso de registro.
 
-4. Cada deposito que el cliente realice pordrá hacerlo por transferencia o por efectivo.
 
-5. El cliente deberá tener la posibliidad de realizar un retiro de dinero de su cuenta por ventanilla o por cajero automatico.
+### Requerimientos no funcionales
 
-6. Cada pago de préstamo adquirido con el banco que realice el cliente deberá pdoer hacerlo parcial o completamente.
-
-7. El encargado deberá tener la posiblidad de realizar el pago de un servicio desde el sistema del banco.
-
-8. El sistema contara con un proceso de validacion de identidad al momento de realizar una transaccion.
-
-## C. Requerimientos no funcionales
-
-1. Los comprobantes generados se realizaran en un maximo de 1 segundo.
-
-2. Cada transaccion que se realice deberá procesarse en un maximo de 2 segundos.
-
-3. La interfaz de usuario deberá ser intuitiva y facil de utilizar para los clientes.
-
-4. Los usuarios dispondrán de un pin para garantizar mayor seguridad y privacidad en sus cuentas.
-
-5. El sitema deberá contar con autenticación y autorización para evitar fraudes al momento de realizar una transacción.
-
-6. La aplicacion deberá tener la posiblidad de ser ejecutado en cualquier navegador.
-
-7. El sistema deberá ser escalable para manejar un gran número de usuarios.
-
-## D. CDU expandidos
+## 4) Diagrama de CDU expandidos
 
 ***Caso de uso:*** Depositar dinero <br>
 ***Actores:*** Cliente <br>

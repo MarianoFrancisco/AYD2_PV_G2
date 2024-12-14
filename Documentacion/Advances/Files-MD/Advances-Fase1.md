@@ -1,12 +1,13 @@
 # Advances Documentation Fase 1
 
 - **Mariano Antecedentes:**
-  ![Kanban-1](../Fase-1-Screenshot/MarianoAntecedentes.png)
+  ![Advances](../Fase-1-Screenshot/MarianoAntecedentes.png)
 
 - **David Antecedentes:**
-  ![Kanban-1](../Fase-1-Screenshot/DavidAntecendentes.png)
+  ![Advances](../Fase-1-Screenshot/DavidAntecendentes.png)
 
 - **Luis Antecedentes:**
-  ![Kanban-1](../Fase-1-Screenshot/LuisAntecedentes.png)
+  ![Advances](../Fase-1-Screenshot/LuisAntecedentes.png)
 
-
+- **Mariano Requisitos:**
+  ![Advances](../Fase-1-Screenshot/MarianoRequisitos.JPG)
