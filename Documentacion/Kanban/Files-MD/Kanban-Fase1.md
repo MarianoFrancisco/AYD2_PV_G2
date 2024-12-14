@@ -8,3 +8,6 @@
 
 - **KanbanMariano Antecedentes:**
   ![Kanban-1](../Fase-1-Screenshot/MarianoKanbanAntecedentes.png)
+
+- **Kanban David Antecedentes:**
+  ![Kanban-1](../Fase-1-Screenshot/DavidKanbanAntecedentes.png)
