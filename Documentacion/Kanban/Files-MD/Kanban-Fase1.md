@@ -14,3 +14,7 @@
 
 - **Kanban Luis Antecedentes:**
   ![Kanban-1](../Fase-1-Screenshot/LuisKanbanAntecedentes.jpg)
+
+- **Kanban Jose Antecedentes:**
+  ![Kanban-1](../Fase-1-Screenshot/JoseKanbanAntecedentes.jpg)
+
