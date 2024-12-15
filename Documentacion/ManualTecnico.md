@@ -49,22 +49,22 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 #### **Gestión Operativa**
 - **Busqueda de Cuenta(RF-008):** El sistema permite la búsqueda de cuentas de clientes por medio de su CUI o número de cuenta.
 - **Registro de TC(RF-009):** El sistema permite a los clientes crear nuevas tarjetas de crédito
-- **Estado de TC:** El sistema permite el bloqueo y activación de tarjetas por pérdida, robo o fraude.
-- **Asignación de Roles(RF-010):** El administrador de sistemas debe poder registrar y asignar roles a los empleados.
+- **Estado de TC(RF-010):** El sistema permite el bloqueo y activación de tarjetas por pérdida, robo o fraude.
+- **Asignación de Roles(RF-011):** El administrador de sistemas debe poder registrar y asignar roles a los empleados.
 
 #### **Monitoreo de datos**
-- **Monitoreo(RF-011):** El sistema permite la visualización en tiempo real de las transacciones realizadas.
-- **Reporte de auditoria(RF-012):** El sistema permite al supervisor generar diferentes reportes.
-- **Solicitudes(RF-013):** El sistema permite al supervisor aceptar diferentes solicitudes.
+- **Monitoreo(RF-012):** El sistema permite la visualización en tiempo real de las transacciones realizadas.
+- **Reporte de auditoria(RF-013):** El sistema permite al supervisor generar diferentes reportes.
+- **Solicitudes(RF-014):** El sistema permite al supervisor aceptar diferentes solicitudes.
 
 #### **Generación de comprobantes**
-- **Generar Comprobante(RF-014):** El sistema permite generar comprobantes(voucher) de las transacciones realizadas.
+- **Generar Comprobante(RF-015):** El sistema permite generar comprobantes(voucher) de las transacciones realizadas.
 
 ### Gestión de transacciones:
-- **Pago de Servicios(RF-015):** El cajero deberá poder realizar pagos de servicios básicos (Agua, Luz, Teléfono e Internet)
-- **Pago de Prestamos(RF-016):** El sistema permitirá pagos parciales o totales de los préstamos
-- **Transacciones(RF-017):** El cliente deberá poder realizar depósitos y retiros, validando límites diarios y moneda
-- **Cambio de Divisas(RF-018):** El sistema permitirá cambiar la moneda de quetzales a dólares.
+- **Pago de Servicios(RF-016):** El cajero deberá poder realizar pagos de servicios básicos (Agua, Luz, Teléfono e Internet)
+- **Pago de Prestamos(RF-017):** El sistema permitirá pagos parciales o totales de los préstamos
+- **Transacciones(RF-018):** El cliente deberá poder realizar depósitos y retiros, validando límites diarios y moneda
+- **Cambio de Divisas(RF-019):** El sistema permitirá cambiar la moneda de quetzales a dólares.
 
 
 ### Requerimientos no funcionales
