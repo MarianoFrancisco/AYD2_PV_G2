@@ -90,6 +90,7 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 - Ofrecer una experiencia intuitiva para los usuarios
 - Estándares de accesibilidad
 - Mostrar mensajes de error descriptivos para orientar al usuario.
+- Generar reportes automáticos y personalizados.
 
 ### **Escalabilidad:**
 - Despliegue del sistema en infraestructura en la nube.
