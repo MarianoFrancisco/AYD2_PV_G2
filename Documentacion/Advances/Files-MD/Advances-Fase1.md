@@ -24,3 +24,6 @@
 
 - **Mariano Caso de uso Expandidos:**
   ![Advances](../Fase-1-Screenshot/MarianoCasoUsoExpandido.jpeg)
+
+  - **David Requerimientos:**
+  ![Advances](../Fase-1-Screenshot/DavidCasodeUsoExpandido.png)
