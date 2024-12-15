@@ -34,70 +34,70 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 
 ### Requerimientos funcionales
 #### **Autenticación**
-- El sistema debe permitir a los clientes autenticarse mediante su **CUI** y **PIN**.
-- El sistema debe ser capaz de reconocer si las credenciales ingresadas corresponden a un **cliente** o a un **empleado**.
+- **Autenticación(RF-001):** El sistema debe permitir a los clientes autenticarse mediante su **CUI** y **PIN**.
+- **Validación de roles(RF-002):** El sistema debe ser capaz de reconocer si las credenciales ingresadas corresponden a un **cliente** o a un **empleado**.
 
 #### **Gestión de Cuentas**
-- Los empleados o encargados deben poder **consultar la información de todas las cuentas** de los clientes.
-- El sistema debe mostrar el **saldo de cuenta disponible** de cada cliente.
-- El administrador de sistemas podrá **proporcionar una nueva contraseña** a los empleados, cuando el supervisor lo indique.
+- **Detalle de Cuentas(RF-003):** Los empleados o encargados deben poder **consultar la información de todas las cuentas** de los clientes.
+- **Balance de Cuenta(RF-004):** El sistema debe mostrar el **saldo de cuenta disponible** de cada cliente.
+- **Reestablecer contraseña(RF-005):** El administrador de sistemas podrá **proporcionar una nueva contraseña** a los empleados, cuando el supervisor lo indique.
 
 #### **Gestión de Usuarios**
-- Los empleados podrán **actualizar la información** de los clientes.
-- El sistema debe permitir **agregar nuevos clientes** mediante un proceso de registro.
+- **Editar Información(RF-006):** Los empleados podrán **actualizar la información** de los clientes.
+- **Registro de Clientes(RF-007):** El sistema debe permitir **agregar nuevos clientes** mediante un proceso de registro.
 
 #### **Gestión Operativa**
-- El sistema permite la búsqueda de cuentas de clientes por medio de su CUI o número de cuenta.
-- El sistema permite a los clientes crear nuevas tarjetas de crédito
-- El sistema permite el bloqueo y activación de tarjetas por pérdida, robo o fraude.
-- El administrador de sistemas debe poder registrar y asignar roles a los empleados.
+- **Busqueda de Cuenta(RF-008):** El sistema permite la búsqueda de cuentas de clientes por medio de su CUI o número de cuenta.
+- **Registro de TC(RF-009):** El sistema permite a los clientes crear nuevas tarjetas de crédito
+- **Estado de TC:** El sistema permite el bloqueo y activación de tarjetas por pérdida, robo o fraude.
+- **Asignación de Roles(RF-010):** El administrador de sistemas debe poder registrar y asignar roles a los empleados.
 
 #### **Monitoreo de datos**
-- El sistema permite la visualización en tiempo real de las transacciones realizadas.
-- El sistema permite al supervisor generar diferentes reportes.
-- El sistema permite al supervisor aceptar diferentes solicitudes.
+- **Monitoreo(RF-011):** El sistema permite la visualización en tiempo real de las transacciones realizadas.
+- **Reporte de auditoria(RF-012):** El sistema permite al supervisor generar diferentes reportes.
+- **Solicitudes(RF-013):** El sistema permite al supervisor aceptar diferentes solicitudes.
 
 #### **Generación de comprobantes**
-- El sistema permite generar comprobantes(voucher) de las transacciones realizadas.
+- **Generar Comprobante(RF-014):** El sistema permite generar comprobantes(voucher) de las transacciones realizadas.
 
 ### Gestión de transacciones:
-- El cajero deberá poder realizar pagos de servicios básicos (Agua, Luz, Teléfono e Internet)
-- El sistema permitirá pagos parciales o totales de los préstamos
-- El cliente deberá poder realizar depósitos y retiros, validando límites diarios y moneda
-- El sistema permitirá cambiar la moneda de quetzales a dólares.
+- **Pago de Servicios(RF-015):** El cajero deberá poder realizar pagos de servicios básicos (Agua, Luz, Teléfono e Internet)
+- **Pago de Prestamos(RF-016):** El sistema permitirá pagos parciales o totales de los préstamos
+- **Transacciones(RF-017):** El cliente deberá poder realizar depósitos y retiros, validando límites diarios y moneda
+- **Cambio de Divisas(RF-018):** El sistema permitirá cambiar la moneda de quetzales a dólares.
 
 
 ### Requerimientos no funcionales
 
 ### Seguridad:
-- Encriptación de datos sensibles como contraseñas.
-- El sistema contará con un modo de generar backups o respaldos de información cada cierto tiempo o cuando el administrador lo necesite.
-- Rollback al detectar transacciones fallidas.
+- **Encriptación(RNF-001):** Encriptación de datos sensibles como contraseñas.
+- **Backups(RNF-002):** El sistema contará con un modo de generar backups o respaldos de información cada cierto tiempo o cuando el administrador lo necesite.
+- **Anti-Fallas(RNF-003):** Rollback al detectar transacciones fallidas.
 
 ### Disponibilidad:
-- El sistema debe estar disponible 24/7 para todos los usuarios.
-- Debe contar con balanceadores de carga.
+- **Disponibilidad(RNF-004):** El sistema debe estar disponible 24/7 para todos los usuarios.
+- **Redundancia(RNF-005):** Debe contar con balanceadores de carga.
 
 ### **Compatibilidad:**
-- Portable, ejecución adecuada en todos los  OS y navegadores.
-- La interfaz del sistema debe ser responsiva en cualquier dispositivo móvil
+- **Portable(RNF-006):** Ejecución adecuada en todos los  OS y navegadores.
+- **Adaptabilidad(RNF-007):** La interfaz del sistema debe ser responsiva en cualquier dispositivo móvil
 
 ### **Rendimiento:**
-- Realizar las transacciones en un tiempo máximo de 2 segundos.
-- El sistema debe ser capaz de procesar varias transacciones por segundo.
+- **Latencia(RNF-008:** Realizar las transacciones en un tiempo máximo de 2 segundos.
+- **Concurrencia(RNF-009):** El sistema debe ser capaz de procesar varias transacciones por segundo.
 
 ### **Usabilidad:**
-- Ofrecer una experiencia intuitiva para los usuarios
-- Estándares de accesibilidad
-- Mostrar mensajes de error descriptivos para orientar al usuario.
-- Generar reportes automáticos y personalizados.
+- **Interfaz Gráfica(RNF-010):** Ofrecer una experiencia intuitiva para los usuarios
+- **Intuición Gráfica(RNF-011):** Estándares de accesibilidad
+- **Alertas(RNF-012):** Mostrar mensajes de error descriptivos para orientar al usuario.
+- **Reportes(RNF-013):** Generar reportes automáticos y personalizados.
 
 ### **Escalabilidad:**
-- Despliegue del sistema en infraestructura en la nube.
-- La arquitectura debe permitir agregar nuevas funcionalidades sin impactar negativamente el rendimiento del sistema.
+- **Infraestructura(RNF-014):** Despliegue del sistema en infraestructura en la nube.
+- **Arquitectura(RNF-015):** La arquitectura debe permitir agregar nuevas funcionalidades sin impactar negativamente el rendimiento del sistema.
 
 ### **Automatización:**
-- Despliegues automatizados
+- **CI/CD(RNF-016):** Despliegues automatizados
 
 ## 4) Diagrama de CDU expandidos
 
