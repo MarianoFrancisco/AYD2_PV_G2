@@ -107,15 +107,15 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 
 ### Stakeholder vrs Requerimientos
 
-![Caso de uso](../Capturas/StakeholderRequerimientosV1.jpg)
+![Caso de uso](../Capturas/StakeholderRequerimientosV2.jpeg)
 
 ### Stakeholders vrs CDU
 
-![Caso de uso](../Capturas/StakeholdersCDUV1.jpg)
+![Caso de uso](../Capturas/StakeholdersCDUV2.jpeg)
 
 ### Requerimiento vrs CDU
 
-![Caso de uso](../Capturas/RequerimientoCDUV1.jpg)
+![Caso de uso](../Capturas/RequerimientoCDUV2.jpeg)
 
 ## E. Arquitectura candidata (Diagrama de bloques)
 
