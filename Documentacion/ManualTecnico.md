@@ -405,6 +405,17 @@ Este patrón permite diseñar diferentes algoritmos y tenerlos en una clase dife
 La aplicación maneja diferentes pagos, como pago de servicios, pago de préstamos o pago de tarjetas. Cada uno tiene su algoritmo diferente pero con la misma finalidad de procesar un pago, por lo que es necesario manejar cada tipo de pago en una clase diferente para ayudar a mantener un código limpio y legible.
 
 
+### 4. Patrón Observer 
+ 
+#### Diagrama UML 
+![PatronObserver](../Capturas/PatronObserver.jpg)
+ 
+#### Descripción 
+Este patrón se basa en dependencias de uno a muchos entre objetos, lo que significa que cuando un objeto relacionado cambia, se detona una notificación a los objetos interesados. 
+ 
+#### ¿Por qué? 
+Es necesario notificar al cliente cuando el bloqueo de tarjeta se haya realizado, por lo que este patrón facilita la implementación de notificaciones (envío de correo) en tiempo real.
+
 ### 5. Patrón Command
 
 #### Diagrama UML
