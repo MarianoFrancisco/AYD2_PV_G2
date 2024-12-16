@@ -167,7 +167,7 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ## F. Diagrama entidad relacion
 
-![Entidad relacion Peter Chen](../Capturas/DiagramaEntidadRelacionV3.png)
+![Entidad relacion Peter Chen](../Capturas/DiagramaEntidadRelacionV4.png)
 
 ## G. Endpoints
 ### Base URL
