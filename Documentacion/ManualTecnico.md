@@ -211,7 +211,45 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ![Cajero-Retiro](../Capturas/Prototipos/Cajero-Retiro.png)
 
+### Atencion-Inicio
 
+![Atencion-Inicio](../Capturas/Prototipos/Atencion-inicio.png)
+
+### Atencion-ActualizarDatos
+
+![Atencion-ActualizarDatos](../Capturas/Prototipos/Atencion-ActualizarDaots.png)
+
+### Atencion-BloquearTarjeta
+
+![Atencion-BloquearTarjeta](../Capturas/Prototipos/Atencion-BloquearTarjeta.png)
+
+### Atencion-BloquearTarjeta2
+
+![Atencion-BloquearTarjeta2](../Capturas/Prototipos/Atencion-BloquearTarjeta2.png)
+
+### Atencion-CrearCuenta
+
+![Atencion-CrearCuenta](../Capturas/Prototipos/Atencion-Crearcuenta.png)
+
+### Atencion-CrearTarjeta
+
+![Atencion-CrearTarjeta](../Capturas/Prototipos/Atencion_CrearTarjeta.png)
+
+### Atencion-CrearTarjeta2
+
+![Atencion-CrearTarjeta2](../Capturas/Prototipos/Atencion-crearTarjeta2.png)
+
+### Cliente-Inicio
+
+![Cliente-Inicio](../Capturas/Prototipos/Cliente-inicio.png)
+
+### Cliente-Encuesta
+
+![Cliente-Encuesta](../Capturas/Prototipos/Cliente-Encuesta.png)
+
+### Cliente-Queja
+
+![Cliente-Queja](../Capturas/Prototipos/Cliente-Queja.png)
 
 ## H. Configuracion de entorno
 
