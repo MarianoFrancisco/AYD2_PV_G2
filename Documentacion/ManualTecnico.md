@@ -107,15 +107,33 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 
 ### Stakeholder vrs Requerimientos
 
-![Caso de uso](../Capturas/StakeholderRequerimientosV4.jpeg)
+![Caso de uso](../Capturas/StakeholderRequerimientosF.jpg)
 
 ### Stakeholders vrs CDU
 
-![Caso de uso](../Capturas/StakeholdersCDUV4.jpeg)
+![Caso de uso](../Capturas/StakeholderCDUF.jpg)
 
 ### Requerimiento vrs CDU
 
-![Caso de uso](../Capturas/RequerimientoCDUV4.jpeg)
+![Caso de uso](../Capturas/RequerimientoCDUF.jpg)
+
+
+## 6) Selección del o los Estilos Arquitectónicos
+
+El banco **Money Bin** requiere un diseño arquitectónico que cumpla o se alinee con las metas del banco, como son la seguridad, rendimiento, modernidad, etc. Para ello, se optó por un estilo arquitectónico basado en **capas**.
+
+Este enfoque organiza la plataforma en varias capas, cada una con responsabilidades diferentes:
+
+### 1. Capa de Presentación
+Se encarga de las interfaces de usuario, asegurando que cada tipo de usuario (clientes, cajeros, administradores, supervisores, etc.) pueda interactuar de forma eficiente y segura con el sistema.
+
+### 2. Capa de Lógica de Negocio
+Contiene las reglas y procesos principales del sistema, como:
+- Autenticación.
+- Procesamiento de pagos y transferencias.
+- Gestión de empleados.
+- Generación de comprobantes.
+- Validación de identidad.
 
 ## E. Arquitectura candidata (Diagrama de bloques)
 
