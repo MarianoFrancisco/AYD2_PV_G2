@@ -18,3 +18,14 @@
 - **Kanban Jose Antecedentes:**
   ![Kanban-1](../Fase-1-Screenshot/JoseKanbanAntecedentes.jpg)
 
+- **Segundo dia de Kanban:**
+  ![Kanban-1](../Fase-1-Screenshot/KanbanSegundoDia.jpg)
+  
+- **Tercer dia de Kanban:**
+  ![Kanban-1](../Fase-1-Screenshot/KanbanTercerDia.jpg)
+  
+- **Cuarto dia de Kanban:**
+  ![Kanban-1](../Fase-1-Screenshot/KanbanCuartoDia.jpg)
+  
+- **Fin Kanban:**
+  ![Kanban-1](../Fase-1-Screenshot/KanbanFinalizado.jpg)
