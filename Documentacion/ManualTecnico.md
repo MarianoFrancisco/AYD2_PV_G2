@@ -157,19 +157,22 @@ La arquitectura en capas ofrece una estructura clara y bien definida que facilit
 - **Comprension del sistema.**
 
 Al separar las responsabilidades en capas especificas, se mejora la modularidad y se reduce el impacto de los cambios en una parte del sistema. 
-
-
-## E. Arquitectura candidata (Diagrama de bloques)
+### Arquitectura candidata (Diagrama de bloques)
 
 ![Caso de uso](../Capturas/estiloarquitectonico.png)
 
 Los clientes y encargados/empleados podran ejecutar su aplicacion de manera local en su PC con acceso a internet y este podra visualizarse en Angular, al momento de realizar las peticiones se haran por medio de un servidor API Rest alojado en Nodejs. La base de datos se encuentra alojada en un servicio RDS de AWS.
 
-## F. Diagrama entidad relacion
+## 7) Diagrama de despliegue y componentes
 
-![Entidad relacion Peter Chen](../Capturas/DiagramaEntidadRelacionV5.png)
+![Entidad relacion](../Capturas/DiagramaDespliegueV1.png)
 
-## G. Prototipos
+## 8. Diagrama entidad relacion
+
+![Entidad relacion](../Capturas/DiagramaEntidadRelacionV5.png)
+**Link:**  [Link](https://drive.google.com/file/d/1K6XSIMpArZHsAqhgD7s1YcEdYW7MxlCb/view?usp=sharing)
+
+## 9). Prototipos
 
 ### Login
 
@@ -362,6 +365,9 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 ### SupervizorReportes
 
 ![SupervizorReportes](../Capturas/Prototipos/SupervizorReportes.png)
+
+## 10) Patrones de diseño
+
 
 
 ## H. Configuracion de entorno
