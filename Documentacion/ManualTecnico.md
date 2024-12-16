@@ -368,6 +368,19 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ## 10) Patrones de diseño
 
+### 1. Patrón Singleton
+
+#### Diagrama UML
+![PatronCommand](../Capturas/PatronSingleton.jpg)
+
+#### Descripción
+Este patrón se encarga de crear una única instancia para controlar el acceso de las clases y mantener consistencia en los datos. También controla el acceso a recursos compartidos.
+
+#### ¿Por qué?
+La aplicación maneja monitoreo en tiempo real, gestión de inventario y copias de seguridad. Estas copias generan datos que necesitan ser gestionados de manera centralizada.  
+Con este patrón aseguramos que una única instancia controle la gestión del inventario, monitoreo de actividades o la gestión de copias de seguridad, evitando la duplicación de datos.
+
+
 
 ### 5. Patrón Command
 
