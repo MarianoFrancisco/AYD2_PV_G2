@@ -8,218 +8,427 @@
 | Mariano Francisco Camposeco Camposeco    | 202030987  |
 | David Enrique Lux Barrera                | 201931344  |
 
+## 1) Antecedentes
+El Banco **"Money Bin"** enfrenta problemas como procesos lentos al momento de realizar transacciones o consultas generando largas colas en el banco, errores humanos en las transacciones, falta de accesibilidad para los clientes y sistemas manuales que limitan la capacidad de realizar pagos, manejar cuentas y generar reportes.
+Además, las transacciones presenciales, la gestión basada en documentos físicos y la falta de seguridad en validaciones de identidad aumentan el riesgo de fraudes y dificultan la eficiencia operativa.
 
-## A. Core del negocio
+La nueva plataforma propuesta busca automatizar procesos clave, fortalecer la seguridad y transformar el modelo de operación hacia una banca virtual. Permitirá el acceso desde una aplicación web, facilitando a los usuarios gestionar sus cuentas, realizar transacciones y acceder a servicios sin la necesidad de ir al banco. También incluirá módulos intuitivos y reportes automatizados que optimicen la operación interna y el análisis del desempeño.
 
-![Caso de uso](../Capturas/CasoUso.png)
+El objetivo es modernizar los servicios del banco, mejorar la eficiencia operativa, fortalecer la seguridad, y ofrecer una experiencia personalizada que aumente la confianza y satisfacción de los clientes, posicionando a Money Bin como un líder en innovación financiera.
 
-La actividad principal del sistema es que clientes y encargados puedan realizar diferentes transacciones y operaciones del banco desde una aplicacion web, con la finalidad de resolver el problema de largas filas y reducir la carga para los empleados. Para seguir manteniendo su trayectoria con la seguridad se ha implementado una funcion de validacion de identidad al momento de realizar una transaccion para evitar cualquier fraude. Entre las transacciones que pueden realizar los clientes son pagos, retiros y depositos, ademas para que los clientes tengan un registro de sus operaciones bancarias podra generar un comprobante. Para reducir la carga de los empleados cuentan con la funcion de buscar cuentas de clientes por su numero de cuenta o por CUI y asi poder localizarlas rapidamente.
+## 2) Core del negocio
+### Descripcion:
+La actividad principal del sistema es que clientes y encargados puedan realizar diferentes transacciones y operaciones del banco desde una página web, con la finalidad de  optimizar los procesos bancarios tradicionales, resolviendo la problemática de las largas filas y no depender de procesos manuales. Para mantener y garantizar la seguridad al momento de realizar una transacción, se ha implementado la validación de identidad para minimizar el riesgo de fraude. La implementación de la plataforma también permitirá centralizar los datos y generar reportes con el fin de analizar y mejorar los aspectos no beneficiosos hacia la empresa.
 
-## B. Requerimientos funcionales
+Entre las transacciones disponibles que pueden realizar los clientes se incluyen pagos, retiros y depósitos. Además, para brindar un mejor control financiero, los usuarios tienen la opción de generar comprobantes como registros de sus operaciones bancarias. Para  reducir la sobrecarga de trabajo que tienen los empleados cuentan con la función de buscar cuentas de clientes por su número de cuenta o por CUI, lo que facilita la localización de información de manera precisa y rápida.
 
-1. El cliente o encargado deberá tener la posibilidad de consultar el saldo en su cuenta.
+Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, algunos siendo la posibilidad de realizar cambios de divisas, gestionar préstamos, y habilitar cuentas en dólares. Ya que, estas funcionalidades aseguran que la plataforma no únicamente atienda las necesidades actuales de los clientes, sino que también esté preparada para adaptarse a futuros cambios en los sectores bancarios.
 
-2. El sistema deberá contar con una opción de generar comprobante en formato PDF luego de realizar una transaccion.
+**Caso de Uso de Alto Nivel**
+![Caso de uso](../Capturas/AltoNivelMoneyBin.png)
 
-3. El empleado deberá tener la opción de buscar una cuenta por su número de cuenta o CUI para poder visualizar su perfil
+**Caso de Uso Primera Descomposicion**
+![Caso de uso](../Capturas/Diagrama-Descomposicion.png)
 
-4. Cada deposito que el cliente realice pordrá hacerlo por transferencia o por efectivo.
+## 3) Lista de requerimientos funcionales generales
 
-5. El cliente deberá tener la posibliidad de realizar un retiro de dinero de su cuenta por ventanilla o por cajero automatico.
+### Requerimientos funcionales
+#### **Autenticación**
+- **Autenticación(RF-001):** El sistema debe permitir a los clientes autenticarse mediante su **CUI** y **PIN**.
+- **Validación de roles(RF-002):** El sistema debe ser capaz de reconocer si las credenciales ingresadas corresponden a un **cliente** o a un **empleado**.
 
-6. Cada pago de préstamo adquirido con el banco que realice el cliente deberá pdoer hacerlo parcial o completamente.
+#### **Gestión de Cuentas**
+- **Detalle de Cuentas(RF-003):** Los empleados o encargados deben poder **consultar la información de todas las cuentas** de los clientes.
+- **Balance de Cuenta(RF-004):** El sistema debe mostrar el **saldo de cuenta disponible** de cada cliente.
+- **Reestablecer contraseña(RF-005):** El administrador de sistemas podrá **proporcionar una nueva contraseña** a los empleados, cuando el supervisor lo indique.
 
-7. El encargado deberá tener la posiblidad de realizar el pago de un servicio desde el sistema del banco.
+#### **Gestión de Usuarios**
+- **Editar Información(RF-006):** Los empleados podrán **actualizar la información** de los clientes.
+- **Registro de Clientes(RF-007):** El sistema debe permitir **agregar nuevos clientes** mediante un proceso de registro.
 
-8. El sistema contara con un proceso de validacion de identidad al momento de realizar una transaccion.
+#### **Gestión Operativa**
+- **Busqueda de Cuenta(RF-008):** El sistema permite la búsqueda de cuentas de clientes por medio de su CUI o número de cuenta.
+- **Registro de TC(RF-009):** El sistema permite a los clientes crear nuevas tarjetas de crédito
+- **Estado de TC(RF-010):** El sistema permite el bloqueo y activación de tarjetas por pérdida, robo o fraude.
+- **Asignación de Roles(RF-011):** El administrador de sistemas debe poder registrar y asignar roles a los empleados.
 
-## C. Requerimientos no funcionales
+#### **Monitoreo de datos**
+- **Monitoreo(RF-012):** El sistema permite la visualización en tiempo real de las transacciones realizadas.
+- **Reporte de auditoria(RF-013):** El sistema permite al supervisor generar diferentes reportes.
+- **Solicitudes(RF-014):** El sistema permite al supervisor aceptar diferentes solicitudes.
 
-1. Los comprobantes generados se realizaran en un maximo de 1 segundo.
+#### **Generación de comprobantes**
+- **Generar Comprobante(RF-015):** El sistema permite generar comprobantes(voucher) de las transacciones realizadas.
 
-2. Cada transaccion que se realice deberá procesarse en un maximo de 2 segundos.
+### Gestión de transacciones:
+- **Pago de Servicios(RF-016):** El cajero deberá poder realizar pagos de servicios básicos (Agua, Luz, Teléfono e Internet)
+- **Pago de Prestamos(RF-017):** El sistema permitirá pagos parciales o totales de los préstamos
+- **Transacciones(RF-018):** El cliente deberá poder realizar depósitos y retiros, validando límites diarios y moneda
+- **Cambio de Divisas(RF-019):** El sistema permitirá cambiar la moneda de quetzales a dólares.
 
-3. La interfaz de usuario deberá ser intuitiva y facil de utilizar para los clientes.
 
-4. Los usuarios dispondrán de un pin para garantizar mayor seguridad y privacidad en sus cuentas.
+### Requerimientos no funcionales
 
-5. El sitema deberá contar con autenticación y autorización para evitar fraudes al momento de realizar una transacción.
+### Seguridad:
+- **Encriptación(RNF-001):** Encriptación de datos sensibles como contraseñas.
+- **Backups(RNF-002):** El sistema contará con un modo de generar backups o respaldos de información cada cierto tiempo o cuando el administrador lo necesite.
+- **Anti-Fallas(RNF-003):** Rollback al detectar transacciones fallidas.
 
-6. La aplicacion deberá tener la posiblidad de ser ejecutado en cualquier navegador.
+### Disponibilidad:
+- **Disponibilidad(RNF-004):** El sistema debe estar disponible 24/7 para todos los usuarios.
+- **Redundancia(RNF-005):** Debe contar con balanceadores de carga.
 
-7. El sistema deberá ser escalable para manejar un gran número de usuarios.
+### **Compatibilidad:**
+- **Portable(RNF-006):** Ejecución adecuada en todos los  OS y navegadores.
+- **Adaptabilidad(RNF-007):** La interfaz del sistema debe ser responsiva en cualquier dispositivo móvil
 
-## D. CDU expandidos
+### **Rendimiento:**
+- **Latencia(RNF-008:** Realizar las transacciones en un tiempo máximo de 2 segundos.
+- **Concurrencia(RNF-009):** El sistema debe ser capaz de procesar varias transacciones por segundo.
 
-***Caso de uso:*** Depositar dinero <br>
-***Actores:*** Cliente <br>
-***Proposito:*** Depositar una cantidad de dinero en una cuenta. <br>
-***Tipo:*** Primario <br>
-***Descripcion:*** El cliente puede realizar un deposito por medio de efectivo o por medio de transferencia. Cuando se realice por efectivo el empleado será encargado de pasar el dinero a la cuenta y cuando se realice por transferencia el mismo cliente podra realizar el depósito. <br>
-***Curso normal de los eventos:*** <br>
-1. El sistema pedira realizar una validacion del cliente para evitar fraudes.
-2. El sistema buscara que la informacion del cliente sea correcta.
-3. El cliente ingresara la siguiente informacion: Numero de cuenta, monto a depositar, fecha y hora del deposito, metodo de deposito.
-4. El sistema validara que la cuenta de origen tenga los fondos suficientes para realizar el deposito. 
-5. El sitema realizara el deposito y actualizara el saldo de la cuenta.
-6. El cliente podrá generar el comprobante en formato PDF.<br>
+### **Usabilidad:**
+- **Interfaz Gráfica(RNF-010):** Ofrecer una experiencia intuitiva para los usuarios
+- **Intuición Gráfica(RNF-011):** Estándares de accesibilidad
+- **Alertas(RNF-012):** Mostrar mensajes de error descriptivos para orientar al usuario.
+- **Reportes(RNF-013):** Generar reportes automáticos y personalizados.
 
-***Cursos alternos:*** <br>
-***Linea 3:*** En caso de que el sistema no valide correctamente la informacion del cliente no se procedera a solicitar la informacion para realizar el deposito. <br>
-***Linea 5:*** El sistema no podra realizar el deposito por falta de fondos y se le notificara al cliente.
+### **Escalabilidad:**
+- **Infraestructura(RNF-014):** Despliegue del sistema en infraestructura en la nube.
+- **Arquitectura(RNF-015):** La arquitectura debe permitir agregar nuevas funcionalidades sin impactar negativamente el rendimiento del sistema.
 
-------------------------------------------
+### **Automatización:**
+- **CI/CD(RNF-016):** Despliegues automatizados
 
-***Caso de uso:*** Pagar prestamos <br>
-***Actores:*** Cliente <br>
-***Proposito:*** Pagar los prestamos adquiridos con el banco Money Bin. <br>
-***Tipo:*** Primario <br>
-***Descripcion:*** El cliente puede realizar el pago de sus prestamos de manera parcial o total. <br>
-***Curso normal de los eventos:*** <br>
-1. El sistema pedira realizar una validacion del cliente para evitar cualquier fraude.
-2. El sitema buscara que la informacion del cliente sea correcta.
-3. El cliente ingresara la siguiente informacion: Numero de cuenta del cliente, numero de prestamo, monto a pagar.
-4. El sistema efectuara el pago y notificara que el pago del prestamo se realizo de manera correcta.
-5. El cliente podrá generar el comprobante en formato PDF.<br>
+## 4) Diagrama de CDU expandidos
 
-***Cursos alternos:*** <br>
-***Linea 3:*** En caso de que el sistema no valide correctamente la informacion del cliente no se procedera a solicitar la informacion para ralizar el pago del prestamo.
+![Caso de uso](../Capturas/CasodeUsoExpandoCompleto.png)
 
-------------------------------------------
+## 5) Matrices de trazabilidad
 
-***Caso de uso:*** Pagar servicios <br>
-***Actores:*** Encargado/Empleado <br>
-***Proposito:*** Pagar los servicios basicos. <br>
-***Descripcion:*** El encargado podra realizar pagos de los servicios basicos en nombre de los clientes desde el sistema. Los servicios basicos son agua, luz, telefono e internet.<br>
-***Curso normal de los eventos:*** <br>
-1. El sistema pedira realizar una validacion del encargado donde ingrese el cui y pin para confirmar que el cliente exista en el sistema.
-2. El sistema buscara que la informacion sea correcta.
-3. El encargado debera ingresar la siguiente informacion: Nombre de la persona encargada del servicio, codigo de servicio y monto que debe pagar.
-4. El sistema realizara el pago del servicio.
-5. El encargado/empleado podra generar un comprobante del pago.<br>
+### Stakeholder vrs Requerimientos
 
-***Cursos alternos:*** <br>
-***Linea 3:*** En caso de que el sistema no valide correctamente la informacion del cliente no se procedera a solicitar la informacion para el pago del servicio y se le notificara al encargado/empleado.
+![Caso de uso](../Capturas/StakeholderRequerimientosF.jpg)
 
-------------------------------------------
+### Stakeholders vrs CDU
 
-***Caso de uso:*** Retirar dinero <br>
-***Actores:*** cliente <br>
-***Proposito:*** Retirar dinero de su cuenta. <br>
-***Descripcion:*** El cliente podra realizar un retiro de efectivo desde su cuenta por ventanilla o en cajero automatico.<br>
-***Curso normal de los eventos:*** <br>
-1. El sistema pedira realizar una validacion del cliente para evitar algun fraude.
-2. El sistema buscara que la informacion del cliente sea valida.
-3. El cliente debera ingresar la siguiente informacion: Numero de cuenta del cliente, monto a retirar y tipo de retiro
+![Caso de uso](../Capturas/StakeholderCDUF.jpg)
 
-4. El sistema buscara que el cliente tenga los fondos suficinetes para realizar el retiro.
-5. El sistema realizara el retiro del efectivo.
-6. El encargado/empleado podra generar un comprobante del pago.<br>
+### Requerimiento vrs CDU
 
-***Cursos alternos:*** <br>
-***Linea 3:*** En caso de que el sistema no valide correctamente la informacion ingresada del cliente no se procedera a realizar el pago del servicio y se le notificara al encargado/empleado.
-***Linea 5:*** El sistema no realizara el retiro del efectivo en caso de no tener el saldo suficinete al solicitado y se le notificara al cliente. <br>
-***Linea 5:*** El empleado sera quien realice el retiro si el cliente decidio hacer su retiro por ventanilla.
+![Caso de uso](../Capturas/RequerimientoCDUF.jpg)
 
-## E. Arquitectura candidata (Diagrama de bloques)
 
-![Caso de uso](../Capturas/DiagramaBloques.png)
+## 6) Selección del o los Estilos Arquitectónicos
+
+El banco **Money Bin** requiere un diseño arquitectónico que cumpla o se alinee con las metas del banco, como son la seguridad, rendimiento, modernidad, etc. Para ello, se optó por un estilo arquitectónico basado en **capas**.
+
+Este enfoque organiza la plataforma en varias capas, cada una con responsabilidades diferentes:
+
+### 1. Capa de Presentación
+Se encarga de las interfaces de usuario, asegurando que cada tipo de usuario (clientes, cajeros, administradores, supervisores, etc.) pueda interactuar de forma eficiente y segura con el sistema.
+
+### 2. Capa de Lógica de Negocio
+Contiene las reglas y procesos principales del sistema, como:
+- Autenticación.
+- Procesamiento de pagos y transferencias.
+- Gestión de empleados.
+- Generación de comprobantes.
+- Validación de identidad.
+
+Esta capa centraliza la lógica del negocio para garantizar que las operaciones sean consistentes y seguras.
+
+### 3. Capa de Lógica de Datos
+Maneja la interacción con la base de datos, incluyendo:
+- Gestión de cuentas.
+- Transacciones.
+- Préstamos.
+- Roles de los usuarios.
+
+Esta capa garantiza que los datos estén organizados y disponibles para las demás capas de forma eficiente.
+
+### Capa de infraestructura
+Proporciona el soporte necesario para ejecutar las aplicaciones.
+
+## Beneficios de la Arquitectura en Capas
+
+La arquitectura en capas ofrece una estructura clara y bien definida que facilita: 
+- **Mantenimiento.**
+- **Escalabilidad.**
+- **Comprension del sistema.**
+
+Al separar las responsabilidades en capas especificas, se mejora la modularidad y se reduce el impacto de los cambios en una parte del sistema. 
+### Arquitectura candidata (Diagrama de bloques)
+
+![Caso de uso](../Capturas/estiloarquitectonico.png)
 
 Los clientes y encargados/empleados podran ejecutar su aplicacion de manera local en su PC con acceso a internet y este podra visualizarse en Angular, al momento de realizar las peticiones se haran por medio de un servidor API Rest alojado en Nodejs. La base de datos se encuentra alojada en un servicio RDS de AWS.
 
-## F. Diagrama entidad relacion
+## 7) Diagrama de despliegue y componentes
 
-![Entidad relacion Peter Chen](../Capturas/DiagramaEntidadRelacionPeterChen.png)
+![Entidad relacion](../Capturas/DiagramaDespliegueV3.png)
 
-## G. Endpoints
-### Base URL
-All endpoints share the base URL `/api`.
+![Entidad relacion](../Capturas/DiagramadeComponenteFinal.png)
 
-### 1. **Show Balance**
-- **Route:** `/api/account/show-balance`
-- **Method:** `GET`
-- **Description:** Retrieves the account balance and the last update date.
-- **Query Parameters:**
-  - `cui` (string, required): Unique identifier for the user.
-  - `pin` (string, required): Personal Identification Number.
-- **Middleware:**
-  - `validateUser('query')`
-- **Response:**
-  - JSON object containing account balance and the last update timestamp.
+## 8) Diagrama entidad relacion
 
-### 2. **Client Information**
-- **Route:** `/api/client/get-client-info`
-- **Method:** `GET`
-- **Description:** Retrieves account information and transaction history.
-- **Query Parameters:**
-  - `cui` (string, optional): Unique identifier for the user.
-  - `account_number` (string, optional): Account number.
-- **Response:**
-  - JSON object containing client details and transaction history.
+![Entidad relacion](../Capturas/DiagramaEntidadRelacionV5.png)
+**Link:**  [Link](https://drive.google.com/file/d/1K6XSIMpArZHsAqhgD7s1YcEdYW7MxlCb/view?usp=sharing)
 
-### 3. **Service Payment**
-- **Route:** `/api/payment-service`
-- **Method:** `POST`
-- **Description:** Processes service payments such as utility bills.
-- **Request Body:**
-  ```json
-  {
-      "service_name": "string (required)",
-      "service_code": "string (required)",
-      "amount": "number (required)",
-      "cui": "string (required)",
-      "pin": "string (required)"
-  }
-- **Middleware:**
-  - `validateUser('body')`
-- **Response:**
-  - JSON object indicating the status of the payment.
+## 9) Prototipos
 
-### 4. **Loan Payment**
-- **Route:** `/api/payloan-payment`
-- **Method:** `POST`
-- **Description:** Processes loan payments.
-- **Request Body:**
-  ```json
-  {
-      "loan_number": "number (required)",
-      "amount": "number (required)",
-      "cui": "string (required)",
-      "pin": "string (required)"
-  }
-- **Middleware:**
-  - `validateUser('body')`
-- **Response:**
-  - JSON object indicating the status of the loan payment.
+### Login
 
-### 5. **Deposit**
-- **Route:** `/api/deposit/deposit`
-- **Method:** `POST`
-- **Description:** Allows depositing money via cash or transfer.
-- **Request Body:**
-  ```json
-  {
-      "account_number": "string (required)",
-      "amount": "number (required)",
-      "deposit_type": "string (required)",
-      "target_account": "string (required)"
-  }
-- **Response:**
-  - JSON object indicating the status of the deposit.
+![Login](../Capturas/Prototipos/Login.png)
 
-### 6. **Service Payment**
-- **Route:** `/api/withdrawal`
-- **Method:** `POST`
-- **Description:** Allows withdrawing money from an account.
-- **Request Body:**
-  ```json
-  {
-      "account_number": "string (required)",
-      "amount": "number (required)",
-      "withdrawal_type": "string (required)"
-  }
-- **Response:**
-  - JSON object indicating the status of the payment.
+### Responsive Inicio
+
+![Responsive-inicio](../Capturas/Prototipos/Responsive-inicio.png)
+
+### Cajero-inicio
+
+![Cajero-inicio](../Capturas/Prototipos/Cajero-inicio.png)
+
+### Cajero-Busqueda de Cuenta
+
+![Cajero-BusquedaCuenta](../Capturas/Prototipos/Cajero-BusquedaCuenta.png)
+
+### Cajero-Cambio de Moneda
+
+![CajeroCambiosMoneda](../Capturas/Prototipos/Cajero-CambiosMoneda.png)
+
+### Cajero-Depositos
+
+![Cajero-Depositos](../Capturas/Prototipos/Cajero-Depositos.png)
+
+### Cajero-Pagos de Prestamos
+
+![Cajero-PagosPrestamos](../Capturas/Prototipos/Cajero-PagosPrestamos.png)
+
+### Cajero-Pagos de Servicios
+
+![Cajero-PagosServicios](../Capturas/Prototipos/Cajero-PagosServicios.png)
+
+### Cajero-Pago de Tarjeta
+
+![Cajero-PagoTarjetas](../Capturas/Prototipos/Cajero-pagoTarjetas.png)
+
+### Cajero-Retiros
+
+![Cajero-Retiro](../Capturas/Prototipos/Cajero-Retiro.png)
+
+### Atencion-Inicio
+
+![Atencion-Inicio](../Capturas/Prototipos/Atencion-inicio.png)
+
+### Atencion-ActualizarDatos
+
+![Atencion-ActualizarDatos](../Capturas/Prototipos/Atencion-ActualizarDaots.png)
+
+### Atencion-BloquearTarjeta
+
+![Atencion-BloquearTarjeta](../Capturas/Prototipos/Atencion-BloquearTarjeta.png)
+
+### Atencion-BloquearTarjeta2
+
+![Atencion-BloquearTarjeta2](../Capturas/Prototipos/Atencion-BloquearTarjeta2.png)
+
+### Atencion-CrearCuenta
+
+![Atencion-CrearCuenta](../Capturas/Prototipos/Atencion-Crearcuenta.png)
+
+### Atencion-CrearTarjeta
+
+![Atencion-CrearTarjeta](../Capturas/Prototipos/Atencion_CrearTarjeta.png)
+
+### Atencion-CrearTarjeta2
+
+![Atencion-CrearTarjeta2](../Capturas/Prototipos/Atencion-crearTarjeta2.png)
+
+### Cliente-Inicio
+
+![Cliente-Inicio](../Capturas/Prototipos/Cliente-inicio.png)
+
+### Cliente-Encuesta
+
+![Cliente-Encuesta](../Capturas/Prototipos/Cliente-Encuesta.png)
+
+### Cliente-Queja
+
+![Cliente-Queja](../Capturas/Prototipos/Cliente-Queja.png)
+
+### Cliente-Pago de Servicios
+
+![Cliente-pagoservicio](../Capturas/Prototipos/Cliente-PagodeServicios.png)
+
+### Admin-inicio
+
+![Admin-inicio](../Capturas/Prototipos/Admin-inicio.png)
+
+### Admin-Registrar Empleado
+
+![Admin-regEmpleado](../Capturas/Prototipos/Admin-RegisEmpleado.png)
+
+### Admin-Empleados
+
+![Admin-Emple](../Capturas/Prototipos/Admin-Empleados.png)
+
+### Admin-Asignar Roles
+
+![Admin-asigRoles](../Capturas/Prototipos/Admin-AsigRoles.png)
+
+### Admin-Cambiar Contraseña
+
+![Admin-CambiarContra](../Capturas/Prototipos/Admin-CambiarContra.png)
+
+### Admin-Copia de seguridad
+
+![Admin-copia1](../Capturas/Prototipos/Admin-copaSeguridad.png)
+
+![Admin-copia2](../Capturas/Prototipos/Admin-copaSeguridad2.png)
+
+### Admin-Eliminar empleados
+
+![Admin-eliminarEmpleado1](../Capturas/Prototipos/Admin-EliminarEmpleado.png)
+
+![Admin-eliminarEmpleado2](../Capturas/Prototipos/Admin-EliminarEmpleado2.png)
+
+### Supervisor-Inicio
+
+![Supervisor-Inicio](../Capturas/Prototipos/Supervisor-Inicio.png)
+
+### Supervisor-AprobarTarjetas
+
+![Supervizor-AprobarTarjetas](../Capturas/Prototipos/Supervizor-AprobarTarjetas.png)
+
+### Supervisor-AprobarTarjetas2
+
+![Supervizor-AprobarTarjetas2](../Capturas/Prototipos/Supervizor-AprobarTarjetas2.png)
+
+### Supervisor-Encuesta
+
+![Supervizor-Encuesta](../Capturas/Prototipos/Supervizor-Encuesta.png)
+
+### Supervisor-Encuesta2
+
+![Supervizor-Encuesta2](../Capturas/Prototipos/Supervizor-Encuesta2.png)
+
+### Supervisor-RegistrarAdmin
+
+![Supervizor-RegistrarAdmin](../Capturas/Prototipos/Supervizor-RegistrarAdmin.png)
+
+### Supervisor-Servicios
+
+![Supervizor-Servicios](../Capturas/Prototipos/Supervizor-servicios.png)
+
+### Supervisor-Servicios2
+
+![Supervizor-Servicios2](../Capturas/Prototipos/Supervizor-servicios2.png)
+
+### Supervisor-SolicitudPrestamos
+
+![Supervizor-SolicitudPrestamos](../Capturas/Prototipos/Supervizor_SolicitudPrestamos.png)
+
+### Supervisor-SolicitudPrestamos2
+
+![Supervizor-SolicitudPrestamos2](../Capturas/Prototipos/Supervizor_SolicitudPrestamos2.png)
+
+### EdicionPerfil
+
+![EdicionPerfil](../Capturas/Prototipos/EdicionPerfil.png)
+
+### Supervizor-Admins
+
+![Supervizor-Admins](../Capturas/Prototipos/Supervizor-Admins.png)
+
+### Supervizor-Admin2
+
+![Supervizor-Admin2](../Capturas/Prototipos/Supervizor-Admin2.png)
+
+### Supervizor-Admin3
+
+![Supervizor-Admin3](../Capturas/Prototipos/Supervizor-Admin3.png)
+
+### Supervizor-Gestion
+
+![Supervizor-Gestion](../Capturas/Prototipos/Supervizor-Gestion.png)
+
+### Supervizor-Monitoreo
+
+![Supervizor-Monitoreo](../Capturas/Prototipos/Supervizor-Monitoreo.png)
+
+### Supervizor-Queja
+
+![Supervizor-Queja](../Capturas/Prototipos/Supervizor-Queja.png)
+
+### Supervizor-Queja2
+
+![Supervizor-Queja2](../Capturas/Prototipos/Supervizor-Queja2.png)
+
+### SupervizorReportes
+
+![SupervizorReportes](../Capturas/Prototipos/SupervizorReportes.png)
+
+## 10) Patrones de diseño
+
+### 1. Patrón Singleton
+
+#### Diagrama UML
+![PatronCommand](../Capturas/PatronSingleton.jpg)
+
+#### Descripción
+Este patrón se encarga de crear una única instancia para controlar el acceso de las clases y mantener consistencia en los datos. También controla el acceso a recursos compartidos.
+
+#### ¿Por qué?
+La aplicación maneja monitoreo en tiempo real, gestión de inventario y copias de seguridad. Estas copias generan datos que necesitan ser gestionados de manera centralizada.  
+Con este patrón aseguramos que una única instancia controle la gestión del inventario, monitoreo de actividades o la gestión de copias de seguridad, evitando la duplicación de datos.
+
+### 2. Patrón State
+
+#### Diagrama UML
+![PatronState](../Capturas/PatronState.jpg)
+
+#### Descripción
+Este patrón se basa en los diferentes estados que puede tener un objeto y cómo en cada estado su comportamiento será diferente. Pueden existir cambios finitos entre estados, lo cual se denomina transición.
+
+#### ¿Por qué?
+Al momento de realizar una solicitud para cancelar un servicio, esta pasará por diferentes estados:  
+1. **EnviarSolicitud**: Aquí la solicitud será revisada antes de enviarla al supervisor.  
+2. **ProcesarSolicitud**: En este estado, el supervisor verificará que no existan pagos pendientes en el servicio antes de aceptar o rechazar la solicitud.
+
+### 3. Patrón Strategy
+
+#### Diagrama UML
+![PatronStrategy](../Capturas/PatronStrategy.jpg)
+
+#### Descripción
+Este patrón permite diseñar diferentes algoritmos y tenerlos en una clase diferente, esto para no tener todo en una sola clase y evitar un conflicto si un algoritmo debe ser cambiado.
+
+#### ¿Por qué?
+La aplicación maneja diferentes pagos, como pago de servicios, pago de préstamos o pago de tarjetas. Cada uno tiene su algoritmo diferente pero con la misma finalidad de procesar un pago, por lo que es necesario manejar cada tipo de pago en una clase diferente para ayudar a mantener un código limpio y legible.
+
+
+### 4. Patrón Observer 
+ 
+#### Diagrama UML 
+![PatronObserver](../Capturas/PatronObserver.jpg)
+ 
+#### Descripción 
+Este patrón se basa en dependencias de uno a muchos entre objetos, lo que significa que cuando un objeto relacionado cambia, se detona una notificación a los objetos interesados. 
+ 
+#### ¿Por qué? 
+Es necesario notificar al cliente cuando el bloqueo de tarjeta se haya realizado, por lo que este patrón facilita la implementación de notificaciones (envío de correo) en tiempo real.
+
+### 5. Patrón Command
+
+#### Diagrama UML
+![PatronCommand](../Capturas/PatronCommand.jpeg)
+
+#### Descripción
+Este patrón se basa en la creación de objetos por solicitud, lo que permite el manejo de colas, ya sea para aceptar o rechazar la solicitud.
+
+#### ¿Por qué?
+El supervisor puede aceptar y/o rechazar solicitudes de préstamos o tarjetas. Este patrón facilita el manejo de estas solicitudes generando una cola para llevar un orden en su procesamiento.
+
 
 ## H. Configuracion de entorno
 
