@@ -161,7 +161,7 @@ Al separar las responsabilidades en capas especificas, se mejora la modularidad 
 
 ## E. Arquitectura candidata (Diagrama de bloques)
 
-![Caso de uso](../Capturas/DiagramaBloques.png)
+![Caso de uso](../Capturas/estiloarquitectonico.png)
 
 Los clientes y encargados/empleados podran ejecutar su aplicacion de manera local en su PC con acceso a internet y este podra visualizarse en Angular, al momento de realizar las peticiones se haran por medio de un servidor API Rest alojado en Nodejs. La base de datos se encuentra alojada en un servicio RDS de AWS.
 
