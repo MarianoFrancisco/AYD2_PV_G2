@@ -19,13 +19,13 @@
   ![Kanban-1](../Fase-1-Screenshot/JoseKanbanAntecedentes.jpg)
 
 - **Segundo dia de Kanban:**
-  ![Kanban-1](../Fase-1-Screenshot/KanbanSegundoDia.jpg)
+  ![Kanban-1](../Fase-1-Screenshot/KanbanSegundoDia.JPG)
   
 - **Tercer dia de Kanban:**
-  ![Kanban-1](../Fase-1-Screenshot/KanbanTercerDia.jpg)
+  ![Kanban-1](../Fase-1-Screenshot/KanbanTercerDia.JPG)
   
 - **Cuarto dia de Kanban:**
-  ![Kanban-1](../Fase-1-Screenshot/KanbanCuartoDia.jpg)
+  ![Kanban-1](../Fase-1-Screenshot/KanbanCuartoDia.JPG)
   
 - **Fin Kanban:**
-  ![Kanban-1](../Fase-1-Screenshot/KanbanFinalizado.jpg)
+  ![Kanban-1](../Fase-1-Screenshot/KanbanFinalizado.JPG)
