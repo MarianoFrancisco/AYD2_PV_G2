@@ -105,7 +105,17 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 
 ## 5) Matrices de trazabilidad
 
+### Stakeholder vrs Requerimientos
 
+![Caso de uso](../Capturas/StakeholderRequerimientosV1.jpg)
+
+### Stakeholders vrs CDU
+
+![Caso de uso](../Capturas/StakeholdersCDUV1.jpg)
+
+### Requerimiento vrs CDU
+
+![Caso de uso](../Capturas/RequerimientoCDUV1.jpg)
 
 ## E. Arquitectura candidata (Diagrama de bloques)
 
