@@ -165,7 +165,7 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ## 7) Diagrama de despliegue y componentes
 
-![Entidad relacion](../Capturas/DiagramaDespliegueV2.png)
+![Entidad relacion](../Capturas/DiagramaDespliegueV3.png)
 
 ## 8. Diagrama entidad relacion
 
