@@ -167,12 +167,12 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ![Entidad relacion](../Capturas/DiagramaDespliegueV3.png)
 
-## 8. Diagrama entidad relacion
+## 8) Diagrama entidad relacion
 
 ![Entidad relacion](../Capturas/DiagramaEntidadRelacionV5.png)
 **Link:**  [Link](https://drive.google.com/file/d/1K6XSIMpArZHsAqhgD7s1YcEdYW7MxlCb/view?usp=sharing)
 
-## 9). Prototipos
+## 9) Prototipos
 
 ### Login
 
@@ -380,7 +380,18 @@ Este patrón se encarga de crear una única instancia para controlar el acceso d
 La aplicación maneja monitoreo en tiempo real, gestión de inventario y copias de seguridad. Estas copias generan datos que necesitan ser gestionados de manera centralizada.  
 Con este patrón aseguramos que una única instancia controle la gestión del inventario, monitoreo de actividades o la gestión de copias de seguridad, evitando la duplicación de datos.
 
+### 2. Patrón State
 
+#### Diagrama UML
+![PatronState](../Capturas/PatronState.jpg)
+
+#### Descripción
+Este patrón se basa en los diferentes estados que puede tener un objeto y cómo en cada estado su comportamiento será diferente. Pueden existir cambios finitos entre estados, lo cual se denomina transición.
+
+#### ¿Por qué?
+Al momento de realizar una solicitud para cancelar un servicio, esta pasará por diferentes estados:  
+1. **EnviarSolicitud**: Aquí la solicitud será revisada antes de enviarla al supervisor.  
+2. **ProcesarSolicitud**: En este estado, el supervisor verificará que no existan pagos pendientes en el servicio antes de aceptar o rechazar la solicitud.
 
 ### 5. Patrón Command
 
