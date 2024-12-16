@@ -393,6 +393,18 @@ Al momento de realizar una solicitud para cancelar un servicio, esta pasará por
 1. **EnviarSolicitud**: Aquí la solicitud será revisada antes de enviarla al supervisor.  
 2. **ProcesarSolicitud**: En este estado, el supervisor verificará que no existan pagos pendientes en el servicio antes de aceptar o rechazar la solicitud.
 
+### 3. Patrón Strategy
+
+#### Diagrama UML
+![PatronStrategy](../Capturas/PatronStrategy.jpg)
+
+#### Descripción
+Este patrón permite diseñar diferentes algoritmos y tenerlos en una clase diferente, esto para no tener todo en una sola clase y evitar un conflicto si un algoritmo debe ser cambiado.
+
+#### ¿Por qué?
+La aplicación maneja diferentes pagos, como pago de servicios, pago de préstamos o pago de tarjetas. Cada uno tiene su algoritmo diferente pero con la misma finalidad de procesar un pago, por lo que es necesario manejar cada tipo de pago en una clase diferente para ayudar a mantener un código limpio y legible.
+
+
 ### 5. Patrón Command
 
 #### Diagrama UML
