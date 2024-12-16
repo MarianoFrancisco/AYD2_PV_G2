@@ -251,6 +251,42 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ![Cliente-Queja](../Capturas/Prototipos/Cliente-Queja.png)
 
+### Cliente-Pago de Servicios
+
+![Cliente-pagoservicio](../Capturas/Prototipos/Cliente-PagodeServicios.png)
+
+### Admin-inicio
+
+![Admin-inicio](../Capturas/Prototipos/Admin-inicio.png)
+
+### Admin-Registrar Empleado
+
+![Admin-regEmpleado](../Capturas/Prototipos/Admin-RegisEmpleado.png)
+
+### Admin-Empleados
+
+![Admin-Emple](../Capturas/Prototipos/Admin-Empleados.png)
+
+### Admin-Asignar Roles
+
+![Admin-asigRoles](../Capturas/Prototipos/Admin-AsigRoles.png)
+
+### Admin-Cambiar Contraseña
+
+![Admin-CambiarContra](../Capturas/Prototipos/Admin-CambiarContra.png)
+
+### Admin-Copia de seguridad
+
+![Admin-copia1](../Capturas/Prototipos/Admin-copaSeguridad.png)
+
+![Admin-copia2](../Capturas/Prototipos/Admin-copaSeguridad2.png)
+
+### Admin-Eliminar empleados
+
+![Admin-eliminarEmpleado1](../Capturas/Prototipos/Admin-EliminarEmpleado.png)
+
+![Admin-eliminarEmpleado2](../Capturas/Prototipos/Admin-EliminarEmpleado2.png)
+
 ## H. Configuracion de entorno
 
 **Requisitos Previos:**
