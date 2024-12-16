@@ -135,6 +135,18 @@ Contiene las reglas y procesos principales del sistema, como:
 - Generación de comprobantes.
 - Validación de identidad.
 
+Esta capa centraliza la lógica del negocio para garantizar que las operaciones sean consistentes y seguras.
+
+### 3. Capa de Lógica de Datos
+Maneja la interacción con la base de datos, incluyendo:
+- Gestión de cuentas.
+- Transacciones.
+- Préstamos.
+- Roles de los usuarios.
+
+Esta capa garantiza que los datos estén organizados y disponibles para las demás capas de forma eficiente.
+
+
 ## E. Arquitectura candidata (Diagrama de bloques)
 
 ![Caso de uso](../Capturas/DiagramaBloques.png)
