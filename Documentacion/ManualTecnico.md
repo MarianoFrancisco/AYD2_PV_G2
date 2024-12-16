@@ -287,6 +287,47 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ![Admin-eliminarEmpleado2](../Capturas/Prototipos/Admin-EliminarEmpleado2.png)
 
+### Supervisor-Inicio
+
+![Supervisor-Inicio](../Capturas/Prototipos/Supervisor-Inicio.png)
+
+### Supervisor-AprobarTarjetas
+
+![Supervizor-AprobarTarjetas](../Capturas/Prototipos/Supervizor-AprobarTarjetas.png)
+
+### Supervisor-AprobarTarjetas2
+
+![Supervizor-AprobarTarjetas2](../Capturas/Prototipos/Supervizor-AprobarTarjetas2.png)
+
+### Supervisor-Encuesta
+
+![Supervizor-Encuesta](../Capturas/Prototipos/Supervizor-Encuesta.png)
+
+### Supervisor-Encuesta2
+
+![Supervizor-Encuesta2](../Capturas/Prototipos/Supervizor-Encuesta2.png)
+
+### Supervisor-RegistrarAdmin
+
+![Supervizor-RegistrarAdmin](../Capturas/Prototipos/Supervizor-RegistrarAdmin.png)
+
+### Supervisor-Servicios
+
+![Supervizor-Servicios](../Capturas/Prototipos/Supervizor-servicios.png)
+
+### Supervisor-Servicios2
+
+![Supervizor-Servicios2](../Capturas/Prototipos/Supervizor-servicios2.png)
+
+### Supervisor-SolicitudPrestamos
+
+![Supervizor-SolicitudPrestamos](../Capturas/Prototipos/Supervizor_SolicitudPrestamos.png)
+
+### Supervisor-SolicitudPrestamos2
+
+![Supervizor-SolicitudPrestamos2](../Capturas/Prototipos/Supervizor_SolicitudPrestamos2.png)
+
+
 ## H. Configuracion de entorno
 
 **Requisitos Previos:**
