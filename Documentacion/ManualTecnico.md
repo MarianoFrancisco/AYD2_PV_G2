@@ -327,6 +327,42 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ![Supervizor-SolicitudPrestamos2](../Capturas/Prototipos/Supervizor_SolicitudPrestamos2.png)
 
+### EdicionPerfil
+
+![EdicionPerfil](../Capturas/Prototipos/EdicionPerfil.png)
+
+### Supervizor-Admins
+
+![Supervizor-Admins](../Capturas/Prototipos/Supervizor-Admins.png)
+
+### Supervizor-Admin2
+
+![Supervizor-Admin2](../Capturas/Prototipos/Supervizor-Admin2.png)
+
+### Supervizor-Admin3
+
+![Supervizor-Admin3](../Capturas/Prototipos/Supervizor-Admin3.png)
+
+### Supervizor-Gestion
+
+![Supervizor-Gestion](../Capturas/Prototipos/Supervizor-Gestion.png)
+
+### Supervizor-Monitoreo
+
+![Supervizor-Monitoreo](../Capturas/Prototipos/Supervizor-Monitoreo.png)
+
+### Supervizor-Queja
+
+![Supervizor-Queja](../Capturas/Prototipos/Supervizor-Queja.png)
+
+### Supervizor-Queja2
+
+![Supervizor-Queja2](../Capturas/Prototipos/Supervizor-Queja2.png)
+
+### SupervizorReportes
+
+![SupervizorReportes](../Capturas/Prototipos/SupervizorReportes.png)
+
 
 ## H. Configuracion de entorno
 
