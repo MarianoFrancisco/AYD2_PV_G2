@@ -101,11 +101,21 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 
 ## 4) Diagrama de CDU expandidos
 
-![Caso de uso](../Capturas/CasoUsoExpandidoV4.jpeg)
+![Caso de uso](../Capturas/CasodeUsoExpandoCompleto.png)
 
 ## 5) Matrices de trazabilidad
 
+### Stakeholder vrs Requerimientos
 
+![Caso de uso](../Capturas/StakeholderRequerimientosV3.jpg)
+
+### Stakeholders vrs CDU
+
+![Caso de uso](../Capturas/StakeholdersCDUV3.jpg)
+
+### Requerimiento vrs CDU
+
+![Caso de uso](../Capturas/RequerimientoCDUV3.jpg)
 
 ## E. Arquitectura candidata (Diagrama de bloques)
 
