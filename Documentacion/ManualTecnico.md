@@ -167,7 +167,7 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ![Entidad relacion](../Capturas/DiagramaDespliegueV3.png)
 
-![Entidad relacion](../Capturas/DiagramaComponentesV1.png)
+![Entidad relacion](../Capturas/DiagramadeComponenteFinal.png)
 
 ## 8) Diagrama entidad relacion
 
