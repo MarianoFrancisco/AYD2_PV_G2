@@ -167,97 +167,125 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ## F. Diagrama entidad relacion
 
-![Entidad relacion Peter Chen](../Capturas/DiagramaEntidadRelacionV3.png)
+![Entidad relacion Peter Chen](../Capturas/DiagramaEntidadRelacionV5.png)
 
-## G. Endpoints
-### Base URL
-All endpoints share the base URL `/api`.
+## G. Prototipos
 
-### 1. **Show Balance**
-- **Route:** `/api/account/show-balance`
-- **Method:** `GET`
-- **Description:** Retrieves the account balance and the last update date.
-- **Query Parameters:**
-  - `cui` (string, required): Unique identifier for the user.
-  - `pin` (string, required): Personal Identification Number.
-- **Middleware:**
-  - `validateUser('query')`
-- **Response:**
-  - JSON object containing account balance and the last update timestamp.
+### Login
 
-### 2. **Client Information**
-- **Route:** `/api/client/get-client-info`
-- **Method:** `GET`
-- **Description:** Retrieves account information and transaction history.
-- **Query Parameters:**
-  - `cui` (string, optional): Unique identifier for the user.
-  - `account_number` (string, optional): Account number.
-- **Response:**
-  - JSON object containing client details and transaction history.
+![Login](../Capturas/Prototipos/Login.png)
 
-### 3. **Service Payment**
-- **Route:** `/api/payment-service`
-- **Method:** `POST`
-- **Description:** Processes service payments such as utility bills.
-- **Request Body:**
-  ```json
-  {
-      "service_name": "string (required)",
-      "service_code": "string (required)",
-      "amount": "number (required)",
-      "cui": "string (required)",
-      "pin": "string (required)"
-  }
-- **Middleware:**
-  - `validateUser('body')`
-- **Response:**
-  - JSON object indicating the status of the payment.
+### Responsive Inicio
 
-### 4. **Loan Payment**
-- **Route:** `/api/payloan-payment`
-- **Method:** `POST`
-- **Description:** Processes loan payments.
-- **Request Body:**
-  ```json
-  {
-      "loan_number": "number (required)",
-      "amount": "number (required)",
-      "cui": "string (required)",
-      "pin": "string (required)"
-  }
-- **Middleware:**
-  - `validateUser('body')`
-- **Response:**
-  - JSON object indicating the status of the loan payment.
+![Responsive-inicio](../Capturas/Prototipos/Responsive-inicio.png)
 
-### 5. **Deposit**
-- **Route:** `/api/deposit/deposit`
-- **Method:** `POST`
-- **Description:** Allows depositing money via cash or transfer.
-- **Request Body:**
-  ```json
-  {
-      "account_number": "string (required)",
-      "amount": "number (required)",
-      "deposit_type": "string (required)",
-      "target_account": "string (required)"
-  }
-- **Response:**
-  - JSON object indicating the status of the deposit.
+### Cajero-inicio
 
-### 6. **Service Payment**
-- **Route:** `/api/withdrawal`
-- **Method:** `POST`
-- **Description:** Allows withdrawing money from an account.
-- **Request Body:**
-  ```json
-  {
-      "account_number": "string (required)",
-      "amount": "number (required)",
-      "withdrawal_type": "string (required)"
-  }
-- **Response:**
-  - JSON object indicating the status of the payment.
+![Cajero-inicio](../Capturas/Prototipos/Cajero-inicio.png)
+
+### Cajero-Busqueda de Cuenta
+
+![Cajero-BusquedaCuenta](../Capturas/Prototipos/Cajero-BusquedaCuenta.png)
+
+### Cajero-Cambio de Moneda
+
+![CajeroCambiosMoneda](../Capturas/Prototipos/Cajero-CambiosMoneda.png)
+
+### Cajero-Depositos
+
+![Cajero-Depositos](../Capturas/Prototipos/Cajero-Depositos.png)
+
+### Cajero-Pagos de Prestamos
+
+![Cajero-PagosPrestamos](../Capturas/Prototipos/Cajero-PagosPrestamos.png)
+
+### Cajero-Pagos de Servicios
+
+![Cajero-PagosServicios](../Capturas/Prototipos/Cajero-PagosServicios.png)
+
+### Cajero-Pago de Tarjeta
+
+![Cajero-PagoTarjetas](../Capturas/Prototipos/Cajero-PagoTarjetas.png)
+
+### Cajero-Retiros
+
+![Cajero-Retiro](../Capturas/Prototipos/Cajero-Retiro.png)
+
+### Atencion-Inicio
+
+![Atencion-Inicio](../Capturas/Prototipos/Atencion-inicio.png)
+
+### Atencion-ActualizarDatos
+
+![Atencion-ActualizarDatos](../Capturas/Prototipos/Atencion-ActualizarDaots.png)
+
+### Atencion-BloquearTarjeta
+
+![Atencion-BloquearTarjeta](../Capturas/Prototipos/Atencion-BloquearTarjeta.png)
+
+### Atencion-BloquearTarjeta2
+
+![Atencion-BloquearTarjeta2](../Capturas/Prototipos/Atencion-BloquearTarjeta2.png)
+
+### Atencion-CrearCuenta
+
+![Atencion-CrearCuenta](../Capturas/Prototipos/Atencion-Crearcuenta.png)
+
+### Atencion-CrearTarjeta
+
+![Atencion-CrearTarjeta](../Capturas/Prototipos/Atencion_CrearTarjeta.png)
+
+### Atencion-CrearTarjeta2
+
+![Atencion-CrearTarjeta2](../Capturas/Prototipos/Atencion-crearTarjeta2.png)
+
+### Cliente-Inicio
+
+![Cliente-Inicio](../Capturas/Prototipos/Cliente-inicio.png)
+
+### Cliente-Encuesta
+
+![Cliente-Encuesta](../Capturas/Prototipos/Cliente-Encuesta.png)
+
+### Cliente-Queja
+
+![Cliente-Queja](../Capturas/Prototipos/Cliente-Queja.png)
+
+### Cliente-Pago de Servicios
+
+![Cliente-pagoservicio](../Capturas/Prototipos/Cliente-PagodeServicios.png)
+
+### Admin-inicio
+
+![Admin-inicio](../Capturas/Prototipos/Admin-inicio.png)
+
+### Admin-Registrar Empleado
+
+![Admin-regEmpleado](../Capturas/Prototipos/Admin-RegisEmpleado.png)
+
+### Admin-Empleados
+
+![Admin-Emple](../Capturas/Prototipos/Admin-Empleados.png)
+
+### Admin-Asignar Roles
+
+![Admin-asigRoles](../Capturas/Prototipos/Admin-AsigRoles.png)
+
+### Admin-Cambiar Contraseña
+
+![Admin-CambiarContra](../Capturas/Prototipos/Admin-CambiarContra.png)
+
+### Admin-Copia de seguridad
+
+![Admin-copia1](../Capturas/Prototipos/Admin-copaSeguridad.png)
+
+![Admin-copia2](../Capturas/Prototipos/Admin-copaSeguridad2.png)
+
+### Admin-Eliminar empleados
+
+![Admin-eliminarEmpleado1](../Capturas/Prototipos/Admin-EliminarEmpleado.png)
+
+![Admin-eliminarEmpleado2](../Capturas/Prototipos/Admin-EliminarEmpleado2.png)
 
 ## H. Configuracion de entorno
 
