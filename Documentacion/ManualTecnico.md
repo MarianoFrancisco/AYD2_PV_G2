@@ -369,6 +369,17 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 ## 10) Patrones de diseño
 
 
+### 5. Patrón Command
+
+#### Diagrama UML
+![PatronCommand](../Capturas/PatronCommand.jpeg)
+
+#### Descripción
+Este patrón se basa en la creación de objetos por solicitud, lo que permite el manejo de colas, ya sea para aceptar o rechazar la solicitud.
+
+#### ¿Por qué?
+El supervisor puede aceptar y/o rechazar solicitudes de préstamos o tarjetas. Este patrón facilita el manejo de estas solicitudes generando una cola para llevar un orden en su procesamiento.
+
 
 ## H. Configuracion de entorno
 
