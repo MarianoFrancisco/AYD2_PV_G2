@@ -117,6 +117,14 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 
 ![Caso de uso](../Capturas/RequerimientoCDUF.jpg)
 
+
+## 6) Selección del o los Estilos Arquitectónicos
+
+El banco **Money Bin** requiere un diseño arquitectónico que cumpla o se alinee con las metas del banco, como son la seguridad, rendimiento, modernidad, etc. Para ello, se optó por un estilo arquitectónico basado en **capas**.
+
+Este enfoque organiza la plataforma en varias capas, cada una con responsabilidades diferentes:
+
+
 ## E. Arquitectura candidata (Diagrama de bloques)
 
 ![Caso de uso](../Capturas/DiagramaBloques.png)
