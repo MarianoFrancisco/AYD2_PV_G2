@@ -146,6 +146,18 @@ Maneja la interacción con la base de datos, incluyendo:
 
 Esta capa garantiza que los datos estén organizados y disponibles para las demás capas de forma eficiente.
 
+### Capa de infraestructura
+Proporciona el soporte necesario para ejecutar las aplicaciones.
+
+## Beneficios de la Arquitectura en Capas
+
+La arquitectura en capas ofrece una estructura clara y bien definida que facilita: 
+- **Mantenimiento.**
+- **Escalabilidad.**
+- **Comprension del sistema.**
+
+Al separar las responsabilidades en capas especificas, se mejora la modularidad y se reduce el impacto de los cambios en una parte del sistema. 
+
 
 ## E. Arquitectura candidata (Diagrama de bloques)
 
