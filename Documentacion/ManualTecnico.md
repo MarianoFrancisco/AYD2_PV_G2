@@ -210,7 +210,7 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ### Cajero-Pago de Tarjeta
 
-![Cajero-PagoTarjetas](../Capturas/Prototipos/Cajero-PagoTarjetas.png)
+![Cajero-PagoTarjetas](../Capturas/Prototipos/Cajero-pagoTarjetas.png)
 
 ### Cajero-Retiros
 
