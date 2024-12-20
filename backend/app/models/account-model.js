@@ -11,19 +11,58 @@ const AccountModel = sequelize.define("accounts", {
         autoIncrement: true,
         primaryKey: true,
     },
-    user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
     account_number: {
         type: DataTypes.CHAR(10),
+        allowNul: false,
+        unique: true,
+    },
+    cui: {
+        type: DataTypes.CHAR(13),
         allowNull: false,
         unique: true,
     },
+    name: {
+        type: Datatypes.STRING(100),
+        allowNull: false,
+    },
+    last_name: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+    },
+    phone: {
+        type: DataTypes.STRING(15),
+        allowNull: true,
+    },
+    email: {
+        type: DataTypes.STRING(100),
+        allowNull: true,
+        unique: true,
+    },
+    address: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+    },
+
+    gender: {
+        type: DataTypes.ENUM('Masculino', 'Femenino', 'Otro'),
+        allowNull: false,
+    },
+    marital_status: {
+        type: DataTypes.ENUM('Soltero', 'Casado', 'Divorciado', 'Viudo'),
+        allowNull: false,
+    },
+    account_type: {
+        type: DataTypes.ENUM('Monetario', 'Ahorro'),
+        allowNull: false,
+    },
+    currency: {
+        type: DataTypes.ENUM('Quetzales', 'Dólares'),
+        allowNull: false,
+    },
     balance: {
         type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
-        defaultValue: 0.0,
+        allowNull: true,
+        defaultValue: 0.00,
         validate: {
             min: 0,
         },
@@ -31,12 +70,18 @@ const AccountModel = sequelize.define("accounts", {
     created_at: {
         type: DataTypes.BIGINT,
         allowNull: false,
-        defaultValue: Math.floor(Date.now() / 1000)
     },
     update_balance_at: {
         type: DataTypes.BIGINT,
         allowNull: false,
-        defaultValue: Math.floor(Date.now() / 1000),
+    },
+    security_question: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+    },
+    security_answer: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
     },
 
 }, {
