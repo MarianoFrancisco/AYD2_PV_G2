@@ -8,14 +8,14 @@ CREATE TABLE IF NOT EXISTS accounts (
   cui CHAR(13) UNIQUE NOT NULL,
   name VARCHAR(100) NOT NULL,
   last_name VARCHAR(100) NOT NULL,
-  phone VARCHAR(15),
-  email VARCHAR(100) UNIQUE,
-  address VARCHAR(255) NOT NULL,
+  phone VARCHAR(15) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  age INT NOT NULL,
   gender ENUM('Masculino', 'Femenino', 'Otro') NOT NULL,
-  marital_status ENUM('Soltero', 'Casado', 'Divorciado', 'Viudo') NOT NULL,
+  photo_path VARCHAR(255),
   account_type ENUM('Monetario', 'Ahorro') NOT NULL,
   currency ENUM('Quetzales', 'Dólares') NOT NULL,
-  balance DECIMAL(10, 2) DEFAULT 0 CHECK (balance >= 0),
+  balance DECIMAL(10, 2) DEFAULT 0 CHECK (balance >= 0)
   created_at BIGINT NOT NULL,
   update_balance_at BIGINT NOT NULL,
   security_question VARCHAR(255) NOT NULL,
@@ -34,14 +34,19 @@ CREATE TABLE IF NOT EXISTS users (
   user_name VARCHAR(15) NOT NULL UNIQUE,
   email VARCHAR(100) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,
-  phone VARCHAR(15),
-  signature VARCHAR(255) NOT NULL,
+  phone VARCHAR(15) NOT NULL,
+  age INT NOT NULL,
+  dpi_number VARCHAR(25) NOT NULL,
+  complete_paperwork_path VARCHAR(255),
+  photo_path VARCHAR(255),
+  gender ENUM('Masculino', 'Femenino', 'Otro') NOT NULL,
+  marital_status ENUM('Soltero', 'Casado', 'Divorciado', 'Viudo', 'Otro') NOT NULL,
+  signature_path VARCHAR(255) NOT NULL,
   second_password_hash VARCHAR(255),
-  -- Para 2FA
   second_password_updated_at BIGINT,
-  -- Fecha de actualización de la segunda contraseña
   created_at BIGINT NOT NULL
 );
+
 -- Tabla de tarjetas
 CREATE TABLE IF NOT EXISTS cards (
   id INT AUTO_INCREMENT PRIMARY KEY,
