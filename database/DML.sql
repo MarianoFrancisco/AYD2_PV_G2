@@ -1,4 +1,5 @@
 INSERT INTO users (
+    id,
     name,
     role,
     user_name,
@@ -17,6 +18,7 @@ INSERT INTO users (
     created_at
 ) VALUES
 (
+    1,
     'Juan Pérez',
     'Cajero',
     'juanperez',
@@ -35,6 +37,7 @@ INSERT INTO users (
     UNIX_TIMESTAMP()
 ),
 (
+    2,
     'Ana López',
     'Atención al Cliente',
     'analopez',
@@ -53,6 +56,7 @@ INSERT INTO users (
     UNIX_TIMESTAMP()
 ),
 (
+    3,
     'Luis Rodríguez',
     'Supervisor',
     'luisrodriguez',
@@ -71,6 +75,7 @@ INSERT INTO users (
     UNIX_TIMESTAMP()
 ),
 (
+    4,
     'María García',
     'Administrador de Sistemas',
     'mariagarcia',
