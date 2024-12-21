@@ -1,5 +1,9 @@
 import nodemailer from 'nodemailer';
 
+/*
+ * @author
+ * Mariano Camposeco {@literal (mariano1941@outlook.es)}
+ */
 const sendEmail = async (to, subject, text, html) => {
     try {
         const transporter = nodemailer.createTransport({
