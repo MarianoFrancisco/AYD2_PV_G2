@@ -1,10 +1,12 @@
-import AWS from 'aws-sdk';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { v4 as uuidv4 } from 'uuid';
 
-const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION
+const s3 = new S3Client({
+    region: process.env.AWS_REGION,
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
 });
 
 const uploadToS3 = async (fileBuffer, fileName, fileType, folder) => {
@@ -15,16 +17,17 @@ const uploadToS3 = async (fileBuffer, fileName, fileType, folder) => {
         Bucket: bucketName,
         Key: key,
         Body: fileBuffer,
-        ContentType: fileType,
-        ACL: 'public-read'
+        ContentType: fileType
     };
 
     try {
-        const data = await s3.upload(params).promise();
-        return data.Location;
+        const command = new PutObjectCommand(params);
+        await s3.send(command);
+
+        return `https://${bucketName}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
     } catch (error) {
-        console.error('Error uploading to S3:', error);
-        throw new Error('Error uploading to S3');
+        console.error('Error uploading photo:', error);
+        throw new Error('Error uploading photo');
     }
 };
 

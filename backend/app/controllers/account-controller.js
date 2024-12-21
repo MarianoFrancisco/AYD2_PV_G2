@@ -41,18 +41,25 @@ const updateAccountInfo = async (req, res) => {
             return res.status(404).json({ message: 'Account not found.' });
         }
 
+        // Validate security answer
         if (account.security_answer !== security_answer) {
             await transaction.rollback();
             return res.status(403).json({ message: 'Invalid security answer.' });
         }
 
+        // Allowed fields for update
         const allowedFields = [
-            'phone', 'email', 'name', 'last_name', 'photo_path', 'address',
-            'cui', 'gender', 'age'
+            'phone', 'email', 'name', 'last_name', 'photo_path', 'address'
         ];
 
+        // Prepare update details
         const fieldsToUpdate = {};
         const updateDetails = [];
+
+        // Use req.photoPath if middleware uploaded the image
+        if (req.photoPath) {
+            updates.photo_path = req.photoPath;
+        }
 
         for (const [field, newValue] of Object.entries(updates)) {
             if (allowedFields.includes(field) && account[field] !== undefined && account[field] !== newValue) {
@@ -66,23 +73,21 @@ const updateAccountInfo = async (req, res) => {
         }
 
         if (updateDetails.length > 0) {
+            // Update account fields
             await account.update(fieldsToUpdate, { transaction });
 
-            const logEntry = updateDetails.length === 1
-                ? {
-                    account_id: account.id,
-                    field_name: updateDetails[0].field_name,
-                    old_value: updateDetails[0].old_value,
-                    new_value: updateDetails[0].new_value,
-                    updated_at: Math.floor(Date.now() / 1000)
-                }
-                : {
-                    account_id: account.id,
-                    field_name: 'Multiple fields',
-                    old_value: JSON.stringify(updateDetails.map(d => ({ field: d.field_name, value: d.old_value }))),
-                    new_value: JSON.stringify(updateDetails.map(d => ({ field: d.field_name, value: d.new_value }))),
-                    updated_at: Math.floor(Date.now() / 1000)
-                };
+            // Insert log entry
+            const logEntry = {
+                account_id: account.id,
+                field_name: updateDetails.length === 1 ? updateDetails[0].field_name : 'Multiple fields',
+                old_value: updateDetails.length === 1
+                    ? updateDetails[0].old_value
+                    : JSON.stringify(updateDetails.map(d => ({ field: d.field_name, value: d.old_value }))),
+                new_value: updateDetails.length === 1
+                    ? updateDetails[0].new_value
+                    : JSON.stringify(updateDetails.map(d => ({ field: d.field_name, value: d.new_value }))),
+                updated_at: Math.floor(Date.now() / 1000)
+            };
 
             await AccountUpdateModel.create(logEntry, { transaction });
         }
