@@ -5,6 +5,9 @@ import { SupervisorRoutingModule } from './supervisor-routing.module';
 import { ActivityMonitoringComponent } from './activity-monitoring/activity-monitoring.component';
 import { AdminRegistryComponent } from './admin-registry/admin-registry.component';
 import { ComplaintRegisterComponent } from './complaint-register/complaint-register.component';
+import { AdminSistemComponent } from './admin-sistem/admin-sistem.component';
+import { InventoriesComponent } from './inventories/inventories.component';
+import { SurveysComponent } from './surveys/surveys.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -12,7 +15,10 @@ import { ComplaintRegisterComponent } from './complaint-register/complaint-regis
     SupervisorRoutingModule,
     ActivityMonitoringComponent,
     AdminRegistryComponent,
-    ComplaintRegisterComponent
+    ComplaintRegisterComponent,
+    AdminSistemComponent,
+    InventoriesComponent,
+    SurveysComponent
   ]
 })
 export class SupervisorModule { }
