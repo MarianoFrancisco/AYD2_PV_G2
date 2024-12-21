@@ -13,6 +13,7 @@ import userRouter from "./app/routes/user.routes.js";
 import accountRouter from "./app/routes/account.routes.js";
 import paymentServiceRouter from "./app/routes/payment-services.routes.js";
 import loanPaymentRouter from "./app/routes/loan-payment.routes.js";
+import loanListRouter from "./app/routes/loan-list.routes.js";
 
 import clientRouter from "./app/routes/client.routes.js";
 
@@ -36,6 +37,7 @@ const user = `${api}/user`;
 const showBalance = `${api}/account`;
 const paymentService = `${api}/payment-service`;
 const loanPayment = `${api}/loan-payment`;
+const loanList = `${api}/loan-list`;
 
 const clientService = `${api}/client`;
 
@@ -48,6 +50,7 @@ app.use(user, userRouter);
 app.use(showBalance, accountRouter);
 app.use(paymentService, paymentServiceRouter);
 app.use(loanPayment, loanPaymentRouter);
+app.use(loanList, loanListRouter);
 
 app.use(clientService, clientRouter);
 
