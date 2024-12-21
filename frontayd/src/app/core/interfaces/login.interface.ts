@@ -1,9 +1,10 @@
 export interface LoginResponse {
-    requiresTwoFactor: boolean;
-    user: {
-      id: number;
-      name: string;
-      email: string;
-      role: string;
-    };
-  }
+  requiresTwoFactor?: boolean;
+  message?: string;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+  };
+}

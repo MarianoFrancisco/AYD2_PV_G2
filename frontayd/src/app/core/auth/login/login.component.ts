@@ -25,10 +25,8 @@ export class LoginComponent {
   })
 
   login() {
-
     const { email, password } = this.loginForm.value;
-
-    // Verificar si los campos están vacíos
+  
     if (!email || !password) {
       Swal.fire({
         icon: 'warning',
@@ -37,43 +35,23 @@ export class LoginComponent {
       });
       return;
     }
-
+  
     this.loginService.login(email, password).subscribe({
       next: (response) => {
-        if (response.requiresTwoFactor) {
+        // Guardar usuario en localStorage
+        localStorage.setItem('user', JSON.stringify(response.user));
+  
+        if (response.user.role === 'Administrador de Sistemas') {
+          this.redirectByRole(response.user.role, email, password);
+        } else if (response.requiresTwoFactor) {
           this.router.navigate(['/mfa-factor']);
         } else {
-          // LocalStore
-          localStorage.setItem('user', JSON.stringify(response.user));
           Swal.fire({
             icon: 'success',
             title: 'Login exitoso',
             text: `Bienvenido ${response.user.name}`,
           });
-
-          // Verificar los roles en la db porque no me pude conectar :0
-          switch (response.user.role) {
-            case 'Cajero':
-              this.router.navigate(['/user/dashboard']);
-              break;
-            case 'Atención al Cliente':
-              this.router.navigate(['customer/inicio-atencion-cliente']);
-              break;
-            case 'Supervisor':
-              this.router.navigate(['supervisor/inicio-supervisor']);
-              break;
-            case 'Administrador':
-              this.router.navigate(['admin/inicio-admin']);
-              break;
-            default:
-              Swal.fire({
-                icon: 'error',
-                title: 'Rol no válido',
-                text: 'No se pudo determinar el rol del usuario.',
-              });
-              this.router.navigate(['/login']);
-              break;
-          }
+          this.redirectByRole(response.user.role, email, password);
         }
       },
       error: () => {
@@ -85,6 +63,67 @@ export class LoginComponent {
       },
     });
   }
+  
+  
+  redirectByRole(role: string, email: string, password: string) {
+    switch (role) {
+      case 'Cajero':
+        this.router.navigate(['/user/dashboard']);
+        break;
+      case 'Atención al Cliente':
+        this.router.navigate(['/customer/inicio-atencion-cliente']);
+        break;
+      case 'Supervisor':
+        this.router.navigate(['/supervisor/inicio-supervisor']);
+        break;
+      case 'Administrador de Sistemas':
+        Swal.fire({
+          title: 'Verificación adicional',
+          input: 'password',
+          inputLabel: 'Por favor, ingresa tu contraseña secundaria:',
+          inputPlaceholder: 'Contraseña secundaria',
+          showCancelButton: true,
+          confirmButtonText: 'Validar',
+        }).then((result) => {
+          if (result.isConfirmed && result.value) {
+            const secondPassword = result.value;
+            this.loginService.validateAdmin(email, secondPassword).subscribe({
+              next: (adminResponse) => {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Login exitoso',
+                  text: `Bienvenido ${adminResponse.user.name}`,
+                });
+                this.router.navigate(['/admin/inicio-admin']);
+              },
+              error: () => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error de validación',
+                  text: 'La contraseña secundaria no es válida.',
+                });
+              },
+            });
+          } else {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Validación cancelada',
+              text: 'No se completó la autenticación.',
+            });
+          }
+        });
+        break;
+      default:
+        Swal.fire({
+          icon: 'error',
+          title: 'Rol no válido',
+          text: 'No se pudo determinar el rol del usuario.',
+        });
+        this.router.navigate(['/login']);
+        break;
+    }
+  }
+   
 
   passwordFieldType: string = 'password';
 
