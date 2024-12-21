@@ -1,6 +1,5 @@
 import UserModel from "../models/user-model.js";
 import { Op } from "sequelize";
-import fs from "fs/promises";
 import bcrypt from "bcryptjs";
 
 const checkTwoFactorAuth = async (req, res) => {

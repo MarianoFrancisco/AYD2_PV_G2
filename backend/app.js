@@ -9,6 +9,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import auhenticatorRouter from "./app/routes/authenticator.routes.js";
+import userRouter from "./app/routes/user.routes.js";
 import accountRouter from "./app/routes/account.routes.js";
 import paymentServiceRouter from "./app/routes/payment-services.routes.js";
 import loanPaymentRouter from "./app/routes/loan-payment.routes.js";
@@ -31,6 +32,7 @@ app.use('/signature', express.static(path.join(__dirname, 'img')));
 
 const api = '/api';
 const authenticator = `${api}/authenticator`;
+const user = `${api}/user`;
 const showBalance = `${api}/account`;
 const paymentService = `${api}/payment-service`;
 const loanPayment = `${api}/loan-payment`;
@@ -42,6 +44,7 @@ const deposit = `${api}/deposit`;
 const withdrawal = `${api}/withdrawal`;
 
 app.use(authenticator, auhenticatorRouter);
+app.use(user, userRouter);
 app.use(showBalance, accountRouter);
 app.use(paymentService, paymentServiceRouter);
 app.use(loanPayment, loanPaymentRouter);
