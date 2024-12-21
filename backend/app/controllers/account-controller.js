@@ -23,7 +23,7 @@ const getBalance = async (req, res) => {
     }
 }
 
-const getSecurityQuestion = async (req, res) => {
+const getSecurityQuestionByAccountNumber = async (req, res) => {
     const { account_number } = req.query;
 
     if (!account_number) {
@@ -46,6 +46,32 @@ const getSecurityQuestion = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving security question.', error: error.message });
+    }
+};
+
+const getPhotographyPathByAccountNumber = async (req, res) => {
+    const { account_number } = req.query;
+
+    if (!account_number) {
+        return res.status(400).json({ message: 'Account number is required.' });
+    }
+
+    try {
+        const account = await AccountModel.findOne({
+            where: { account_number },
+            attributes: ['photo_path']
+        });
+
+        if (!account) {
+            return res.status(404).json({ message: 'Account not found.' });
+        }
+
+        res.status(200).json({
+            message: 'Photography path retrieved successfully.',
+            photo_path: account.photo_path
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving photography path.', error: error.message });
     }
 };
 
@@ -72,7 +98,15 @@ const updateAccountInfo = async (req, res) => {
         }
 
         const allowedFields = [
-            'phone', 'email', 'name', 'last_name', 'photo_path', 'address'
+            'phone',
+            'email',
+            'name',
+            'last_name',
+            'photo_path',
+            'address',
+            'cui',
+            'gender',
+            'age'
         ];
 
         const fieldsToUpdate = {};
@@ -122,6 +156,7 @@ const updateAccountInfo = async (req, res) => {
 
 export {
     getBalance,
-    getSecurityQuestion,
+    getSecurityQuestionByAccountNumber,
+    getPhotographyPathByAccountNumber,
     updateAccountInfo
 }
