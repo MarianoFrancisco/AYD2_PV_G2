@@ -6,8 +6,12 @@ import { ConfigurationComponent } from './configuration/configuration.component'
 import { ComplaintsRegisterComponent } from './complaints-register/complaints-register.component';
 import { DolarAccountComponent } from './dolar-account/dolar-account.component';
 import { SatisfactionComponent } from './satisfaction/satisfaction.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
+  {
+    path: 'inicio-atencion-cliente', component: DashboardComponent
+  },
   {
     path: 'crear-cuenta', component: AccountComponent
   },

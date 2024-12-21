@@ -7,7 +7,11 @@ import { ComplaintRegisterComponent } from './complaint-register/complaint-regis
 import { AdminSistemComponent } from './admin-sistem/admin-sistem.component';
 import { InventoriesComponent } from './inventories/inventories.component';
 import { SurveysComponent } from './surveys/surveys.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 const routes: Routes = [
+  {
+    path:'inicio-supervisor', component: DashboardComponent
+  },
   {
     path:'monitoreo', component: ActivityMonitoringComponent
   },

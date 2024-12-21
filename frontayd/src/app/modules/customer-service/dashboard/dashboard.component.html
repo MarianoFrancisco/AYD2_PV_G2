@@ -1,0 +1,37 @@
+<div class="container mx-auto px-4 py-6">
+    <h1 class="text-3xl font-semibold mb-6 text-center text-blue-600">Bienvenido a Money Bin</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+      <div class="bg-blue-100 p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold text-blue-600">Cuenta</h2>
+        <p class="mt-2 text-gray-600">Crea nuevas cuentas Moneraria o de Ahorro.</p>
+        <a routerLink="/customer/crear-cuenta" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+  
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Actualizar Cliente</h2>
+        <p class="mt-2 text-gray-600">Actualiza los datos de los clientes.</p>
+        <a routerLink="/customer/configuracion-cuenta" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+  
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Quejas</h2>
+        <p class="mt-2 text-gray-600">Registra quejas de los clientes.</p>
+        <button [routerLink]="['/customer/registrar-queja']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
+      </div>
+
+      <div class="bg-blue-100 p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold text-blue-600">Dolares</h2>
+        <p class="mt-2 text-gray-600">Realiza cambio de cuentas en dolares.</p>
+        <a routerLink="/customer/cuentas-dolar" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+  
+
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Satisfacción</h2>
+        <p class="mt-2 text-gray-600">Modulo de Encuestas de Satisfacción.</p>
+        <button [routerLink]="['/customer/encuesta-satisfaccion']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
+      </div>
+    </div>
+  </div>

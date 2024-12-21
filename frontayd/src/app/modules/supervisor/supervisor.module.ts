@@ -8,6 +8,7 @@ import { ComplaintRegisterComponent } from './complaint-register/complaint-regis
 import { AdminSistemComponent } from './admin-sistem/admin-sistem.component';
 import { InventoriesComponent } from './inventories/inventories.component';
 import { SurveysComponent } from './surveys/surveys.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -18,7 +19,8 @@ import { SurveysComponent } from './surveys/surveys.component';
     ComplaintRegisterComponent,
     AdminSistemComponent,
     InventoriesComponent,
-    SurveysComponent
+    SurveysComponent,
+    DashboardComponent
   ]
 })
 export class SupervisorModule { }

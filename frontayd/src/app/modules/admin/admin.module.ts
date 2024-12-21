@@ -5,6 +5,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
 import { RolesComponent } from './roles/roles.component';
 import { SecurityComponent } from './security/security.component';
+import { DasboardComponent } from './dashboard/dasboard.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -12,7 +13,8 @@ import { SecurityComponent } from './security/security.component';
     AdminRoutingModule,
     EmployeeRegisterComponent,
     RolesComponent,
-    SecurityComponent
+    SecurityComponent,
+    DasboardComponent
   ]
 })
 export class AdminModule { }

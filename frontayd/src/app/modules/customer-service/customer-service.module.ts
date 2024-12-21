@@ -7,6 +7,7 @@ import { ConfigurationComponent } from './configuration/configuration.component'
 import { ComplaintsRegisterComponent } from './complaints-register/complaints-register.component';
 import { DolarAccountComponent } from './dolar-account/dolar-account.component';
 import { SatisfactionComponent } from './satisfaction/satisfaction.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -16,7 +17,8 @@ import { SatisfactionComponent } from './satisfaction/satisfaction.component';
     ConfigurationComponent,
     ComplaintsRegisterComponent,
     DolarAccountComponent,
-    SatisfactionComponent
+    SatisfactionComponent,
+    DashboardComponent
   ]
 })
 export class CustomerServiceModule { }
