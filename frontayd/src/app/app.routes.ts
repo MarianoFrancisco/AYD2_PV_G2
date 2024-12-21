@@ -14,6 +14,18 @@ export const routes: Routes = [
  path: 'login', component: LoginComponent
 }, 
 {
+    path:'admin',
+    loadChildren:() => import('./modules/admin/admin.module').then(m => m.AdminModule)
+},
+{
+    path:'customer',
+    loadChildren:() => import('./modules/customer-service/customer-service.module').then(m => m.CustomerServiceModule)
+},
+{
+    path:'supervisor',
+    loadChildren:() => import('./modules/supervisor/supervisor.module').then(m => m.SupervisorModule)
+},
+{
     path: "",
     redirectTo: "login",
     pathMatch: 'full'
