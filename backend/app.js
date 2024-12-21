@@ -14,7 +14,7 @@ import accountRouter from "./app/routes/account.routes.js";
 import paymentServiceRouter from "./app/routes/payment-services.routes.js";
 import loanPaymentRouter from "./app/routes/loan-payment.routes.js";
 
-import clientRouter from "./app/routes/client-info.routes.js";
+import clientRouter from "./app/routes/client.routes.js";
 
 import depositRouter from './app/routes/deposit.routes.js';
 
