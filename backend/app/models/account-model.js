@@ -22,7 +22,7 @@ const AccountModel = sequelize.define("accounts", {
         unique: true,
     },
     name: {
-        type: Datatypes.STRING(100),
+        type: DataTypes.STRING(100),
         allowNull: false,
     },
     last_name: {
