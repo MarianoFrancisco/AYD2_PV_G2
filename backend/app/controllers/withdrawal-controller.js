@@ -5,9 +5,11 @@ import UserModel from '../models/user-model.js';
 
 export const createWithdrawal = async (req, res) => {
     try {
-        const { account_number, amount, withdrawal_type } = req.body;
+        //numbero de cuenta, monto, tipo de retiro, tipo de cuenta, tipo de moneda
+        const { account_number, amount, withdrawal_type, account_type, currency } = req.body;
 
-        if (!account_number || !amount || !withdrawal_type) {
+        //Validar campos obligatorios
+        if (!account_number || !amount || !withdrawal_type || !account_type || !currency) {
             return res.status(400).json({ message: 'Faltan datos obligatorios' });
         }
 
@@ -17,6 +19,10 @@ export const createWithdrawal = async (req, res) => {
 
         if (![1, 2].includes(withdrawal_type)) {
             return res.status(400).json({ message: 'Tipo de retiro inválido' });
+        }
+
+        if (![1, 2].includes(currency)) {
+            return res.status(400).json({message: "Tipo de moneda invalido"})
         }
 
         const account = await AccountModel.findOne({ where: { account_number } });
@@ -41,6 +47,8 @@ export const createWithdrawal = async (req, res) => {
             amount,
             withdrawal_type: withdrawal_type === 1 ? 'Ventanilla' : 'Cajero Automático',
             created_at: unixTimestamp,
+            account_type: account_type,
+            currency: currency,
         });
 
         // Registrar en transaction_history
@@ -71,6 +79,8 @@ export const createWithdrawal = async (req, res) => {
             account_number,
             transaction_type: 'Retiro',
             amount: transactionHistory.amount,
+            account_type: account_type,
+            currency: currency,
             description: transactionHistory.description,
             created_at: transactionHistory.created_at,
         };

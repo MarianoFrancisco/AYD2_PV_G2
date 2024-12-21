@@ -38,6 +38,17 @@ const AccountModel = sequelize.define("accounts", {
         allowNull: true,
         unique: true,
     },
+    age: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+
+    },
+    
+    photo_path: {
+        type: DataTypes.CHAR(255),
+        allowNull: false,
+    },
+   
     address: {
         type: DataTypes.STRING(255),
         allowNull: false,

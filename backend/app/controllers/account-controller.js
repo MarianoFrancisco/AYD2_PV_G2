@@ -5,6 +5,7 @@ const getBalance = async (req, res) => {
     const userModel = req.userModel;
 
     try {
+        //Se busca el
         const accountModel = await AccountModel.findOne({
             where: {
                 user_id: userModel.id
