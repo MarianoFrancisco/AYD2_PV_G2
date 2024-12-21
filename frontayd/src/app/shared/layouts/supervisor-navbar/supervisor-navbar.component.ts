@@ -19,7 +19,8 @@ export class SupervisorNavbarComponent implements OnInit {
 
 
   logout() {
-
+    localStorage.removeItem('user');
+    window.location.href = '/login';
   }
 
   toggleSidebar() {

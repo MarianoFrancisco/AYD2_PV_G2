@@ -6,6 +6,7 @@ import { InicioNavbarComponent } from './shared/layouts/inicio-navbar/inicio-nav
 import { AdminNavbarComponent } from './shared/layouts/admin-navbar/admin-navbar.component';
 import { CustomerNavbarComponent } from './shared/layouts/customer-navbar/customer-navbar.component';
 import { SupervisorNavbarComponent } from './shared/layouts/supervisor-navbar/supervisor-navbar.component';
+import { MfaComponent } from './core/auth/mfa/mfa.component';
 export const routes: Routes = [
 
 {
@@ -15,6 +16,9 @@ export const routes: Routes = [
 },
 {
  path: 'login', component: LoginComponent
+},
+{
+    path:'mfa-factor', component: MfaComponent
 }, 
 {
     path:'admin',
