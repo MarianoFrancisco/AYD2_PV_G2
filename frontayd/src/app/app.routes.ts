@@ -1,6 +1,8 @@
+import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
-
+import { LoginComponent } from './core/auth/login/login.component';
 import { ClientNavbarComponent } from './shared/layouts/client-navbar/client-navbar.component';
+import { InicioNavbarComponent } from './shared/layouts/inicio-navbar/inicio-navbar.component';
 export const routes: Routes = [
 
 {
@@ -9,13 +11,16 @@ export const routes: Routes = [
     loadChildren:() => import('./modules/common-user/common-user.module').then(m => m.CommonUserModule)
 },
 {
+ path: 'login', component: LoginComponent
+}, 
+{
     path: "",
-    redirectTo: "user/dashboard",
+    redirectTo: "login",
     pathMatch: 'full'
 },
 {
     path: '**',
-    redirectTo: "user/dashboard",
+    redirectTo: "login",
     pathMatch: 'full'
 }
 ];
