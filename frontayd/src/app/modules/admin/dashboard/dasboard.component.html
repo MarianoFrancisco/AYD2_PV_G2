@@ -1,0 +1,25 @@
+<div class="container mx-auto px-4 py-6">
+    <h1 class="text-3xl font-semibold mb-6 text-center text-blue-600">Bienvenido a Money Bin</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+       <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Registrar Empleados</h2>
+        <p class="mt-2 text-gray-600">Modulo para Registra a los Empleados</p>
+        <a routerLink="/admin/registro-empleado" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+  
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Seguridad</h2>
+        <p class="mt-2 text-gray-600">Realiza copia de seguidad de los datos.</p>
+        <button [routerLink]="['/admin/copia-seguridad']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
+      </div>
+
+      <div class="bg-blue-100 p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold text-blue-600">Roles</h2>
+        <p class="mt-2 text-gray-600">Asigna roles a los Empleados.</p>
+        <a routerLink="/admin/roles-empelado" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+    </div>
+  </div>
+  

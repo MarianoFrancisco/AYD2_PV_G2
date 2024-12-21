@@ -1,8 +1,11 @@
 import UserModel from "../models/user-model.js";
 import { Op } from "sequelize";
-import fs from "fs/promises";
 import bcrypt from "bcryptjs";
 
+/*
+ * @author
+ * Mariano Camposeco {@literal (mariano1941@outlook.es)}
+ */
 const checkTwoFactorAuth = async (req, res) => {
     const { identifier, password } = req.body;
 

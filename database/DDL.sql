@@ -109,12 +109,10 @@ CREATE TABLE IF NOT EXISTS loan_payments (
 -- Tabla de pagos de servicios
 CREATE TABLE IF NOT EXISTS service_payments (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  account_id INT NOT NULL,
   service_type ENUM('Agua', 'Luz', 'Teléfono', 'Internet') NOT NULL,
   service_code VARCHAR(50) NOT NULL,
   amount DECIMAL(10, 2) NOT NULL,
-  created_at BIGINT NOT NULL,
-  FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
+  created_at BIGINT NOT NULL
 );
 -- Tabla de depósitos
 CREATE TABLE IF NOT EXISTS deposits (

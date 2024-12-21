@@ -1,4 +1,5 @@
 INSERT INTO users (
+    id,
     name,
     role,
     user_name,
@@ -17,6 +18,7 @@ INSERT INTO users (
     created_at
 ) VALUES
 (
+    1,
     'Juan Pérez',
     'Cajero',
     'juanperez',
@@ -35,6 +37,7 @@ INSERT INTO users (
     UNIX_TIMESTAMP()
 ),
 (
+    2,
     'Ana López',
     'Atención al Cliente',
     'analopez',
@@ -53,6 +56,7 @@ INSERT INTO users (
     UNIX_TIMESTAMP()
 ),
 (
+    3,
     'Luis Rodríguez',
     'Supervisor',
     'luisrodriguez',
@@ -71,6 +75,7 @@ INSERT INTO users (
     UNIX_TIMESTAMP()
 ),
 (
+    4,
     'María García',
     'Administrador de Sistemas',
     'mariagarcia',
@@ -88,59 +93,102 @@ INSERT INTO users (
     UNIX_TIMESTAMP(),
     UNIX_TIMESTAMP()
 );
-
 INSERT INTO accounts (
-        id,
-        user_id,
-        account_number,
-        balance,
-        created_at,
-        update_balance_at
-    )
-VALUES (
-        1,
-        2,
-        '1000000001',
-        1500.00,
-        1707357600,
-        1707357600
-    ),
-    -- 2024-12-07 10:00:00 UTC
-    (
-        2,
-        3,
-        '1000000002',
-        2500.00,
-        1707361200,
-        1707361200
-    ),
-    -- 2024-12-07 11:00:00 UTC
-    (
-        3,
-        1,
-        '1000000003',
-        10000.00,
-        1707364800,
-        1707364800
-    ),
-    -- 2024-12-07 12:00:00 UTC
-    (
-        4,
-        4,
-        '1000000004',
-        500.00,
-        1707368400,
-        1707368400
-    ),
-    -- 2024-12-07 13:00:00 UTC
-    (
-        5,
-        5,
-        '1000000005',
-        8000.00,
-        1707372000,
-        1707372000
-    );
+    id,
+    account_number,
+    cui,
+    name,
+    last_name,
+    phone,
+    email,
+    age,
+    gender,
+    photo_path,
+    account_type,
+    currency,
+    balance,
+    created_at,
+    update_balance_at,
+    security_question,
+    security_answer
+) VALUES
+(
+    1,
+    '1000000001',
+    '1234567890123',
+    'Carlos',
+    'Pérez',
+    '5551234567',
+    'carlos.perez@example.com',
+    30,
+    'Masculino',
+    'https://money-bin-group2.s3.us-east-1.amazonaws.com/photography/test_men.jpg',
+    'Ahorro',
+    'Quetzales',
+    5000.00,
+    UNIX_TIMESTAMP(),
+    UNIX_TIMESTAMP(),
+    '¿Cuál es el nombre de tu mascota?',
+    'Rex'
+),
+(
+    2,
+    '1000000002',
+    '9876543210123',
+    'Ana',
+    'López',
+    '5559876543',
+    'ana.lopez@example.com',
+    28,
+    'Femenino',
+    'https://money-bin-group2.s3.us-east-1.amazonaws.com/photography/test_woman.jpg',
+    'Ahorro',
+    'Dólares',
+    3000.00,
+    UNIX_TIMESTAMP(),
+    UNIX_TIMESTAMP(),
+    '¿Cuál es tu ciudad natal?',
+    'Guatemala'
+),
+(
+    3,
+    '2000000001',
+    '1234567890987',
+    'Luis',
+    'Gómez',
+    '5558765432',
+    'luis.gomez@example.com',
+    35,
+    'Masculino',
+    'https://money-bin-group2.s3.us-east-1.amazonaws.com/photography/test_men.jpg',
+    'Monetario',
+    'Quetzales',
+    1200.00,
+    UNIX_TIMESTAMP(),
+    UNIX_TIMESTAMP(),
+    '¿Cuál es tu color favorito?',
+    'Azul'
+),
+(
+    4,
+    '2000000002',
+    '9876543210432',
+    'María',
+    'Rodríguez',
+    '5556543210',
+    'maria.rodriguez@example.com',
+    29,
+    'Femenino',
+    'https://money-bin-group2.s3.us-east-1.amazonaws.com/photography/test_woman.jpg',
+    'Monetario',
+    'Dólares',
+    1150.00,
+    UNIX_TIMESTAMP(),
+    UNIX_TIMESTAMP(),
+    '¿Cómo se llama tu mejor amigo?',
+    'Sofía'
+);
+
 INSERT INTO loans (
         id,
         account_id,
