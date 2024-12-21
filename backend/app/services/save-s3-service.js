@@ -8,6 +8,11 @@ const uploadPhoto = async (fileBuffer, fileName, fileType) => {
     return await uploadToS3(fileBuffer, fileName, fileType, process.env.AWS_FOLDER_PHOTOGRAPHY,);
 };
 
+const uploadSignature = async (fileBuffer, fileName, fileType) => {
+    return await uploadToS3(fileBuffer, fileName, fileType, process.env.AWS_FOLDER_SIGNATURE,);
+};
+
 export {
-    uploadPhoto
+    uploadPhoto,
+    uploadSignature
 };
