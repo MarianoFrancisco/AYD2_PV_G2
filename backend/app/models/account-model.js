@@ -1,10 +1,11 @@
-import { DataTypes } from "sequelize"
-import sequelize from "../../config/database-connection.js"
-import UserModel from './user-model.js';
+import { DataTypes } from "sequelize";
+import sequelize from "../../config/database-connection.js";
 
-
+/*
+ * @author
+ * Mariano Camposeco {@literal (mariano1941@outlook.es)}
+ */
 const AccountModel = sequelize.define("accounts", {
-
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -13,7 +14,7 @@ const AccountModel = sequelize.define("accounts", {
     },
     account_number: {
         type: DataTypes.CHAR(10),
-        allowNul: false,
+        allowNull: false,
         unique: true,
     },
     cui: {
@@ -31,36 +32,24 @@ const AccountModel = sequelize.define("accounts", {
     },
     phone: {
         type: DataTypes.STRING(15),
-        allowNull: true,
+        allowNull: false,
     },
     email: {
         type: DataTypes.STRING(100),
-        allowNull: true,
+        allowNull: false,
         unique: true,
     },
     age: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-
-    },
-    
-    photo_path: {
-        type: DataTypes.CHAR(255),
         allowNull: false,
     },
-   
-    address: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-    },
-
     gender: {
         type: DataTypes.ENUM('Masculino', 'Femenino', 'Otro'),
         allowNull: false,
     },
-    marital_status: {
-        type: DataTypes.ENUM('Soltero', 'Casado', 'Divorciado', 'Viudo'),
-        allowNull: false,
+    photo_path: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
     },
     account_type: {
         type: DataTypes.ENUM('Monetario', 'Ahorro'),
@@ -94,7 +83,6 @@ const AccountModel = sequelize.define("accounts", {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
-
 }, {
     tableName: "accounts",
     timestamps: false,
@@ -111,9 +99,6 @@ const AccountModel = sequelize.define("accounts", {
             }
         },
     },
-})
+});
 
-AccountModel.belongsTo(UserModel, { foreignKey: 'user_id', as: 'user' });
-UserModel.hasMany(AccountModel, { foreignKey: 'user_id' });
-
-export default AccountModel
+export default AccountModel;
