@@ -21,8 +21,33 @@ const getBalance = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error fetching accounts: ' + error.message });
     }
-
 }
+
+const getSecurityQuestion = async (req, res) => {
+    const { account_number } = req.query;
+
+    if (!account_number) {
+        return res.status(400).json({ message: 'Account number is required.' });
+    }
+
+    try {
+        const account = await AccountModel.findOne({
+            where: { account_number },
+            attributes: ['security_question']
+        });
+
+        if (!account) {
+            return res.status(404).json({ message: 'Account not found.' });
+        }
+
+        res.status(200).json({
+            message: 'Security question retrieved successfully.',
+            security_question: account.security_question
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving security question.', error: error.message });
+    }
+};
 
 const updateAccountInfo = async (req, res) => {
     const { account_number, security_answer, updates } = req.body;
@@ -41,22 +66,18 @@ const updateAccountInfo = async (req, res) => {
             return res.status(404).json({ message: 'Account not found.' });
         }
 
-        // Validate security answer
         if (account.security_answer !== security_answer) {
             await transaction.rollback();
             return res.status(403).json({ message: 'Invalid security answer.' });
         }
 
-        // Allowed fields for update
         const allowedFields = [
             'phone', 'email', 'name', 'last_name', 'photo_path', 'address'
         ];
 
-        // Prepare update details
         const fieldsToUpdate = {};
         const updateDetails = [];
 
-        // Use req.photoPath if middleware uploaded the image
         if (req.photoPath) {
             updates.photo_path = req.photoPath;
         }
@@ -73,10 +94,8 @@ const updateAccountInfo = async (req, res) => {
         }
 
         if (updateDetails.length > 0) {
-            // Update account fields
             await account.update(fieldsToUpdate, { transaction });
 
-            // Insert log entry
             const logEntry = {
                 account_id: account.id,
                 field_name: updateDetails.length === 1 ? updateDetails[0].field_name : 'Multiple fields',
@@ -103,5 +122,6 @@ const updateAccountInfo = async (req, res) => {
 
 export {
     getBalance,
+    getSecurityQuestion,
     updateAccountInfo
 }
