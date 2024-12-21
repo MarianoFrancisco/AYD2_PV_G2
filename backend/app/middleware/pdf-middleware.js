@@ -7,7 +7,7 @@ import multer from 'multer';
 const pdfUpload = multer({
     storage: multer.memoryStorage(),
     limits: {
-        fileSize: 10 * 1024 * 1024 // Tamaño máximo de 10 MB
+        fileSize: 10 * 1024 * 1024
     },
     fileFilter: (req, file, cb) => {
         if (file.mimetype === 'application/pdf') {
