@@ -103,12 +103,16 @@ export class AccountComponent {
   }
 
   limpiarCampos() {
-    this.limpiarForm(); // Limpia el formulario
-    this.AccountDetail = undefined; // Limpia el detalle del usuario
-    this.transactions = []; // Limpia la lista de transacciones
+    this.limpiarForm();
+    this.AccountDetail = undefined;
+    this.transactions = [];
   }  
 
   formatDate(date: string): string{
     return  new Date(Number(date) * 1000).toLocaleString();
+  }
+  convertirFecha(timestamp: number): string {
+    const date = new Date(timestamp * 1000);
+    return date.toLocaleDateString();  
   }
 }
