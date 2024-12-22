@@ -22,33 +22,9 @@ const s3 = new S3Client({
 
 // Configuración de multer para manejar imágenes temporalmente
 const storage = multer.memoryStorage(); // Almacena en memoria antes de subir a S3
-const upload = multer({ storage });
 
-// Función para subir imagen a S3
-const uploadBase64ToS3 = async (base64Image, bucketName, fileName) => {
-    try {
-      // Decodificar Base64 a Buffer
-      const imageBuffer = Buffer.from(base64Image, "base64");
-  
-      // Parámetros para subir el archivo
-      const params = {
-        Bucket: bucketName,
-        Key: fileName,
-        Body: imageBuffer,
-        ContentType: "image/png", // Cambia si no es PNG
-      };
-  
-      // Subir a S3
-      const command = new PutObjectCommand(params);
-      await s3.send(command);
-  
-      console.log(`Imagen subida correctamente a S3: ${fileName}`);
-      return `https://${bucketName}.s3.amazonaws.com/${fileName}`;
-    } catch (error) {
-      console.error("Error subiendo la imagen a S3:", error);
-      throw error;
-    }
-  };
+
+
 
 const getBalance = async (req, res) => {
 
@@ -204,6 +180,7 @@ const updateAccountInfo = async (req, res) => {
 
 const createAccount = async (req, res) => {
     try {
+        console.log(req.photoPath)
         const {
             firstName,
             lastName,
@@ -216,8 +193,8 @@ const createAccount = async (req, res) => {
             securityQuestion,
             securityAnswer,
             amount,
-            photo64
         } = req.body;
+
 
         
 
@@ -240,11 +217,7 @@ const createAccount = async (req, res) => {
         console.log(accountNumber)
         const currentDate = Math.floor(Date.now() / 1000);
 
-        const bucketName = "money-bin-group2";
-        const fileName = `imagenes/${Date.now()}.png`;
 
-        const photoUrl = await uploadBase64ToS3(photo64, bucketName, fileName);
-        console.log("URL de la imagen subida:", photoUrl);
 
         // Simular almacenamiento (aquí podrías guardar en una base de datos)
 
@@ -257,7 +230,7 @@ const createAccount = async (req, res) => {
             email: email,
             age: parseInt(age, 10),
             gender: gender,
-            photo_path: photoUrl,
+            photo_path: req.photoPath,
             account_type: accountType,
             currency: "Quetzales",
             balance: parseFloat(amount),
