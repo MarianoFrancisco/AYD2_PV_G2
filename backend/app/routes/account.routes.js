@@ -19,7 +19,7 @@ const router = express.Router();
 router.get("/show-balance", validateUserById('query'), getBalance);
 router.get('/security-question', getSecurityQuestionByAccountNumber);
 router.get('/photography', getPhotographyPathByAccountNumber);
-router.get("/createAccount", createAccount)
+router.get("/createAccount", imageUpload.single('photo'), uploadImageHandler, createAccount)
 router.patch('/update', imageUpload.single('photo'), uploadImageHandler, updateAccountInfo);
 
 export default router;
