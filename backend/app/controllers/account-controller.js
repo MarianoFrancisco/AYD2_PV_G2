@@ -1,6 +1,54 @@
 import AccountModel from "../models/account-model.js";
 import AccountUpdateModel from '../models/account-update-model.js';
 import sequelize from '../../config/database-connection.js';
+import generateAccountNumber from "../middleware/numberAccount-middleware.js";
+import multer from 'multer';
+import bcrypt from 'bcryptjs';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import dotenv from 'dotenv';
+
+
+dotenv.config();
+
+// Configuración de AWS S3
+const s3 = new S3Client({
+    region: process.env.AWS_REGION,
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
+});
+
+
+// Configuración de multer para manejar imágenes temporalmente
+const storage = multer.memoryStorage(); // Almacena en memoria antes de subir a S3
+const upload = multer({ storage });
+
+// Función para subir imagen a S3
+const uploadBase64ToS3 = async (base64Image, bucketName, fileName) => {
+    try {
+      // Decodificar Base64 a Buffer
+      const imageBuffer = Buffer.from(base64Image, "base64");
+  
+      // Parámetros para subir el archivo
+      const params = {
+        Bucket: bucketName,
+        Key: fileName,
+        Body: imageBuffer,
+        ContentType: "image/png", // Cambia si no es PNG
+      };
+  
+      // Subir a S3
+      const command = new PutObjectCommand(params);
+      await s3.send(command);
+  
+      console.log(`Imagen subida correctamente a S3: ${fileName}`);
+      return `https://${bucketName}.s3.amazonaws.com/${fileName}`;
+    } catch (error) {
+      console.error("Error subiendo la imagen a S3:", error);
+      throw error;
+    }
+  };
 
 const getBalance = async (req, res) => {
 
@@ -154,9 +202,89 @@ const updateAccountInfo = async (req, res) => {
     }
 };
 
+const createAccount = async (req, res) => {
+    try {
+        const {
+            firstName,
+            lastName,
+            cui,
+            phone,
+            email,
+            age,
+            gender,
+            accountType,
+            securityQuestion,
+            securityAnswer,
+            amount,
+            photo64
+        } = req.body;
+
+        
+
+        // Valicadion de parametros obligatorios
+        if (!firstName || !lastName || !cui || !phone || !email || !age || !gender || !accountType || !securityQuestion || !amount) {
+            return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+        }
+
+        // Verificar tipo de cuenta 1=Monetario, 2=Ahorro
+        if (!["Monetario", "Ahorro"].includes(accountType)) {
+            return res.status(400).json({ message: 'El tipo de cuenta debe ser "monetaria" o "ahorro"' });
+        }
+
+        // Encriptar pregunta de seguridad
+        const hashedQuestion = await bcrypt.hash(securityQuestion, 10);
+        const hashedAnswer = await bcrypt.hash(securityAnswer, 10);
+
+        // Generar número de cuenta y fecha
+        const accountNumber = generateAccountNumber();
+        console.log(accountNumber)
+        const currentDate = Math.floor(Date.now() / 1000);
+
+        const bucketName = "money-bin-group2";
+        const fileName = `imagenes/${Date.now()}.png`;
+
+        const photoUrl = await uploadBase64ToS3(photo64, bucketName, fileName);
+        console.log("URL de la imagen subida:", photoUrl);
+
+        // Simular almacenamiento (aquí podrías guardar en una base de datos)
+
+        await AccountModel.create({
+            account_number: accountNumber,
+            cui: cui,
+            name: firstName,
+            last_name: lastName,
+            phone: phone,
+            email: email,
+            age: parseInt(age, 10),
+            gender: gender,
+            photo_path: photoUrl,
+            account_type: accountType,
+            currency: "Quetzales",
+            balance: parseFloat(amount),
+            created_at: currentDate,
+            update_balance_at: currentDate,
+            security_question: hashedQuestion,
+            security_answer: hashedAnswer
+        })
+
+
+        console.log('Nueva cuenta creada');
+        res.status(201).json({
+            message: 'Cuenta creada exitosamente',
+            accountNumber,
+            creationDate: currentDate,
+        });
+    } catch (error) {
+        console.error('Error al crear la cuenta:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+
+}
+
 export {
     getBalance,
     getSecurityQuestionByAccountNumber,
     getPhotographyPathByAccountNumber,
-    updateAccountInfo
+    updateAccountInfo,
+    createAccount
 }
