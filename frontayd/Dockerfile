@@ -3,16 +3,16 @@ WORKDIR /app
 
 COPY package*.json ./
 RUN npm install
-
 COPY . .
-
 RUN npm run build -- --configuration production
 
-FROM nginx:alpine
-WORKDIR /usr/share/nginx/html
+FROM node:18-alpine
+WORKDIR /app
+
+RUN npm install -g serve
 
 COPY --from=build /app/dist/frontayd/browser .
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["serve", "-s", ".", "-l", "80"]
