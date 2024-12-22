@@ -8,14 +8,18 @@ import { environment } from '../../../../src/environments/environment';
   providedIn: 'root'
 })
 export class PaymentsService {
-  private urlApi:string = `${environment.API_URL}/payment-service`
+  private urlApiService: string = 'http://localhost:5000/api/payment-service/account';
+  private urlApiCash: string = 'http://localhost:5000/api/payment-service/cashier'; // nuevo endpoint
 
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  // Método para enviar el pago de servicio
+  sendServicePayment(data: Payments): Observable<{ payment: ResponsePayments; voucher: VoucherPayments }> {
+    return this.http.post<{ payment: ResponsePayments; voucher: VoucherPayments }>(this.urlApiService, data);
+  }
 
-  //Metodo para envíar pago
-  sendPayment(data: Payments ): Observable<{payment: ResponsePayments, voucher: VoucherPayments}>{
-    //console.log(data)
-    return this.http.post<{payment: ResponsePayments, voucher: VoucherPayments}>(this.urlApi,data)
+  // Método para enviar el pago en efectivo
+  sendCashPayment(data: Payments): Observable<{ payment: ResponsePayments; voucher: VoucherPayments }> {
+    return this.http.post<{ payment: ResponsePayments; voucher: VoucherPayments }>(this.urlApiCash, data);
   }
 }
