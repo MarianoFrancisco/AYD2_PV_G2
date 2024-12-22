@@ -39,9 +39,11 @@ const api = '/api';
 const authenticator = `${api}/authenticator`;
 const user = `${api}/user`;
 const showBalance = `${api}/account`;
+
 const paymentService = `${api}/payment-service`;
 const loanPayment = `${api}/loan-payment`;
 const loanList = `${api}/loan-list`;
+const createAccount = `${api}/create`;
 
 const creditCard = `${api}/get-credit-card`;
 const paycreditcard = `${api}/pay-credit-card`;
@@ -55,6 +57,7 @@ const withdrawal = `${api}/withdrawal`;
 app.use(authenticator, auhenticatorRouter);
 app.use(user, userRouter);
 app.use(showBalance, accountRouter);
+app.use(createAccount, accountRouter);
 app.use(paymentService, paymentServiceRouter);
 app.use(loanPayment, loanPaymentRouter);
 app.use(loanList, loanListRouter);

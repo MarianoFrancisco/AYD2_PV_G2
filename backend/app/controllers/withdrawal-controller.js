@@ -47,7 +47,7 @@ export const createWithdrawal = async (req, res) => {
             amount,
             withdrawal_type: withdrawal_type === 1 ? 'Ventanilla' : 'Cajero Automático',
             created_at: unixTimestamp,
-            account_type: account_type,
+            account_type: account_type === 1 ? "Monetaria" : "Ahorro",
             currency: currency,
         });
 
