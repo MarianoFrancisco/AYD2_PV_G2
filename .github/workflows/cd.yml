@@ -28,6 +28,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@54.204.157.130 << 'EOF'
           cd /home/ubuntu/AYD2_PV_G2/backend
+          git config pull.rebase false
           git pull
           sudo docker-compose down
           sudo docker-compose up --build -d
@@ -37,6 +38,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@44.201.179.6 << 'EOF'
           cd /home/ubuntu/AYD2_PV_G2/frontayd
+          git config pull.rebase false
           git pull
           sudo docker-compose down
           sudo docker-compose up --build -d
