@@ -3,11 +3,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Loan_Payments, Loan_state, Payment } from '../../interfaces/loan-payments';
 import { VoucherPayments } from '../../interfaces/payments';
+import { environment } from '../../../../src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class LoanPaymentsService {
-  private urlApi:string = 'http://localhost:5000/api/loan-payment'
+  private urlApi:string = `${environment.API_URL}/loan-payment`
 
   constructor(private http: HttpClient) { }
 
