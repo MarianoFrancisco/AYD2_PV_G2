@@ -22,10 +22,14 @@ export const createWithdrawal = async (req, res) => {
         }
 
         if (![1, 2].includes(currency)) {
-            return res.status(400).json({message: "Tipo de moneda invalido"})
+            return res.status(400).json({ message: "Tipo de moneda invalido" })
         }
 
-        const account = await AccountModel.findOne({ where: { account_number } });
+        const account = await AccountModel.findOne({
+            where: {
+                account_number: account_number
+            }
+        });
 
         if (!account) {
             return res.status(404).json({ message: 'Cuenta no encontrada' });
@@ -64,14 +68,14 @@ export const createWithdrawal = async (req, res) => {
 
         // Obtener datos para el voucher
         const user = await UserModel.findOne({
-            where: { id: account.user_id },
-            attributes: ['name', 'signature'],
+            where: { id: account.id },
+            attributes: ['name', 'signature_path'],
         });
 
         const voucher = {
             account_number,
             name: user.name,
-            signature: user.signature,
+            signature: user.signature_path,
         };
 
         const transaction = {
