@@ -1,0 +1,31 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: EC2
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Add SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Deploy Backend to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@54.204.157.130 << 'EOF'
+          cd /home/ubuntu/AYD2_PV_G2/backend
+          git config pull.rebase false
+          git pull origin main
+          sudo docker-compose down
+          sudo docker-compose up --build -d
+          EOF
