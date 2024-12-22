@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { LoginResponse } from '../interfaces/login.interface'
+import { environment } from '../../../../src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private readonly checkApiUrl = 'http://localhost:5000/api/authenticator/check';
-  private readonly validateApiUrl = 'http://localhost:5000/api/authenticator/validate/password';
-  private readonly validateFileUrl = 'http://localhost:5000/api/authenticator/validate/file';
+  private readonly checkApiUrl = `${environment.API_URL}/authenticator/check`;
+  private readonly validateApiUrl = `${environment.API_URL}/authenticator/validate/password`;
+  private readonly validateFileUrl = `${environment.API_URL}/authenticator/validate/file`;
 
   constructor(private http: HttpClient) {}
 

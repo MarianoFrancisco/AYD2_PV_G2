@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS accounts (
   gender ENUM('Masculino', 'Femenino', 'Otro') NOT NULL,
   photo_path VARCHAR(255),
   account_type ENUM('Monetario', 'Ahorro') NOT NULL,
-  currency ENUM('Quetzales', 'Dólares') NOT NULL,
+  currency ENUM('Quetzales', 'Dólares', 'Quetzales y Dólares') NOT NULL,
   balance DECIMAL(10, 2) DEFAULT 0 CHECK (balance >= 0)
   created_at BIGINT NOT NULL,
   update_balance_at BIGINT NOT NULL,
@@ -68,17 +68,6 @@ CREATE TABLE IF NOT EXISTS card_blocks (
   blocked_at BIGINT NOT NULL,
   FOREIGN KEY (card_id) REFERENCES cards(id) ON DELETE CASCADE
 );
--- Tabla de pagos de tarjetas de crédito
-CREATE TABLE IF NOT EXISTS credit_card_payments (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  card_id INT NOT NULL,
-  account_id INT NOT NULL,
-  amount DECIMAL(10, 2) NOT NULL,
-  interest DECIMAL(10, 2) DEFAULT 0,
-  created_at BIGINT NOT NULL,
-  FOREIGN KEY (card_id) REFERENCES cards(id) ON DELETE CASCADE,
-  FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
-);
 -- Tabla de préstamos
 CREATE TABLE IF NOT EXISTS loans (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -96,16 +85,7 @@ CREATE TABLE IF NOT EXISTS loans (
   created_at BIGINT NOT NULL,
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
--- Tabla de pagos de préstamos
-CREATE TABLE IF NOT EXISTS loan_payments (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  loan_id INT NOT NULL,
-  account_id INT NOT NULL,
-  amount DECIMAL(10, 2) NOT NULL,
-  created_at BIGINT NOT NULL,
-  FOREIGN KEY (loan_id) REFERENCES loans(id) ON DELETE CASCADE,
-  FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
-);
+
 -- Tabla de pagos de servicios
 CREATE TABLE IF NOT EXISTS service_payments (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -143,7 +123,8 @@ CREATE TABLE IF NOT EXISTS transaction_history (
     'Retiro',
     'Pago de Servicio',
     'Pago de Préstamo',
-    'Cambio de Moneda'
+    'Cambio de Moneda',
+    'Pago crédito'
   ) NOT NULL,
   amount DECIMAL(10, 2) NOT NULL,
   description VARCHAR(255),
@@ -185,6 +166,16 @@ CREATE TABLE IF NOT EXISTS surveys (
   score INT NOT NULL,
   comment TEXT,
   responded_at BIGINT NOT NULL,
+  Question1 TEXT,
+  Answer1 TEXT,
+  Question2 TEXT,
+  Answer2 TEXT,
+  Question3 TEXT,
+  Answer3 TEXT,
+  Question4 TEXT,
+  Answer4 TEXT,
+  Question5 TEXT,
+  Answer5 TEXT,
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
 -- Tabla de auditorías
