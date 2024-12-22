@@ -15,6 +15,10 @@ import paymentServiceRouter from "./app/routes/payment-services.routes.js";
 import loanPaymentRouter from "./app/routes/loan-payment.routes.js";
 import loanListRouter from "./app/routes/loan-list.routes.js";
 
+import creditCardRouter from "./app/routes/credit-card.routes.js";
+
+import paycreditcardrouter from "./app/routes/pay-credit-card.routes.js";
+
 import clientRouter from "./app/routes/client.routes.js";
 
 import depositRouter from './app/routes/deposit.routes.js';
@@ -39,6 +43,9 @@ const paymentService = `${api}/payment-service`;
 const loanPayment = `${api}/loan-payment`;
 const loanList = `${api}/loan-list`;
 
+const creditCard = `${api}/get-credit-card`;
+const paycreditcard = `${api}/pay-credit-card`;
+
 const clientService = `${api}/client`;
 
 const deposit = `${api}/deposit`;
@@ -51,6 +58,9 @@ app.use(showBalance, accountRouter);
 app.use(paymentService, paymentServiceRouter);
 app.use(loanPayment, loanPaymentRouter);
 app.use(loanList, loanListRouter);
+
+app.use(creditCard, creditCardRouter);
+app.use(paycreditcard, paycreditcardrouter)
 
 app.use(clientService, clientRouter);
 
