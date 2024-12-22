@@ -166,6 +166,16 @@ CREATE TABLE IF NOT EXISTS surveys (
   score INT NOT NULL,
   comment TEXT,
   responded_at BIGINT NOT NULL,
+  Question1 TEXT,
+  Answer1 TEXT,
+  Question2 TEXT,
+  Answer2 TEXT,
+  Question3 TEXT,
+  Answer3 TEXT,
+  Question4 TEXT,
+  Answer4 TEXT,
+  Question5 TEXT,
+  Answer5 TEXT,
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
 -- Tabla de auditorías
