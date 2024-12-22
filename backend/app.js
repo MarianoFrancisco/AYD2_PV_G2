@@ -25,6 +25,7 @@ import surveyCreateRoute from './app/routes/survey-create.routes.js';
 import surveyListRouter from "./app/routes/list-survey.routes.js";
 
 import complaintListRouter from "./app/routes/list-complaints.routes.js";
+import userManagementRouter from "./app/routes/user-management.routes.js";
 
 import clientRouter from "./app/routes/client.routes.js";
 
@@ -62,6 +63,7 @@ const createSurveyRoute = `${api}/create-survey`;
 const surveyList = `${api}/survey-list`;
 
 const complaintList = `${api}/complaint-list`;
+const userManagement = `${api}/users`;
 
 const clientService = `${api}/client`;
 
@@ -86,6 +88,7 @@ app.use(surveyList, surveyListRouter);
 app.use(updcurrencys,updatecurren)
 
 app.use(complaintList, complaintListRouter);
+app.use(userManagement, userManagementRouter);
 
 app.use(clientService, clientRouter);
 
