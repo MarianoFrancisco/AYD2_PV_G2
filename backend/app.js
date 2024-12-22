@@ -19,6 +19,14 @@ import creditCardRouter from "./app/routes/credit-card.routes.js";
 
 import paycreditcardrouter from "./app/routes/pay-credit-card.routes.js";
 
+import updatecurren from "./app/routes/update-currency.routes.js";
+import surveyQuestionsRoute from './app/routes/survey-question.routes.js';
+import surveyCreateRoute from './app/routes/survey-create.routes.js';
+import surveyListRouter from "./app/routes/list-survey.routes.js";
+
+import complaintListRouter from "./app/routes/list-complaints.routes.js";
+import userManagementRouter from "./app/routes/user-management.routes.js";
+
 import clientRouter from "./app/routes/client.routes.js";
 
 import depositRouter from './app/routes/deposit.routes.js';
@@ -34,17 +42,28 @@ app.use(express.json());
 app.use(bodyParser.json({ limit: '15mb' }));
 app.use(cors());
 app.use('/signature', express.static(path.join(__dirname, 'img')));
-
 const api = '/api';
+
+
 const authenticator = `${api}/authenticator`;
 const user = `${api}/user`;
-const showBalance = `${api}/account`;
+const account = `${api}/account`;
+
 const paymentService = `${api}/payment-service`;
 const loanPayment = `${api}/loan-payment`;
 const loanList = `${api}/loan-list`;
+const createAccount = `${api}/create`;
 
 const creditCard = `${api}/get-credit-card`;
 const paycreditcard = `${api}/pay-credit-card`;
+
+const updcurrencys = `${api}/accounts/update-currency`;
+const surveygetquestion = `${api}/survey-questions`;
+const createSurveyRoute = `${api}/create-survey`;
+const surveyList = `${api}/survey-list`;
+
+const complaintList = `${api}/complaint-list`;
+const userManagement = `${api}/users`;
 
 const clientService = `${api}/client`;
 
@@ -54,13 +73,22 @@ const withdrawal = `${api}/withdrawal`;
 
 app.use(authenticator, auhenticatorRouter);
 app.use(user, userRouter);
-app.use(showBalance, accountRouter);
+app.use(account, accountRouter);
+app.use(createAccount, accountRouter);
 app.use(paymentService, paymentServiceRouter);
 app.use(loanPayment, loanPaymentRouter);
 app.use(loanList, loanListRouter);
 
 app.use(creditCard, creditCardRouter);
 app.use(paycreditcard, paycreditcardrouter)
+app.use(surveygetquestion, surveyQuestionsRoute)
+app.use(createSurveyRoute, surveyCreateRoute);
+app.use(surveyList, surveyListRouter);
+
+app.use(updcurrencys,updatecurren)
+
+app.use(complaintList, complaintListRouter);
+app.use(userManagement, userManagementRouter);
 
 app.use(clientService, clientRouter);
 

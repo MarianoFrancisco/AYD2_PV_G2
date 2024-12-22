@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS accounts (
   gender ENUM('Masculino', 'Femenino', 'Otro') NOT NULL,
   photo_path VARCHAR(255),
   account_type ENUM('Monetario', 'Ahorro') NOT NULL,
-  currency ENUM('Quetzales', 'Dólares') NOT NULL,
+  currency ENUM('Quetzales', 'Dólares', 'Quetzales y Dólares') NOT NULL,
   balance DECIMAL(10, 2) DEFAULT 0 CHECK (balance >= 0)
   created_at BIGINT NOT NULL,
   update_balance_at BIGINT NOT NULL,
@@ -166,6 +166,16 @@ CREATE TABLE IF NOT EXISTS surveys (
   score INT NOT NULL,
   comment TEXT,
   responded_at BIGINT NOT NULL,
+  Question1 TEXT,
+  Answer1 TEXT,
+  Question2 TEXT,
+  Answer2 TEXT,
+  Question3 TEXT,
+  Answer3 TEXT,
+  Question4 TEXT,
+  Answer4 TEXT,
+  Question5 TEXT,
+  Answer5 TEXT,
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
 -- Tabla de auditorías

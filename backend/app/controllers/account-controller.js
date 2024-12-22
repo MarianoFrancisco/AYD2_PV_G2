@@ -1,6 +1,16 @@
 import AccountModel from "../models/account-model.js";
 import AccountUpdateModel from '../models/account-update-model.js';
 import sequelize from '../../config/database-connection.js';
+import generateAccountNumber from "../middleware/numberAccount-middleware.js";
+import ComplaintsModel from "../models/complaints-model.js";
+import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
+import sendEmail from "../services/send-mail-service.js";
+import UserModel from "../models/user-model.js";
+
+dotenv.config();
+
+
 
 const getBalance = async (req, res) => {
 
@@ -154,9 +164,180 @@ const updateAccountInfo = async (req, res) => {
     }
 };
 
+const createAccount = async (req, res) => {
+    try {
+        console.log(req.photoPath)
+        const {
+            firstName,
+            lastName,
+            cui,
+            phone,
+            email,
+            age,
+            gender,
+            accountType,
+            securityQuestion,
+            securityAnswer,
+            amount,
+        } = req.body;
+
+
+
+
+        // Valicadion de parametros obligatorios
+        if (!firstName || !lastName || !cui || !phone || !email || !age || !gender || !accountType || !securityQuestion || !amount) {
+            return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+        }
+
+        // Verificar tipo de cuenta 1=Monetario, 2=Ahorro
+        if (!["Monetario", "Ahorro"].includes(accountType)) {
+            return res.status(400).json({ message: 'El tipo de cuenta debe ser "monetaria" o "ahorro"' });
+        }
+
+        // Encriptar pregunta de seguridad
+        const hashedQuestion = await bcrypt.hash(securityQuestion, 10);
+        const hashedAnswer = await bcrypt.hash(securityAnswer, 10);
+
+        // Generar número de cuenta y fecha
+        const accountNumber = generateAccountNumber();
+        console.log(accountNumber)
+        const currentDate = Math.floor(Date.now() / 1000);
+
+
+
+        // Simular almacenamiento (aquí podrías guardar en una base de datos)
+
+        await AccountModel.create({
+            account_number: accountNumber,
+            cui: cui,
+            name: firstName,
+            last_name: lastName,
+            phone: phone,
+            email: email,
+            age: parseInt(age, 10),
+            gender: gender,
+            photo_path: req.photoPath,
+            account_type: accountType,
+            currency: "Quetzales",
+            balance: parseFloat(amount),
+            created_at: currentDate,
+            update_balance_at: currentDate,
+            security_question: hashedQuestion,
+            security_answer: hashedAnswer
+        })
+
+
+        console.log('Nueva cuenta creada');
+        res.status(201).json({
+            message: 'Cuenta creada exitosamente',
+            accountNumber,
+            creationDate: currentDate,
+        });
+    } catch (error) {
+        console.error('Error al crear la cuenta:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+
+}
+
+const registroQuejas = async (req, res) => {
+    try {
+        //form
+        const {
+            identificacion,
+            detalle,
+            tipoQueja
+
+        } = req.body
+
+        console.log(req.body)
+
+        // Valicadion de parametros obligatorios
+        if (!identificacion || !detalle || !tipoQueja ) {
+            return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+        }
+
+        // Verificar tipo de queja
+        if (!["Servicio", "Producto", "Atencion al cliente"].includes(tipoQueja)) {
+            return res.status(400).json({ message: 'El tipo de cuenta debe ser "monetaria" o "ahorro"' });
+        }
+
+        //fecha de queja
+        const currentDate = Math.floor(Date.now() / 1000);
+
+        let account_id = ""
+        let id = 0
+
+        //buscar cuenta
+        let cuenta = await AccountModel.findOne({
+            where: {
+                cui: identificacion
+            }
+        })
+
+        if(!cuenta){
+            cuenta = await AccountModel.findOne({
+                where: {
+                    account_number: identificacion
+                }
+            })
+
+            if(!cuenta){
+                return res.status(400).json({ message: 'No existe el usuario' }); 
+            } else {
+                id = cuenta.id
+            }
+
+        } else {
+          
+            id = cuenta.id
+        }
+
+
+
+        //Buscar cuenta supervisor
+        let cuentaSupervisor = await UserModel.findOne({
+            where: {
+                role: "Supervisor",
+            },
+        });
+
+        if(!cuentaSupervisor) {
+            return res.status(400).json({ message: 'No hay una cuenta de supervisor' });
+        }
+
+
+        const contenido = "<p>" + detalle + "</p>"
+
+        const info = await sendEmail("luisgagu9@gmail.com", "Queja", detalle, contenido )
+
+        await ComplaintsModel.create({
+            account_id: id,
+            details: detalle,
+            created_at: currentDate,
+            category: tipoQueja
+        })
+
+        console.log('Nueva queja creada');
+        res.status(201).json({
+            message: 'Queja registrada correctamente',
+            identificacion,
+            creationDate: currentDate,
+        });
+
+
+    } catch (error) {
+        console.error('Error al crear la cuenta:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+
+}
+
 export {
     getBalance,
     getSecurityQuestionByAccountNumber,
     getPhotographyPathByAccountNumber,
-    updateAccountInfo
+    updateAccountInfo,
+    createAccount,
+    registroQuejas
 }
