@@ -2,27 +2,13 @@ import AccountModel from "../models/account-model.js";
 import AccountUpdateModel from '../models/account-update-model.js';
 import sequelize from '../../config/database-connection.js';
 import generateAccountNumber from "../middleware/numberAccount-middleware.js";
-import multer from 'multer';
+import ComplaintsModel from "../models/complaints-model.js";
 import bcrypt from 'bcryptjs';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import dotenv from 'dotenv';
-
+import sendEmail from "../services/send-mail-service.js";
+import UserModel from "../models/user-model.js";
 
 dotenv.config();
-
-// Configuración de AWS S3
-const s3 = new S3Client({
-    region: process.env.AWS_REGION,
-    credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    },
-});
-
-
-// Configuración de multer para manejar imágenes temporalmente
-const storage = multer.memoryStorage(); // Almacena en memoria antes de subir a S3
-
 
 
 
@@ -196,7 +182,7 @@ const createAccount = async (req, res) => {
         } = req.body;
 
 
-        
+
 
         // Valicadion de parametros obligatorios
         if (!firstName || !lastName || !cui || !phone || !email || !age || !gender || !accountType || !securityQuestion || !amount) {
@@ -254,10 +240,103 @@ const createAccount = async (req, res) => {
 
 }
 
+const registroQuejas = async (req, res) => {
+    try {
+        const {
+            identificacion,
+            detalle,
+            tipoQueja
+
+        } = req.body
+
+        console.log(req.body)
+
+        // Valicadion de parametros obligatorios
+        if (!identificacion || !detalle || !tipoQueja ) {
+            return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+        }
+
+        // Verificar tipo de queja
+        if (!["Servicio", "Producto", "Atencion al cliente"].includes(tipoQueja)) {
+            return res.status(400).json({ message: 'El tipo de cuenta debe ser "monetaria" o "ahorro"' });
+        }
+
+        //fecha de queja
+        const currentDate = Math.floor(Date.now() / 1000);
+
+        let account_id = ""
+        let id = 0
+
+        //buscar cuenta
+        let cuenta = await AccountModel.findOne({
+            where: {
+                cui: identificacion
+            }
+        })
+
+        if(!cuenta){
+            cuenta = await AccountModel.findOne({
+                where: {
+                    account_number: identificacion
+                }
+            })
+
+            if(!cuenta){
+                return res.status(400).json({ message: 'No existe el usuario' }); 
+            } else {
+                id = cuenta.id
+            }
+
+        } else {
+          
+            id = cuenta.id
+        }
+
+
+
+        //Buscar cuenta supervisor
+        let cuentaSupervisor = await UserModel.findOne({
+            where: {
+                role: "Supervisor",
+            },
+        });
+
+        if(!cuentaSupervisor) {
+            return res.status(400).json({ message: 'No hay una cuenta de supervisor' });
+        }
+
+
+        const contenido = "<p>" + detalle + "</p>"
+
+        const info = await sendEmail("luisgagu9@gmail.com", "Queja", detalle, contenido )
+
+        await ComplaintsModel.create({
+            account_id: id,
+            details: detalle,
+            created_at: currentDate,
+            category: tipoQueja
+        })
+
+        console.log('Nueva queja creada');
+        res.status(201).json({
+            message: 'Queja registrada correctamente',
+            identificacion,
+            creationDate: currentDate,
+        });
+
+
+    } catch (error) {
+        console.error('Error al crear la cuenta:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+
+}
+
 export {
     getBalance,
     getSecurityQuestionByAccountNumber,
     getPhotographyPathByAccountNumber,
     updateAccountInfo,
-    createAccount
+    createAccount,
+    registroQuejas
 }
