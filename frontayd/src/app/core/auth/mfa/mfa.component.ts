@@ -19,6 +19,13 @@ export class MfaComponent {
 
   constructor(private loginService: LoginService, private router: Router) {}
 
+  ngOnInit(): void {
+    const savedIdentifier = localStorage.getItem('identifier');
+    if (savedIdentifier) {
+      this.identifier = savedIdentifier;
+    }
+  }
+
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -46,6 +53,7 @@ export class MfaComponent {
           title: 'Autenticación Exitosa',
           text: `Bienvenido ${response.user.name}`,
         });
+        localStorage.removeItem('identifier');
         this.router.navigate(['/supervisor/inicio-supervisor']);
       },
       error: () => {

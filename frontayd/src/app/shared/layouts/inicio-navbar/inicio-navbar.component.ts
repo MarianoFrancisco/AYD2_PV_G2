@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 @Component({
@@ -14,5 +14,10 @@ export class InicioNavbarComponent {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+  
+  clearIdentifier(): void {
+    localStorage.removeItem('identifier');
+    localStorage.removeItem('user');
   }
 }

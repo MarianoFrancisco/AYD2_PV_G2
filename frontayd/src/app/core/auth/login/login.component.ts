@@ -40,10 +40,13 @@ export class LoginComponent {
       next: (response) => {
         // Guardar usuario en localStorage
         localStorage.setItem('user', JSON.stringify(response.user));
-  
+        localStorage.setItem('identifier', email);
+
         if (response.user.role === 'Administrador de Sistemas') {
           this.redirectByRole(response.user.role, email, password);
-        } else if (response.requiresTwoFactor) {
+        }
+         else if (response.requiresTwoFactor) {
+          
           this.router.navigate(['/mfa-factor']);
         } else {
           Swal.fire({
