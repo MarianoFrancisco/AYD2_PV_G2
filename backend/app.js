@@ -24,6 +24,8 @@ import surveyQuestionsRoute from './app/routes/survey-question.routes.js';
 import surveyCreateRoute from './app/routes/survey-create.routes.js';
 import surveyListRouter from "./app/routes/list-survey.routes.js";
 
+import complaintListRouter from "./app/routes/list-complaints.routes.js";
+
 import clientRouter from "./app/routes/client.routes.js";
 
 import depositRouter from './app/routes/deposit.routes.js';
@@ -59,6 +61,8 @@ const surveygetquestion = `${api}/survey-questions`;
 const createSurveyRoute = `${api}/create-survey`;
 const surveyList = `${api}/survey-list`;
 
+const complaintList = `${api}/complaint-list`;
+
 const clientService = `${api}/client`;
 
 const deposit = `${api}/deposit`;
@@ -80,6 +84,8 @@ app.use(createSurveyRoute, surveyCreateRoute);
 app.use(surveyList, surveyListRouter);
 
 app.use(updcurrencys,updatecurren)
+
+app.use(complaintList, complaintListRouter);
 
 app.use(clientService, clientRouter);
 
