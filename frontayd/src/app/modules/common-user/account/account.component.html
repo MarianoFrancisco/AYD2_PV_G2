@@ -1,72 +1,76 @@
 <div class="container mx-auto">
     <h2 class="text-3xl font-semibold mb-6 text-center text-blue-600">Busqueda Money Bin</h2>
-
+  
     <form [formGroup]="accountForm" (ngSubmit)="buscar()" class="mb-6">
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div class="sm:col-span-3">
-                <label for="tipoBusqueda" class="block text-sm/6 font-medium text-gray-900">Buscar Por: </label>
-                <div class="mt-2">
-                    <select id="tipoBusqueda" formControlName="tipoBusqueda"
-                        class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                        <option value="cui">CUI</option>
-                        <option value="account_number">Cuenta</option>
-                    </select>
-                </div>
-            </div>
-            <div class="sm:col-span-3">
-                <label for="codigoBusqueda" class="block text-sm/6 font-medium text-gray-900">CUI o Cuenta: </label>
-                <div class="mt-2">
-                    <input type="text" formControlName="codigoBusqueda" id="codigoBusqueda"
-                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                </div>
-            </div>
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <label for="tipoBusqueda" class="block text-sm/6 font-medium text-gray-900">Buscar Por: </label>
+          <div class="mt-2">
+            <select id="tipoBusqueda" formControlName="tipoBusqueda"
+              class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+              <option value="cui">CUI</option>
+              <option value="account_number">Cuenta</option>
+            </select>
+          </div>
         </div>
-
-        <div class="mt-6 flex items-center justify-center gap-x-6">
-            <button type="button" class="text-sm/6 font-semibold text-gray-900">Cancelar</button>
-            <button type="submit" [disabled]="!accountForm.valid"
-                class="rounded-md dark:bg-gray-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:dark:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark:bg-gray-800">Buscar</button>
+        <div class="sm:col-span-3">
+          <label for="codigoBusqueda" class="block text-sm/6 font-medium text-gray-900">CUI o Cuenta: </label>
+          <div class="mt-2">
+            <input type="text" formControlName="codigoBusqueda" id="codigoBusqueda"
+              class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+          </div>
         </div>
+      </div>
+  
+      <div class="mt-6 flex items-center justify-center gap-x-6">
+        <button type="button" class="text-sm/6 font-semibold text-gray-900">Cancelar</button>
+        <button type="submit" [disabled]="!accountForm.valid"
+          class="rounded-md dark:bg-gray-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:dark:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark:bg-gray-800">Buscar</button>
+        <button type="button" (click)="limpiarCampos()"
+          class="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Limpiar</button>
+      </div>
     </form>
-
+  
     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-3">
-            <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
-                <h2 class="text-xl font-semibold">Detalle Usuario</h2>
-                <p class="mt-2 text-gray-600">Usuario : <span>{{accountDetail.name}}</span></p>
-                <p class="mt-2 text-gray-600">CUI : <span>{{accountDetail.cui}}</span></p>
-                <p class="mt-2 text-gray-600">Correo : <span>{{accountDetail.email}}</span></p>
-                <p class="mt-2 text-gray-600">Teléfono : <span>{{accountDetail.phone}}</span></p>
-            </div>
+      <div class="sm:col-span-3">
+        <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+          <h2 class="text-xl font-semibold">Detalle Usuario</h2>
+          <p class="mt-2 text-gray-600">Usuario : <span>{{AccountDetail?.name}}</span></p>
+          <p class="mt-2 text-gray-600">CUI : <span>{{AccountDetail?.cui}}</span></p>
+          <p class="mt-2 text-gray-600">Correo : <span>{{AccountDetail?.email}}</span></p>
+          <p class="mt-2 text-gray-600">Teléfono : <span>{{AccountDetail?.phone}}</span></p>
         </div>
-        <div class="sm:col-span-3">
-            <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
-                <h2 class="text-xl font-semibold">Detalle Cuenta</h2>
-                <p class="mt-2 text-gray-600">Cuenta : <span>{{accountDetail.account.account_number}}</span></p>
-                <p class="mt-2 text-gray-600">Balance : <span>Q. {{accountDetail.account.balance}}</span></p>
-            </div>
+      </div>
+      <div class="sm:col-span-3">
+        <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+          <h2 class="text-xl font-semibold">Detalle Cuenta</h2>
+          <p class="mt-2 text-gray-600">Cuenta : <span>{{AccountDetail?.account_number}}</span></p>
+          <p class="mt-2 text-gray-600">Balance : <span>Q. {{AccountDetail?.balance}}</span></p>
         </div>
+      </div>
     </div>
+  
     <div class="mt-10">
-        <table class="table-auto w-full">
-            <thead>
-                <tr>
-                    <th>Tipo</th>
-                    <th>Monto</th>
-                    <th>Descripción</th>
-                    <th>Fecha</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (item of transactions; track $index) {
-                    <tr>
-                        <td>{{item.transaction_type}}</td>
-                        <td>Q. {{item.amount}}</td>
-                        <td>{{item.description}}</td>
-                        <td>{{formatDate(item.created_at)}}</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+      <table class="table-auto w-full">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Monto</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of transactions; track $index) {
+          <tr>
+            <td>{{item.transaction_type}}</td>
+            <td>Q. {{item.amount}}</td>
+            <td>{{item.description}}</td>
+            <td>{{ convertirFecha(item.created_at) }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
     </div>
-</div>
+  </div>
+  

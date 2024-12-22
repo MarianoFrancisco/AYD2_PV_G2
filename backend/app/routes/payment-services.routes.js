@@ -1,8 +1,9 @@
 import express from 'express';
 import {
-    save
+    createServicePaymentByCashier,
+    createServicePaymentByAccount
 } from '../controllers/payment-services-controller.js';
-import validateUser from '../middleware/validate-user-middleware.js';
+import validateUserById from '../middleware/validate-user-middleware.js';
 
 /*
  * @author
@@ -10,6 +11,8 @@ import validateUser from '../middleware/validate-user-middleware.js';
  */
 const router = express.Router();
 
-router.post('', validateUser('body'), save);
+router.post('/cashier', validateUserById('body'), createServicePaymentByCashier);
+
+router.post('/account', validateUserById('body'), createServicePaymentByAccount);
 
 export default router;

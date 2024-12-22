@@ -1,29 +1,68 @@
-import { DataTypes } from "sequelize"
-import sequelize from "../../config/database-connection.js"
-import UserModel from './user-model.js';
+import { DataTypes } from "sequelize";
+import sequelize from "../../config/database-connection.js";
 
-
+/*
+ * @author
+ * Mariano Camposeco {@literal (mariano1941@outlook.es)}
+ */
 const AccountModel = sequelize.define("accounts", {
-
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
     },
-    user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
     account_number: {
         type: DataTypes.CHAR(10),
         allowNull: false,
         unique: true,
     },
+    cui: {
+        type: DataTypes.CHAR(13),
+        allowNull: false,
+        unique: true,
+    },
+    name: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+    },
+    last_name: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+    },
+    phone: {
+        type: DataTypes.STRING(15),
+        allowNull: false,
+    },
+    email: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+        unique: true,
+    },
+    age: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    gender: {
+        type: DataTypes.ENUM('Masculino', 'Femenino', 'Otro'),
+        allowNull: false,
+    },
+    photo_path: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+    },
+    account_type: {
+        type: DataTypes.ENUM('Monetario', 'Ahorro'),
+        allowNull: false,
+    },
+    currency: {
+        type: DataTypes.ENUM('Quetzales', 'Dólares'),
+        allowNull: false,
+    },
     balance: {
         type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
-        defaultValue: 0.0,
+        allowNull: true,
+        defaultValue: 0.00,
         validate: {
             min: 0,
         },
@@ -31,14 +70,19 @@ const AccountModel = sequelize.define("accounts", {
     created_at: {
         type: DataTypes.BIGINT,
         allowNull: false,
-        defaultValue: Math.floor(Date.now() / 1000)
     },
     update_balance_at: {
         type: DataTypes.BIGINT,
         allowNull: false,
-        defaultValue: Math.floor(Date.now() / 1000),
     },
-
+    security_question: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+    },
+    security_answer: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+    },
 }, {
     tableName: "accounts",
     timestamps: false,
@@ -55,9 +99,6 @@ const AccountModel = sequelize.define("accounts", {
             }
         },
     },
-})
+});
 
-AccountModel.belongsTo(UserModel, { foreignKey: 'user_id', as: 'user' });
-UserModel.hasMany(AccountModel, { foreignKey: 'user_id' });
-
-export default AccountModel
+export default AccountModel;

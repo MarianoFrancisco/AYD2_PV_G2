@@ -167,12 +167,14 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ![Entidad relacion](../Capturas/DiagramaDespliegueV3.png)
 
-## 8. Diagrama entidad relacion
+![Entidad relacion](../Capturas/DiagramadeComponenteFinal.png)
+
+## 8) Diagrama entidad relacion
 
 ![Entidad relacion](../Capturas/DiagramaEntidadRelacionV5.png)
 **Link:**  [Link](https://drive.google.com/file/d/1K6XSIMpArZHsAqhgD7s1YcEdYW7MxlCb/view?usp=sharing)
 
-## 9). Prototipos
+## 9) Prototipos
 
 ### Login
 
@@ -208,7 +210,7 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ### Cajero-Pago de Tarjeta
 
-![Cajero-PagoTarjetas](../Capturas/Prototipos/Cajero-PagoTarjetas.png)
+![Cajero-PagoTarjetas](../Capturas/Prototipos/Cajero-pagoTarjetas.png)
 
 ### Cajero-Retiros
 
@@ -368,6 +370,53 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ## 10) Patrones de diseño
 
+### 1. Patrón Singleton
+
+#### Diagrama UML
+![PatronCommand](../Capturas/PatronSingleton.jpg)
+
+#### Descripción
+Este patrón se encarga de crear una única instancia para controlar el acceso de las clases y mantener consistencia en los datos. También controla el acceso a recursos compartidos.
+
+#### ¿Por qué?
+La aplicación maneja monitoreo en tiempo real, gestión de inventario y copias de seguridad. Estas copias generan datos que necesitan ser gestionados de manera centralizada.  
+Con este patrón aseguramos que una única instancia controle la gestión del inventario, monitoreo de actividades o la gestión de copias de seguridad, evitando la duplicación de datos.
+
+### 2. Patrón State
+
+#### Diagrama UML
+![PatronState](../Capturas/PatronState.jpg)
+
+#### Descripción
+Este patrón se basa en los diferentes estados que puede tener un objeto y cómo en cada estado su comportamiento será diferente. Pueden existir cambios finitos entre estados, lo cual se denomina transición.
+
+#### ¿Por qué?
+Al momento de realizar una solicitud para cancelar un servicio, esta pasará por diferentes estados:  
+1. **EnviarSolicitud**: Aquí la solicitud será revisada antes de enviarla al supervisor.  
+2. **ProcesarSolicitud**: En este estado, el supervisor verificará que no existan pagos pendientes en el servicio antes de aceptar o rechazar la solicitud.
+
+### 3. Patrón Strategy
+
+#### Diagrama UML
+![PatronStrategy](../Capturas/PatronStrategy.jpg)
+
+#### Descripción
+Este patrón permite diseñar diferentes algoritmos y tenerlos en una clase diferente, esto para no tener todo en una sola clase y evitar un conflicto si un algoritmo debe ser cambiado.
+
+#### ¿Por qué?
+La aplicación maneja diferentes pagos, como pago de servicios, pago de préstamos o pago de tarjetas. Cada uno tiene su algoritmo diferente pero con la misma finalidad de procesar un pago, por lo que es necesario manejar cada tipo de pago en una clase diferente para ayudar a mantener un código limpio y legible.
+
+
+### 4. Patrón Observer 
+ 
+#### Diagrama UML 
+![PatronObserver](../Capturas/PatronObserver.jpg)
+ 
+#### Descripción 
+Este patrón se basa en dependencias de uno a muchos entre objetos, lo que significa que cuando un objeto relacionado cambia, se detona una notificación a los objetos interesados. 
+ 
+#### ¿Por qué? 
+Es necesario notificar al cliente cuando el bloqueo de tarjeta se haya realizado, por lo que este patrón facilita la implementación de notificaciones (envío de correo) en tiempo real.
 
 ### 5. Patrón Command
 
