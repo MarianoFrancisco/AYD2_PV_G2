@@ -242,6 +242,7 @@ const createAccount = async (req, res) => {
 
 const registroQuejas = async (req, res) => {
     try {
+        //form
         const {
             identificacion,
             detalle,

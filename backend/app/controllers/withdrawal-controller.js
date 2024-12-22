@@ -5,6 +5,7 @@ import UserModel from '../models/user-model.js';
 
 export const createWithdrawal = async (req, res) => {
     try {
+        //en json
         //numbero de cuenta, monto, tipo de retiro, tipo de cuenta, tipo de moneda
         const { account_number, amount, withdrawal_type, account_type, currency } = req.body;
 
