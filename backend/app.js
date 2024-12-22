@@ -19,6 +19,8 @@ import creditCardRouter from "./app/routes/credit-card.routes.js";
 
 import paycreditcardrouter from "./app/routes/pay-credit-card.routes.js";
 
+import updatecurren from "./app/routes/update-currency.routes.js";
+
 import clientRouter from "./app/routes/client.routes.js";
 
 import depositRouter from './app/routes/deposit.routes.js';
@@ -48,6 +50,8 @@ const createAccount = `${api}/create`;
 const creditCard = `${api}/get-credit-card`;
 const paycreditcard = `${api}/pay-credit-card`;
 
+const updcurrencys = `${api}/accounts/update-currency`;
+
 const clientService = `${api}/client`;
 
 const deposit = `${api}/deposit`;
@@ -64,6 +68,8 @@ app.use(loanList, loanListRouter);
 
 app.use(creditCard, creditCardRouter);
 app.use(paycreditcard, paycreditcardrouter)
+
+app.use(updcurrencys,updatecurren)
 
 app.use(clientService, clientRouter);
 

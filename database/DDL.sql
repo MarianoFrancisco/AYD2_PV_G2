@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS accounts (
   gender ENUM('Masculino', 'Femenino', 'Otro') NOT NULL,
   photo_path VARCHAR(255),
   account_type ENUM('Monetario', 'Ahorro') NOT NULL,
-  currency ENUM('Quetzales', 'Dólares') NOT NULL,
+  currency ENUM('Quetzales', 'Dólares', 'Quetzales y Dólares') NOT NULL,
   balance DECIMAL(10, 2) DEFAULT 0 CHECK (balance >= 0)
   created_at BIGINT NOT NULL,
   update_balance_at BIGINT NOT NULL,
