@@ -40,7 +40,7 @@ app.use('/signature', express.static(path.join(__dirname, 'img')));
 const api = '/api';
 const authenticator = `${api}/authenticator`;
 const user = `${api}/user`;
-const showBalance = `${api}/account`;
+const account = `${api}/account`;
 
 const paymentService = `${api}/payment-service`;
 const loanPayment = `${api}/loan-payment`;
@@ -60,7 +60,7 @@ const withdrawal = `${api}/withdrawal`;
 
 app.use(authenticator, auhenticatorRouter);
 app.use(user, userRouter);
-app.use(showBalance, accountRouter);
+app.use(account, accountRouter);
 app.use(createAccount, accountRouter);
 app.use(paymentService, paymentServiceRouter);
 app.use(loanPayment, loanPaymentRouter);
