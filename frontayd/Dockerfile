@@ -11,7 +11,7 @@ RUN npm run build -- --configuration production
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 
-COPY --from=build /app/dist/browser .
+COPY --from=build /app/dist/frontayd/browser .
 
 EXPOSE 80
 
