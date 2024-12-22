@@ -14,18 +14,39 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Add SSH key
+      - name: Configure SSH
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Prepare known_hosts
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          chmod 700 ~/.ssh
+          touch ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Add known hosts
+        run: |
+          ssh-keyscan -H ${{ secrets.BACKEND_IP }} 2>/dev/null >> ~/.ssh/known_hosts || true
+          ssh-keyscan -H ${{ secrets.FRONTEND_IP }} 2>/dev/null >> ~/.ssh/known_hosts || true
 
       - name: Deploy Backend to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@54.204.157.130 << 'EOF'
+          ssh ubuntu@${{ secrets.BACKEND_IP }} << 'EOF'
           cd /home/ubuntu/AYD2_PV_G2/backend
           git config pull.rebase false
-          git pull origin main
+          git pull
+          sudo docker-compose down
+          sudo docker-compose up --build -d
+          EOF
+
+      - name: Deploy Frontend to EC2
+        run: |
+          ssh ubuntu@${{ secrets.FRONTEND_IP }} << 'EOF'
+          cd /home/ubuntu/AYD2_PV_G2/frontayd
+          git config pull.rebase false
+          git pull
           sudo docker-compose down
           sudo docker-compose up --build -d
           EOF
