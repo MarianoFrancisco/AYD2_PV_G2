@@ -8,3 +8,7 @@ export interface LoginResponse {
     role: string;
   };
 }
+
+export interface usuario {
+  identifier: string;
+}
