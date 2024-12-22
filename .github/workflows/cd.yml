@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature202030987_docker-frontend
 
 jobs:
   deploy:
@@ -24,6 +25,16 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@54.204.157.130 << 'EOF'
           cd /home/ubuntu/AYD2_PV_G2/backend
+          git config pull.rebase false
+          git pull origin main
+          sudo docker-compose down
+          sudo docker-compose up --build -d
+          EOF
+
+      - name: Deploy Frontend to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@54.204.157.130 << 'EOF'
+          cd /home/ubuntu/AYD2_PV_G2/frontayd
           git config pull.rebase false
           git pull origin main
           sudo docker-compose down
