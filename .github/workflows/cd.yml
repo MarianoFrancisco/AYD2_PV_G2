@@ -26,7 +26,7 @@ jobs:
 
       - name: Deploy Backend to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@54.204.157.130 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@3.83.46.248 << 'EOF'
           cd /home/ubuntu/AYD2_PV_G2/backend
           git config pull.rebase false
           git pull
@@ -36,7 +36,7 @@ jobs:
 
       - name: Deploy Frontend to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@44.201.179.6 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@44.211.125.116 << 'EOF'
           cd /home/ubuntu/AYD2_PV_G2/frontayd
           git config pull.rebase false
           git pull
