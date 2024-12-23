@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AccountsByCuiResponse, Transactions, AccountResponse } from '../../interfaces/account';
+import { environment } from '../../../../src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  private baseUrl: string = 'http://localhost:5000/api/client';
+  private baseUrl: string = `${environment.API_URL}/client`;
 
   constructor(private http: HttpClient) {}
 
