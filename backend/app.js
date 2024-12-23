@@ -26,6 +26,8 @@ import surveyListRouter from "./app/routes/list-survey.routes.js";
 
 import complaintListRouter from "./app/routes/list-complaints.routes.js";
 import userManagementRouter from "./app/routes/user-management.routes.js";
+import inventory from "./app/routes/inventory.routes.js"
+import moni from "./app/routes/monitoring.routes.js"
 
 import clientRouter from "./app/routes/client.routes.js";
 
@@ -44,7 +46,7 @@ app.use(cors());
 app.use('/signature', express.static(path.join(__dirname, 'img')));
 const api = '/api';
 
-
+const monitor = `${api}/monitoring`;
 const authenticator = `${api}/authenticator`;
 const user = `${api}/user`;
 const account = `${api}/account`;
@@ -70,7 +72,10 @@ const clientService = `${api}/client`;
 const deposit = `${api}/deposit`;
 
 const withdrawal = `${api}/withdrawal`;
+const invetory = `${api}/inventory`;
 
+app.use(monitor, moni);
+app.use(invetory, inventory);
 app.use(authenticator, auhenticatorRouter);
 app.use(user, userRouter);
 app.use(account, accountRouter);
