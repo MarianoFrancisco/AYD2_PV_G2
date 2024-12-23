@@ -1,1 +1,95 @@
-<p>inventories works!</p>
+<div class="p-6 bg-gray-50 rounded-lg shadow-lg max-w-6xl mx-auto mt-10">
+    <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Gestión de Inventario</h2>
+  
+    <!-- Capital Total -->
+    <div class="my-6 bg-green-50 p-4 rounded-lg shadow-sm">
+      <h3 class="text-lg font-semibold text-gray-700">Capital Total</h3>
+        <p class="text-green-700 text-2xl font-bold">{{ capitalTotal | currency:'GTQ':'symbol':'1.2-2' }}</p>
+
+    </div>
+  
+    <!-- Entradas -->
+    <div class="my-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Entradas</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse rounded-lg shadow-sm bg-white">
+          <thead class="bg-blue-100">
+            <tr>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">ID</th>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">Tipo</th>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">Descripción</th>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">Monto</th>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let entry of entradas" class="hover:bg-gray-50">
+              <td class="border px-4 py-3 text-gray-600">{{ entry.id }}</td>
+              <td class="border px-4 py-3 text-gray-600">{{ entry.transaction_type }}</td>
+              <td class="border px-4 py-3 text-gray-600">{{ entry.description }}</td>
+              <td class="border px-4 py-3 text-gray-600">{{ entry.amount | currency:'GTQ':'symbol':'1.2-2' }}</td>
+              <td class="border px-4 py-3 text-gray-600">{{ entry.created_at | date:'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <!-- Salidas - Transacciones -->
+    <div class="my-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Salidas - Transacciones</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse rounded-lg shadow-sm bg-white">
+          <thead class="bg-red-100">
+            <tr>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">ID</th>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">Tipo</th>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">Descripción</th>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">Monto</th>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transaction of salidasTransacciones" class="hover:bg-gray-50">
+              <td class="border px-4 py-3 text-gray-600">{{ transaction.id }}</td>
+              <td class="border px-4 py-3 text-gray-600">{{ transaction.transaction_type }}</td>
+              <td class="border px-4 py-3 text-gray-600">{{ transaction.description }}</td>
+              <td class="border px-4 py-3 text-gray-600">{{ transaction.amount | currency:'GTQ':'symbol':'1.2-2' }}</td>
+              <td class="border px-4 py-3 text-gray-600">{{ transaction.created_at | date:'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <!-- Salidas - Préstamos -->
+    <div class="my-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Salidas - Préstamos</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse rounded-lg shadow-sm bg-white">
+          <thead class="bg-yellow-100">
+            <tr>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">ID</th>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">Tipo</th>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">Monto Total</th>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">Saldo Restante</th>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">Estado</th>
+              <th class="px-4 py-3 border text-sm font-medium text-gray-700">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let loan of salidasPrestamos" class="hover:bg-gray-50">
+              <td class="border px-4 py-3 text-gray-600">{{ loan.id }}</td>
+              <td class="border px-4 py-3 text-gray-600">{{ loan.loan_type }}</td>
+              <td class="border px-4 py-3 text-gray-600">{{ loan.total_amount | currency:'GTQ':'symbol':'1.2-2' }}</td>
+              <td class="border px-4 py-3 text-gray-600">{{ loan.remaining_balance | currency:'GTQ':'symbol':'1.2-2' }}</td>
+              <td class="border px-4 py-3 text-gray-600">{{ loan.state }}</td>
+              <td class="border px-4 py-3 text-gray-600">{{ loan.created_at | date:'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  
