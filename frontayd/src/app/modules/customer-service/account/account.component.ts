@@ -71,6 +71,7 @@ export class AccountComponent {
 
       this.newAccountService.createAccount(this.data).subscribe({
         next: (data) => {
+          this.limpiarForm()
           Swal.fire({
             icon: 'success',
             title: 'Cuenta Creada',
@@ -84,10 +85,7 @@ export class AccountComponent {
             text: 'No se pudo crear la cuenta. Intente nuevamente.'
           });
         }
-      })
-
-        
-
+      });
     }
     else{
       Swal.fire({
@@ -113,6 +111,23 @@ export class AccountComponent {
 
   getFile(event: any){
     this.photo = event.target.files[0];
+  }
+
+  limpiarForm(){
+    this.accountForm.patchValue({
+      firstName : '',
+      lastName :  '',
+      cui :  '',
+      phone : '',
+      email :  '',
+      age :  0,
+      gender :  '',
+      accountType :  '',
+      securityQuestion :  '',
+      securityAnswer :  '',
+      amount : 0,
+      photo64: '',
+    })
   }
 
 }
