@@ -34,7 +34,7 @@ export class DolarAccountComponent {
           Swal.fire({
             icon: 'success',
             title: 'Cuenta en Dólares',
-            text: 'La cuenta se ha habilitado para realizar transacciones en dólares.'
+            text: `${data.message}`
           });
         },
         error: (error) => {
