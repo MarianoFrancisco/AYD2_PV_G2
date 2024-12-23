@@ -14,13 +14,12 @@ dotenv.config();
 
 const getBalance = async (req, res) => {
 
-    const userModel = req.userModel;
+    const id = req.body.id;
 
     try {
         const accountModel = await AccountModel.findOne({
             where: {
-                user_id: userModel.id
-            }
+                account_number: id          }
         })
 
         res.status(200).json({
