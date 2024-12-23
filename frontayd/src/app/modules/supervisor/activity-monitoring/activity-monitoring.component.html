@@ -34,7 +34,67 @@
         </ngx-charts-pie-chart>
       </div>
     </div>
-    
+
+    <!-- Retiros -->
+    <div class="flex flex-col items-center p-4 space-y-4">
+        <h3 class="text-xl font-semibold text-gray-800">Verificar Alarma</h3>
+      
+        <div class="flex flex-col w-full max-w-sm space-y-4">
+          <input
+            type="number"
+            placeholder="Ingresa el ID de usuario"
+            #userIdInput
+            class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          
+          <button
+            (click)="checkAlarm(+userIdInput.value)"
+            class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Verificar Alarma
+          </button>
+        </div>
+      </div>
+      
+
+<p *ngIf="alarmMessage">{{ alarmMessage }}</p>
+
+  <!-- Filtros de búsqueda -->
+  <div class="mb-6">
+    <div class="flex justify-between items-center space-x-4">
+      <!-- Filtro por Empleado -->
+      <div>
+        <input
+          type="text"
+          placeholder="Buscar por Empleado"
+          [(ngModel)]="searchEmployee"
+          class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Filtro por Fecha -->
+      <div>
+        <input
+          type="date"
+          [(ngModel)]="searchDate"
+          class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Filtro por Tipo de Actividad -->
+      <div>
+        <select
+          [(ngModel)]="searchType"
+          class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">Seleccione Tipo de Actividad</option>
+          <option value="Retiro">Retiro</option>
+          <option value="Préstamo">Préstamo</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
     <!-- Retiros -->
     <section class="mb-8">
       <h3 class="text-2xl font-semibold mb-4">Retiros</h3>
@@ -50,13 +110,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let withdrawal of withdrawals" class="hover:bg-gray-100">
-              <td class="py-2 px-4 border-b text-center">{{ withdrawal.id }}</td>
-              <td class="py-2 px-4 border-b">{{ withdrawal.account.name }} {{ withdrawal.account.last_name }}</td>
-              <td class="py-2 px-4 border-b text-right">Q{{ withdrawal.amount | number:'1.2-2' }}</td>
-              <td class="py-2 px-4 border-b">{{ withdrawal.description }}</td>
-              <td class="py-2 px-4 border-b">{{ withdrawal.created_at | date:'short' }}</td>
-            </tr>
+            <tr *ngFor="let withdrawal of filteredWithdrawals()" class="hover:bg-gray-100">
+                <td class="py-2 px-4 border-b text-center">{{ withdrawal.id }}</td>
+                <td class="py-2 px-4 border-b">{{ withdrawal.account.name }} {{ withdrawal.account.last_name }}</td>
+                <td class="py-2 px-4 border-b text-right">Q{{ withdrawal.amount | number:'1.2-2' }}</td>
+                <td class="py-2 px-4 border-b">{{ withdrawal.description }}</td>
+                <td class="py-2 px-4 border-b">{{ withdrawal.created_at | date:'short' }}</td>
+              </tr>
           </tbody>
         </table>
       </div>
@@ -79,15 +139,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let loan of loans" class="hover:bg-gray-100">
-              <td class="py-2 px-4 border-b text-center">{{ loan.id }}</td>
-              <td class="py-2 px-4 border-b">{{ loan.account.name }} {{ loan.account.last_name }}</td>
-              <td class="py-2 px-4 border-b">{{ loan.loan_type }}</td>
-              <td class="py-2 px-4 border-b text-right">Q{{ loan.total_amount | number:'1.2-2' }}</td>
-              <td class="py-2 px-4 border-b text-right">Q{{ loan.remaining_balance | number:'1.2-2' }}</td>
-              <td class="py-2 px-4 border-b">{{ loan.state }}</td>
-              <td class="py-2 px-4 border-b">{{ loan.created_at | date:'short' }}</td>
-            </tr>
+            <tr *ngFor="let loan of filteredLoans()" class="hover:bg-gray-100">
+                <td class="py-2 px-4 border-b text-center">{{ loan.id }}</td>
+                <td class="py-2 px-4 border-b">{{ loan.account.name }} {{ loan.account.last_name }}</td>
+                <td class="py-2 px-4 border-b">{{ loan.loan_type }}</td>
+                <td class="py-2 px-4 border-b text-right">Q{{ loan.total_amount | number:'1.2-2' }}</td>
+                <td class="py-2 px-4 border-b text-right">Q{{ loan.remaining_balance | number:'1.2-2' }}</td>
+                <td class="py-2 px-4 border-b">{{ loan.state }}</td>
+                <td class="py-2 px-4 border-b">{{ loan.created_at | date:'short' }}</td>
+              </tr>
           </tbody>
         </table>
       </div>

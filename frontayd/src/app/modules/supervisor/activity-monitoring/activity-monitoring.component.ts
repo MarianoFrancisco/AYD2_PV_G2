@@ -2,19 +2,24 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivityMonitoringService } from '../../services/activity-monitoring.service';
 import { CommonModule } from '@angular/common';
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
+import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-activity-monitoring',
   standalone: true,
-  imports: [CommonModule, NgxChartsModule],
+  imports: [CommonModule, NgxChartsModule, FormsModule],
   templateUrl: './activity-monitoring.component.html',
   styleUrl: './activity-monitoring.component.scss'
 })
 export class ActivityMonitoringComponent implements OnInit {
   withdrawals: any[] = [];
   loans: any[] = [];
+  alarmMessage: string = '';
 
+  searchEmployee: string = '';
+  searchDate: string = '';
+  searchType: string = '';
   // Datos para los gráficos
   withdrawalsChartData: any[] = [];
   loansChartData: any[] = [];
@@ -87,4 +92,40 @@ export class ActivityMonitoringComponent implements OnInit {
     }));
   }
   
+  filteredWithdrawals() {
+    return this.withdrawals.filter((withdrawal) => {
+      const matchesEmployee =
+        this.searchEmployee === '' ||
+        (withdrawal.account.name + ' ' + withdrawal.account.last_name)
+          .toLowerCase()
+          .includes(this.searchEmployee.toLowerCase());
+      const matchesDate =
+        this.searchDate === '' || withdrawal.created_at.includes(this.searchDate);
+      const matchesType =
+        this.searchType === '' || 'Retiro'.includes(this.searchType);
+      
+      return matchesEmployee && matchesDate && matchesType;
+    });
+  }
+
+  filteredLoans() {
+    return this.loans.filter((loan) => {
+      const matchesEmployee =
+        this.searchEmployee === '' ||
+        (loan.account.name + ' ' + loan.account.last_name)
+          .toLowerCase()
+          .includes(this.searchEmployee.toLowerCase());
+      const matchesDate =
+        this.searchDate === '' || loan.created_at.includes(this.searchDate);
+      const matchesType =
+        this.searchType === '' || loan.loan_type.includes(this.searchType);
+      
+      return matchesEmployee && matchesDate && matchesType;
+    });
+  }
+  checkAlarm(userId: number): void {
+    this.monitoringService.postAlarm(userId).subscribe((response) => {
+      this.alarmMessage = response.message;
+    });
+  }
 }

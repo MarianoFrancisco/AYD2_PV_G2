@@ -32,6 +32,11 @@ interface Loan {
   account: Account;
 }
 
+
+interface AlarmResponse {
+    message: string;
+  }
+
 @Injectable({
   providedIn: 'root'
 })
@@ -46,5 +51,9 @@ export class ActivityMonitoringService {
 
   getLoans(): Observable<Loan[]> {
     return this.http.get<Loan[]>(`${this.baseUrl}/prestamos`);
+  }
+
+  postAlarm(userId: number): Observable<AlarmResponse> {
+    return this.http.post<AlarmResponse>(`${this.baseUrl}/alarma`, { userId });
   }
 }
