@@ -12,10 +12,9 @@ export class AccountService {
   constructor(private http: HttpClient) {}
 
   // Método para consultar el saldo
-  getBalance(cui: string, pin: string): Observable<{ Saldo: string; Fecha: number }> {
+  getBalance(cui: string,): Observable<{ Saldo: string; Fecha: number; Moneda: string }> {
     const params = new HttpParams()
-      .set('cui', cui)
-      .set('pin', pin);
-    return this.http.get<{ Saldo: string; Fecha: number }>(`${this.apiUrl}/show-balance`, { params });
+      .set('id', cui)
+    return this.http.get<{ Saldo: string; Fecha: number; Moneda: string }>(`${this.apiUrl}/show-balance`, { params });
   }
 }
