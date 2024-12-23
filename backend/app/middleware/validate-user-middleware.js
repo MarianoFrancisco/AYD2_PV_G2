@@ -1,3 +1,4 @@
+import AccountModel from '../models/account-model.js';
 import UserModel from '../models/user-model.js';
 
 /*
@@ -15,7 +16,11 @@ const validateUserById = (source = 'body') => {
                 });
             }
 
-            const userModel = await UserModel.findByPk(id);
+            const userModel = await AccountModel.findOne({
+                where: {
+                    account_number: id
+                }
+            });
 
             if (!userModel) {
                 return res.status(404).json({ message: 'User not found' });
