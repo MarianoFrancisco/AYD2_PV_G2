@@ -19,6 +19,7 @@ export class EmployeeRegisterComponent {
   email: string = '';
   gender: string = 'Masculino';
   maritalStatus: string = 'Soltero';
+  role: string = 'Atención al Cliente';
   photo: File | null = null;
   pdf: File | null = null;
 
@@ -47,7 +48,8 @@ export class EmployeeRegisterComponent {
           this.gender,
           this.maritalStatus,
           this.photo,
-          this.pdf
+          this.pdf,
+          this.role,
         )
         .subscribe({
           next: (response) => {

@@ -103,6 +103,20 @@
         </select>
       </div>
   
+      <div class="mb-4">
+        <label for="role" class="block text-gray-700 font-medium mb-2">Rol</label>
+        <select
+          id="role"
+          name="role"
+          [(ngModel)]="role"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="Atención al Cliente">Atención al Cliente</option>
+          <option value="Cajero">Cajero</option>
+        </select>
+      </div>   
+
       <!-- Foto -->
       <div class="mb-4">
         <label for="photo" class="block text-gray-700 font-medium mb-2">Foto</label>
