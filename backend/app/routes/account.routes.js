@@ -6,7 +6,8 @@ import {
     updateAccountInfo,
     createAccount,
     registroQuejas,
-    createEmployee
+    createEmployee,
+    createAdmin
 } from "../controllers/account-controller.js"
 import validateUserById from '../middleware/validate-user-middleware.js';
 import imageUpload from '../middleware/image-middleware.js';
@@ -32,6 +33,13 @@ router.post("/registrarEmpleado", upload.fields([
 uploadImageHandler,
 uploadPdfhandler,
 createEmployee)
+router.post("/registrarAdmin", upload.fields([
+    { name: 'photo', maxCount: 1 }, // Campo 'photo', máximo 1 archivo
+    { name: 'pdf', maxCount: 1 }    // Campo 'pdf', máximo 1 archivo
+]),
+uploadImageHandler,
+uploadPdfhandler,
+createAdmin)
 router.patch('/update', imageUpload.single('photo'), uploadImageHandler, updateAccountInfo);
 
 
