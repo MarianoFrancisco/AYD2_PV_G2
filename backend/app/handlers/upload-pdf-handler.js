@@ -1,4 +1,4 @@
-import { uploadPhoto } from '../services/save-s3-service.js';
+import { uploadStationery } from '../services/save-s3-service.js';
 
 /*
  * @author
@@ -17,7 +17,7 @@ const uploadPdfhandler = async (req, res, next) => {
         const fileBuffer = file.buffer;
         const fileName = file.originalname;
 
-        const pdfPath = await uploadpdf(fileBuffer, fileName, fileType);
+        const pdfPath = await uploadStationery(fileBuffer, fileName, fileType);
 
         req.pdfPath = pdfPath;
 

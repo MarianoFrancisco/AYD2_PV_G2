@@ -20,8 +20,12 @@ const WithdrawalModel = sequelize.define('withdrawals', {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
     },
-    withdrawal_type: {
-        type: DataTypes.ENUM('Ventanilla', 'Cajero Automático'),
+    account_type: {
+        type: DataTypes.ENUM('Monetaria', 'Ahorro'),
+        allowNull: false,
+    },
+    currency: {
+        type: DataTypes.ENUM('Quetzales', 'Dólares'),
         allowNull: false,
     },
     created_at: {
