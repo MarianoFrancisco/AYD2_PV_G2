@@ -24,25 +24,43 @@ export const createWithdrawal = async (req, res) => {
         }
 
         const account = await AccountModel.findOne({
-            where: { account_number: account_number }
+            where: { account_number }
         });
 
         if (!account) {
             return res.status(404).json({ message: 'Cuenta no encontrada' });
         }
 
-        if (parseFloat(account.balance) < parseFloat(amount)) {
-            return res.status(400).json({ message: 'Fondos insuficientes en la cuenta' });
+        if (!account.user_id) {
+            return res.status(400).json({ message: 'La cuenta no tiene un usuario asociado válido' });
         }
 
-        const MAX_WITHDRAWAL_AMOUNT = 10000; // Ejemplo
-        if (amount > MAX_WITHDRAWAL_AMOUNT) {
-            return res.status(400).json({ message: `El monto excede el límite máximo de retiro de ${MAX_WITHDRAWAL_AMOUNT}` });
+        const exchangeRate = 7.75;
+        let finalAmount = amount;
+        let description = `Retiro de efectivo en ${currency}`;
+
+        if (account.currency === "Quetzales y Dólares") {
+            if (currency === "Dólares") {
+                finalAmount = amount * exchangeRate;
+                description = `Retiro de ${amount} USD convertido a Quetzales`;
+            } else if (currency === "Quetzales") {
+                finalAmount = amount;
+                description = `Retiro de ${amount} Quetzales`;
+            }
+        } else if (currency === account.currency) {
+            finalAmount = amount;
+            description = `Retiro de ${amount} ${currency}`;
+        } else {
+            return res.status(400).json({ message: `La cuenta no admite retiros en ${currency}` });
+        }
+
+        if (parseFloat(account.balance) < parseFloat(finalAmount)) {
+            return res.status(400).json({ message: 'Fondos insuficientes en la cuenta' });
         }
 
         const unixTimestamp = Math.floor(Date.now() / 1000);
 
-        account.balance = parseFloat(account.balance) - parseFloat(amount);
+        account.balance = parseFloat(account.balance) - parseFloat(finalAmount);
         await account.save();
 
         const withdrawal = await WithdrawalModel.create({
@@ -57,7 +75,7 @@ export const createWithdrawal = async (req, res) => {
             account_id: account.id,
             transaction_type: 'Retiro',
             amount,
-            description: 'Retiro de efectivo',
+            description,
             created_at: unixTimestamp
         });
 
@@ -65,6 +83,10 @@ export const createWithdrawal = async (req, res) => {
             where: { id: account.user_id },
             attributes: ['name', 'signature_path']
         });
+
+        if (!user) {
+            return res.status(404).json({ message: 'Usuario asociado a la cuenta no encontrado' });
+        }
 
         const voucher = {
             account_number,
@@ -84,6 +106,7 @@ export const createWithdrawal = async (req, res) => {
         };
 
         res.status(200).json({ message: 'Retiro realizado con éxito', voucher, transaction });
+
     } catch (error) {
         console.error('Error al procesar el retiro:', error);
         res.status(500).json({ message: 'Error interno del servidor', error: error.message });

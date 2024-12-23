@@ -5,9 +5,9 @@ import TransactionHistoryModel from '../models/transaction-history-model.js';
 
 export const createDeposit = async (req, res) => {
     try {
-        const { account_number, amount, account_type, currency } = req.body;
+        const { account_number, amount, account_type, currency, allow_dollar_deposit } = req.body;
 
-        if (!account_number || !amount || !account_type || !currency) {
+        if (!account_number || !amount || !account_type || !currency || allow_dollar_deposit === undefined) {
             return res.status(400).json({ message: 'Faltan datos obligatorios' });
         }
 
@@ -31,13 +31,24 @@ export const createDeposit = async (req, res) => {
             return res.status(404).json({ message: 'Cuenta no encontrada' });
         }
 
-        if (currency === "Dólares" && !account.dollar_deposit_enabled) {
+        if (currency === "Dólares" && !allow_dollar_deposit) {
             return res.status(400).json({ message: 'Depósitos en dólares no habilitados para esta cuenta' });
         }
 
         const unixTimestamp = Math.floor(Date.now() / 1000);
 
-        account.balance = parseFloat(account.balance) + parseFloat(amount);
+        const exchangeRate = 7.75; // Tasa de cambio ejemplo (1 USD = 7.75 GTQ)
+        let finalAmount = amount;
+
+        if (currency !== account.currency) {
+            if (currency === "Dólares" && account.currency === "Quetzales") {
+                finalAmount = amount * exchangeRate;
+            } else if (currency === "Quetzales" && account.currency === "Dólares") {
+                finalAmount = amount / exchangeRate;
+            }
+        }
+
+        account.balance = parseFloat(account.balance) + parseFloat(finalAmount);
         await account.save();
 
         await DepositModel.create({
@@ -52,7 +63,7 @@ export const createDeposit = async (req, res) => {
             account_id: account.id,
             transaction_type: 'Depósito',
             amount,
-            description: 'Depósito de efectivo',
+            description: `Depósito de efectivo convertido a ${account.currency}`,
             created_at: unixTimestamp,
         });
 
