@@ -19,7 +19,8 @@ const getBalance = async (req, res) => {
     try {
         const accountModel = await AccountModel.findOne({
             where: {
-                account_number: UserModel.account_number          }
+                account_number: UserModel.account_number
+            }
         })
 
         res.status(200).json({
@@ -253,7 +254,7 @@ const registroQuejas = async (req, res) => {
         console.log(req.body)
 
         // Valicadion de parametros obligatorios
-        if (!identificacion || !detalle || !tipoQueja ) {
+        if (!identificacion || !detalle || !tipoQueja) {
             return res.status(400).json({ message: 'Todos los campos son obligatorios' });
         }
 
@@ -275,21 +276,21 @@ const registroQuejas = async (req, res) => {
             }
         })
 
-        if(!cuenta){
+        if (!cuenta) {
             cuenta = await AccountModel.findOne({
                 where: {
                     account_number: identificacion
                 }
             })
 
-            if(!cuenta){
-                return res.status(400).json({ message: 'No existe el usuario' }); 
+            if (!cuenta) {
+                return res.status(400).json({ message: 'No existe el usuario' });
             } else {
                 id = cuenta.id
             }
 
         } else {
-          
+
             id = cuenta.id
         }
 
@@ -302,14 +303,14 @@ const registroQuejas = async (req, res) => {
             },
         });
 
-        if(!cuentaSupervisor) {
+        if (!cuentaSupervisor) {
             return res.status(400).json({ message: 'No hay una cuenta de supervisor' });
         }
 
 
         const contenido = "<p>" + detalle + "</p>"
 
-        const info = await sendEmail("luisgagu9@gmail.com", "Queja", detalle, contenido )
+        const info = await sendEmail("luisgagu9@gmail.com", "Queja", detalle, contenido)
 
         await ComplaintsModel.create({
             account_id: id,
@@ -387,7 +388,7 @@ const createEmployee = async (req, res) => {
         while (crearUsername) {
             //Crear nombre usuario
             const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-             username = '';
+            username = '';
 
             for (let i = 0; i < 10; i++) {
                 const randomIndex = Math.floor(Math.random() * letters.length);
@@ -406,7 +407,7 @@ const createEmployee = async (req, res) => {
 
             }
 
-            if(!ya_existe) {
+            if (!ya_existe) {
                 crearUsername = false
             }
 
@@ -432,32 +433,30 @@ const createEmployee = async (req, res) => {
 
 
         // Simular almacenamiento (aquí podrías guardar en una base de datos)
-        await UserModel.create({
+        const newUser = await UserModel.create({
             name: fullName,
             role: "Cajero",
-            user_name: username ,
+            user_name: username,
             email: email,
             password: hashedPassword,
             phone: phone,
             age: parseInt(age, 10),
             dpi_number: cui,
-            complete_papework_path: req.pdfPath, //obtener 
-            photo_path: req.photoPath, 
+            complete_papework_path: req.pdfPath,
+            photo_path: req.photoPath,
             gender: gender,
             marital_status: marital_status,
-            signature_path:  "https://money-bin-group2.s3.us-east-1.amazonaws.com/signature/test.png",
+            signature_path: "https://money-bin-group2.s3.us-east-1.amazonaws.com/signature/test.png",
             second_password_hash: "",
-            created_at: currentDate //generar
-
-        })
-
-
+            created_at: currentDate
+        });
 
         console.log('Nuevo empleado creado');
         res.status(201).json({
             message: 'Empleado creado exitosamente',
             cui,
             creationDate: currentDate,
+            user_id: newUser.id
         });
     } catch (error) {
         console.error('Error al crear el empleado:', error);
@@ -520,7 +519,7 @@ const createAdmin = async (req, res) => {
         while (crearUsername) {
             //Crear nombre usuario
             const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-             username = '';
+            username = '';
 
             for (let i = 0; i < 10; i++) {
                 const randomIndex = Math.floor(Math.random() * letters.length);
@@ -539,7 +538,7 @@ const createAdmin = async (req, res) => {
 
             }
 
-            if(!ya_existe) {
+            if (!ya_existe) {
                 crearUsername = false
             }
 
@@ -568,17 +567,17 @@ const createAdmin = async (req, res) => {
         await UserModel.create({
             name: fullName,
             role: "Administrador de Sistemas",
-            user_name: username ,
+            user_name: username,
             email: email,
             password: hashedPassword,
             phone: phone,
             age: parseInt(age, 10),
             dpi_number: cui,
             complete_papework_path: req.pdfPath, //obtener 
-            photo_path: req.photoPath, 
+            photo_path: req.photoPath,
             gender: gender,
             marital_status: marital_status,
-            signature_path:  "https://money-bin-group2.s3.us-east-1.amazonaws.com/signature/test.png",
+            signature_path: "https://money-bin-group2.s3.us-east-1.amazonaws.com/signature/test.png",
             second_password_hash: "",
             created_at: currentDate //generar
 
