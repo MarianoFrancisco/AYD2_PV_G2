@@ -4,6 +4,21 @@ import UserModel from "../models/user-model.js";
  * @author
  * Mariano Camposeco {@literal (mariano1941@outlook.es)}
  */
+
+const getAllUsers = async (req, res) => {
+    try {
+        const user = await UserModel.findAll();
+
+        if (!user) {
+            return res.status(404).json({ message: 'Users not found.' });
+        }
+
+        res.json({ message: 'Users getted successfully.', user });
+    } catch (error) {
+        res.status(500).json({ message: 'Error getting users: ' + error.message });
+    }
+};
+
 const updateUserRole = async (req, res) => {
     const { id, role } = req.body;
 
@@ -33,5 +48,6 @@ const updateUserRole = async (req, res) => {
 };
 
 export {
+    getAllUsers,
     updateUserRole
 };

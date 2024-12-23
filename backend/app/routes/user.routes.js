@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+    getAllUsers,
     updateUserRole
 } from '../controllers/user-controller.js';
 
@@ -9,6 +10,7 @@ import {
  */
 const router = express.Router();
 
+router.get('', getAllUsers);
 router.patch('/role', updateUserRole);
 
 export default router;
