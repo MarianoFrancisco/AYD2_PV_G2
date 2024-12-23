@@ -345,6 +345,7 @@ const createEmployee = async (req, res) => {
             email,
             gender,
             marital_status,
+            role
         } = req.body;
 
         req.pdfboyd //pdf
@@ -414,12 +415,6 @@ const createEmployee = async (req, res) => {
 
         }
 
-
-
-
-
-
-
         //Encriptar contraseña
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -435,7 +430,7 @@ const createEmployee = async (req, res) => {
         // Simular almacenamiento (aquí podrías guardar en una base de datos)
         const newUser = await UserModel.create({
             name: fullName,
-            role: "Cajero",
+            role: role,
             user_name: username,
             email: email,
             password: hashedPassword,
@@ -545,12 +540,6 @@ const createAdmin = async (req, res) => {
 
         }
 
-
-
-
-
-
-
         //Encriptar contraseña
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -583,8 +572,6 @@ const createAdmin = async (req, res) => {
 
         })
 
-
-
         console.log('Nuevo administrador de sistemas creado');
         res.status(201).json({
             message: 'administrador de sistemas creado exitosamente',
@@ -597,8 +584,6 @@ const createAdmin = async (req, res) => {
     }
 
 }
-
-
 
 export {
     getBalance,
