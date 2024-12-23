@@ -1,83 +1,87 @@
 <div class="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
-    <h2 class="text-3xl font-semibold mb-6 text-center text-blue-600">Pagos Money Bin</h2>
-  
-    <form [formGroup]="paymentsForm" (ngSubmit)="pagar()" class="space-y-6">
-      <div class="grid gap-6 sm:grid-cols-2">
-        
-        <!-- Campo para seleccionar el tipo de pago -->
+  <h2 class="text-3xl font-semibold mb-6 text-center text-blue-600">Pagos Money Bin</h2>
+
+  <form [formGroup]="paymentsForm" (ngSubmit)="pagar()" class="space-y-6">
+    <div class="grid gap-6 sm:grid-cols-2">
+
+      <div>
+        <label for="paymentType" class="block text-sm font-medium text-gray-700">Tipo de Pago</label>
+        <select formControlName="paymentType" id="paymentType"
+          class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+          <option value="service">Pago por Cuenta</option>
+          <option value="cash">Pago en Caja</option>
+        </select>
+      </div>
+
+      <div *ngIf="paymentsForm.get('paymentType')?.value === 'service'">
+        <label for="tipoPago" class="block text-sm font-medium text-gray-700">Tipo de Servicio</label>
+        <select formControlName="tipoPago" id="tipoPago"
+          class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+          <option value="agua">Agua</option>
+          <option value="luz">Luz</option>
+          <option value="telefono">Teléfono</option>
+          <option value="internet">Internet</option>
+        </select>
+      </div>
+
+      <div *ngIf="paymentsForm.get('paymentType')?.value === 'service'">
+        <label for="codigoServicio" class="block text-sm font-medium text-gray-700">Código del Servicio</label>
+        <input formControlName="codigoServicio" id="codigoServicio" type="text"
+          class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm" />
+      </div>
+
+      <div>
+        <label for="montoPagar" class="block text-sm font-medium text-gray-700">Monto a Pagar</label>
+        <input formControlName="montoPagar" id="montoPagar" type="number"
+          class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm" />
+      </div>
+
+      <div *ngIf="paymentsForm.get('paymentType')?.value === 'cash'">
+
         <div>
-          <label for="paymentType" class="block text-sm font-medium text-gray-700">Tipo de Pago</label>
-          <select formControlName="paymentType" id="paymentType" class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-            <option value="service">Pago por Cuenta</option>
-            <option value="cash">Pago en Caja</option>
+          <label for="serviceName" class="block text-sm font-medium text-gray-700">Servicio</label>
+          <select formControlName="serviceName" id="serviceName"
+            class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+            <option *ngFor="let service of availableServices" [value]="service.name">{{ service.name }}</option>
           </select>
         </div>
-  
-        <!-- Campo para seleccionar el tipo de servicio (solo si se selecciona 'Pago de Servicio') -->
-        <div *ngIf="paymentsForm.get('paymentType')?.value === 'service'">
-          <label for="tipoPago" class="block text-sm font-medium text-gray-700">Tipo de Servicio</label>
-          <select formControlName="tipoPago" id="tipoPago" class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-            <option value="agua">Agua</option>
-            <option value="luz">Luz</option>
-            <option value="telefono">Teléfono</option>
-            <option value="internet">Internet</option>
-          </select>
-        </div>
-  
-        <!-- Campo para ingresar el código del servicio (solo si se selecciona 'Pago de Servicio') -->
-        <div *ngIf="paymentsForm.get('paymentType')?.value === 'service'">
+
+        <div>
           <label for="codigoServicio" class="block text-sm font-medium text-gray-700">Código del Servicio</label>
-          <input formControlName="codigoServicio" id="codigoServicio" type="text" class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm" />
+          <input formControlName="codigoServicio" id="codigoServicio" type="text"
+            class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm" />
         </div>
-  
-        <!-- Campo para ingresar el monto a pagar -->
-        <div>
-          <label for="montoPagar" class="block text-sm font-medium text-gray-700">Monto a Pagar</label>
-          <input formControlName="montoPagar" id="montoPagar" type="number" class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm" />
-        </div>
-  
-        <!-- Campos específicos para 'Pago en Efectivo' -->
-        <div *ngIf="paymentsForm.get('paymentType')?.value === 'cash'">
-          
-          <!-- Campo para seleccionar el servicio (solo si se selecciona 'Pago en Efectivo') -->
-          <div>
-            <label for="serviceName" class="block text-sm font-medium text-gray-700">Servicio</label>
-            <select formControlName="serviceName" id="serviceName" class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-              <option *ngFor="let service of availableServices" [value]="service.name">{{ service.name }}</option>
-            </select>
-          </div>
-  
-          <!-- Campo para ingresar el código del servicio (solo si se selecciona 'Pago en Efectivo') -->
-          <div>
-            <label for="serviceCode" class="block text-sm font-medium text-gray-700">Código del Servicio</label>
-            <input formControlName="serviceCode" id="serviceCode" type="text" class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm" />
-          </div>
-  
-          <!-- Campo para ingresar el monto del servicio (solo si se selecciona 'Pago en Efectivo') -->
-
-        </div>
-  
-        <!-- Campo para ingresar el número de cuenta (solo si se selecciona 'Pago de Servicio') -->
-        <div *ngIf="paymentsForm.get('paymentType')?.value === 'service'">
-          <label for="numeroCuenta" class="block text-sm font-medium text-gray-700">Número de Cuenta</label>
-          <input formControlName="numeroCuenta" id="numeroCuenta" type="text" class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm" />
-        </div>
-  
-        <!-- Campo para ingresar el DPI (solo si se selecciona 'Pago de Servicio') -->
-        <div *ngIf="paymentsForm.get('paymentType')?.value === 'service'">
-          <label for="dpi" class="block text-sm font-medium text-gray-700">DPI</label>
-          <input formControlName="dpi" id="dpi" type="text" class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm" />
-        </div>
-      </div>
-  
-      <!-- Botones en línea -->
-      <div class="flex gap-4 justify-center mt-6">
-        <button type="submit" class="w-full sm:w-auto px-6 py-3 text-white bg-blue-600 hover:bg-blue-700 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-          Registrar Pago
-        </button>
 
       </div>
-    </form>
+
+      <div *ngIf="paymentsForm.get('paymentType')?.value === 'service'">
+        <label for="numeroCuenta" class="block text-sm font-medium text-gray-700">Número de Cuenta</label>
+        <input formControlName="numeroCuenta" id="numeroCuenta" type="text"
+          class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm" />
+      </div>
+
+      <div *ngIf="paymentsForm.get('paymentType')?.value === 'service'">
+        <label for="dpi" class="block text-sm font-medium text-gray-700">DPI</label>
+        <input formControlName="dpi" id="dpi" type="text"
+          class="mt-1 block w-full py-3 px-4 rounded-md border-gray-300 shadow-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm" />
+      </div>
+    </div>
+
+    <div class="flex gap-4 justify-center mt-6">
+      <button type="submit"
+        class="w-full sm:w-auto px-6 py-3 text-white bg-blue-600 hover:bg-blue-700 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+        Registrar Pago
+      </button>
+
+      <button type="button" (click)="validarInformacion()"
+        class="px-6 py-3 text-white bg-blue-600 hover:bg-blue-700 rounded-md shadow-md">
+        Verificar Titular
+      </button>
+    </div>
+  </form>
+
+  <div *ngIf="imagenRuta" class="mt-6">
+    <p class="text-center font-semibold">TITULAR DE CUENTA</p>
+    <img [src]="imagenRuta" alt="Imagen de Validación" class="max-w-xs mx-auto border rounded shadow-md" />
   </div>
-      
-  
+</div>
