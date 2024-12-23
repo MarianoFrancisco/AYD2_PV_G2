@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NewAccount } from '../../../interfaces/new-account';
+import { NewAccount, NewAccountResponse } from '../../../interfaces/new-account';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { NewAccountService } from '../../../services/newAccount/new-account.service';
@@ -29,6 +29,9 @@ export class AccountComponent {
   }
   photo!: File;
 
+  account : string | null = null;
+  fecha: string | null = null;
+
   accountForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -48,7 +51,6 @@ export class AccountComponent {
 
   async createAccount(){
     const values = this.accountForm.value;
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
 
     if(values.firstName != '' && values.lastName != '' && values.cui != '' && values.phone != '' && values.email != '' && values.gender != '' 
       && values.age != 0 && values.securityQuestion != '' && values.securityAnswer != '' && values.amount != 0 && values.photo64 != ''){
@@ -67,18 +69,24 @@ export class AccountComponent {
       this.data.securityAnswer = values.securityAnswer || '';
       this.data.amount = values.amount || 0;
 
-      console.log(this.data)
-
       this.newAccountService.createAccount(this.data).subscribe({
         next: (data) => {
+          this.account = data.accountNumber
+          this.fecha = new Date(data.creationDate * 1000).toLocaleString();
+
           this.limpiarForm()
           Swal.fire({
             icon: 'success',
             title: 'Cuenta Creada',
-            text: 'La cuenta se ha creado correctamente'
+            html: `<p>${data.message}</p>
+                  <strong>Cuenta:</strong> ${this.account}<br>
+                  <strong>Fecha de Creación:</strong> ${this.fecha}`,
           });
         },
         error: () => {
+          this.fecha = null
+          this.account = null
+          this.limpiarForm()
           Swal.fire({
             icon: 'error',
             title: 'Error',
@@ -88,6 +96,8 @@ export class AccountComponent {
       });
     }
     else{
+      this.fecha = null
+      this.account = null
       Swal.fire({
         icon: 'error',
         title: 'Error',
