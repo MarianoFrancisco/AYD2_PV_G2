@@ -1,1 +1,90 @@
-<p>account works!</p>
+<div class="flex flex-col items-center min-h-screen bg-gray-100 p-4">
+    <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-0">Creación de Cuenta</h1>
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">(Monetario o Ahorro)</h1>
+        <!-- Formulario -->
+        <form class="space-y-4" [formGroup]="accountForm" (ngSubmit)="createAccount()">
+            <div>
+                <label for="firstName" class="block text-sm font-medium text-gray-600">Nombre: </label>
+                <input type="text" id="firstName" name="firstName" formControlName="firstName"
+                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Nombre" required />
+            </div>
+            <div>
+                <label for="lastName" class="block text-sm font-medium text-gray-600">Apellido: </label>
+                <input type="text" id="lastName" name="lastName" formControlName="lastName"
+                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Apellido" required />
+            </div>
+            <div>
+                <label for="cui" class="block text-sm font-medium text-gray-600">CUI: </label>
+                <input type="text" id="cui" name="cui" formControlName="cui"
+                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="CUI" required />
+            </div>
+            <div>
+                <label for="phone" class="block text-sm font-medium text-gray-600">Teléfono: </label>
+                <input type="text" id="phone" name="phone" formControlName="phone"
+                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Teléfono" required />
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-600">Correo: </label>
+                <input type="email" id="email" name="email" formControlName="email"
+                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Correo" required />
+            </div>
+            <div>
+                <label for="age" class="block text-sm font-medium text-gray-600">Edad: </label>
+                <input type="text" id="age" name="age" formControlName="age"
+                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Edad" required />
+            </div>
+            <div>
+                <label for="gender" class="block text-sm font-medium text-gray-600">Genero: </label>
+                <select id="gender" formControlName="gender" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                </select>
+            </div>
+            <div>
+                <label for="accountType" class="block text-sm font-medium text-gray-600">Tipo de Cuenta: </label>
+                <select id="accountType" formControlName="accountType" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    <option value="Monetario">Monetario</option>
+                    <option value="Ahorro">Ahorro</option>
+                </select>
+            </div>
+            <div>
+                <label for="securityQuestion" class="block text-sm font-medium text-gray-600">Pregunta de Seguridad: </label>
+                <input type="text" id="securityQuestion" name="securityQuestion" formControlName="securityQuestion"
+                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Pregunta de seguridad" required />
+            </div>
+            <div>
+                <label for="securityAnswer" class="block text-sm font-medium text-gray-600">Respuesta: </label>
+                <input type="text" id="securityAnswer" name="securityAnswer" formControlName="securityAnswer"
+                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Respuesta" required />
+            </div>
+            <div>
+                <label for="amount" class="block text-sm font-medium text-gray-600">Monto: </label>
+                <input type="text" id="amount" name="amount" formControlName="amount"
+                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Monto" required />
+            </div>
+            <div>
+                <label for="photo64" class="block text-sm font-medium text-gray-600">Foto: </label>
+                <input type="file" id="photo64" name="photo64" formControlName="photo64"
+                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Foto" accept="image/png, image/jpeg" (change)="getFile($event)" required />
+            </div>
+
+            <div class="text-center">
+                <button type="submit"
+                    class="w-full px-4 py-2 bg-blue-500 text-white font-medium rounded-lg shadow hover:bg-blue-600">
+                    Validar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
