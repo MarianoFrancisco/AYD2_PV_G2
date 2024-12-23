@@ -1,0 +1,62 @@
+<div class="container mx-auto p-6 bg-gray-50 shadow-lg rounded-lg max-w-lg">
+    <h1 class="text-2xl font-bold text-center mb-8 text-blue-600">Pago de Tarjeta de Crédito</h1>
+    <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- ID de la Cuenta -->
+      <div>
+        <label for="account_id" class="block font-medium text-gray-700 mb-1">ID de la Cuenta</label>
+        <input
+          id="account_id"
+          type="number"
+          formControlName="account_id"
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          placeholder="Ingrese el ID de la cuenta"
+        />
+        <div *ngIf="paymentForm.get('account_id')?.touched && paymentForm.get('account_id')?.invalid" class="text-red-500 text-sm mt-1">
+          <div *ngIf="paymentForm.get('account_id')?.hasError('required')">El campo ID de la cuenta es obligatorio.</div>
+        </div>
+      </div>
+      
+      <div>
+        <label for="card_number" class="block font-medium text-gray-700 mb-1">Número de Tarjeta</label>
+        <input
+          id="card_number"
+          type="text"
+          formControlName="card_number"
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          placeholder="Ingrese el número de la tarjeta"
+        />
+        <div *ngIf="paymentForm.get('card_number')?.touched && paymentForm.get('card_number')?.invalid" class="text-red-500 text-sm mt-1">
+          <div *ngIf="paymentForm.get('card_number')?.hasError('required')">El campo Número de Tarjeta es obligatorio.</div>
+          <div *ngIf="paymentForm.get('card_number')?.hasError('pattern')">El número de tarjeta no es válido. Debe tener 16 dígitos.</div>
+        </div>
+      </div>
+      
+      <div class="sm:col-span-2">
+        <label for="amount" class="block font-medium text-gray-700 mb-1 text-center">Monto</label>
+        <input
+          id="amount"
+          type="number"
+          formControlName="amount"
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none sm:w-1/2 mx-auto"
+          placeholder="Ingrese el monto"
+        />
+        <div *ngIf="paymentForm.get('amount')?.touched && paymentForm.get('amount')?.invalid" class="text-red-500 text-sm mt-1">
+          <div *ngIf="paymentForm.get('amount')?.hasError('required')">El campo Monto es obligatorio.</div>
+          <div *ngIf="paymentForm.get('amount')?.hasError('min')">El monto debe ser mayor que 0.</div>
+        </div>
+      </div>
+      
+  
+      <!-- Botón -->
+      <div class="sm:col-span-2 text-center">
+        <button
+          type="submit"
+          class="w-full sm:w-auto px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          [disabled]="paymentForm.invalid"
+        >
+          Realizar Pago
+        </button>
+      </div>
+    </form>
+  </div>
+  

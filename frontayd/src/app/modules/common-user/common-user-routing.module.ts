@@ -8,7 +8,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { TransfersComponent } from './transfers/transfers.component';
 import {LoanPaymentsComponent} from './loan-payments/loan-payments.component'
 import { BalancesComponent } from './balances/balances.component';
-
+import { PayCreditcardComponent } from './pay-creditcard/pay-creditcard.component';
 const routes: Routes = [
 {
   path:'cuenta', component: AccountComponent
@@ -30,6 +30,9 @@ const routes: Routes = [
 },
 {
   path:'balances', component: BalancesComponent
+},
+{
+  path:'pago-tarjeta-credito', component: PayCreditcardComponent
 }
 ];
 
