@@ -42,7 +42,7 @@
 
             <div *ngFor="let key of objectKeys(questions)">
                 <label [for]="key" class="block text-sm font-medium text-gray-600">{{ questions[key]}}</label>
-                <input type="text" [id]="key" name={{key}} [(ngModel)]="formData[key]"
+                <input type="text" [id]="key" name={{getName(key)}} [(ngModel)]="formData[key]"
                     class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Respuesta" required />
             </div>
