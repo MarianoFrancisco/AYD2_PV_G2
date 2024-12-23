@@ -586,14 +586,14 @@ const createAdmin = async (req, res) => {
 
 
 
-        console.log('Nuevo empleado creado');
+        console.log('Nuevo administrador de sistemas creado');
         res.status(201).json({
-            message: 'Empleado creado exitosamente',
+            message: 'administrador de sistemas creado exitosamente',
             cui,
             creationDate: currentDate,
         });
     } catch (error) {
-        console.error('Error al crear el empleado:', error);
+        console.error('Error al crear el administrador:', error);
         res.status(500).json({ message: 'Error interno del servidor' });
     }
 
