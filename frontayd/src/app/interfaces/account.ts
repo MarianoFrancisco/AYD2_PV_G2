@@ -16,7 +16,8 @@ export interface AccountDetail {
     balance: string;
     created_at: number;
     update_balance_at: number;
-}
+    photoPath?: string; // Agregado para la URL de la fotografía
+  }
 
 export interface AccountResponse {
     message: string;
