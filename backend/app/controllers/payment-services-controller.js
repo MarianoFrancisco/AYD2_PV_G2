@@ -11,7 +11,7 @@ const createServicePaymentByCashier = async (req, res) => {
     const { serviceName, serviceCode, amount } = req.body;
     const userModel = req.userModel;
 
-    if (!serviceName || !serviceCode || !amount) {
+    if (!serviceName || !serviceCode || !amount ) {
         return res.status(400).json({ message: 'Service name, service code, and amount are required.' });
     }
 
