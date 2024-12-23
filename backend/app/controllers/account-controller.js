@@ -24,7 +24,8 @@ const getBalance = async (req, res) => {
 
         res.status(200).json({
             "Saldo": accountModel.balance,
-            "Fecha": accountModel.update_balance_at
+            "Fecha": accountModel.update_balance_at,
+            "Moneda": accountModel.currency
         });
 
     } catch (error) {
