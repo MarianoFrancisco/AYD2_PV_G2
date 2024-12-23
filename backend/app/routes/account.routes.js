@@ -20,11 +20,11 @@ import upload from "../middleware/uploadfiles.js";
  */
 const router = express.Router();
 
-router.get("/show-balance", validateUserById('query'), getBalance);
+router.get("/show-balance", getBalance);
 router.get('/security-question', getSecurityQuestionByAccountNumber);
 router.get('/photography', getPhotographyPathByAccountNumber);
-router.get("/createAccount", imageUpload.single('photo'), uploadImageHandler, createAccount)
-router.get("/registrarQueja", imageUpload.single('photo'), registroQuejas)
+router.post("/createAccount", imageUpload.single('photo'), uploadImageHandler, createAccount)
+router.post("/registrarQueja", imageUpload.single('photo'), registroQuejas)
 router.post("/registrarEmpleado", upload.fields([
     { name: 'photo', maxCount: 1 }, // Campo 'photo', máximo 1 archivo
     { name: 'pdf', maxCount: 1 }    // Campo 'pdf', máximo 1 archivo

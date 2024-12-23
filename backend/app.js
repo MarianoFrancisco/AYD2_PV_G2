@@ -26,6 +26,7 @@ import surveyListRouter from "./app/routes/list-survey.routes.js";
 
 import complaintListRouter from "./app/routes/list-complaints.routes.js";
 import userManagementRouter from "./app/routes/user-management.routes.js";
+import inventory from "./app/routes/inventory.routes.js"
 
 import clientRouter from "./app/routes/client.routes.js";
 
@@ -70,7 +71,10 @@ const clientService = `${api}/client`;
 const deposit = `${api}/deposit`;
 
 const withdrawal = `${api}/withdrawal`;
+const invetory = `${api}/inventory`;
 
+
+app.use(invetory, inventory);
 app.use(authenticator, auhenticatorRouter);
 app.use(user, userRouter);
 app.use(account, accountRouter);
