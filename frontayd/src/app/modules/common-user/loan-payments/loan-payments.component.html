@@ -4,9 +4,8 @@
   <form [formGroup]="loanForm" (ngSubmit)="pagar()">
     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-      <!-- Campo de Número de Cuenta -->
       <div class="sm:col-span-3">
-        <label for="accountNumber" class="block text-sm font-medium text-gray-900"># Cuenta: </label>
+        <label for="accountNumber" class="block text-sm font-medium text-gray-900">No. Cuenta: </label>
         <div class="mt-2">
           <input type="text" formControlName="accountNumber" id="accountNumber"
             class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm" />
@@ -18,7 +17,7 @@
       </div>
 
       <div class="sm:col-span-3">
-        <label for="loanId" class="block text-sm font-medium text-gray-900"># Préstamo: </label>
+        <label for="loanId" class="block text-sm font-medium text-gray-900">No. Préstamo: </label>
         <div class="mt-2">
           <input type="text" formControlName="loanId" id="loanId"
             class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm" />
