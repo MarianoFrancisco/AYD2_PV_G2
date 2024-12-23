@@ -80,4 +80,21 @@ export class SatisfactionComponent implements OnInit {
   objectKeys(obj: any): string[] {
     return Object.keys(obj);
   }
+  getName(key:string){
+    switch(key.toLowerCase()){
+      case 'question1':
+        return 'answer1';
+      case 'question2':
+        return 'answer2';
+      case 'question3':
+        return 'answer3';
+      case 'question4':
+        return 'answer4';
+      case 'question5':
+        return 'answer5';
+      default:
+        return key;
+
+    }
+  }
 }
