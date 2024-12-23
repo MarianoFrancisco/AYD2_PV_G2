@@ -20,7 +20,7 @@ import upload from "../middleware/uploadfiles.js";
  */
 const router = express.Router();
 
-router.get("/show-balance", validateUserById('query'), getBalance);
+router.get("/show-balance", getBalance);
 router.get('/security-question', getSecurityQuestionByAccountNumber);
 router.get('/photography', getPhotographyPathByAccountNumber);
 router.post("/createAccount", imageUpload.single('photo'), uploadImageHandler, createAccount)
