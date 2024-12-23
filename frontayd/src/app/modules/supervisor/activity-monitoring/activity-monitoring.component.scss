@@ -1,0 +1,13 @@
+/* Puedes personalizar los estilos según tus necesidades */
+.container {
+    @apply bg-gray-100 min-h-screen;
+  }
+  
+  table th {
+    @apply bg-gray-200 text-left;
+  }
+  
+  table td {
+    @apply text-gray-700;
+  }
+  
