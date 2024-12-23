@@ -1,8 +1,9 @@
 export interface Loan_Payments {
-    loan_number: number,
-    amount:number,
-    cui:string,
-    pin:string
+    employee_id: number;
+    account_number: string;
+    loan_id: number;
+    amount: number;
+    payment_date: string;
 }
 
 export interface Payment {
@@ -16,3 +17,13 @@ export interface Payment {
 export interface Loan_state {
     loanState: string,
 }
+
+export interface Loan {
+    id: number;
+    account_id: number;
+    loan_type: string;
+    remaining_balance: string;
+    interest_rate: string;
+    state: string;
+    created_at: number;
+  }
