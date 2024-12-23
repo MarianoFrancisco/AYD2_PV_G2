@@ -1,17 +1,25 @@
 import LoanModel from '../models/loan-model.js';
+import AccountModel from '../models/account-model.js';
 
 const getLoansByAccount = async (req, res) => {
-    const { account_id } = req.params;
+    const { account_number } = req.params;
 
-    // Validar que se reciba el `account_id`
-    if (!account_id) {
-        return res.status(400).json({ message: 'Account ID is required' });
+    if (!account_number) {
+        return res.status(400).json({ message: 'Account Number is required' });
     }
 
     try {
-        // Buscar préstamos asociados al `account_id`
+        const account = await AccountModel.findOne({
+            where: { account_number },
+            attributes: ['id']
+        });
+
+        if (!account) {
+            return res.status(404).json({ message: 'No account found for the provided account number' });
+        }
+
         const loans = await LoanModel.findAll({
-            where: { account_id },
+            where: { account_id: account.id },
             attributes: [
                 'id',
                 'account_id',
@@ -23,12 +31,10 @@ const getLoansByAccount = async (req, res) => {
             ]
         });
 
-        // Verificar si hay préstamos asociados
         if (loans.length === 0) {
-            return res.status(404).json({ message: 'No loans found for the provided account ID' });
+            return res.status(404).json({ message: 'No loans found for the provided account number' });
         }
 
-        // Responder con los préstamos encontrados
         res.status(200).json({ message: 'Loans retrieved successfully', loans });
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving loans', error: error.message });
