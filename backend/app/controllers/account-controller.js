@@ -333,11 +333,147 @@ const registroQuejas = async (req, res) => {
 
 }
 
+const createEmployee = async (req, res) => {
+    try {
+        console.log(req.photoPath)
+        const {
+            fullName,
+            phone,
+            age,
+            cui,
+            email,
+            gender,
+            marital_status,
+        } = req.body;
+
+        req.pdfboyd //pdf
+
+        console.log(fullName)
+        console.log(marital_status)
+
+
+
+
+        // Valicadion de parametros obligatorios
+        if (!fullName || !phone || !age || !cui || !email || !gender || !marital_status) {
+            return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+        }
+
+        // Verificar genero
+        if (!["Masculino", "Femenino", "Otro"].includes(gender)) {
+            return res.status(400).json({ message: 'Genero invalido' });
+        }
+
+        // Verificar genero
+        if (!["Masculino", "Femenino", "otro"].includes(gender)) {
+            return res.status(400).json({ message: 'Genero invalido' });
+        }
+
+        // Verificar genero
+        if (!["Soltero", "Casado", "Divorciado", "Viudo", "Otro"].includes(marital_status)) {
+            return res.status(400).json({ message: 'Estado civil invalido' });
+        }
+
+        //generar contraseña
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+        let password = '';
+        for (let i = 0; i < 16; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            password += characters[randomIndex];
+        }
+
+        let crearUsername = true
+        let username = ""
+        while (crearUsername) {
+            //Crear nombre usuario
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+             username = '';
+
+            for (let i = 0; i < 10; i++) {
+                const randomIndex = Math.floor(Math.random() * letters.length);
+                username += letters[randomIndex];
+            }
+
+            //verificar que no exista
+            const users = await UserModel.findAll();
+            let ya_existe = false
+
+            for (var i = 0; i < users.length; i++) {
+
+                if (users[i].user_name == username) {
+                    ya_existe = true
+                }
+
+            }
+
+            if(!ya_existe) {
+                crearUsername = false
+            }
+
+
+        }
+
+
+
+
+
+
+
+        //Encriptar contraseña
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const detalle = "Se le ha creado la siguiente cuenta. Nombre usuario: " + username + " contraseña: " + password
+        const contenido = "<p>" + detalle + "</p>"
+        //Enviar correo
+        const info = await sendEmail(email, "Acceso", detalle, contenido)
+
+        //generar fecha
+        const currentDate = Math.floor(Date.now() / 1000);
+
+
+        // Simular almacenamiento (aquí podrías guardar en una base de datos)
+        await UserModel.create({
+            name: fullName,
+            role: "Cajero",
+            user_name: username ,
+            email: email,
+            password: hashedPassword,
+            phone: phone,
+            age: parseInt(age, 10),
+            dpi_number: cui,
+            complete_papework_path: req.pdfPath, //obtener 
+            photo_path: req.photoPath, 
+            gender: gender,
+            marital_status: marital_status,
+            signature_path:  "https://money-bin-group2.s3.us-east-1.amazonaws.com/signature/test.png",
+            second_password_hash: "",
+            created_at: currentDate //generar
+
+        })
+
+
+
+        console.log('Nuevo empleado creado');
+        res.status(201).json({
+            message: 'Empleado creado exitosamente',
+            cui,
+            creationDate: currentDate,
+        });
+    } catch (error) {
+        console.error('Error al crear el empleado:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+
+}
+
+
+
 export {
     getBalance,
     getSecurityQuestionByAccountNumber,
     getPhotographyPathByAccountNumber,
     updateAccountInfo,
     createAccount,
-    registroQuejas
+    registroQuejas,
+    createEmployee
 }
