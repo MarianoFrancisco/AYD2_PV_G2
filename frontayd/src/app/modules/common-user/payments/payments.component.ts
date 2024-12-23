@@ -48,6 +48,17 @@ export class PaymentsComponent {
 
   pagar() {
     const values = this.paymentsForm.value;
+
+    if (values.paymentType === 'service' && (!values.codigoServicio || !values.numeroCuenta || !values.tipoPago)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos Vacíos',
+        text: 'Por favor, complete todos los campos antes de continuar.'
+      });
+      return;
+    }
+
+
     const user = JSON.parse(localStorage.getItem('user') || '{}');
 
     if (values.paymentType === 'service') {
