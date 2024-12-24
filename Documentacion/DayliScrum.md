@@ -85,54 +85,100 @@ Sprint Daily Scrum Report David Enrique
 Sprint Daily Scrum Report Luis Garcia 
  
 #### Día 1: Funcionalidad retirar dinero - Backend
-- Se revisó toda la estructura base del nuevo frontend utilizando Angular. 
-- Se establecieron los componentes iniciales y la arquitectura del proyecto. 
-- Configuración de herramientas como Angular CLI y las dependencias principales para el desarrollo. 
+- Se analizo los datos que se recibirian
 
--
+- Se realizaron las peticiones al backend
+
  
 ##### Complicaciones: 
-- Integración de nuevas librerías que requerían ajustes en el entorno de desarrollo. 
-- Problemas iniciales con la configuración del enrutador de Angular. 
+- Nuevos requerimientos para retirar dinero
  
-#### Día 2: Implementación del Login 
-- Desarrollo del sistema de login para empleados, administradores y supervisores. 
-- Se trabajó en la autenticación con diferentes niveles de permisos. 
-- Pruebas de roles para validar accesos según las credenciales ingresadas. 
+#### Día 2: Implementacio de funcion crear empleado
+- Analizar datos que se recibirian
+- crear metodos para subir informacion al S3
  
 ##### Complicaciones: 
-- Ajustes en la gestión de tokens para cada tipo de usuario. 
-- Sincronización entre backend y frontend para garantizar sesiones activas correctamente. 
+- Implementar S3
  
-#### Día 3: Funcionalidades de Servicios Bancarios 
-- Implementación del frontend para: 
-  - Pago de tarjetas de crédito. 
-  - Registro de quejas por parte de los clientes. 
-  - Gestión de inventarios bancarios. 
-- Creación de formularios interactivos y validación de datos en tiempo real. 
+#### Día 3: Funcionalidades de backend
+- Implementacion de depositos
+- Implementacion de cambio de moneda
  
-##### Complicaciones: 
-- Manejo de grandes volúmenes de datos para inventarios bancarios. 
-- Diseño de interfaces responsivas para los formularios. 
+
+--------------------------------------------------------------------
+
+Sprint Daily Scrum Report Cristofher Saquilmer 
  
-#### Día 4: Funcionalidades de Monitoreo y Gestión 
-- Desarrollo de: 
-  - Monitoreo de actividad en tiempo real para el sistema. 
-  - Registro y gestión de administradores del sistema. 
-  - Visualización del historial de quejas registradas por los clientes. 
-- Mejoras en la experiencia de usuario para simplificar el monitoreo. 
+#### Día 1: Implementación Mostrar Saldo y Creción de Cuenta Monetario o Ahorro 
+- Se revisó la estructura para el modulo de mostrar saldo. 
+- Se revisó la estructura para el modulo de crear cuenta Monetario o Ahorro.
  
 ##### Complicaciones: 
-- Optimización del monitoreo en tiempo real para evitar retrasos. 
-- Gestión eficiente de grandes cantidades de registros históricos de quejas. 
+- Terceros: Salida demasiado tarde del Trabajo.
+- Envío de fotografía al backend
  
-#### Día 5: Gestión de Seguridad y Actualización de Datos 
-- Desarrollo de funcionalidades de: 
-  - Gestión y programación de copias de seguridad. 
-  - Asignación y gestión de roles en el sistema. 
-  - Actualización de datos de clientes desde el frontend. 
-- Implementación de mensajes de confirmación y validación en los formularios. 
+#### Día 2: Implementación Permitir cuentas en dolares y Registro de Quejas
+- Se revisó la estructura para el modulo de permitir cuentas en dolares. 
+- Se revisó la estructura para el modulo de registro de quejas.
  
 ##### Complicaciones: 
-- Configuración inicial de la automatización de las copias de seguridad. 
-- Sincronización de roles y datos de clientes con el backend.
+- Terceros: Salida demasiado tarde del Trabajo.
+ 
+#### Día 3: Implementación Encuestas de Satisfacción
+- Se revisó la estructura para el modulo encuestas de satisfacción. 
+ 
+##### Complicaciones: 
+- Terceros: Salida demasiado tarde del Trabajo.
+- Envío de respuestas al backend.
+ 
+#### Día 4: Implementación Encuestas de Satisfacción Modulo Supervisor
+- Se revisó la estructura para el modulo encuestas de satisfacción.  
+ 
+##### Complicaciones: 
+- Terceros: Salida demasiado tarde del Trabajo.
+ 
+#### Día 5: Implementación Información de los Administradores 
+- Se revisó la estructura para el modulo información de los administradores.
+ 
+##### Complicaciones: 
+- Terceros: Salida demasiado tarde del Trabajo.
+- Terceros Enfermedad
+- Desplegar data para actualización
+
+
+------------------------------------------------------------------
+Sprint Daily Scrum Report Jose Pablo Ceron Urizar
+ 
+#### Día 1: Crear entorno de aws rds, ec2 y stmp 
+- Se creo la instancia de la base de datos con mysql
+- Se levanto dos ec2 para frontend y backend
+- Se implemento stmp para envios de correos
+ 
+##### Complicaciones: 
+- Al no tener dominio en el stmp, solo envia correos registrados.
+ 
+#### Día 2: implementar pagos de prestamos y de credito
+- Se implemento el endpoint para pago de prestamos desde el backend.
+- Se implemento el endpoint para pago de credito desde el backend.
+ 
+##### Complicaciones: 
+- limite de uso de la tarjeta de credito.
+ 
+#### Día 3: Implementación Encuestas de Satisfacción
+- Se realizo endpoint para encuestas de satisfaccion. 
+ 
+##### Complicaciones: 
+- Modo anonimo.
+ 
+#### Día 4: Implementacion de quetzales a dolares
+- Se realizo endpoint para cambiar cuenta de quetzales a dolares. 
+ 
+##### Complicaciones: 
+- Terceros: Salida demasiado tarde del Trabajo.
+ 
+#### Día 5: Implementacion del rol del supervisor(inventario, encuestas y gestion)
+- Se realizo el endpoint para inventario, encuesta y gestion en relacion de lo que sucede
+en tiempo real en el banco.
+ 
+##### Complicaciones: 
+- Actualizacion de datos
