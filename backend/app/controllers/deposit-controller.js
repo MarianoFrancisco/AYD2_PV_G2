@@ -5,7 +5,7 @@ import TransactionHistoryModel from '../models/transaction-history-model.js';
 
 export const createDeposit = async (req, res) => {
     try {
-        const { account_number, amount, account_type, currency, allow_dollar_deposit } = req.body;
+        const { account_number, amount, account_type, currency, allow_dollar_deposit, user_id } = req.body;
 
         if (!account_number || !amount || !account_type || !currency || allow_dollar_deposit === undefined) {
             return res.status(400).json({ message: 'Faltan datos obligatorios' });
@@ -37,7 +37,7 @@ export const createDeposit = async (req, res) => {
 
         const unixTimestamp = Math.floor(Date.now() / 1000);
 
-        const exchangeRate = 7.75; // Tasa de cambio ejemplo (1 USD = 7.75 GTQ)
+        const exchangeRate = 7.75;
         let finalAmount = amount;
 
         if (currency !== account.currency) {
@@ -68,7 +68,7 @@ export const createDeposit = async (req, res) => {
         });
 
         const user = await UserModel.findOne({
-            where: { id: account.user_id },
+            where: { id: user_id },
             attributes: ['name', 'signature_path'],
         });
 
