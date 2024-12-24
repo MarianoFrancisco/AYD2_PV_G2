@@ -345,7 +345,8 @@ const createEmployee = async (req, res) => {
             email,
             gender,
             marital_status,
-            role
+            role,
+            signature
         } = req.body;
 
         req.pdfboyd //pdf

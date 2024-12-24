@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
  * @author
  * Mariano Camposeco {@literal (mariano1941@outlook.es)}
  */
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 const s3 = new S3Client({
     region: process.env.AWS_REGION,
     credentials: {
@@ -27,11 +29,11 @@ const uploadToS3 = async (fileBuffer, fileName, fileType, folder) => {
     try {
         const command = new PutObjectCommand(params);
         await s3.send(command);
-
+        await delay(1000);
         return `https://${bucketName}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
     } catch (error) {
-        console.error('Error uploading photo:', error);
-        throw new Error('Error uploading photo');
+        console.error('Error uploading data:', error);
+        throw new Error('Error uploading data');
     }
 };
 

@@ -85,7 +85,6 @@ CREATE TABLE IF NOT EXISTS loans (
   created_at BIGINT NOT NULL,
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
-
 -- Tabla de pagos de servicios
 CREATE TABLE IF NOT EXISTS service_payments (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -99,7 +98,7 @@ CREATE TABLE IF NOT EXISTS deposits (
   id INT AUTO_INCREMENT PRIMARY KEY,
   account_id INT NOT NULL,
   amount DECIMAL(10, 2) NOT NULL,
-  deposit_type ENUM('Efectivo', 'Transferencia Bancaria') NOT NULL,
+  account_type ENUM('Monetaria', 'Ahorro') NOT NULL,
   currency ENUM('Quetzales', 'Dólares') NOT NULL,
   created_at BIGINT NOT NULL,
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
@@ -109,7 +108,7 @@ CREATE TABLE IF NOT EXISTS withdrawals (
   id INT AUTO_INCREMENT PRIMARY KEY,
   account_id INT NOT NULL,
   amount DECIMAL(10, 2) NOT NULL,
-  withdrawal_type ENUM('Ventanilla', 'Cajero Automático') NOT NULL,
+  account_type ENUM('Monetaria', 'Ahorro') NOT NULL,
   currency ENUM('Quetzales', 'Dólares') NOT NULL,
   created_at BIGINT NOT NULL,
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
