@@ -9,6 +9,7 @@ import { environment } from '../../../../src/environments/environment';
 export class CreditCardPaymentService {
   private readonly apiUrl = `${environment.API_URL}/pay-credit-card`;
 
+
   constructor(private http: HttpClient) {}
 
   payCreditCard(data: PaymentRequest): Observable<PaymentResponse> {
