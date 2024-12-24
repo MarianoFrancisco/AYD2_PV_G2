@@ -337,6 +337,7 @@ const registroQuejas = async (req, res) => {
 const createEmployee = async (req, res) => {
     try {
         console.log(req.photoPath)
+        console.log(req.pdfPath)
         const {
             fullName,
             phone,
@@ -464,6 +465,7 @@ const createEmployee = async (req, res) => {
 const createAdmin = async (req, res) => {
     try {
         console.log(req.photoPath)
+        console.log(req.pdfPath)
         const {
             fullName,
             phone,
@@ -474,13 +476,8 @@ const createAdmin = async (req, res) => {
             marital_status,
         } = req.body;
 
-        req.pdfboyd //pdf
-
         console.log(fullName)
         console.log(marital_status)
-
-
-
 
         // Valicadion de parametros obligatorios
         if (!fullName || !phone || !age || !cui || !email || !gender || !marital_status) {

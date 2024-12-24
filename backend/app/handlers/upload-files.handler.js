@@ -28,7 +28,6 @@ const uploadFilesHandler = async (req, res, next) => {
         } else {
             req.pdfPath = null;
         }
-        console.log(req.pdfPath)
         next();
     } catch (error) {
         res.status(500).json({ message: 'Error uploading files.', error: error.message });
