@@ -671,6 +671,66 @@ const exchangeCurrency = async (req, res) => {
     }
 };
 
+const sentPetitionPassword = async (req, res) => {
+
+}
+
+const changePassword = async (req, res) => {
+
+    const {
+        user_name
+    } = req.body;
+
+
+    //Validar campos
+    if (!user_name) {
+        return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+    }
+
+
+    //Genero una nueva contraseña
+    //generar contraseña
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+    let password = '';
+    for (let i = 0; i < 16; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        password += characters[randomIndex];
+    }
+
+    //Encriptar contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    //Validar que exista el usuario
+    const userModel = await UserModel.findOne({
+        where: {
+            user_name: user_name
+        }
+    });
+
+    if (!userModel) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+
+    //Cambiar contraseña en base de datos
+    userModel.password = hashedPassword
+    await userModel.save();
+
+
+    //Enviar notificacion al correo del usuario
+    const detalle = "Se le ha cambiado su contraseña por la siguiente: " + password
+    const contenido = "<p>" + detalle + "</p>"
+    
+    const info = await sendEmail(userModel.email, "Acceso", detalle, contenido)
+
+
+    //Enviar respuesta al frontend
+    return res.status(200).json({ message: 'User updated successfully', user: userModel });
+
+
+
+}
+
 export {
     getBalance,
     getSecurityQuestionByAccountNumber,
@@ -680,5 +740,6 @@ export {
     registroQuejas,
     createEmployee,
     createAdmin,
-    exchangeCurrency
+    exchangeCurrency,
+    changePassword
 }
