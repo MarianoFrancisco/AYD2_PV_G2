@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AccountComponent } from './account/account.component';
@@ -9,6 +9,7 @@ import { TransfersComponent } from './transfers/transfers.component';
 import {LoanPaymentsComponent} from './loan-payments/loan-payments.component'
 import { BalancesComponent } from './balances/balances.component';
 import { PayCreditcardComponent } from './pay-creditcard/pay-creditcard.component';
+import { CambiosComponent } from './cambios/cambios.component';
 const routes: Routes = [
 {
   path:'cuenta', component: AccountComponent
@@ -33,6 +34,9 @@ const routes: Routes = [
 },
 {
   path:'pago-tarjeta-credito', component: PayCreditcardComponent
+},
+{
+  path: 'cambios-moneda', component: CambiosComponent
 }
 ];
 
