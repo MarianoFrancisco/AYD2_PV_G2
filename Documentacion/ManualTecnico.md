@@ -25,10 +25,10 @@ Entre las transacciones disponibles que pueden realizar los clientes se incluyen
 Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, algunos siendo la posibilidad de realizar cambios de divisas, gestionar préstamos, y habilitar cuentas en dólares. Ya que, estas funcionalidades aseguran que la plataforma no únicamente atienda las necesidades actuales de los clientes, sino que también esté preparada para adaptarse a futuros cambios en los sectores bancarios.
 
 **Caso de Uso de Alto Nivel**
-![Caso de uso](../Capturas/AltoNivelMoneyBin.png)
+![Caso de uso](../Capturas/F2/moneyBin-AltoNIvel.png)
 
 **Caso de Uso Primera Descomposicion**
-![Caso de uso](../Capturas/Diagrama-Descomposicion.png)
+![Caso de uso](../Capturas/F2/MoneyBin-PrimeraComposicion.png)
 
 ## 3) Lista de requerimientos funcionales generales
 
@@ -101,7 +101,19 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 
 ## 4) Diagrama de CDU expandidos
 
-![Caso de uso](../Capturas/CasodeUsoExpandoCompleto.png)
+![Caso de uso](../Capturas/F2/moneyBin-Solicitudes.jpg)
+
+![Caso de uso](../Capturas/F2/MoneyBin-GenerarConsultas.jpg)
+
+![Caso de uso](../Capturas/F2/MoneyBin-GestionCuentas.jpg)
+
+![Caso de uso](../Capturas/F2/MoneyBin-MonitoreoDatos.jpg)
+
+![Caso de uso](../Capturas/F2/MoneyBin-Quejas.jpg)
+
+![Caso de uso](../Capturas/F2/MoneyBin-Transacciones.jpg)
+
+
 
 ## 5) Matrices de trazabilidad
 

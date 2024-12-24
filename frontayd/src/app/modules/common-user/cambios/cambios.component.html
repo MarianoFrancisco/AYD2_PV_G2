@@ -1,1 +1,47 @@
-<p>cambios works!</p>
+<!-- src/app/components/cambios/cambios.component.html -->
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Cambio de Moneda</h1>
+    
+    <form (ngSubmit)="exchangeCoin()" class="space-y-4">
+      <div>
+        <label for="cui" class="block text-sm font-medium">CUI</label>
+        <input
+          id="cui"
+          [(ngModel)]="exchangeData.cui"
+          name="cui"
+          type="text"
+          required
+          class="border rounded w-full p-2"
+        />
+      </div>
+      <div>
+        <label for="amount" class="block text-sm font-medium">Monto</label>
+        <input
+          id="amount"
+          [(ngModel)]="exchangeData.amount"
+          name="amount"
+          type="number"
+          required
+          class="border rounded w-full p-2"
+        />
+      </div>
+      
+      <button
+        type="submit"
+        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+      >
+        Realizar Cambio
+      </button>
+    </form>
+  
+    <!-- Mostrar resultados del cambio de moneda -->
+    <div *ngIf="exchangeResult" class="mt-4 p-4 border bg-gray-100">
+      <h2 class="text-lg font-bold">Resultado del Cambio</h2>
+      <p><strong>CUI:</strong> {{ exchangeResult.cui }}</p>
+      <p><strong>Monto en Quetzales:</strong> Q{{ exchangeResult.amount_in_quetzales }}</p>
+      <p><strong>Monto en Dólares:</strong> ${{ exchangeResult.amount_in_dollars }}</p>
+      <p><strong>Tasa de Cambio:</strong> {{ exchangeResult.exchange_rate }}</p>
+      <p><strong>Total Cambiado Hoy:</strong> Q{{ exchangeResult.total_exchanged_today }}</p>
+    </div>
+  </div>
+  
