@@ -1,1 +1,67 @@
-<p>roles works!</p>
+<div class="roles-container p-8 bg-white shadow-lg rounded-lg max-w-4xl mx-auto mt-10">
+    <h2 class="text-3xl font-semibold text-center mb-8 text-gray-800">Gestión de Roles</h2>
+    
+    <!-- Filtros -->
+    <div class="mb-6 flex gap-6">
+      <!-- Filtro por Nombre -->
+      <div class="flex flex-col w-1/2">
+        <label for="nameFilter" class="text-sm font-medium text-gray-700">Buscar por Nombre</label>
+        <input 
+          id="nameFilter"
+          type="text"
+          [(ngModel)]="nameFilter"
+          (ngModelChange)="filterUsers()"
+          class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Filtrar por nombre..."
+        />
+      </div>
+  
+      <!-- Filtro por Rol -->
+      <div class="flex flex-col w-1/2">
+        <label for="roleFilter" class="text-sm font-medium text-gray-700">Filtrar por Rol</label>
+        <select 
+          id="roleFilter"
+          [(ngModel)]="roleFilter"
+          (ngModelChange)="filterUsers()"
+          class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">Todos</option>
+          <option value="Atención al Cliente">Atención al Cliente</option>
+          <option value="Cajero">Cajero</option>
+        </select>
+      </div>
+    </div>
+  
+    <!-- Tabla -->
+    <div class="overflow-x-auto bg-white rounded-lg shadow-sm">
+      <table class="min-w-full table-auto border-collapse">
+        <thead>
+          <tr class="bg-blue-50 text-left">
+            <th class="py-3 px-6 border-b text-sm font-medium text-gray-600">Nombre</th>
+            <th class="py-3 px-6 border-b text-sm font-medium text-gray-600">Correo</th>
+            <th class="py-3 px-6 border-b text-sm font-medium text-gray-600">Rol Actual</th>
+            <th class="py-3 px-6 border-b text-sm font-medium text-gray-600">Cambiar Rol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of filteredUsers" class="border-b hover:bg-gray-50">
+            <td class="py-3 px-6">{{ user.name }}</td>
+            <td class="py-3 px-6">{{ user.email }}</td>
+            <td class="py-3 px-6">{{ user.role }}</td>
+            <td class="py-3 px-6 flex items-center gap-3">
+              <select [(ngModel)]="userRoles[user.id]" class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option [value]="'Atención al Cliente'">Atención al Cliente</option>
+                <option [value]="'Cajero'">Cajero</option>
+              </select>
+              <button 
+                (click)="updateRole(user)" 
+                class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+                Actualizar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
