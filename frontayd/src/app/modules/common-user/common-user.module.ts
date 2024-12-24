@@ -10,6 +10,7 @@ import { TransfersComponent } from './transfers/transfers.component';
 import { LoanPaymentsComponent } from './loan-payments/loan-payments.component';
 import { BalancesComponent} from './balances/balances.component'
 import { PayCreditcardComponent } from './pay-creditcard/pay-creditcard.component';
+import { CambiosComponent } from './cambios/cambios.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -22,7 +23,8 @@ import { PayCreditcardComponent } from './pay-creditcard/pay-creditcard.componen
     TransfersComponent,
     LoanPaymentsComponent,
     BalancesComponent,
-    PayCreditcardComponent
+    PayCreditcardComponent,
+    CambiosComponent
   ]
 })
 export class CommonUserModule { }

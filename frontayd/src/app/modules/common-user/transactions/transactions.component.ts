@@ -5,6 +5,10 @@ import { FormsModule } from '@angular/forms';
 
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
+import { RetiroService } from '../../services/retiro.service';
+import { RetiroResponse } from '../../../interfaces/transaction-response.interface';
+import { WithdrawalService } from '../../services/withdrawal.service';
+import { WithdrawalRequest } from '../../../interfaces/withdrawal.interface';
 @Component({
   selector: 'app-transactions',
   standalone: true,
@@ -13,101 +17,58 @@ import jsPDF from 'jspdf';
   styleUrl: './transactions.component.scss'
 })
 export class TransactionsComponent {
-  accountNumber: string = '';
-  amount: number | null = null;
-  withdrawalType: number | null = null;
-  receipt: any = null;
+  withdrawalData: WithdrawalRequest = {
+    account_number: '',
+    amount: 0,
+    account_type: 'Monetaria',
+    currency: 'Quetzales',
+    user_id: 0, // Inicialmente 0, se actualizará con el ID del localStorage
+  };
 
-  constructor(private transactionService: TransactionService) {}
+  constructor(private withdrawalService: WithdrawalService) {
+    this.setUserId();
+  }
 
-  realizarRetiro() {
-    if (!this.accountNumber || !this.amount || !this.withdrawalType) {
-      Swal.fire('Error', 'Todos los campos son obligatorios.', 'error');
-      return;
+  // Método para obtener el ID del usuario desde localStorage
+  setUserId(): void {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (user && user.id) {
+      this.withdrawalData.user_id = user.id;
+    }
+  }
+
+  makeWithdrawal(): void {
+    this.withdrawalService.makeWithdrawal(this.withdrawalData).subscribe({
+      next: (response) => {
+        Swal.fire('Éxito', response.message, 'success');
+        this.generatePDF(response);
+      },
+      error: (err) => {
+        console.error('Error al realizar el retiro:', err);
+        Swal.fire('Error', 'Ocurrió un problema al realizar el retiro.', 'error');
+      },
+    });
+  }
+
+  generatePDF(response: any): void {
+    const doc = new jsPDF();
+
+    doc.setFontSize(16);
+    doc.text('Comprobante de Retiro', 10, 10);
+
+    doc.setFontSize(12);
+    doc.text(`Cuenta: ${response.voucher.account_number}`, 10, 20);
+    doc.text(`Nombre: ${response.voucher.name}`, 10, 30);
+    doc.text(`Monto: ${response.transaction.amount} ${response.transaction.currency}`, 10, 40);
+    doc.text(`Tipo de Cuenta: ${response.transaction.account_type}`, 10, 50);
+    doc.text(`Descripción: ${response.transaction.description}`, 10, 60);
+    doc.text(`Fecha: ${new Date(response.transaction.created_at * 1000).toLocaleString()}`, 10, 70);
+
+    if (response.voucher.signature) {
+      doc.text('Firma:', 10, 80);
+      doc.addImage(response.voucher.signature, 'PNG', 10, 90, 50, 30);
     }
 
-    this.transactionService
-      .realizarRetiro(this.accountNumber, this.amount, Number(this.withdrawalType))
-      .subscribe({
-        next: (response) => {
-          this.receipt = response;
-          if (response.message === 'OK') {
-            this.generarRecibo(response);
-            Swal.fire('Éxito', 'El retiro se realizó correctamente.', 'success');
-            this.limpiarFormulario();
-          } else {
-            Swal.fire('Error', 'No se pudo realizar el retiro.', 'error');
-          }
-        },
-        error: () => {
-          Swal.fire('Error', 'Ocurrió un error al procesar el retiro.', 'error');
-        },
-      });
-  }
-
-  generarRecibo(response: any) {
-    const doc = new jsPDF();
-    const signatureUrl = `http://localhost:5000/signature/${response.voucher.signature}`;
-
-    // Título
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(16);
-    doc.text('Recibo de Retiro Money Bin', 105, 20, { align: 'center' });
-
-    // Fecha
-    const fecha = new Date(response.transaction.created_at * 1000).toLocaleString();
-    doc.setFontSize(12);
-    doc.text('Fecha:', 20, 40);
-    doc.setFont('helvetica', 'normal');
-    doc.text(fecha, 50, 40);
-
-    // Nombre y No. Cuenta
-    doc.setFont('helvetica', 'bold');
-    doc.text('Nombre:', 20, 50);
-    doc.setFont('helvetica', 'normal');
-    doc.text(response.voucher.name, 50, 50);
-
-    doc.setFont('helvetica', 'bold');
-    doc.text('No. Cuenta:', 140, 50);
-    doc.setFont('helvetica', 'normal');
-    doc.text(response.voucher.account_number, 180, 50);
-
-    // Descripción y Monto
-    doc.setFont('helvetica', 'bold');
-    doc.text('Descripción:', 20, 60);
-    doc.setFont('helvetica', 'normal');
-    doc.text(response.transaction.description, 50, 60);
-
-    doc.setFont('helvetica', 'bold');
-    doc.text('Monto:', 140, 60);
-    doc.setFont('helvetica', 'normal');
-    doc.text(`Q${response.transaction.amount}`, 180, 60);
-
-    // Firma
-    doc.setFont('helvetica', 'bold');
-    doc.text('Firma:', 20, 80);
-
-    const imgWidth = 50;
-    const imgHeight = 30;
-
-    // Cargar la imagen de la firma
-    const image = new Image();
-    image.crossOrigin = 'Anonymous';
-    image.src = signatureUrl;
-
-    image.onload = () => {
-      doc.addImage(image, 'PNG', 20, 90, imgWidth, imgHeight);
-      doc.save(`Recibo_${response.voucher.account_number}.pdf`);
-    };
-
-    image.onerror = () => {
-      Swal.fire('Error', 'No se pudo cargar la firma para el recibo.', 'error');
-    };
-  }
-
-  limpiarFormulario() {
-    this.accountNumber = '';
-    this.amount = null;
-    this.withdrawalType = null;
+    doc.save('voucher.pdf');
   }
 }
