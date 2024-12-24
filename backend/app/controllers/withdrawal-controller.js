@@ -5,7 +5,7 @@ import UserModel from '../models/user-model.js';
 
 export const createWithdrawal = async (req, res) => {
     try {
-        const { account_number, amount, account_type, currency } = req.body;
+        const { account_number, amount, account_type, currency, user_id } = req.body;
 
         if (!account_number || !amount || !account_type || !currency) {
             return res.status(400).json({ message: 'Faltan datos obligatorios' });
@@ -29,10 +29,6 @@ export const createWithdrawal = async (req, res) => {
 
         if (!account) {
             return res.status(404).json({ message: 'Cuenta no encontrada' });
-        }
-
-        if (!account.user_id) {
-            return res.status(400).json({ message: 'La cuenta no tiene un usuario asociado válido' });
         }
 
         const exchangeRate = 7.75;
@@ -80,7 +76,7 @@ export const createWithdrawal = async (req, res) => {
         });
 
         const user = await UserModel.findOne({
-            where: { id: account.user_id },
+            where: { id: user_id },
             attributes: ['name', 'signature_path']
         });
 
