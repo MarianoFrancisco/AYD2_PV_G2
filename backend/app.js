@@ -34,6 +34,7 @@ import clientRouter from "./app/routes/client.routes.js";
 import depositRouter from './app/routes/deposit.routes.js';
 
 import withdrawalRouter from './app/routes/withdrawal.routes.js';
+import databaseRouter from './app/routes/database.routes.js';
 
 const app = express();
 
@@ -66,6 +67,7 @@ const surveyList = `${api}/survey-list`;
 
 const complaintList = `${api}/complaint-list`;
 const userManagement = `${api}/users`;
+const database = `${api}/database`;
 
 const clientService = `${api}/client`;
 
@@ -83,6 +85,7 @@ app.use(createAccount, accountRouter);
 app.use(paymentService, paymentServiceRouter);
 app.use(loanPayment, loanPaymentRouter);
 app.use(loanList, loanListRouter);
+app.use(database, databaseRouter);
 
 app.use(creditCard, creditCardRouter);
 app.use(paycreditcard, paycreditcardrouter)
