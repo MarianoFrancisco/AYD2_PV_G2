@@ -7,6 +7,9 @@ import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import sendEmail from "../services/send-mail-service.js";
 import UserModel from "../models/user-model.js";
+import CurrencyExchangeModel from "../models/currency-exchange-model.js";
+import { startOfDay, endOfDay } from "date-fns";
+import { Op } from "sequelize";
 
 dotenv.config();
 
@@ -337,6 +340,7 @@ const registroQuejas = async (req, res) => {
 const createEmployee = async (req, res) => {
     try {
         console.log(req.photoPath)
+        console.log(req.pdfPath)
         const {
             fullName,
             phone,
@@ -464,6 +468,7 @@ const createEmployee = async (req, res) => {
 const createAdmin = async (req, res) => {
     try {
         console.log(req.photoPath)
+        console.log(req.pdfPath)
         const {
             fullName,
             phone,
@@ -474,13 +479,8 @@ const createAdmin = async (req, res) => {
             marital_status,
         } = req.body;
 
-        req.pdfboyd //pdf
-
         console.log(fullName)
         console.log(marital_status)
-
-
-
 
         // Valicadion de parametros obligatorios
         if (!fullName || !phone || !age || !cui || !email || !gender || !marital_status) {
@@ -586,6 +586,91 @@ const createAdmin = async (req, res) => {
 
 }
 
+const exchangeCurrency = async (req, res) => {
+    const { cui, amount } = req.body;
+
+    if (!cui || !amount) {
+        return res.status(400).json({ error: "CUI and amount are required." });
+    }
+
+    if (amount <= 0) {
+        return res.status(400).json({ error: "Amount must be greater than 0." });
+    }
+
+    try {
+        // Verificar si el cliente existe
+        let user = await CurrencyExchangeModel.findOne({ where: { cui } });
+
+        if (!user) {
+            // Crear nuevo registro si el cliente no existe
+            user = await CurrencyExchangeModel.create({ cui, amount_exchanged: 0 });
+        }
+
+        const currentDate = new Date();
+
+        // Calcular inicio y fin del día actual
+        const dayStart = startOfDay(currentDate);
+        const dayEnd = endOfDay(currentDate);
+
+        // Obtener las transacciones del día actual
+        const dailyTransactions = await CurrencyExchangeModel.findAll({
+            where: {
+                cui,
+                last_exchange_date: {
+                    [Op.between]: [dayStart, dayEnd],
+                },
+            },
+        });
+
+        // Sumar los montos ya intercambiados hoy
+        const totalExchangedToday = dailyTransactions.reduce(
+            (total, tx) => total + parseFloat(tx.amount_exchanged),
+            0
+        );
+
+        if (totalExchangedToday + amount > 10000.00) {
+            return res
+                .status(400)
+                .json({
+                    error: `Daily limit exceeded: You have Q${(10000.00 - totalExchangedToday).toFixed(
+                        2
+                    )} remaining today.`,
+                });
+        }
+
+        // Validar si el cliente ya realizó un cambio este mes
+        if (
+            user.last_exchange_date &&
+            new Date(user.last_exchange_date).getMonth() === currentDate.getMonth()
+        ) {
+            return res
+                .status(400)
+                .json({ error: "Exchange not allowed: already exchanged this month." });
+        }
+
+        // Realizar el cambio de moneda
+        const usdAmount = (amount / 7.8).toFixed(2); // Supongamos una tasa de cambio fija de 7.8
+
+        // Actualizar registro del cliente
+        user.last_exchange_date = currentDate;
+        user.amount_exchanged = amount;
+
+        await user.save();
+
+        return res.status(200).json({
+            message: "Exchange successful",
+            cui,
+            amount_in_quetzales: parseFloat(amount),
+            amount_in_dollars: parseFloat(usdAmount),
+            exchange_rate: 7.8,
+            total_exchanged_today: totalExchangedToday + amount,
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal server error." });
+    }
+};
+
 export {
     getBalance,
     getSecurityQuestionByAccountNumber,
@@ -594,5 +679,6 @@ export {
     createAccount,
     registroQuejas,
     createEmployee,
-    createAdmin
+    createAdmin,
+    exchangeCurrency
 }

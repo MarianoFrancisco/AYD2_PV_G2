@@ -171,7 +171,7 @@ Los clientes y encargados/empleados podran ejecutar su aplicacion de manera loca
 
 ## 8) Diagrama entidad relacion
 
-![Entidad relacion](../Capturas/DiagramaEntidadRelacionV5.png)
+![Entidad relacion](../Capturas/F2/V2ENTITY.png)
 **Link:**  [Link](https://drive.google.com/file/d/1K6XSIMpArZHsAqhgD7s1YcEdYW7MxlCb/view?usp=sharing)
 
 ## 9) Prototipos
