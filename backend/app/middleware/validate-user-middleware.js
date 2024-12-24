@@ -1,30 +1,29 @@
+import AccountModel from '../models/account-model.js';
+import UserModel from '../models/user-model.js';
+
 /*
  * @author
  * Mariano Camposeco {@literal (mariano1941@outlook.es)}
  */
-import UserModel from '../models/user-model.js';
-
-const validateUser = (source = 'body') => {
+const validateUserById = (source = 'body') => {
     return async (req, res, next) => {
         try {
-            const { cui, pin } = source === 'query' ? req.query : req.body;
+            const { id } = source === 'query' ? req.query : req.body;
 
-            if (!cui || !pin) {
+            if (!id) {
                 return res.status(400).json({
-                    message: `CUI and PIN are required in ${source}`
+                    message: `User ID is required in ${source}`
                 });
             }
 
-            const userModel = await UserModel.findOne({
-                where: { cui }
+            const userModel = await AccountModel.findOne({
+                where: {
+                    account_number: id
+                }
             });
 
             if (!userModel) {
                 return res.status(404).json({ message: 'User not found' });
-            }
-
-            if (userModel.pin !== pin) {
-                return res.status(401).json({ message: 'Invalid PIN' });
             }
 
             req.userModel = userModel;
@@ -38,4 +37,4 @@ const validateUser = (source = 'body') => {
     };
 };
 
-export default validateUser;
+export default validateUserById;

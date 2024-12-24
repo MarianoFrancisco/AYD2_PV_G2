@@ -1,0 +1,143 @@
+<div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Registrar Administrador</h2>
+    <form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+      <!-- Nombre Completo -->
+      <div class="mb-4">
+        <label for="fullName" class="block text-gray-700 font-medium mb-2">Nombre Completo</label>
+        <input
+          id="fullName"
+          name="fullName"
+          type="text"
+          [(ngModel)]="fullName"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Ingresa tu nombre completo"
+        />
+      </div>
+  
+      <!-- Teléfono -->
+      <div class="mb-4">
+        <label for="phone" class="block text-gray-700 font-medium mb-2">Teléfono</label>
+        <input
+          id="phone"
+          name="phone"
+          type="text"
+          [(ngModel)]="phone"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Ingresa tu número de teléfono"
+        />
+      </div>
+  
+      <!-- Edad -->
+      <div class="mb-4">
+        <label for="age" class="block text-gray-700 font-medium mb-2">Edad</label>
+        <input
+          id="age"
+          name="age"
+          type="number"
+          [(ngModel)]="age"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Ingresa tu edad"
+        />
+      </div>
+  
+      <!-- CUI -->
+      <div class="mb-4">
+        <label for="cui" class="block text-gray-700 font-medium mb-2">CUI</label>
+        <input
+          id="cui"
+          name="cui"
+          type="text"
+          [(ngModel)]="cui"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Ingresa tu CUI"
+        />
+      </div>
+  
+      <!-- Correo Electrónico -->
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          [(ngModel)]="email"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Ingresa tu correo electrónico"
+        />
+      </div>
+  
+      <!-- Género -->
+      <div class="mb-4">
+        <label for="gender" class="block text-gray-700 font-medium mb-2">Género</label>
+        <select
+          id="gender"
+          name="gender"
+          [(ngModel)]="gender"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
+      </div>
+  
+      <!-- Estado Civil -->
+      <div class="mb-4">
+        <label for="maritalStatus" class="block text-gray-700 font-medium mb-2">Estado Civil</label>
+        <select
+          id="maritalStatus"
+          name="maritalStatus"
+          [(ngModel)]="maritalStatus"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="Soltero">Soltero</option>
+          <option value="Casado">Casado</option>
+          <option value="Divorciado">Divorciado</option>
+          <option value="Viudo">Viudo</option>
+        </select>
+      </div>
+  
+      <!-- Foto -->
+      <div class="mb-4">
+        <label for="photo" class="block text-gray-700 font-medium mb-2">Foto</label>
+        <input
+          id="photo"
+          name="photo"
+          type="file"
+          (change)="onFileChange($event, 'photo')"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+  
+      <!-- Documento PDF -->
+      <div class="mb-6">
+        <label for="pdf" class="block text-gray-700 font-medium mb-2">Documento PDF</label>
+        <input
+          id="pdf"
+          name="pdf"
+          type="file"
+          (change)="onFileChange($event, 'pdf')"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+  
+      <!-- Botón de Submit -->
+      <div class="flex justify-center">
+        <button
+          type="submit"
+          class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Registrar Empleado
+        </button>
+      </div>
+    </form>
+  </div>
+  

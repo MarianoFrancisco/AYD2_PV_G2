@@ -21,14 +21,15 @@ const DepositModel = sequelize.define(
                 min: 0.01,
             },
         },
-        deposit_type: {
-            type: DataTypes.ENUM('Efectivo', 'Transferencia Bancaria'),
+        account_type: {
+            type: DataTypes.ENUM('Monetaria', 'Ahorro'),
+            allowNull: false,
+        },
+        currency: {
+            type: DataTypes.ENUM('Quetzales', 'Dólares'),
             allowNull: false,
         },
         created_at: {
-            //type: DataTypes.DATE,
-            //allowNull: false,
-            //defaultValue: DataTypes.NOW,
             type: DataTypes.BIGINT,
             allowNull: false
         },
@@ -39,7 +40,6 @@ const DepositModel = sequelize.define(
     }
 );
 
-// Definir relaciones
 DepositModel.belongsTo(AccountModel, { foreignKey: 'account_id', as: 'account' });
 
 export default DepositModel;

@@ -16,43 +16,76 @@ const UserModel = sequelize.define('users', {
         type: DataTypes.STRING(100),
         allowNull: false
     },
-    rol: {
-        type: DataTypes.ENUM('Encargado', 'Cliente'),
+    role: {
+        type: DataTypes.ENUM(
+            'Cajero',
+            'Atención al Cliente',
+            'Administrador de Sistemas',
+            'Supervisor'
+        ),
         allowNull: false
     },
-    cui: {
-        type: DataTypes.CHAR(13),
+    user_name: {
+        type: DataTypes.STRING(15),
         allowNull: false,
         unique: true
     },
     email: {
         type: DataTypes.STRING(100),
-        allowNull: true,
+        allowNull: false,
         unique: true
+    },
+    password: {
+        type: DataTypes.STRING(255),
+        allowNull: false
     },
     phone: {
         type: DataTypes.STRING(15),
-        allowNull: true,
-        defaultValue: null
-    },
-    pin: {
-        type: DataTypes.CHAR(6),
         allowNull: false
     },
-    signature: {
+    age: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    dpi_number: {
+        type: DataTypes.STRING(25),
+        allowNull: false
+    },
+    complete_paperwork_path: {
         type: DataTypes.STRING(255),
+        allowNull: true
+    },
+    photo_path: {
+        type: DataTypes.STRING(255),
+        allowNull: true
+    },
+    gender: {
+        type: DataTypes.ENUM('Masculino', 'Femenino', 'Otro'),
+        allowNull: false
+    },
+    marital_status: {
+        type: DataTypes.ENUM('Soltero', 'Casado', 'Divorciado', 'Viudo', 'Otro'),
+        allowNull: false
+    },
+    signature_path: {
+        type: DataTypes.STRING(255),
+        allowNull: false
+    },
+    second_password_hash: {
+        type: DataTypes.STRING(255),
+        allowNull: true
+    },
+    second_password_updated_at: {
+        type: DataTypes.BIGINT,
+        allowNull: true
+    },
+    created_at: {
+        type: DataTypes.BIGINT,
         allowNull: false
     }
 }, {
     tableName: 'users',
-    timestamps: false,
-    hooks: {
-        beforeSave: async (user) => {
-            if (user.pin) {
-                user.pin = user.pin;
-            }
-        }
-    }
+    timestamps: false
 });
 
 export default UserModel;

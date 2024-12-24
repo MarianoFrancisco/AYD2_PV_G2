@@ -1,37 +1,35 @@
-import LoanPaymentModel from '../models/loan-payment.js';
 import LoanModel from '../models/loan-model.js';
 import AccountModel from '../models/account-model.js';
 import TransactionHistoryModel from '../models/transaction-history-model.js';
+import UserModel from '../models/user-model.js';
 import sequelize from '../../config/database-connection.js';
-
-/*
- * @author
- * Mariano Camposeco {@literal (mariano1941@outlook.es)}
- */
 const save = async (req, res) => {
-    const { loan_number, amount } = req.body;
-    const userModel = req.userModel;
+    const { employee_id, account_number, loan_id, amount, payment_date } = req.body;
 
-    if (!loan_number || !amount || amount <= 0) {
-        return res.status(400).json({ message: 'Loan number and amount are required, and amount must be positive' });
+    if (!loan_id || !amount || amount <= 0) {
+        return res.status(400).json({ message: 'Loan ID and amount are required, and amount must be positive' });
     }
 
     const transaction = await sequelize.transaction();
 
     try {
         const accountModel = await AccountModel.findOne({
-            where: { user_id: userModel.id },
-            attributes: ['id', 'balance', 'account_number'],
+            where: { account_number: account_number },
+            attributes: ['id', 'balance', 'account_number', 'name', 'last_name', 'account_type', 'currency', 'update_balance_at'],
             transaction
         });
 
         if (!accountModel) {
-            return res.status(404).json({ message: 'Account not found for the user' });
+            return res.status(404).json({ message: 'Account not found' });
+        }
+
+        if (accountModel.balance < amount) {
+            return res.status(400).json({ message: 'Insufficient account balance' });
         }
 
         const loanModel = await LoanModel.findOne({
-            where: { id: loan_number },
-            attributes: ['id', 'remaining_balance', 'total_amount', 'state'],
+            where: { id: loan_id },
+            attributes: ['id', 'remaining_balance', 'total_amount', 'state', 'loan_type'],
             transaction
         });
 
@@ -39,54 +37,72 @@ const save = async (req, res) => {
             return res.status(404).json({ message: 'Loan not found' });
         }
 
-        if (loanModel.remaining_balance < amount) {
-            return res.status(400).json({ message: 'Payment exceeds remaining balance' });
+        if (amount > loanModel.remaining_balance) {
+            return res.status(400).json({ message: 'Payment exceeds remaining loan balance' });
         }
-
-        if (accountModel.balance < amount) {
-            return res.status(400).json({ message: 'Insufficient account balance' });
-        }
-
-        const payment = await LoanPaymentModel.create({
-            loan_id: loanModel.id,
-            account_id: accountModel.id,
-            amount,
-        }, { transaction });
 
         const updatedLoan = await loanModel.update(
             { remaining_balance: loanModel.remaining_balance - amount },
             { transaction }
         );
 
+        const newLoanState = updatedLoan.remaining_balance === 0 ? 'Pagado' : 'Parcialmente Pagado';
+        await loanModel.update({ state: newLoanState }, { transaction });
+
         await accountModel.update(
-            { balance: accountModel.balance - amount },
+            {
+                balance: accountModel.balance - amount,
+                update_balance_at: Math.floor(Date.now() / 1000)
+            },
             { transaction }
         );
 
+        const description = newLoanState === 'Pagado' ? 'Pago total' : 'Pago parcial';
         await TransactionHistoryModel.create({
             account_id: accountModel.id,
             transaction_type: 'Pago de Préstamo',
             amount,
-            description: `Pago de préstamo - ${updatedLoan.state} (${loan_number})`,
+            description,
             created_at: Math.floor(Date.now() / 1000)
         }, { transaction });
 
-        const voucher = {
-            "account_number": accountModel.account_number,
-            'name': userModel.name,
-            'signature': userModel.signature
+        const userModel = await UserModel.findOne({
+            where: { id: employee_id },
+            attributes: ['id', 'signature_path'],
+            transaction
+        });
+
+        if (!userModel) {
+            return res.status(404).json({ message: 'Employee not found' });
         }
+
+        const voucher = {
+            account_number: accountModel.account_number,
+            name: `${accountModel.name} ${accountModel.last_name}`,
+            signature: userModel.signature_path
+        };
+
+        const loanState = {
+            loanState: newLoanState
+        };
 
         await transaction.commit();
 
-        res.status(201).json({
+        res.status(200).json({
             message: 'Loan payment completed successfully',
-            payment,
-            loanState: updatedLoan.state,
+            payment: {
+                created_at: payment_date,
+                loan_id: updatedLoan.id,
+                account_id: updatedLoan.account_id,
+                amount
+            },
+            loanState,
             voucher
         });
     } catch (error) {
-        await transaction.rollback();
+        if (transaction.finished !== 'commit') {
+            await transaction.rollback();
+        }
         res.status(500).json({ message: 'Error processing loan payment', error: error.message });
     }
 };

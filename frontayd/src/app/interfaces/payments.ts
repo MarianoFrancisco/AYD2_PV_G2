@@ -1,23 +1,24 @@
 export interface Payments {
-    service_name: string;
-    service_code: number;
+    id: string;
+    accountNumber: string;
+    dpi: string;
+    serviceName: string;
+    serviceCode: string;
     amount: number;
-    cui: string;
-    pin: string;
-}
-
-export interface ResponsePayments{
-    id: number,
-    account_id:number,
-    user_id: number,
-    service_type: string,
-    service_code: string,
-    amount: number,
-    created_at: string
-}
-
-export interface VoucherPayments{
-    account_number: string,
-    name: string,
-    signature: string
-}
+    paymentType: 'service' | 'cash'; // nuevo campo para el tipo de pago
+  }
+  
+  export interface ResponsePayments {
+    id: number;
+    service_type: string;
+    service_code: string;
+    amount: number;
+    created_at: string;
+  }
+  
+  export interface VoucherPayments {
+    account_number: string;
+    name: string;
+    signature: string;
+  }
+  

@@ -1,7 +1,5 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../../config/database-connection.js';
-import AccountModel from './account-model.js';
-import UserModel from './user-model.js';
 
 /*
  * @author
@@ -13,14 +11,6 @@ const ServicePaymentModel = sequelize.define('service_payments', {
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
-    },
-    account_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
     },
     service_type: {
         type: DataTypes.ENUM('Agua', 'Luz', 'Teléfono', 'Internet'),
@@ -40,7 +30,7 @@ const ServicePaymentModel = sequelize.define('service_payments', {
     created_at: {
         type: DataTypes.BIGINT,
         allowNull: false,
-        defaultValue: Math.floor(Date.now() / 1000)
+        defaultValue: () => Math.floor(Date.now() / 1000)
     }
 }, {
     tableName: 'service_payments',
@@ -53,11 +43,5 @@ const ServicePaymentModel = sequelize.define('service_payments', {
         }
     }
 });
-
-ServicePaymentModel.belongsTo(AccountModel, { foreignKey: 'account_id', as: 'account' });
-AccountModel.hasMany(ServicePaymentModel, { foreignKey: 'account_id' });
-
-ServicePaymentModel.belongsTo(UserModel, { foreignKey: 'user_id', as: 'user' });
-UserModel.hasMany(ServicePaymentModel, { foreignKey: 'user_id' });
 
 export default ServicePaymentModel;

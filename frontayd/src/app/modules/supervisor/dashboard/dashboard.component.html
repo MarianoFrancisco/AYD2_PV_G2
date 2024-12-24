@@ -1,0 +1,43 @@
+<div class="container mx-auto px-4 py-6">
+    <h1 class="text-3xl font-semibold mb-6 text-center text-blue-600">Bienvenido a Money Bin</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+      <div class="bg-blue-100 p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold text-blue-600">Monitoreo</h2>
+        <p class="mt-2 text-gray-600">Revisa el Monitoreo de Actividad en Tiempo Real.</p>
+        <a routerLink="/supervisor/monitoreo" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+  
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Registro</h2>
+        <p class="mt-2 text-gray-600">Registra nuevos administradores.</p>
+        <a routerLink="/supervisor/registrar-admin" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+  
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Quejas</h2>
+        <p class="mt-2 text-gray-600">Ver el Registro de Quejas.</p>
+        <button [routerLink]="['/supervisor/registros-quejas']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
+      </div>
+
+      <div class="bg-blue-100 p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold text-blue-600">Información</h2>
+        <p class="mt-2 text-gray-600">Informacion de los Administradores de sistemas.</p>
+        <a routerLink="/supervisor/informacion-admin" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+  
+
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Inventarios</h2>
+        <p class="mt-2 text-gray-600">Gestiona los Inventarios Bancarios.</p>
+        <button [routerLink]="['/supervisor/inventarios']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
+      </div>
+
+      <div class="bg-blue-100 p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold text-blue-600">Encuesta</h2>
+        <p class="mt-2 text-gray-600">Realiza las encuestas de Satisfacción</p>
+        <a routerLink="/supervisor/encuesta-satisfaccion" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+    </div>
+  </div>

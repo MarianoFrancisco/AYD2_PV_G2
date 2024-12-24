@@ -5,9 +5,9 @@ import UserModel from '../models/user-model.js';
 
 export const createWithdrawal = async (req, res) => {
     try {
-        const { account_number, amount, withdrawal_type } = req.body;
+        const { account_number, amount, account_type, currency, user_id } = req.body;
 
-        if (!account_number || !amount || !withdrawal_type) {
+        if (!account_number || !amount || !account_type || !currency) {
             return res.status(400).json({ message: 'Faltan datos obligatorios' });
         }
 
@@ -15,55 +15,79 @@ export const createWithdrawal = async (req, res) => {
             return res.status(400).json({ message: 'El monto debe ser mayor a cero' });
         }
 
-        if (![1, 2].includes(withdrawal_type)) {
-            return res.status(400).json({ message: 'Tipo de retiro inválido' });
+        if (!["Monetaria", "Ahorro"].includes(account_type)) {
+            return res.status(400).json({ message: 'Tipo de cuenta inválido' });
         }
 
-        const account = await AccountModel.findOne({ where: { account_number } });
+        if (!["Quetzales", "Dólares"].includes(currency)) {
+            return res.status(400).json({ message: 'Tipo de moneda inválido' });
+        }
+
+        const account = await AccountModel.findOne({
+            where: { account_number }
+        });
 
         if (!account) {
             return res.status(404).json({ message: 'Cuenta no encontrada' });
         }
 
-        if (parseFloat(account.balance) < parseFloat(amount)) {
+        const exchangeRate = 7.75;
+        let finalAmount = amount;
+        let description = `Retiro de efectivo en ${currency}`;
+
+        if (account.currency === "Quetzales y Dólares") {
+            if (currency === "Dólares") {
+                finalAmount = amount * exchangeRate;
+                description = `Retiro de ${amount} USD convertido a Quetzales`;
+            } else if (currency === "Quetzales") {
+                finalAmount = amount;
+                description = `Retiro de ${amount} Quetzales`;
+            }
+        } else if (currency === account.currency) {
+            finalAmount = amount;
+            description = `Retiro de ${amount} ${currency}`;
+        } else {
+            return res.status(400).json({ message: `La cuenta no admite retiros en ${currency}` });
+        }
+
+        if (parseFloat(account.balance) < parseFloat(finalAmount)) {
             return res.status(400).json({ message: 'Fondos insuficientes en la cuenta' });
         }
 
         const unixTimestamp = Math.floor(Date.now() / 1000);
 
-        // Actualizar balance
-        account.balance = parseFloat(account.balance) - parseFloat(amount);
+        account.balance = parseFloat(account.balance) - parseFloat(finalAmount);
         await account.save();
 
-        // Registrar retiro
         const withdrawal = await WithdrawalModel.create({
             account_id: account.id,
             amount,
-            withdrawal_type: withdrawal_type === 1 ? 'Ventanilla' : 'Cajero Automático',
-            created_at: unixTimestamp,
+            account_type,
+            currency,
+            created_at: unixTimestamp
         });
 
-        // Registrar en transaction_history
         const transactionHistory = await TransactionHistoryModel.create({
             account_id: account.id,
             transaction_type: 'Retiro',
             amount,
-            description: withdrawal_type === 1
-                ? 'Retiro efectivo desde ventanilla'
-                : 'Retiro efectivo desde cajero automático',
-            created_at: unixTimestamp,
+            description,
+            created_at: unixTimestamp
         });
 
-        // Obtener datos para el voucher
         const user = await UserModel.findOne({
-            where: { id: account.user_id },
-            attributes: ['name', 'signature'],
+            where: { id: user_id },
+            attributes: ['name', 'signature_path']
         });
+
+        if (!user) {
+            return res.status(404).json({ message: 'Usuario asociado a la cuenta no encontrado' });
+        }
 
         const voucher = {
             account_number,
             name: user.name,
-            signature: user.signature,
+            signature: user.signature_path,
         };
 
         const transaction = {
@@ -71,11 +95,14 @@ export const createWithdrawal = async (req, res) => {
             account_number,
             transaction_type: 'Retiro',
             amount: transactionHistory.amount,
+            account_type,
+            currency,
             description: transactionHistory.description,
-            created_at: transactionHistory.created_at,
+            created_at: transactionHistory.created_at
         };
 
-        res.status(200).json({ message: 'OK', voucher, transaction });
+        res.status(200).json({ message: 'Retiro realizado con éxito', voucher, transaction });
+
     } catch (error) {
         console.error('Error al procesar el retiro:', error);
         res.status(500).json({ message: 'Error interno del servidor', error: error.message });
