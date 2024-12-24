@@ -1,92 +1,70 @@
-<div class="container mx-auto p-6 max-w-lg bg-white shadow-md rounded-md">
-    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Realizar Depósito</h2>
-    <form (ngSubmit)="makeDeposit()">
-      <!-- Número de cuenta -->
-      <div class="mb-4">
-        <label for="accountNumber" class="block text-sm font-medium text-gray-700">
-          Número de cuenta
-        </label>
-        <input
-          type="text"
-          id="accountNumber"
-          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-          [(ngModel)]="accountNumber"
-          name="accountNumber"
-          placeholder="Ingrese el número de cuenta"
-          required
-        />
-      </div>
-  
-      <!-- Monto a depositar -->
-      <div class="mb-4">
-        <label for="amount" class="block text-sm font-medium text-gray-700">
-          Monto a depositar
-        </label>
-        <input
-          type="number"
-          id="amount"
-          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-          [(ngModel)]="amount"
-          name="amount"
-          placeholder="Ingrese el monto"
-          required
-        />
-      </div>
-  
-      <!-- Método de depósito -->
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Método de depósito</label>
-        <select
-          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-          [(ngModel)]="depositType"
-          name="depositType"
-        >
-          <option value="1">Efectivo</option>
-          <option value="2">Transferencia bancaria</option>
-        </select>
-      </div>
-  
-      <!-- Cuenta destino (si es transferencia) -->
-      <div *ngIf="depositType === '2'" class="mb-4">
-        <label for="targetAccount" class="block text-sm font-medium text-gray-700">
-          Cuenta destino
-        </label>
-        <input
-          type="text"
-          id="targetAccount"
-          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-          [(ngModel)]="targetAccount"
-          name="targetAccount"
-          placeholder="Ingrese la cuenta destino"
-        />
-      </div>
-  
-      <!-- Botón de realizar depósito -->
-      <div class="text-center">
-        <button
-          type="submit"
-          class="w-full px-4 py-2 bg-blue-600 text-white font-medium text-lg rounded-md shadow hover:bg-blue-700"
-        >
-          Realizar Depósito
-        </button>
-      </div>
-    </form>
-  
-    <!-- Mostrar recibo -->
-    <div *ngIf="receipt" class="mt-6 p-4 bg-gray-100 rounded-md">
-      <h3 class="text-lg font-bold text-gray-700">Recibo de Depósito</h3>
-      <p><strong>Número de cuenta:</strong> {{ receipt.voucher.account_number }}</p>
-      <p><strong>Nombre:</strong> {{ receipt.voucher.name }}</p>
-      <p><strong>Monto:</strong> {{ receipt.transaction.amount }}</p>
-      <p><strong>Descripción:</strong> {{ receipt.transaction.description }}</p>
-      <p><strong>Fecha:</strong> {{ receipt.transaction.created_at | date: 'short' }}</p>
-
-      <button
-      (click)="generatePDF()"
-      class="mt-4 px-4 py-2 bg-green-600 text-white font-medium rounded-md shadow hover:bg-green-700"
-    >
-      Generar PDF
-    </button>
+<!-- src/app/components/paypalments/paypalments.component.html -->
+<div class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-4">Realizar Pago</h1>
+  <form (ngSubmit)="makePaypalment()" class="space-y-4">
+    <div>
+      <label for="account_number" class="block text-sm font-medium">Número de Cuenta</label>
+      <input
+        id="account_number"
+        [(ngModel)]="paypalmentData.account_number"
+        name="account_number"
+        type="text"
+        required
+        class="border rounded w-full p-2"
+      />
     </div>
-  </div>
-  
+    <div>
+      <label for="amount" class="block text-sm font-medium">Monto</label>
+      <input
+        id="amount"
+        [(ngModel)]="paypalmentData.amount"
+        name="amount"
+        type="number"
+        required
+        class="border rounded w-full p-2"
+      />
+    </div>
+    <div>
+      <label for="account_type" class="block text-sm font-medium">Tipo de Cuenta</label>
+      <select
+        id="account_type"
+        [(ngModel)]="paypalmentData.account_type"
+        name="account_type"
+        required
+        class="border rounded w-full p-2"
+      >
+        <option value="Monetaria">Monetaria</option>
+        <option value="Ahorros">Ahorros</option>
+      </select>
+    </div>
+    <div>
+      <label for="currency" class="block text-sm font-medium">Moneda</label>
+      <select
+        id="currency"
+        [(ngModel)]="paypalmentData.currency"
+        name="currency"
+        required
+        class="border rounded w-full p-2"
+      >
+        <option value="Quetzales">Quetzales</option>
+        <option value="Dólares">Dólares</option>
+      </select>
+    </div>
+    <div>
+      <label for="allow_dollar_deposit" class="block text-sm font-medium">Permitir Depósito en Dólares</label>
+      <input
+        id="allow_dollar_deposit"
+        [(ngModel)]="paypalmentData.allow_dollar_deposit"
+        name="allow_dollar_deposit"
+        type="checkbox"
+        class="border rounded p-2"
+      />
+    </div>
+    <button
+      type="submit"
+      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+    >
+      Realizar Pago
+    </button>
+  </form>
+</div>
