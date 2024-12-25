@@ -6,5 +6,5 @@ export default {
     transform: {
         '^.+\\.js$': 'babel-jest',
     },
-    testMatch: ['**/tests/unit/**/*.test.js'],
+    testMatch: ['**/tests/unit-integration/**/*.test.js'],
 };
