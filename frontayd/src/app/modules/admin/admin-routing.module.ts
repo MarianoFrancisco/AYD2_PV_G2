@@ -29,7 +29,8 @@ const routes: Routes = [
   },
   {
     path:'cambio-contrasena', component: PasswordChangeComponent
-  }
+  },
+
 
 ];
 
