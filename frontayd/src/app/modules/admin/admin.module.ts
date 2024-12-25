@@ -6,12 +6,14 @@ import { EmployeeRegisterComponent } from './employee-register/employee-register
 import { RolesComponent } from './roles/roles.component';
 import { SecurityComponent } from './security/security.component';
 import { DasboardComponent } from './dashboard/dasboard.component';
+import { EmpleyeeAdminComponent } from './empleyee-admin/empleyee-admin.component';
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     AdminRoutingModule,
     EmployeeRegisterComponent,
+    EmpleyeeAdminComponent,
     RolesComponent,
     SecurityComponent,
     DasboardComponent
