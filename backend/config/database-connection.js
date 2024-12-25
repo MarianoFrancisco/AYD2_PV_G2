@@ -18,6 +18,9 @@ class Database {
         process.env.MYSQL_PASSWORD, {
           host: process.env.MYSQL_HOST,
           dialect: 'mysql',
+          dialectOptions: {
+              charset: 'utf8mb4',
+          },
           port: process.env.MYSQL_PORT,
           logging: false
         }
