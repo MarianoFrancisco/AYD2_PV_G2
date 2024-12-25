@@ -113,6 +113,7 @@ export const endpoints = {
     updateRole: '/api/user/role',
     withdrawal: '/api/withdrawal',
     deposit: '/api/deposit',
+    loanPayment: '/api/loan-payment',
 };
 
 // Roles
