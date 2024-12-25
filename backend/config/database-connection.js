@@ -34,7 +34,7 @@ class Database {
   try {
     const sequelize = Database.getInstance();
     await sequelize.authenticate();
-    console.log('Connection successfully established with the database.');
+    //console.log('Connection successfully established with the database.');
   } catch (error) {
     console.error('Error connecting to the database:', error);
   }
