@@ -7,6 +7,8 @@ import { RolesComponent } from './roles/roles.component';
 import { SecurityComponent } from './security/security.component';
 import { DasboardComponent } from './dashboard/dasboard.component';
 import { EmpleyeeAdminComponent } from './empleyee-admin/empleyee-admin.component';
+import { DeleteEmployeComponent } from './delete-employe/delete-employe.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -16,7 +18,10 @@ import { EmpleyeeAdminComponent } from './empleyee-admin/empleyee-admin.componen
     EmpleyeeAdminComponent,
     RolesComponent,
     SecurityComponent,
-    DasboardComponent
+    DasboardComponent,
+    PasswordChangeComponent,
+    DeleteEmployeComponent
+
   ]
 })
 export class AdminModule { }
