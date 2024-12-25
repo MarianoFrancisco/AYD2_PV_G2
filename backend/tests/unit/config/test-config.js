@@ -112,6 +112,7 @@ export const endpoints = {
     validateFile: '/api/authenticator/validate/file',
     updateRole: '/api/user/role',
     withdrawal: '/api/withdrawal',
+    deposit: '/api/deposit',
 };
 
 // Roles
