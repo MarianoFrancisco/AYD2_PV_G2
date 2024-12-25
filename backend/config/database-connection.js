@@ -18,6 +18,9 @@ class Database {
         process.env.MYSQL_PASSWORD, {
           host: process.env.MYSQL_HOST,
           dialect: 'mysql',
+          dialectOptions: {
+              charset: 'utf8mb4',
+          },
           port: process.env.MYSQL_PORT,
           logging: false
         }
@@ -31,7 +34,7 @@ class Database {
   try {
     const sequelize = Database.getInstance();
     await sequelize.authenticate();
-    console.log('Connection successfully established with the database.');
+    //console.log('Connection successfully established with the database.');
   } catch (error) {
     console.error('Error connecting to the database:', error);
   }

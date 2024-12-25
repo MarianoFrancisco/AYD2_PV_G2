@@ -182,3 +182,11 @@ en tiempo real en el banco.
  
 ##### Complicaciones: 
 - Actualizacion de datos
+
+
+
+-----
+
+## Registro kanban
+
+![Caso de uso](../Capturas/F2/kanban.png)

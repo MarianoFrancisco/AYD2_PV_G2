@@ -17,4 +17,14 @@ export interface Admins {
     "second_password_updated_at": number,
     "created_at": number
 }
+
+export interface Employees {
+    "id": number,
+    "name": string,
+    "solicitud": string,
+    "password": string,
+    "path_solicitud": string,
+    "created_at": number
+}
+
   

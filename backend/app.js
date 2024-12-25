@@ -6,7 +6,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
 import auhenticatorRouter from "./app/routes/authenticator.routes.js";
 import userRouter from "./app/routes/user.routes.js";
@@ -38,7 +37,6 @@ import databaseRouter from './app/routes/database.routes.js';
 
 const app = express();
 
-const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.json());

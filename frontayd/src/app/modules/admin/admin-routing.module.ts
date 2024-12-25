@@ -5,6 +5,7 @@ import { EmployeeRegisterComponent } from './employee-register/employee-register
 import { SecurityComponent } from './security/security.component';
 import { RolesComponent } from './roles/roles.component';
 import { DasboardComponent } from './dashboard/dasboard.component';
+import { EmpleyeeAdminComponent } from './empleyee-admin/empleyee-admin.component';
 const routes: Routes = [
   {
   path: 'inicio-admin', component: DasboardComponent  
@@ -17,6 +18,9 @@ const routes: Routes = [
   },
   {
     path:'roles-empelado', component: RolesComponent
+  },
+  {
+    path:'administrar-empleado', component: EmpleyeeAdminComponent
   }
 
 ];
