@@ -162,8 +162,10 @@ describe('Create Deposit Tests', () => {
     });
 
     it('should return 500 if there is an internal server error', async () => {
+        jest.spyOn(console, 'error').mockImplementation(() => {}); // Silencia los logs
+    
         AccountModel.findOne.mockRejectedValue(new Error('Database error'));
-
+    
         const response = await request(app)
             .post(endpoints.deposit)
             .send({
@@ -174,8 +176,10 @@ describe('Create Deposit Tests', () => {
                 allow_dollar_deposit: true,
                 user_id: accounts.account1.user.id,
             });
-
+    
         expect(response.status).toBe(500);
         expect(response.body.message).toBe('Error interno del servidor');
+    
+        jest.restoreAllMocks(); // Restaura los logs después del test
     });
 });
