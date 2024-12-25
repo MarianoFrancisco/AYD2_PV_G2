@@ -2,7 +2,7 @@ import { environment } from '../../../../src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Admins } from '../../interfaces/admins';
+import { Admins, Employees } from '../../interfaces/admins';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,18 @@ export class AdminsService {
   }
 
   deleteUser(id:number):Observable<string>{
+    return this.http.delete<string>(`${this.urlApi}/users/${id}`)
+  }
+
+  getAllEmployes():Observable<Employees[]>{
+    return this.http.get<Employees[]>(`${this.urlApi}/users`)
+  }
+
+  deleteEmployes(id:number):Observable<string>{
+    return this.http.delete<string>(`${this.urlApi}/users/${id}`)
+  }
+
+  changePasswordEmploye(id:number):Observable<string>{
     return this.http.delete<string>(`${this.urlApi}/users/${id}`)
   }
 }
