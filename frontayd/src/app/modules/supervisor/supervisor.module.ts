@@ -9,6 +9,10 @@ import { AdminSistemComponent } from './admin-sistem/admin-sistem.component';
 import { InventoriesComponent } from './inventories/inventories.component';
 import { SurveysComponent } from './surveys/surveys.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CancellationServiceComponent } from './cancellation-service/cancellation-service.component';
+import { LoanApproveCardsComponent } from './loan-approve-cards/loan-approve-cards.component';
+import { ModifyEmployeeComponent } from './modify-employee/modify-employee.component';
+import { ReportesComponent } from './reportes/reportes.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -20,7 +24,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AdminSistemComponent,
     InventoriesComponent,
     SurveysComponent,
-    DashboardComponent
+    DashboardComponent,
+    CancellationServiceComponent,
+    LoanApproveCardsComponent,
+    ModifyEmployeeComponent,
+    ReportesComponent
   ]
 })
 export class SupervisorModule { }
