@@ -27,6 +27,14 @@ export const users = {
         secondPassword: 'correctSecondPassword',
         hashedSecondPassword: '$2a$10$mpnWHTXDlbuC/DfFMoqsEe03Z9yvtxU8DQgkDbdUiHk9HS2OymNwK',
     },
+    validUser: {
+        id: 2,
+        name: 'Juan Perez',
+        role: 'Cajero',
+    },
+    nonExistentUser: {
+        id: 999,
+    },
 };
 
 // Endpoints
@@ -34,4 +42,11 @@ export const endpoints = {
     check: '/api/authenticator/check',
     validatePassword: '/api/authenticator/validate/password',
     validateFile: '/api/authenticator/validate/file',
+    updateRole: '/api/user/role',
+};
+
+// Roles
+export const roles = {
+    allowed: ['Cajero', 'Atención al Cliente'],
+    invalid: 'Administrador',
 };
