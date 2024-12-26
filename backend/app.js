@@ -5,44 +5,32 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import path from 'path';
-
 import auhenticatorRouter from "./app/routes/authenticator.routes.js";
 import userRouter from "./app/routes/user.routes.js";
 import accountRouter from "./app/routes/account.routes.js";
 import paymentServiceRouter from "./app/routes/payment-services.routes.js";
 import loanPaymentRouter from "./app/routes/loan-payment.routes.js";
 import loanListRouter from "./app/routes/loan-list.routes.js";
-
 import creditCardRouter from "./app/routes/credit-card.routes.js";
-
 import paycreditcardrouter from "./app/routes/pay-credit-card.routes.js";
-
 import updatecurren from "./app/routes/update-currency.routes.js";
 import surveyQuestionsRoute from './app/routes/survey-question.routes.js';
 import surveyCreateRoute from './app/routes/survey-create.routes.js';
 import surveyListRouter from "./app/routes/list-survey.routes.js";
-
 import complaintListRouter from "./app/routes/list-complaints.routes.js";
 import userManagementRouter from "./app/routes/user-management.routes.js";
 import inventory from "./app/routes/inventory.routes.js"
 import moni from "./app/routes/monitoring.routes.js"
-
 import clientRouter from "./app/routes/client.routes.js";
-
 import depositRouter from './app/routes/deposit.routes.js';
-
 import withdrawalRouter from './app/routes/withdrawal.routes.js';
 import databaseRouter from './app/routes/database.routes.js';
 
 const app = express();
 
-const __dirname = path.dirname(__filename);
-
 app.use(express.json());
 app.use(bodyParser.json({ limit: '15mb' }));
 app.use(cors());
-app.use('/signature', express.static(path.join(__dirname, 'img')));
 const api = '/api';
 
 const monitor = `${api}/monitoring`;
