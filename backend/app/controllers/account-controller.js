@@ -490,12 +490,8 @@ const createAdmin = async (req, res) => {
             return res.status(400).json({ message: 'Genero invalido' });
         }
 
-        // Verificar genero
-        if (!["Masculino", "Femenino", "otro"].includes(gender)) {
-            return res.status(400).json({ message: 'Genero invalido' });
-        }
 
-        // Verificar genero
+        // Verificar estado
         if (!["Soltero", "Casado", "Divorciado", "Viudo", "Otro"].includes(marital_status)) {
             return res.status(400).json({ message: 'Estado civil invalido' });
         }
