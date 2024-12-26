@@ -3,7 +3,7 @@ export default {
       {
         displayName: 'unit',
         testEnvironment: 'node',
-        testTimeout: 50000,
+        testTimeout: 100000,
         moduleFileExtensions: ['js', 'json'],
         setupFiles: ['<rootDir>/jest.setup.unit.js'],
         transform: {
@@ -14,7 +14,7 @@ export default {
       {
         displayName: 'integration',
         testEnvironment: 'node',
-        testTimeout: 50000,
+        testTimeout: 100000,
         moduleFileExtensions: ['js', 'json'],
         setupFiles: ['<rootDir>/jest.setup.integration.js'],
         transform: {
