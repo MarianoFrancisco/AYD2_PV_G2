@@ -2,7 +2,7 @@ import UserModel from "../models/user-model.js";
 
 // 1. Eliminar un usuario con rol "Administrador de Sistemas"
 export const deleteUser = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.query;
 
   try {
     const user = await UserModel.findOne({ where: { id } });

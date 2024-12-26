@@ -13,16 +13,14 @@ import { Op } from "sequelize";
 
 dotenv.config();
 
-
-
 const getBalance = async (req, res) => {
 
-    const UserModel = req.userModel;
+    const { id } = req.params;
 
     try {
         const accountModel = await AccountModel.findOne({
             where: {
-                account_number: UserModel.account_number
+                account_number: id
             }
         })
 
