@@ -1,4 +1,3 @@
-import AccountModel from '../models/account-model.js';
 import UserModel from '../models/user-model.js';
 
 /*
@@ -16,9 +15,9 @@ const validateUserById = (source = 'body') => {
                 });
             }
 
-            const userModel = await AccountModel.findOne({
+            const userModel = await UserModel.findOne({
                 where: {
-                    account_number: id
+                    id
                 }
             });
 
