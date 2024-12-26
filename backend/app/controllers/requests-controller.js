@@ -10,6 +10,7 @@ import UserModel from "../models/user-model.js";
 import CurrencyExchangeModel from "../models/currency-exchange-model.js";
 import { startOfDay, endOfDay } from "date-fns";
 import { Op } from "sequelize";
+import ServiceCancellation from "../models/service_cancellations-model.js";
 
 dotenv.config();
 
@@ -17,16 +18,62 @@ dotenv.config();
 const requestCancelSolicitud = async (req, res) => {
 
     //Recibir los datos del form
+    const {
+        account_id, 
+        service, 
+        reason
+    } = req.body;
     // Numero de cuenta o cui
     // servicio a cancelar (cuenta o tarjeta)
     // Motivo de la cancelacion
-    
+
+
+    //validar campos vacios
+    if(!account_id || !service || !reason){
+        return res.status(400).json({ error: "Faltan datos por llenar." })
+    }
+
+    //Verificar servicio
+    if (!["Cuenta", "Tarjeta"].includes(service)) {
+        return res.status(400).json({ message: 'Servicio invalido' });
+    }  
+
+    //Verificar que exista el numero de cuenta
+    const user = await AccountModel.findOne({
+        where: {
+            account_number: account_id 
+        } 
+    }); 
+
+    if(!user) {
+        return res.status(404).json({ message: "Cuenta de usuario no encontrado."});
+    }
 
 
     //Generar la fecha actual
+    const currentDate = Math.floor(Date.now() / 1000);
+
+
 
     //Colocar estado de solicitud como pendiente
+    try {
+        await ServiceCancellation.create({
+            account_id: parseInt(user.id, 10), 
+            service: service,
+            reason: reason, 
+            status: "Pendiente",
+            created_at: currentDate
+        })
 
+        return res.status(200).json({ message: 'Solicitud de cancelacion enviado' });
+
+    } catch (error) {
+        console.error('Error al enviar solicitud:', error);
+        res.status(500).json({ message: 'Error interno del servidor', error: error });
+    }
+    
+
+    
 
 }
 

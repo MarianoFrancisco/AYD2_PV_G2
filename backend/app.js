@@ -25,6 +25,7 @@ import clientRouter from "./app/routes/client.routes.js";
 import depositRouter from './app/routes/deposit.routes.js';
 import withdrawalRouter from './app/routes/withdrawal.routes.js';
 import databaseRouter from './app/routes/database.routes.js';
+import request from "./app/routes/requests.route.js"
 
 const app = express();
 
@@ -37,6 +38,7 @@ const monitor = `${api}/monitoring`;
 const authenticator = `${api}/authenticator`;
 const user = `${api}/user`;
 const account = `${api}/account`;
+const service = `${api}/cancellation`;
 
 const paymentService = `${api}/payment-service`;
 const loanPayment = `${api}/loan-payment`;
@@ -72,6 +74,7 @@ app.use(paymentService, paymentServiceRouter);
 app.use(loanPayment, loanPaymentRouter);
 app.use(loanList, loanListRouter);
 app.use(database, databaseRouter);
+app.use(service, request)
 
 app.use(creditCard, creditCardRouter);
 app.use(paycreditcard, paycreditcardrouter)
