@@ -1,10 +1,27 @@
 export default {
-    testTimeout: 10000,
-    testEnvironment: 'node',
-    moduleFileExtensions: ['js', 'json'],
-    setupFilesAfterEnv: ['./jest.setup.js'],
-    transform: {
-        '^.+\\.js$': 'babel-jest',
-    },
-    testMatch: ['**/tests/unit-integration/**/*.test.js'],
-};
+    projects: [
+      {
+        displayName: 'unit',
+        testEnvironment: 'node',
+        testTimeout: 50000,
+        moduleFileExtensions: ['js', 'json'],
+        setupFiles: ['<rootDir>/jest.setup.unit.js'],
+        transform: {
+          '^.+\\.js$': 'babel-jest',
+        },
+        testMatch: ['**/tests/unit/**/*.test.js'],
+      },
+      {
+        displayName: 'integration',
+        testEnvironment: 'node',
+        testTimeout: 50000,
+        moduleFileExtensions: ['js', 'json'],
+        setupFiles: ['<rootDir>/jest.setup.integration.js'],
+        transform: {
+          '^.+\\.js$': 'babel-jest',
+        },
+        testMatch: ['**/tests/integration/**/*.test.js'],
+      },
+    ],
+  };
+  

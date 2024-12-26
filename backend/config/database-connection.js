@@ -1,11 +1,12 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
+import path from 'path';
 
 /*
 * @author
 * Mariano Camposeco {@literal (mariano1941@outlook.es)}
 */
-dotenv.config();
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
 class Database {
   static instance;
@@ -34,7 +35,7 @@ class Database {
   try {
     const sequelize = Database.getInstance();
     await sequelize.authenticate();
-    //console.log('Connection successfully established with the database.');
+    // console.log('Connection successfully established with the database.');
   } catch (error) {
     console.error('Error connecting to the database:', error);
   }
