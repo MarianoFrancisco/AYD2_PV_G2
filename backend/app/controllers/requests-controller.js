@@ -77,6 +77,8 @@ const requestCancelSolicitud = async (req, res) => {
 
 }
 
+
+
 const requestPrestamo = async (req, res) => {
     const { account_number } = req.query;
 
@@ -103,11 +105,32 @@ const requestPrestamo = async (req, res) => {
     }
 };
 
+const sendrequestPrestamo = async (req, res) => {
+
+    /*Recibir cuenta/cui
+    tipo de prestamo
+    monto solicitado
+    plazo del prestamo
+    documentacion*/
+
+
+    //Validar campos vacios
+
+    //Validar plazo del prestamo
+
+    //Generar fecha y hora
+
+    //Estado de solicitud como pendiente
+    
+
+}
+
 
 
 
 
 export {
     requestCancelSolicitud,
-    requestPrestamo
+    requestPrestamo,
+    sendrequestPrestamo
 }
