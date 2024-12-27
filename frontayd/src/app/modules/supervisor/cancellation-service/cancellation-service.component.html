@@ -1,1 +1,35 @@
-<p>cancellation-service works!</p>
+<div class="container mx-auto">
+    <h1 class="text-3xl font-semibold mb-6 text-center text-blue-600">Solicitud para cancelar servicios Money Bin</h1>
+  
+    <div>
+      <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+        <thead>
+          <tr>
+            <th class="px-6 py-4 text-left">Cuenta</th>
+            <th class="px-6 py-4 text-left">Servicio</th>
+            <th class="px-6 py-4 text-left">Razón</th>
+            <th class="px-6 py-4 text-left">Estado</th>
+            <th class="px-6 py-4 text-left">Creado</th>
+            <th class="px-6 py-4 text-left">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+        <!--  @for (item of data; track $index) {
+          <tr>
+            <td class="px-6 py-4">{{item.account_id}}</td>
+            <td class="px-6 py-4">{{item.service}}</td>
+            <td class="px-6 py-4">{{item.reason}}</td>
+            <td class="px-6 py-4">{{item.status}}</td>
+            <td class="px-6 py-4">{{ convertirFecha(item.created_at) }}</td>
+            <td class="px-6 py-4">
+                <div class="flex gap-2">
+                    <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg" (click)="viewsDetails(item)">Detalles</button>
+                </div>
+            </td>
+          </tr>
+          }-->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
