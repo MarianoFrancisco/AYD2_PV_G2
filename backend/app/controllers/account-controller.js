@@ -340,7 +340,7 @@ const registroQuejas = async (req, res) => {
 const createEmployee = async (req, res) => {
     try {
         console.log(req.photoPath)
-        console.log(req.pdfPath)
+        console.log(req.pdfPath) //pdf
         const {
             fullName,
             phone,
@@ -353,12 +353,10 @@ const createEmployee = async (req, res) => {
             signature
         } = req.body;
 
-        req.pdfboyd //pdf
+        
 
         console.log(fullName)
         console.log(marital_status)
-
-
 
 
         // Valicadion de parametros obligatorios
@@ -447,7 +445,7 @@ const createEmployee = async (req, res) => {
             gender: gender,
             marital_status: marital_status,
             signature_path: "https://money-bin-group2.s3.us-east-1.amazonaws.com/signature/test.png",
-            second_password_hash: "",
+            second_password_hash: hashedPassword,
             created_at: currentDate
         });
 
