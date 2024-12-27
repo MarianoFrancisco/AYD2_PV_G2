@@ -23,4 +23,10 @@ export class SupervisorsService {
   updatePassEmployee(id:number):Observable<string>{
     return this.http.delete<string>(`${this.urlApi}/users/${id}`)
   }
+
+
+
+  getSolicitudCancelService():Observable<{empleados : Admins[]}>{
+    return  this.http.get<{empleados : Admins[]}>(`${this.urlApi}/account/getEmpleados`)
+  }
 }
