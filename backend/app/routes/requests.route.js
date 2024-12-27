@@ -1,6 +1,7 @@
 import express from "express"
 import {
-    requestCancelSolicitud 
+    requestCancelSolicitud, 
+    sendrequestPrestamo
 } from "../controllers/requests-controller.js"
 import validateUserById from '../middleware/validate-user-middleware.js';
 import imageUpload from '../middleware/image-middleware.js';
@@ -16,5 +17,11 @@ const router = express.Router();
 
 
 router.post("/cancelService", imageUpload.single('photo'), requestCancelSolicitud)
+router.post("/requestLoan",
+    upload.fields([
+        { name: 'pdf', maxCount: 1 },
+    ]),
+    uploadFilesHandler,
+    sendrequestPrestamo)
 
 export default router;
