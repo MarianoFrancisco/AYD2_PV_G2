@@ -7,6 +7,7 @@ import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import sendEmail from "../services/send-mail-service.js";
 import UserModel from "../models/user-model.js";
+import RequestLoanModel from "../models/service-request-loan-model.js";
 import CurrencyExchangeModel from "../models/currency-exchange-model.js";
 import { startOfDay, endOfDay } from "date-fns";
 import { Op } from "sequelize";
@@ -112,16 +113,72 @@ const sendrequestPrestamo = async (req, res) => {
     monto solicitado
     plazo del prestamo
     documentacion*/
+    const {
+        account_id, 
+        type_loan,
+        mount,
+        tiempo,
+        plazo, //Años, Meses
+
+    } = req.body
+
+    //documentacion
+    console.log(req.pdfPath)
 
 
-    //Validar campos vacios
+    // Valicadion de parametros obligatorios
+    if (!account_id || !type_loan || !mount || !tiempo || !plazo) {
+        return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+    }
 
-    //Validar plazo del prestamo
+    //Validar tipo  del prestamo
+    if (!["Personal", "Hipotecario", "Vehicular", "Educativo"].includes(type_loan)) {
+        return res.status(400).json({ message: 'Tipo de prestamo invalido' });
+    }
+
+     //Validar tiempo
+     if (!["Meses", "Años"].includes(plazo)) {
+        return res.status(400).json({ message: 'Plazo invalido' });
+    }
+
+    //validar existencia del usuario
+    const user = await AccountModel.findOne({
+        where: {
+            account_number: account_id 
+        } 
+    }); 
+
+    if(!user) {
+        return res.status(404).json({ message: "Cuenta de usuario no encontrado."});
+    }
+
+
 
     //Generar fecha y hora
+    const currentDate = Math.floor(Date.now() / 1000);
+
 
     //Estado de solicitud como pendiente
-    
+    try {
+        await RequestLoanModel.create({
+            account_id: parseInt(user.id, 10),
+            loan_type: type_loan,
+            requested_amount: parseFloat(mount),
+            term: plazo, //años, meses 
+            loan_term: parseInt(tiempo, 10), //int
+            requested_at: currentDate,
+            status: "Pendiente",
+            documentation_path: req.pdfPath
+
+
+        })
+
+        return res.status(200).json({ message: 'Solicitud de prestamo enviado' });
+
+
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving security question.', error: error.message });
+    }
 
 }
 

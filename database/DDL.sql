@@ -203,3 +203,17 @@ CREATE TABLE IF NOT EXISTS account_updates (
   updated_at BIGINT NOT NULL,
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
+
+
+-- Tabla de solicitudes de préstamos
+CREATE TABLE IF NOT EXISTS request_loan (
+  id INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único
+  account_id INT NOT NULL, -- Relación con la tabla de cuentas
+  loan_type ENUM('Personal', 'Hipotecario', 'Vehicular', 'Educativo') NOT NULL, -- Tipo de préstamo
+  requested_amount DECIMAL(12, 2) NOT NULL, -- Monto solicitado
+  loan_term INT NOT NULL, -- Plazo del préstamo (en meses o años, según definas)
+  requested_at BIGINT NOT NULL, -- Fecha y hora en formato timestamp
+  status ENUM('Pendiente', 'Aprobada', 'Rechazada') NOT NULL, -- Estado de la solicitud
+  documentation_path VARCHAR(255), -- Link donde se subirá el archivo PDF
+  FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE -- Relación con la tabla accounts
+);
