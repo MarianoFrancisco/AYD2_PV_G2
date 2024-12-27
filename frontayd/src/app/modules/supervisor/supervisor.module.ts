@@ -13,6 +13,8 @@ import { CancellationServiceComponent } from './cancellation-service/cancellatio
 import { LoanApproveCardsComponent } from './loan-approve-cards/loan-approve-cards.component';
 import { ModifyEmployeeComponent } from './modify-employee/modify-employee.component';
 import { ReportesComponent } from './reportes/reportes.component';
+import { DeleteEmployeComponent } from './delete-employe/delete-employe.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -28,7 +30,9 @@ import { ReportesComponent } from './reportes/reportes.component';
     CancellationServiceComponent,
     LoanApproveCardsComponent,
     ModifyEmployeeComponent,
-    ReportesComponent
+    ReportesComponent,
+    DeleteEmployeComponent,
+    PasswordChangeComponent
   ]
 })
 export class SupervisorModule { }

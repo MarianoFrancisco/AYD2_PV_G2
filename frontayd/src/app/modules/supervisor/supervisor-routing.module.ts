@@ -12,6 +12,8 @@ import { ReportesComponent } from './reportes/reportes.component';
 import { CancellationServiceComponent } from './cancellation-service/cancellation-service.component';
 import { LoanApproveCardsComponent } from './loan-approve-cards/loan-approve-cards.component';
 import { ModifyEmployeeComponent } from './modify-employee/modify-employee.component';
+import { DeleteEmployeComponent } from './delete-employe/delete-employe.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 
 const routes: Routes = [
   {
@@ -46,6 +48,12 @@ const routes: Routes = [
   },
   {
     path:'modificar-empleado', component: ModifyEmployeeComponent
+  },
+  {
+    path:'solicitud-delete-empleado', component: DeleteEmployeComponent
+  },
+  {
+    path:'solicitud-pass-empleado', component: PasswordChangeComponent
   }
 ];
 
