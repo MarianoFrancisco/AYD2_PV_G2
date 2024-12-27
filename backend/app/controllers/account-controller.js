@@ -726,6 +726,29 @@ const changePassword = async (req, res) => {
 
 
 }
+const getEmpleados = async (req, res) => {
+
+    //Obtener informacion de todos los empleados
+    try {
+        const empleados = await UserModel.findAll({
+            where: {
+    
+                role: { [Op.ne]: "Supervisor" }
+    
+            }
+        }) 
+    
+        return res.status(200).json({ empleados: empleados})
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal server error." });
+    }
+
+
+    
+
+}
 
 export {
     getBalance,
@@ -737,5 +760,6 @@ export {
     createEmployee,
     createAdmin,
     exchangeCurrency,
-    changePassword
+    changePassword,
+    getEmpleados
 }

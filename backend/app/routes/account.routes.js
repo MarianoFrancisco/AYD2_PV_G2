@@ -9,7 +9,8 @@ import {
     createEmployee,
     createAdmin,
     exchangeCurrency,
-    changePassword
+    changePassword,
+    getEmpleados
 } from "../controllers/account-controller.js"
 import validateUserById from '../middleware/validate-user-middleware.js';
 import imageUpload from '../middleware/image-middleware.js';
@@ -44,5 +45,6 @@ router.post('/registrarAdmin',
     createAdmin)
 router.patch('/update', imageUpload.single('photo'), uploadImageHandler, updateAccountInfo);
 router.post('/exchange-coin', exchangeCurrency)
+router.get("/getEmpleados", getEmpleados)
 
 export default router;
