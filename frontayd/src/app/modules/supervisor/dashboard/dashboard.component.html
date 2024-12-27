@@ -60,5 +60,16 @@
         <p class="mt-2 text-gray-600">Modifica o actualiza la informacion de los empleados.</p>
         <button [routerLink]="['/supervisor/modificar-empleado']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
       </div>
+
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Eliminar Empleado</h2>
+        <p class="mt-2 text-gray-600">Crea una solicitud para el administrador para eliminar empleado.</p>
+        <button [routerLink]="['/supervisor/solicitud-delete-empleado']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Cambiar Contraseña</h2>
+        <p class="mt-2 text-gray-600">Crea una solicitud para el administrador para cambiar contraseña a empleado.</p>
+        <button [routerLink]="['/supervisor/solicitud-pass-empleado']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
+      </div>
     </div>
   </div>
