@@ -217,3 +217,10 @@ CREATE TABLE IF NOT EXISTS request_loan (
   documentation_path VARCHAR(255), -- Link donde se subirá el archivo PDF
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE -- Relación con la tabla accounts
 );
+
+-- Tabla de solicitudes de modificacion informacion
+CREATE TABLE IF NOT EXISTS request_change_info (
+  id INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único
+  account_id INT NOT NULL, -- Relación con la tabla de cuentas
+  FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE -- Relación con la tabla accounts
+);
