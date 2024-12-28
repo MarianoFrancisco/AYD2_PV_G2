@@ -14,55 +14,44 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Docker
-        run: |
-          echo "Ensuring Docker is installed"
-          docker --version
-
       - name: Build Docker image
         run: |
-          docker build -t backend-money-bin:latest -f backend/Dockerfile backend
+          docker build --target build -t backend-money-bin-build:latest -f backend/Dockerfile backend
 
-      - name: Run Unit Tests
+      - name: Extract Unit Test Reports
         run: |
-          docker run --rm -v $PWD/test-reports:/app/test-reports backend-money-bin:latest npm test unit
+          docker cp $(docker create backend-money-bin-build:latest):/app/test-reports/unit ./unit-test-reports
+
+      - name: Extract Integration Test Reports
+        run: |
+          docker cp $(docker create backend-money-bin-build:latest):/app/test-reports/integration ./integration-test-reports
 
       - name: Upload Unit Test Reports
         uses: actions/upload-artifact@v3
         with:
           name: unit-test-reports
-          path: test-reports/unit/junit.xml
-
-      - name: Publish Unit Test Results
-        uses: dorny/test-reporter@v1
-        with:
-          name: Unit Tests
-          path: test-reports/unit/junit.xml
-          reporter: junit
-
-      - name: Run Integration Tests
-        run: |
-          docker run --rm -v $PWD/test-reports:/app/test-reports backend-money-bin:latest npm test integration
+          path: ./unit-test-reports/junit.xml
 
       - name: Upload Integration Test Reports
         uses: actions/upload-artifact@v3
         with:
           name: integration-test-reports
-          path: test-reports/integration/junit.xml
+          path: ./integration-test-reports/junit.xml
+
+      - name: Publish Unit Test Results
+        uses: dorny/test-reporter@v1
+        with:
+          name: Unit Tests
+          path: ./unit-test-reports/junit.xml
+          reporter: junit
 
       - name: Publish Integration Test Results
         uses: dorny/test-reporter@v1
         with:
           name: Integration Tests
-          path: test-reports/integration/junit.xml
+          path: ./integration-test-reports/junit.xml
           reporter: junit
 
-      - name: Save Docker image to file
+      - name: Build Production Docker Image
         run: |
-          docker save backend-money-bin:latest | gzip > backend-money-bin-latest.tar.gz
-
-      - name: Upload Docker image artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: backend-money-bin-latest
-          path: backend-money-bin-latest.tar.gz
+          docker build -t backend-money-bin:latest -f backend/Dockerfile backend

@@ -1,4 +1,3 @@
-# Etapa 1: Construcción y pruebas
 FROM node:18-alpine AS build
 WORKDIR /app
 
@@ -7,7 +6,8 @@ RUN npm install
 
 COPY . .
 
-RUN npm test
+RUN npm test unit && \
+    npm test integration
 
 FROM node:18-alpine
 WORKDIR /app
@@ -18,4 +18,5 @@ RUN npm install --only=production
 COPY . .
 
 EXPOSE 5000
+
 CMD ["node", "index.js"]
