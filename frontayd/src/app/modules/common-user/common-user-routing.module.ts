@@ -10,6 +10,7 @@ import {LoanPaymentsComponent} from './loan-payments/loan-payments.component'
 import { BalancesComponent } from './balances/balances.component';
 import { PayCreditcardComponent } from './pay-creditcard/pay-creditcard.component';
 import { CambiosComponent } from './cambios/cambios.component';
+import { RequestInfoComponent } from '../customer-service/request-info/request-info.component';
 const routes: Routes = [
 {
   path:'cuenta', component: AccountComponent
@@ -37,6 +38,9 @@ const routes: Routes = [
 },
 {
   path: 'cambios-moneda', component: CambiosComponent
+},
+{
+  path:'solicitud-cambio-info', component: RequestInfoComponent
 }
 ];
 

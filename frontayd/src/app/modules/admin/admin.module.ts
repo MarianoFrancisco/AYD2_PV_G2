@@ -9,6 +9,7 @@ import { DasboardComponent } from './dashboard/dasboard.component';
 import { EmpleyeeAdminComponent } from './empleyee-admin/empleyee-admin.component';
 import { DeleteEmployeComponent } from './delete-employe/delete-employe.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { RequestInfoComponent } from '../customer-service/request-info/request-info.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -20,7 +21,8 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
     SecurityComponent,
     DasboardComponent,
     PasswordChangeComponent,
-    DeleteEmployeComponent
+    DeleteEmployeComponent, 
+    RequestInfoComponent
 
   ]
 })
