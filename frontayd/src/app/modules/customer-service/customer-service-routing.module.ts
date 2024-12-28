@@ -11,7 +11,7 @@ import { BlockcardsComponent } from './blockcards/blockcards.component';
 import { CancelservicesComponent } from './cancelservices/cancelservices.component';
 import { CreatecardComponent } from './createcard/createcard.component';
 import { LoanapplicationsComponent } from './loanapplications/loanapplications.component';
-
+import { RequestInfoComponent } from './request-info/request-info.component';
 const routes: Routes = [
   {
     path: 'inicio-atencion-cliente', component: DashboardComponent
@@ -42,6 +42,9 @@ const routes: Routes = [
   },
   {
     path:'solicitud-prestamos-banco', component: LoanapplicationsComponent
+  },
+  {
+    path:'solicitud-informacion', component: RequestInfoComponent
   }
 ];
 
