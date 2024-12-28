@@ -1,15 +1,12 @@
 <div class="container mx-auto p-6 max-w-4xl bg-gray-50 rounded-lg shadow-md mt-10">
-  <!-- Título principal -->
   <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">
     Modificación de Información de Empleados
   </h1>
 
-  <!-- Mensaje sin solicitudes -->
   <div *ngIf="employeeRequests.length === 0" class="text-center text-gray-600">
     <p>No hay solicitudes pendientes.</p>
   </div>
 
-  <!-- Lista de solicitudes -->
   <ul
     *ngIf="employeeRequests.length > 0"
     class="space-y-4 border-t border-gray-200 pt-4"
@@ -37,8 +34,6 @@
       Editando: {{ selectedEmployee.name }}
     </h2>
 
-    <!-- Foto del empleado -->
-<!-- Foto del empleado -->
 <div class="mb-6 text-center">
   <img
     *ngIf="currentPhotoPath"
@@ -49,7 +44,6 @@
 </div>
 
 
-    <!-- Formulario -->
     <form
       [formGroup]="employeeForm"
       (ngSubmit)="submitUpdate()"

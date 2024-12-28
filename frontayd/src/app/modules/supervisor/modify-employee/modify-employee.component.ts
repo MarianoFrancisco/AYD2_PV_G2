@@ -17,7 +17,7 @@ export class ModifyEmployeeComponent implements OnInit {
   employeeRequests: EmployeeRequest[] = [];
   selectedEmployee: EmployeeRequest | null = null;
   employeeForm: FormGroup;
-  currentPhotoPath: string | null = null; // Almacena la ruta de la foto actual
+  currentPhotoPath: string | null = null;
 
   constructor(private employeeService: EmployeeService, private fb: FormBuilder) {
     this.employeeForm = this.fb.group({
@@ -38,14 +38,17 @@ export class ModifyEmployeeComponent implements OnInit {
   loadRequests(): void {
     this.employeeService.getRequests().subscribe(
       (response) => {
-        this.employeeRequests = response.Solicitudes;
+        const uniqueRequests = response.Solicitudes.filter((request, index, self) =>
+          index === self.findIndex((t) => t.id === request.id)
+        );
+        this.employeeRequests = uniqueRequests;
       },
       (error) => {
         console.error('Error fetching requests:', error);
       }
     );
   }
-
+  
   selectEmployee(employee: EmployeeRequest): void {
     
     this.selectedEmployee = employee;
