@@ -28,6 +28,18 @@ const EmployeeTerminationsModel = sequelize.define('employee_terminations', {
     allowNull: false,
     defaultValue: 'Activo',
   },
+  name_adm: {
+    type: DataTypes.STRING(100),
+    allowNull: false
+  },
+  phone_adm: {
+    type: DataTypes.STRING(15),
+    allowNull: false
+  },
+  email_adm: {
+    type: DataTypes.STRING(100),
+    allowNull: false,
+  },
 }, {
   tableName: 'employee_terminations',
   timestamps: false,

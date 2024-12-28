@@ -232,5 +232,8 @@ CREATE TABLE IF NOT EXISTS employee_terminations (
   signature_admin VARCHAR(255) NOT NULL,
   created_at BIGINT NOT NULL,
   status ENUM('Activo', 'Pendiente', 'Eliminado') NOT NULL DEFAULT 'Activo',
+  name_adm VARCHAR(100) NOT NULL,
+  phone_adm VARCHAR(15) NOT NULL,
+  email_adm VARCHAR(100) NOT NULL;
   FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE
 );
