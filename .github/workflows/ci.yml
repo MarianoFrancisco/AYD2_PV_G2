@@ -42,13 +42,6 @@ jobs:
           cd backend
           npm test integration --forceExit
 
-      - name: Publish Integration Test Results
-        uses: dorny/test-reporter@v1
-        with:
-          name: Integration Tests
-          path: ./test-reports/integration/junit.xml
-          reporter: junit
-
       - name: Set up Docker
         run: |
           echo "Ensuring Docker is installed"
