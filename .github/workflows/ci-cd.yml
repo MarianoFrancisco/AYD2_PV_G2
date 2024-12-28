@@ -72,7 +72,7 @@ jobs:
 
       - name: Transfer docker-compose.yml to EC2
         run: |
-          scp docker-compose.yml ubuntu@${{ secrets.BACKEND_IP }}:/home/ubuntu/
+          scp backend/docker-compose.yml ubuntu@${{ secrets.BACKEND_IP }}:/home/ubuntu/
 
       - name: Deploy Backend to EC2
         run: |
