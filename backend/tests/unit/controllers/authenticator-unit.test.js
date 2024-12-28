@@ -9,16 +9,8 @@ import {
 } from '../config/test-config';
 
 beforeAll(async () => {
-    try {
-        await sequelize.authenticate();
-    } catch (error) {
-        throw error;
-    }
+    sequelize.authenticate.mockResolvedValue();
 });
-
-jest.mock('../../../app/models/user-model', () => ({
-    findOne: jest.fn()
-}));
 
 jest.mock('bcryptjs', () => ({
     compare: jest.fn(),
@@ -29,7 +21,7 @@ afterEach(() => {
 });
 
 afterAll(async () => {
-    await sequelize.close();
+    sequelize.close.mockResolvedValue();
 });
 
 describe('Authentication Tests', () => {

@@ -7,29 +7,8 @@ import TransactionHistoryModel from '../../../app/models/transaction-history-mod
 import sequelize from '../../../config/database-connection';
 import { accounts, endpoints } from '../config/test-config';
 
-jest.mock('../../../app/models/account-model', () => ({
-    findOne: jest.fn(),
-    save: jest.fn(),
-}));
-
-jest.mock('../../../app/models/user-model', () => ({
-    findOne: jest.fn(),
-}));
-
-jest.mock('../../../app/models/withdrawal-model', () => ({
-    create: jest.fn(),
-}));
-
-jest.mock('../../../app/models/transaction-history-model', () => ({
-    create: jest.fn(),
-}));
-
 beforeAll(async () => {
-    try {
-        await sequelize.authenticate();
-    } catch (error) {
-        throw error;
-    }
+    sequelize.authenticate.mockResolvedValue();
 });
 
 afterEach(() => {
@@ -37,7 +16,7 @@ afterEach(() => {
 });
 
 afterAll(async () => {
-    await sequelize.close();
+    sequelize.close.mockResolvedValue();
 });
 
 describe('Create Withdrawal Tests', () => {
