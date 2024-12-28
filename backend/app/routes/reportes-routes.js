@@ -1,5 +1,7 @@
 import express from "express"
-import { reporte_prestamos } from "../controllers/reportes-controller.js";
+import { reporte_prestamos, 
+    reporte_solicitudes 
+} from "../controllers/reportes-controller.js";
 import validateUserById from '../middleware/validate-user-middleware.js';
 import imageUpload from '../middleware/image-middleware.js';
 import uploadImageHandler from '../handlers/upload-image-handler.js';
@@ -14,5 +16,6 @@ const router = express.Router();
 
 
 router.get("/reportePrestamos", reporte_prestamos)
+router.get("/reporteSolicitudes", reporte_solicitudes)
 
 export default router;
