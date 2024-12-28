@@ -224,3 +224,13 @@ CREATE TABLE IF NOT EXISTS request_change_info (
   account_id INT NOT NULL, -- Relación con la tabla de cuentas
   type ENUM("Informacion", "Password") NOT NULL
 );
+-- Tabla de empleados eliminados
+CREATE TABLE IF NOT EXISTS employee_terminations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_user INT NOT NULL,
+  reason VARCHAR(255) NOT NULL,
+  signature_admin VARCHAR(255) NOT NULL,
+  created_at BIGINT NOT NULL,
+  status ENUM('Activo', 'Pendiente', 'Eliminado') NOT NULL DEFAULT 'Activo',
+  FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE
+);
