@@ -3,14 +3,12 @@ import AccountUpdateModel from '../models/account-update-model.js';
 import sequelize from '../../config/database-connection.js';
 import generateAccountNumber from "../middleware/numberAccount-middleware.js";
 import ComplaintsModel from "../models/complaints-model.js";
-import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import sendEmail from "../services/send-mail-service.js";
 import UserModel from "../models/user-model.js";
 import RequestLoanModel from "../models/service-request-loan-model.js";
 import CurrencyExchangeModel from "../models/currency-exchange-model.js";
-import { startOfDay, endOfDay } from "date-fns";
-import { Op } from "sequelize";
+
 import ServiceCancellation from "../models/service_cancellations-model.js";
 import requestChangeInfo from "../models/request-change-info-model.js";
 

@@ -26,6 +26,7 @@ import depositRouter from './app/routes/deposit.routes.js';
 import withdrawalRouter from './app/routes/withdrawal.routes.js';
 import databaseRouter from './app/routes/database.routes.js';
 import request from "./app/routes/requests.route.js"
+import report from "./app/routes/reportes-routes.js"
 
 import createCardRouter from "./app/routes/create-card.routes.js";
 import block_card from "./app/routes/card-block.routes.js"
@@ -45,6 +46,7 @@ const authenticator = `${api}/authenticator`;
 const user = `${api}/user`;
 const account = `${api}/account`;
 const service = `${api}/cancellation`;
+const reportes = `${api}/reportes`;
 
 const paymentService = `${api}/payment-service`;
 const loanPayment = `${api}/loan-payment`;
@@ -87,6 +89,7 @@ app.use(loanPayment, loanPaymentRouter);
 app.use(loanList, loanListRouter);
 app.use(database, databaseRouter);
 app.use(service, request)
+app.use(reportes, report)
 
 app.use(creditCard, creditCardRouter);
 app.use(paycreditcard, paycreditcardrouter)
