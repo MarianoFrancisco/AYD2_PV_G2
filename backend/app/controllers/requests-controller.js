@@ -12,6 +12,7 @@ import CurrencyExchangeModel from "../models/currency-exchange-model.js";
 import { startOfDay, endOfDay } from "date-fns";
 import { Op } from "sequelize";
 import ServiceCancellation from "../models/service_cancellations-model.js";
+import RequestChangeInfo from "../models/service-request-change-info-model.js";
 
 dotenv.config();
 
@@ -177,9 +178,129 @@ const sendrequestPrestamo = async (req, res) => {
 
 
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving security question.', error: error.message });
+        res.status(500).json({ message: 'Error interno', error: error.message });
     }
 
+}
+
+const sendRequestChangePassword = async(req, res) => {
+
+    const {
+        account_id
+    } = req.body 
+
+    //Validar parametros obligatorios
+    if (!account_id) {
+        return res.status(400).json({ message: "Todos los campos son obligatorios"})
+    }
+
+    //validar existencia del usuario
+    const user = await AccountModel.findOne({
+        where: {
+            account_number: account_id 
+        } 
+    }); 
+
+    if(!user) {
+        return res.status(404).json({ message: "Cuenta de usuario no encontrado."});
+    }
+
+    //Type de solicitud Password
+    try {
+        await RequestChangeInfo.create({
+            account_id: parseInt(user.id, 10),
+            type: "Password",
+
+        })
+
+        return res.status(200).json({ message: 'Solicitud de cambio de contraseña enviado' });
+
+
+    } catch (error) {
+        res.status(500).json({ message: 'Error interno', error: error.message });
+    }
+
+
+}
+
+const sendRequestChangeInfo = async(req, res) => {
+
+    const {
+        account_id
+    } = req.body 
+
+    //Validar parametros obligatorios
+    if (!account_id) {
+        return res.status(400).json({ message: "Todos los campos son obligatorios"})
+    }
+
+    //validar existencia del usuario
+    const user = await AccountModel.findOne({
+        where: {
+            account_number: account_id 
+        } 
+    }); 
+
+    if(!user) {
+        return res.status(404).json({ message: "Cuenta de usuario no encontrado."});
+    }
+
+    //Type de solicitud Informacion
+    try {
+        await RequestChangeInfo.create({
+            account_id: parseInt(user.id, 10),
+            type: "Informacion",
+
+        })
+
+        return res.status(200).json({ message: 'Solicitud de cambio de contraseña enviado' });
+
+
+    } catch (error) {
+        res.status(500).json({ message: 'Error interno', error: error.message });
+    }
+
+
+}
+
+const getRequestChangePasword = async(req, res) => {
+
+    try{
+        const requestChangePassword = await RequestChangeInfo.findAll({
+            where: {
+                type: "Password"
+            }
+        })
+
+        return res.status(200).json({ Solicitudes: requestChangePassword });
+
+
+
+    } catch (error) {
+        res.status(500).json({ message: 'Error interno', error: error.message });
+    }
+
+    
+
+
+
+}
+
+const getRequestChangInfo = async(req, res) => {
+    try{
+        const requestChangePassword = await RequestChangeInfo.findAll({
+            where: {
+                type: "Informacion"
+            }
+        })
+
+        return res.status(200).json({ Solicitudes: requestChangePassword });
+
+
+
+    } catch (error) {
+        res.status(500).json({ message: 'Error interno', error: error.message });
+    }
 }
 
 
