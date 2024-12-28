@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature202030987_ci-cd-backend
 
 jobs:
   setup-and-tests:
