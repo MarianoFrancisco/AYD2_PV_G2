@@ -1,1 +1,121 @@
-<p>createcard works!</p>
+<div class="container mx-auto p-6 max-w-3xl bg-gray-50 rounded-lg shadow-lg">
+    <!-- Título principal -->
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Crear Tarjeta</h1>
+  
+    <!-- Formulario para crear la tarjeta -->
+    <form class="space-y-6">
+      <!-- Número de cuenta -->
+      <div>
+        <label
+          for="accountNumber"
+          class="block text-sm font-medium text-gray-700"
+        >
+          Número de Cuenta
+        </label>
+        <input
+          id="accountNumber"
+          type="text"
+          [(ngModel)]="accountNumber"
+          name="accountNumber"
+          class="border-gray-300 border rounded-lg p-3 w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Ingresa el número de cuenta"
+        />
+      </div>
+  
+      <!-- Tipo de tarjeta -->
+      <div>
+        <label for="cardType" class="block text-sm font-medium text-gray-700">
+          Tipo de Tarjeta
+        </label>
+        <select
+          id="cardType"
+          [(ngModel)]="cardType"
+          name="cardType"
+          class="border-gray-300 border rounded-lg p-3 w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        >
+          <option value="Débito">Débito</option>
+          <option value="Crédito">Crédito</option>
+        </select>
+      </div>
+  
+      <!-- Límite de crédito (visible si es tarjeta de crédito) -->
+      <div *ngIf="cardType === 'Crédito'">
+        <label
+          for="creditLimit"
+          class="block text-sm font-medium text-gray-700"
+        >
+          Límite de Crédito
+        </label>
+        <input
+          id="creditLimit"
+          type="number"
+          [(ngModel)]="creditLimit"
+          name="creditLimit"
+          class="border-gray-300 border rounded-lg p-3 w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Ingresa el límite de crédito"
+          min="0"
+        />
+      </div>
+  
+      <!-- Fecha de emisión -->
+      <div>
+        <label for="issueDate" class="block text-sm font-medium text-gray-700">
+          Fecha de Emisión
+        </label>
+        <input
+          id="issueDate"
+          type="date"
+          [(ngModel)]="issueDate"
+          name="issueDate"
+          class="border-gray-300 border rounded-lg p-3 w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          [readonly]="isDateReadonly"
+        />
+      </div>
+  
+      <!-- Botón para crear tarjeta -->
+      <div class="text-center">
+        <button
+          type="button"
+          (click)="createCard()"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md focus:ring-2 focus:ring-blue-500"
+        >
+          Crear Tarjeta
+        </button>
+        <button
+        type="button"
+        (click)="clearForm()"
+        class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-md focus:ring-2 focus:ring-gray-500"
+      >
+        Limpiar Pantalla
+      </button>
+      </div>
+    </form>
+  
+    <!-- Detalles de la tarjeta creada -->
+    <div
+      *ngIf="createdCard"
+      class="mt-6 p-6 bg-gray-100 border-t-4 border-blue-500 rounded-lg shadow-md"
+    >
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+        Detalles de la Solicitud de la Tarjeta enviada a Supervisor
+      </h2>
+      <ul class="space-y-2 text-gray-700">
+        <li><strong>Número de Tarjeta:</strong> {{ createdCard.card_number }}</li>
+        <li><strong>Tipo de Tarjeta:</strong> {{ createdCard.card_type }}</li>
+        <li><strong>Fecha de Emisión  <button
+            type="button"
+            (click)="clearForm()"
+            class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-md focus:ring-2 focus:ring-gray-500"
+          >
+            Limpiar Pantalla
+          </button>:</strong> {{ createdCard.issue_date | date: 'dd/MM/yyyy' }}</li>
+        <li><strong>Fecha de Expiración:</strong> {{ createdCard.expiry_date | date: 'dd/MM/yyyy' }}</li>
+        <li *ngIf="cardType === 'Crédito'">
+          <strong>Límite de Crédito:</strong> Q{{ createdCard.credit_limit }}
+        </li>
+        <li><strong>Saldo:</strong> Q{{ createdCard.balance }}</li>
+        <li><strong>Estado:</strong> {{ createdCard.status }}</li>
+      </ul>
+    </div>
+  </div>
+  
