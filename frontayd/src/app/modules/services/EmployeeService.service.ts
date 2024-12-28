@@ -8,8 +8,8 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class EmployeeService {
-  private readonly getRequestsUrl = 'http://127.0.0.1:5000/api/cancellation/getRequestChangeInfo';
-  private readonly updateInfoUrl = 'http://127.0.0.1:5000/api/account/changeInfo';
+  private readonly getRequestsUrl = `${environment.API_URL}/cancellation/getRequestChangeInfo`;
+  private readonly updateInfoUrl = `${environment.API_URL}/account/changeInfo`;
 
   constructor(private http: HttpClient) {}
 
