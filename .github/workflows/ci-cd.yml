@@ -70,23 +70,15 @@ jobs:
         run: |
           sudo docker --version
 
-      - name: Build Docker image
+      - name: Transfer docker-compose.yml to EC2
         run: |
-          sudo docker build -t backend-money-bin:latest -f backend/Dockerfile backend
-
-      - name: Save Docker image to file
-        run: |
-          sudo docker save backend-money-bin:latest | gzip > backend-money-bin-latest.tar.gz
-
-      - name: Transfer Docker image to EC2
-        run: |
-          scp backend-money-bin-latest.tar.gz ubuntu@${{ secrets.BACKEND_IP }}:/home/ubuntu/
+          scp docker-compose.yml ubuntu@${{ secrets.BACKEND_IP }}:/home/ubuntu/
 
       - name: Deploy Backend to EC2
         run: |
           ssh ubuntu@${{ secrets.BACKEND_IP }} << 'EOF'
           cd /home/ubuntu
           sudo docker load < backend-money-bin-latest.tar.gz
-          sudo docker-compose down
-          sudo docker-compose up -d
+          sudo docker-compose -f /home/ubuntu/docker-compose.yml down
+          sudo docker-compose -f /home/ubuntu/docker-compose.yml up -d
           EOF
