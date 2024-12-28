@@ -20,6 +20,10 @@ const requestChangeInfo = sequelize.define('request_change_info', {
       type: DataTypes.ENUM('Informacion', 'Password'),
       allowNull: false,
     },
+    created_at: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+    },
     
   }, {
     tableName: 'request_change_info',
