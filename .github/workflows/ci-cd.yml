@@ -39,12 +39,12 @@ jobs:
       - name: Run Unit Tests
         run: |
           cd backend
-          npm test -- --selectProjects unit --forceExit
+          npm test -- --selectProjects unit --detectOpenHandles
 
       - name: Run Integration Tests
         run: |
           cd backend
-          npm test -- --selectProjects integration --forceExit
+          npm test -- --selectProjects integration --detectOpenHandles
 
       - name: Set up Docker
         run: |
