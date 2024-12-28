@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS cards (
   expiry_date BIGINT NOT NULL,
   credit_limit DECIMAL(12, 2) DEFAULT NULL,
   balance DECIMAL(12, 2) DEFAULT 0,
-  active BOOLEAN DEFAULT TRUE,
+  status ENUM('Activa', 'Pendiente', 'Rechazada', 'Bloqueado') NOT NULL DEFAULT 'Pendiente',
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
 -- Tabla de bloqueos de tarjetas

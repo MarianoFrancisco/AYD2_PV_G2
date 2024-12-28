@@ -27,6 +27,8 @@ import withdrawalRouter from './app/routes/withdrawal.routes.js';
 import databaseRouter from './app/routes/database.routes.js';
 import request from "./app/routes/requests.route.js"
 
+import createCardRouter from "./app/routes/create-card.routes.js";
+
 const app = express();
 
 app.use(express.json());
@@ -64,6 +66,8 @@ const deposit = `${api}/deposit`;
 const withdrawal = `${api}/withdrawal`;
 const invetory = `${api}/inventory`;
 
+const createCardEndpoint = `${api}/create-card`;
+
 app.use(monitor, moni);
 app.use(invetory, inventory);
 app.use(authenticator, auhenticatorRouter);
@@ -92,5 +96,7 @@ app.use(clientService, clientRouter);
 app.use(deposit, depositRouter);
 
 app.use(withdrawal, withdrawalRouter);
+
+app.use(createCardEndpoint, createCardRouter);
 
 export default app;
