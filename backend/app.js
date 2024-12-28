@@ -28,6 +28,7 @@ import databaseRouter from './app/routes/database.routes.js';
 import request from "./app/routes/requests.route.js"
 
 import createCardRouter from "./app/routes/create-card.routes.js";
+import block_card from "./app/routes/card-block.routes.js"
 
 const app = express();
 
@@ -67,6 +68,7 @@ const withdrawal = `${api}/withdrawal`;
 const invetory = `${api}/inventory`;
 
 const createCardEndpoint = `${api}/create-card`;
+const block_card_endpoint = `${api}/block-card`;
 
 app.use(monitor, moni);
 app.use(invetory, inventory);
@@ -98,5 +100,6 @@ app.use(deposit, depositRouter);
 app.use(withdrawal, withdrawalRouter);
 
 app.use(createCardEndpoint, createCardRouter);
+app.use(block_card_endpoint, block_card);
 
 export default app;
