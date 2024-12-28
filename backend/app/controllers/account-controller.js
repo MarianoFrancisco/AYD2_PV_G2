@@ -706,6 +706,7 @@ const changePassword = async (req, res) => {
 
     //Cambiar contraseña en base de datos
     userModel.password = hashedPassword
+    userModel.second_password_hash = hashedPassword
     await userModel.save();
 
 

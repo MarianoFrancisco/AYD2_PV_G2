@@ -4,17 +4,8 @@ import UserModel from '../../../app/models/user-model';
 import sequelize from '../../../config/database-connection';
 import { users, roles, endpoints } from '../config/test-config';
 
-// Mock de UserModel
-jest.mock('../../../app/models/user-model', () => ({
-    findByPk: jest.fn(),
-}));
-
 beforeAll(async () => {
-    try {
-        await sequelize.authenticate();
-    } catch (error) {
-        throw error;
-    }
+    sequelize.authenticate.mockResolvedValue();
 });
 
 afterEach(() => {
@@ -22,7 +13,7 @@ afterEach(() => {
 });
 
 afterAll(async () => {
-    await sequelize.close();
+    sequelize.close.mockResolvedValue();
 });
 
 describe('Update User Role by Admin Tests', () => {
@@ -49,6 +40,7 @@ describe('Update User Role by Admin Tests', () => {
                 role: roles.allowed[1],
             },
         });
+        expect(validUser.role).toBe(roles.allowed[1]);
         expect(validUser.save).toHaveBeenCalled();
     });
 

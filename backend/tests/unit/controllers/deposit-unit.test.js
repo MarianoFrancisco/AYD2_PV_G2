@@ -7,29 +7,8 @@ import TransactionHistoryModel from '../../../app/models/transaction-history-mod
 import sequelize from '../../../config/database-connection';
 import { accounts, endpoints } from '../config/test-config';
 
-// Mock de los modelos
-jest.mock('../../../app/models/account-model', () => ({
-    findOne: jest.fn(),
-}));
-
-jest.mock('../../../app/models/user-model', () => ({
-    findOne: jest.fn(),
-}));
-
-jest.mock('../../../app/models/deposit-model', () => ({
-    create: jest.fn(),
-}));
-
-jest.mock('../../../app/models/transaction-history-model', () => ({
-    create: jest.fn(),
-}));
-
 beforeAll(async () => {
-    try {
-        await sequelize.authenticate();
-    } catch (error) {
-        throw error;
-    }
+    sequelize.authenticate.mockResolvedValue();
 });
 
 afterEach(() => {
@@ -37,7 +16,7 @@ afterEach(() => {
 });
 
 afterAll(async () => {
-    await sequelize.close();
+    sequelize.close.mockResolvedValue();
 });
 
 describe('Create Deposit Tests', () => {
@@ -180,6 +159,6 @@ describe('Create Deposit Tests', () => {
         expect(response.status).toBe(500);
         expect(response.body.message).toBe('Error interno del servidor');
     
-        jest.restoreAllMocks(); // Restaura los logs después del test
+        jest.restoreAllMocks();
     });
 });
