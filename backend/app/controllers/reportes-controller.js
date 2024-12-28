@@ -13,6 +13,7 @@ import ServiceCancellation from "../models/service_cancellations-model.js";
 import requestChangeInfo from "../models/request-change-info-model.js";
 import LoanModel from "../models/loan-model.js";
 import CardModel from "../models/card-model.js";
+import TransactionHistoryModel from "../models/transaction-history-model.js";
 
 
 dotenv.config();
@@ -251,6 +252,82 @@ const reporte_solicitudes = async (req, res) => {
 }
 
 
+const reporte_transacciones = async(req, res) => {
+
+    try{
+        //Obtener a todos los usuarios
+    const usuarios = await AccountModel.findAll()
+
+    //crar lista de transacciones
+    let history_transactions = []
+
+    //Recorrer cada usuario para obtener sus transacciones
+    for(let i = 0; i < usuarios.length; i++) {
+        const transacciones = await TransactionHistoryModel.findAll({
+            where: {
+                account_id: usuarios[i].id
+            }
+        })
+
+        //Recorrer las transacciones y clasificarlas
+        let pago_servicio = 0
+        let pago_prestamos = 0
+        let pago_credito = 0
+        let retiro = 0
+        let deposito = 0
+        for(let j = 0; j < transacciones.length; j++) {
+
+            let actual_transaction = transacciones[j]
+
+            if(actual_transaction.transaction_type == "Depósito") {
+                deposito+=parseFloat(actual_transaction.amount)
+
+            }else if (actual_transaction.transaction_type == "Retiro") {
+                retiro+=parseFloat(actual_transaction.amount)
+
+            }else if (actual_transaction.transaction_type == "Pago de Servicio") {
+                pago_servicio+=parseFloat(actual_transaction.amount)
+
+            }else if (actual_transaction.transaction_type == "Pago de Préstamo") {
+                pago_prestamos+=parseFloat(actual_transaction.amount)
+
+            }else if (actual_transaction.transaction_type == "Pago crédito") {
+                pago_credito+=parseFloat(actual_transaction.amount)
+
+            }
+
+        }
+
+        //Crar informacion del usuario
+        const user_actual = {
+            account_number: usuarios[i].account_number,
+            name: usuarios[i].name,
+            last_name: usuarios[i].last_name,
+            pago_servicio_total: pago_servicio,
+            pago_prestamos_total: pago_prestamos,
+            pago_credito_total: pago_credito,
+            retiro_total: retiro, 
+            deposito_total: deposito,
+            dinero_total_cuenta: usuarios[i].balance
+
+        }
+
+        history_transactions.push(user_actual)
+
+        
+
+
+
+    }
+    res.status(201).json({ transacciones: history_transactions});
+    } catch (error) {
+        await transaction.rollback();
+        res.status(500).json({ message: 'Error interno', error: error });
+    }
+
+}
+
+
 
 
 
@@ -259,5 +336,6 @@ const reporte_solicitudes = async (req, res) => {
 
 export {
     reporte_prestamos,
-    reporte_solicitudes
+    reporte_solicitudes,
+    reporte_transacciones
 }
