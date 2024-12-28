@@ -19,12 +19,9 @@ export interface Admins {
 }
 
 export interface Employees {
-    "id": number,
-    "name": string,
-    "solicitud": string,
-    "password": string,
-    "path_solicitud": string,
+    "id_admin": number,
+    "id_user": number,
+    "reason": string,
     "created_at": number
 }
 
-  

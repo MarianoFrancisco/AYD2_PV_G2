@@ -16,10 +16,13 @@ export class SupervisorsService {
   getAllEmployees():Observable<{empleados : Admins[]}>{
     return  this.http.get<{empleados : Admins[]}>(`${this.urlApi}/account/getEmpleados`)
   }
+  getAllEmployeesActive():Observable<Admins[]>{
+    return  this.http.get<Admins[]>(`${this.urlApi}/eliminar-empleado/active-users`)
+  }
 
 //Eliminar Empleados
-  deleteEmployes(id:number):Observable<string>{
-    return this.http.delete<string>(`${this.urlApi}/users/${id}`)
+  deleteEmployes(empleado: Employees):Observable<{message : string}>{
+    return this.http.post<{message : string}>(`${this.urlApi}/eliminar-empleado/employee-termination`,empleado)
   }
 
 

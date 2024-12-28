@@ -14,8 +14,8 @@
         <tbody>
           @for (item of data; track $index) {
           <tr>
-            <td class="px-6 py-4">{{item.name}}</td>
-            <td class="px-6 py-4">{{item.solicitud}}</td>
+            <td class="px-6 py-4">{{item.id_user}}</td>
+            <td class="px-6 py-4">{{item.reason}}</td>
             <td class="px-6 py-4">{{ convertirFecha(item.created_at) }}</td>
             <td class="px-6 py-4">
                 <div class="flex gap-2">
