@@ -7,51 +7,49 @@ on:
       - feature202030987_ci-cd-backend
 
 jobs:
-  build:
+  test-and-build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build Docker image
-        run: |
-          docker build --target build -t backend-money-bin-build:latest -f backend/Dockerfile backend
-
-      - name: Extract Unit Test Reports
-        run: |
-          docker cp $(docker create backend-money-bin-build:latest):/app/test-reports/unit ./unit-test-reports
-
-      - name: Extract Integration Test Reports
-        run: |
-          docker cp $(docker create backend-money-bin-build:latest):/app/test-reports/integration ./integration-test-reports
-
-      - name: Upload Unit Test Reports
-        uses: actions/upload-artifact@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          name: unit-test-reports
-          path: ./unit-test-reports/junit.xml
+          node-version: 18
 
-      - name: Upload Integration Test Reports
-        uses: actions/upload-artifact@v3
-        with:
-          name: integration-test-reports
-          path: ./integration-test-reports/junit.xml
+      - name: Install dependencies
+        run: npm install
 
-      - name: Publish Unit Test Results
-        uses: dorny/test-reporter@v1
-        with:
-          name: Unit Tests
-          path: ./unit-test-reports/junit.xml
-          reporter: junit
+      - name: Run Unit Tests
+        run: npm test unit
+
+      - name: Run Integration Tests
+        run: npm test integration
 
       - name: Publish Integration Test Results
         uses: dorny/test-reporter@v1
         with:
           name: Integration Tests
-          path: ./integration-test-reports/junit.xml
+          path: ./test-reports/integration/junit.xml
           reporter: junit
 
-      - name: Build Production Docker Image
+      - name: Set up Docker
+        run: |
+          echo "Ensuring Docker is installed"
+          docker --version
+
+      - name: Build Docker image
         run: |
           docker build -t backend-money-bin:latest -f backend/Dockerfile backend
+
+      - name: Save Docker image to file
+        run: |
+          docker save backend-money-bin:latest | gzip > backend-money-bin-latest.tar.gz
+
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-money-bin-latest
+          path: backend-money-bin-latest.tar.gz
