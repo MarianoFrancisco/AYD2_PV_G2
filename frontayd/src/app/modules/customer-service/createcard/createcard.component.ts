@@ -25,7 +25,7 @@ export class CreatecardComponent  {
   // Crear la tarjeta según el tipo seleccionado
   createCard(): void {
     if (!this.accountNumber || (this.cardType === 'Crédito' && !this.creditLimit) || !this.issueDate) {
-      Swal.fire('Error', 'Por favor, ingresa todos los campos correctamente, incluyendo la fecha de emisión.', 'error');
+      Swal.fire('Error', 'Por favor, ingresa todos los campos correctamente.', 'error');
       return;
     }
   
@@ -42,7 +42,7 @@ export class CreatecardComponent  {
   createDebitCard(issueDate: number): void {
     this.createCardService.createDebitCard(this.accountNumber, issueDate).subscribe({
       next: (response: CreateCardResponse) => {
-        Swal.fire('Éxito de solicitud de', response.message, 'success');
+        Swal.fire('Éxito','Éxito en la solicitud de Tarjeta', 'success');
         this.createdCard = response.card;
       },
       error: (err) => {
@@ -56,7 +56,7 @@ export class CreatecardComponent  {
   createCreditCard(issueDate: number): void {
     this.createCardService.createCreditCard(this.accountNumber, this.creditLimit, issueDate).subscribe({
       next: (response: CreateCardResponse) => {
-        Swal.fire('Éxito', response.message, 'success');
+        Swal.fire('Éxito','Éxito en la solicitud de Tarjeta', 'success');
         this.createdCard = response.card;
       },
       error: (err) => {
