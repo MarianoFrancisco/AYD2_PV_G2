@@ -19,9 +19,29 @@ jobs:
           echo "Ensuring Docker is installed"
           docker --version
 
-      - name: Build and Test Docker image
+      - name: Build Docker image
         run: |
           docker build -t backend-money-bin:latest -f backend/Dockerfile backend
+
+      - name: Run Unit Tests
+        run: |
+          docker run --rm -v $PWD/test-reports:/app/test-reports backend-money-bin:latest npm test -- --selectProjects unit
+
+      - name: Upload Unit Test Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: unit-test-reports
+          path: test-reports/unit/junit.xml
+
+      - name: Run Integration Tests
+        run: |
+          docker run --rm -v $PWD/test-reports:/app/test-reports backend-money-bin:latest npm test -- --selectProjects integration
+
+      - name: Upload Integration Test Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: integration-test-reports
+          path: test-reports/integration/junit.xml
 
       - name: Save Docker image to file
         run: |
