@@ -2,7 +2,7 @@ import { environment } from '../../../../src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Admins, Employees } from '../../interfaces/admins';
+import { Admins } from '../../interfaces/admins';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,8 @@ export class AdminsService {
     return this.http.delete<string>(`${this.urlApi}/users/${id}`)
   }
 
-  getAllEmployes():Observable<Employees[]>{
-    return this.http.get<Employees[]>(`${this.urlApi}/users`)
+  getAllEmployes():Observable<Admins[]>{
+    return this.http.get<Admins[]>(`${this.urlApi}/users`)
   }
 
   deleteEmployes(id:number):Observable<string>{

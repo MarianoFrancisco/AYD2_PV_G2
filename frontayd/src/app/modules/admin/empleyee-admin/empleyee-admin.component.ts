@@ -19,12 +19,12 @@ export class EmpleyeeAdminComponent {
   changeOnlyAdmins(admins: Employees) {
     Swal.fire({
       title: "Cambiar Contraseña",
-      html: `<a href="${admins.path_solicitud}" class="mt-4 inline-block text-blue-500 hover:underline">ver solicitud - ${admins.name}</a>`,
+      html: `<a href="" class="mt-4 inline-block text-blue-500 hover:underline">ver solicitud - ${admins.id_user}</a>`,
       showCancelButton: true,
       confirmButtonText: "Actualizar",
     }).then((result) => {
       if (result.isConfirmed) {
-        this.deleteAdmins(admins.id)
+        this.deleteAdmins(admins.id_user)
       }
     });
   }
@@ -32,12 +32,12 @@ export class EmpleyeeAdminComponent {
   deleteOnlyAdmins(admins: Employees) {
     Swal.fire({
       title: "Eliminar Empleado",
-      html: `<a href="${admins.path_solicitud}" class="mt-4 inline-block text-blue-500 hover:underline">ver solicitud - ${admins.name}</a>`,
+      html: `<a href="" class="mt-4 inline-block text-blue-500 hover:underline">ver solicitud - ${admins.id_user}</a>`,
       showCancelButton: true,
       confirmButtonText: "Eliminar",
     }).then((result) => {
       if (result.isConfirmed) {
-        this.deleteAdmins(admins.id)
+        this.deleteAdmins(admins.id_user)
       }
     });
   }
