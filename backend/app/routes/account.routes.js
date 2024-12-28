@@ -10,7 +10,8 @@ import {
     createAdmin,
     exchangeCurrency,
     changePassword,
-    getEmpleados
+    getEmpleados,
+    changeInfo
 } from "../controllers/account-controller.js"
 import validateUserById from '../middleware/validate-user-middleware.js';
 import imageUpload from '../middleware/image-middleware.js';
@@ -29,6 +30,7 @@ router.get('/photography', getPhotographyPathByAccountNumber);
 router.post("/createAccount", imageUpload.single('photo'), uploadImageHandler, createAccount)
 router.post("/registrarQueja", imageUpload.single('photo'), registroQuejas)
 router.post("/changePassword", imageUpload.single('photo'), changePassword)
+router.post("/changeInfo", imageUpload.single("photo"),uploadImageHandler, changeInfo)
 router.post("/registrarEmpleado",
     upload.fields([
         { name: 'photo', maxCount: 1 },
