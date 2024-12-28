@@ -21,7 +21,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t backend-money-bin:latest .
+          docker build -t backend-money-bin:latest -f backend/Dockerfile backend
 
       - name: Run Tests
         run: |
