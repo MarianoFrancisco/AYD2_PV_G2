@@ -23,10 +23,14 @@ jobs:
         run: npm install
 
       - name: Run Unit Tests
-        run: npm test unit
+        run:  |
+          cd backend
+          npm test unit
 
       - name: Run Integration Tests
-        run: npm test integration
+        run:  |
+          cd backend
+          npm test integration
 
       - name: Publish Integration Test Results
         uses: dorny/test-reporter@v1
