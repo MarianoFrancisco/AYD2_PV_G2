@@ -16,9 +16,9 @@ export class PasswordChangeComponent implements OnInit {
   constructor(private supervisorServices: SupervisorsService) { }
 
   ngOnInit(): void {
-    this.supervisorServices.getAllEmployees().subscribe({
+    this.supervisorServices.getSolicitudChangePassword().subscribe({
       next: (data) => {
-        this.data = data.empleados
+        this.data = data.Solicitudes
         console.log()
       },
       error: () => {
@@ -32,25 +32,25 @@ export class PasswordChangeComponent implements OnInit {
       title: "Cambiar Contraseña Empleado",
       html: `
                 <p class="mb-0 text-start">Contraseña de empleado a modificar: <strong>${admins.name}</strong></p><br>
-                <p class="mb-0 text-start">¿Seguro que desea enviar una solicitud de cambio?</p><br>
+                <p class="mb-0 text-start">¿Aprobar Cambio?</p><br>
               `,
       showCancelButton: true,
-      confirmButtonText: "Solicitar Cambio",
+      confirmButtonText: "Cambiar",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        this.updatePass(admins.id)
+        this.updatePass(admins.user_name)
       }
     });
   }
 
-  updatePass(id: number) {
-    this.supervisorServices.updatePassEmployee(id).subscribe({
+  updatePass(user_name: string) {
+    this.supervisorServices.aprobeUpdatePass(user_name).subscribe({
       next: (data) => {
         console.log(data)
         Swal.fire({
           icon: 'success',
           title: 'Cambiar Contraseña Empleado',
-          text: `Solicitud enviada correctamente`
+          text: `${data.message}`
         });
       },
       error: (err) => {
@@ -58,7 +58,7 @@ export class PasswordChangeComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Cambiar Contraseña Empleado',
-          text: `Error al enviar la solicitud`
+          text: `${err.message}`
         });
       }
     })
