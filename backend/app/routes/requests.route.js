@@ -1,6 +1,10 @@
 import express from "express"
 import {
+    getRequestChangePasword,
+    getRequestChangInfo,
     requestCancelSolicitud, 
+    sendRequestChangeInfo, 
+    sendRequestChangePassword, 
     sendrequestPrestamo
 } from "../controllers/requests-controller.js"
 import validateUserById from '../middleware/validate-user-middleware.js';
@@ -23,5 +27,9 @@ router.post("/requestLoan",
     ]),
     uploadFilesHandler,
     sendrequestPrestamo)
+router.post("/sendRequstChangePassword", imageUpload.single('photo'), sendRequestChangePassword),
+router.post("/sendRequestChangeInfo", imageUpload.single('photo'), sendRequestChangeInfo),
+router.get("/getRequestChangePassword",imageUpload.single('photo'),  getRequestChangePasword),
+router.get("/getRequestChangeInfo",imageUpload.single('photo'),  getRequestChangInfo)
 
 export default router;
