@@ -27,10 +27,12 @@ jobs:
         run: |
           docker run --rm backend-money-bin:latest npm test
 
-      - name: Save Docker image artifact
+      - name: Save Docker image to file
+        run: |
+          docker save backend-money-bin:latest | gzip > backend-money-bin-latest.tar.gz
+
+      - name: Upload Docker image artifact
         uses: actions/upload-artifact@v3
         with:
           name: backend-money-bin-latest
           path: backend-money-bin-latest.tar.gz
-        run: |
-          docker save backend-money-bin:latest | gzip > backend-money-bin-latest.tar.gz
