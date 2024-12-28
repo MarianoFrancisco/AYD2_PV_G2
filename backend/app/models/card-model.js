@@ -43,10 +43,10 @@ const CardModel = sequelize.define('Card', {
         allowNull: false,
         defaultValue: 0,
     },
-    active: {
-        type: DataTypes.BOOLEAN,
+    status: {
+        type: DataTypes.ENUM('Activa', 'Pendiente', 'Rechazada', 'Bloqueado'),
         allowNull: false,
-        defaultValue: true,
+        defaultValue: "Pendiente",
     },
 }, {
     tableName: 'cards', // Nombre exacto de la tabla en la base de datos
@@ -54,3 +54,11 @@ const CardModel = sequelize.define('Card', {
 });
 
 export default CardModel;
+
+/* 
+active: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: true,
+},
+*/
