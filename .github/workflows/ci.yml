@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Unit Tests
         run: |
-          docker run --rm -v $PWD/test-reports:/app/test-reports backend-money-bin:latest npm test -- --selectProjects unit
+          docker run --rm -v $PWD/test-reports:/app/test-reports backend-money-bin:latest npm test unit
 
       - name: Upload Unit Test Reports
         uses: actions/upload-artifact@v3
@@ -33,15 +33,29 @@ jobs:
           name: unit-test-reports
           path: test-reports/unit/junit.xml
 
+      - name: Publish Unit Test Results
+        uses: dorny/test-reporter@v1
+        with:
+          name: Unit Tests
+          path: test-reports/unit/junit.xml
+          reporter: junit
+
       - name: Run Integration Tests
         run: |
-          docker run --rm -v $PWD/test-reports:/app/test-reports backend-money-bin:latest npm test -- --selectProjects integration
+          docker run --rm -v $PWD/test-reports:/app/test-reports backend-money-bin:latest npm test integration
 
       - name: Upload Integration Test Reports
         uses: actions/upload-artifact@v3
         with:
           name: integration-test-reports
           path: test-reports/integration/junit.xml
+
+      - name: Publish Integration Test Results
+        uses: dorny/test-reporter@v1
+        with:
+          name: Integration Tests
+          path: test-reports/integration/junit.xml
+          reporter: junit
 
       - name: Save Docker image to file
         run: |
