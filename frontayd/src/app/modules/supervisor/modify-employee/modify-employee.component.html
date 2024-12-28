@@ -1,1 +1,149 @@
-<p>modify-employee works!</p>
+<div class="container mx-auto p-6 max-w-4xl bg-gray-50 rounded-lg shadow-md mt-10">
+    <!-- Título principal -->
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+      Solicitudes de Cambio de Información
+    </h2>
+  
+    <!-- Tabla de solicitudes -->
+    <div class="overflow-x-auto">
+      <table class="table-auto w-full bg-white rounded-lg shadow-sm mb-6">
+        <thead class="bg-gray-200 text-gray-700 text-sm uppercase font-medium">
+          <tr>
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">Nombre</th>
+            <th class="px-4 py-2">Usuario</th>
+            <th class="px-4 py-2">Rol</th>
+            <th class="px-4 py-2">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-600 text-sm">
+          <tr
+            *ngFor="let employee of requests"
+            class="border-b hover:bg-gray-100 transition-colors"
+          >
+            <td class="px-4 py-2">{{ employee.id }}</td>
+            <td class="px-4 py-2">{{ employee.name }}</td>
+            <td class="px-4 py-2">{{ employee.user_name }}</td>
+            <td class="px-4 py-2">{{ employee.role }}</td>
+            <td class="px-4 py-2 text-center">
+              <button
+                class="bg-blue-500 text-white font-medium px-4 py-2 rounded hover:bg-blue-600 transition"
+                (click)="selectEmployee(employee)"
+              >
+                Modificar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Formulario de modificación -->
+    <div *ngIf="selectedEmployee" class="bg-white p-6 rounded-lg shadow-md">
+      <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">
+        Modificar Información de: {{ selectedEmployee.name }}
+      </h3>
+  
+      <!-- Foto centrada -->
+      <div class="mb-6 text-center">
+        <img
+          *ngIf="selectedEmployee.photo_path"
+          [src]="selectedEmployee.photo_path"
+          alt="Foto de {{ selectedEmployee.name }}"
+          class="w-32 h-32 object-cover rounded-full mx-auto"
+        />
+      </div>
+  
+      <!-- Formulario -->
+      <form [formGroup]="employeeForm" (ngSubmit)="submitForm()" class="space-y-4">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">
+            Nombre
+          </label>
+          <input
+            formControlName="name"
+            id="name"
+            type="text"
+            class="border rounded-lg w-full p-2 focus:ring focus:ring-blue-200"
+          />
+        </div>
+  
+        <div>
+          <label for="phone" class="block text-sm font-medium text-gray-700">
+            Teléfono
+          </label>
+          <input
+            formControlName="phone"
+            id="phone"
+            type="text"
+            class="border rounded-lg w-full p-2 focus:ring focus:ring-blue-200"
+          />
+        </div>
+  
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">
+            Correo Electrónico
+          </label>
+          <input
+            formControlName="email"
+            id="email"
+            type="email"
+            class="border rounded-lg w-full p-2 focus:ring focus:ring-blue-200"
+          />
+        </div>
+  
+        <div>
+          <label for="gender" class="block text-sm font-medium text-gray-700">
+            Género
+          </label>
+          <select
+            formControlName="gender"
+            id="gender"
+            class="border rounded-lg w-full p-2 focus:ring focus:ring-blue-200"
+          >
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
+        </div>
+  
+        <div>
+          <label for="estado_civil" class="block text-sm font-medium text-gray-700">
+            Estado Civil
+          </label>
+          <select
+            formControlName="estado_civil"
+            id="estado_civil"
+            class="border rounded-lg w-full p-2 focus:ring focus:ring-blue-200"
+          >
+            <option value="Soltero">Soltero</option>
+            <option value="Casado">Casado</option>
+            <option value="Divorciado">Divorciado</option>
+            <option value="Viudo">Viudo</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+  
+        <div>
+          <label for="photo" class="block text-sm font-medium text-gray-700">
+            Foto
+          </label>
+          <input
+            type="file"
+            formControlName="photo"
+            id="photo"
+            class="block w-full text-sm text-gray-500 border rounded-lg p-2 focus:ring focus:ring-blue-200"
+          />
+        </div>
+  
+        <div class="text-right">
+          <button
+            type="submit"
+            class="bg-green-500 text-white font-medium px-4 py-2 rounded hover:bg-green-600 transition"
+          >
+            Actualizar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
