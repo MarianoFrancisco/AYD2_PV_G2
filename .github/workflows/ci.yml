@@ -9,6 +9,14 @@ on:
 jobs:
   test-and-build:
     runs-on: ubuntu-latest
+    environment: Database
+
+    env:
+      MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+      MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+      MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
 
     steps:
       - name: Checkout code
