@@ -14,17 +14,15 @@ import Swal from 'sweetalert2';
   styleUrl: './modify-employee.component.scss'
 })
 export class ModifyEmployeeComponent implements OnInit {
-  requests: EmployeeRequest[] = [];
+  employeeRequests: EmployeeRequest[] = [];
   selectedEmployee: EmployeeRequest | null = null;
   employeeForm: FormGroup;
+  currentPhotoPath: string | null = null; // Almacena la ruta de la foto actual
 
-  constructor(
-    private employeeService: EmployeeService,
-    private fb: FormBuilder
-  ) {
+  constructor(private employeeService: EmployeeService, private fb: FormBuilder) {
     this.employeeForm = this.fb.group({
-      user_name: [''],
       name: [''],
+      user_name: [''],
       phone: [''],
       email: [''],
       gender: [''],
@@ -34,49 +32,81 @@ export class ModifyEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchRequests();
+    this.loadRequests();
   }
 
-  fetchRequests() {
-    this.employeeService.getRequestsChangeInfo().subscribe({
-      next: (res) => {
-        this.requests = res.Solicitudes;
+  loadRequests(): void {
+    this.employeeService.getRequests().subscribe(
+      (response) => {
+        this.employeeRequests = response.Solicitudes;
       },
-      error: () => {
-        Swal.fire('Error', 'No se pudieron obtener las solicitudes', 'error');
-      },
-    });
+      (error) => {
+        console.error('Error fetching requests:', error);
+      }
+    );
   }
 
-  selectEmployee(employee: EmployeeRequest) {
-    Swal.fire('Éxito', 'La informacion se presenta abajo de la tabla', 'success');
+  selectEmployee(employee: EmployeeRequest): void {
+    
     this.selectedEmployee = employee;
+    this.currentPhotoPath = employee.photo_path || null;
+    Swal.fire({
+      icon: 'info',
+      title: 'Información',
+      html: '<p>La información se generó abajo</p><br><i style="font-size: 24px;">&#x2193;</i>', // Flecha hacia abajo en HTML
+      confirmButtonText: 'Entendido'
+  });
+  
     this.employeeForm.patchValue({
-      user_name: employee.user_name,
       name: employee.name,
+      user_name: employee.user_name,
       phone: employee.phone,
       email: employee.email,
       gender: employee.gender,
-      estado_civil: employee.estado_civil,
+      estado_civil: employee.marital_status,
     });
   }
 
-  submitForm() {
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.employeeForm.patchValue({ photo: file });
+    }
+  }
+
+  submitUpdate(): void {
     if (!this.selectedEmployee) return;
-
+  
     const formData = new FormData();
-    Object.entries(this.employeeForm.value).forEach(([key, value]) => {
-      formData.append(key, value as string | Blob);
+  
+    // Añadir todos los campos del formulario
+    Object.keys(this.employeeForm.value).forEach((key) => {
+      if (key === 'photo' && this.employeeForm.value.photo) {
+        // Si hay una nueva foto se manda por el formdata
+        formData.append(key, this.employeeForm.value.photo);
+      } else if (key !== 'photo') {
+        // Ya vi el porque
+        formData.append(key, this.employeeForm.value[key]);
+      }
     });
-
-    this.employeeService.updateEmployeeInfo(formData).subscribe({
-      next: (res) => {
-        Swal.fire('Éxito', 'Información actualizada correctamente', 'success');
-        this.fetchRequests();
+  
+    // Al no ser un tipo FILE no va a dejar validarlo
+    if (!this.employeeForm.value.photo && this.currentPhotoPath) {
+      formData.append('photo_path', this.currentPhotoPath);
+    }
+  
+    this.employeeService.updateEmployeeInfo(formData).subscribe(
+      (response) => {
+        Swal.fire('Éxito', response.message, 'success');
+        this.loadRequests();
+        this.selectedEmployee = null;
+        this.currentPhotoPath = null;
+        this.employeeForm.reset();
       },
-      error: () => {
-        Swal.fire('Error', 'No se pudo actualizar la información', 'error');
-      },
-    });
-  }
+      (error) => {
+        console.error('Error updating employee info:', error);
+        Swal.fire('Error', 'Hubo un error en el proceso', 'error');
+      }
+    );
+  }   
 }
