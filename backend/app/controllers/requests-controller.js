@@ -12,7 +12,7 @@ import CurrencyExchangeModel from "../models/currency-exchange-model.js";
 import { startOfDay, endOfDay } from "date-fns";
 import { Op } from "sequelize";
 import ServiceCancellation from "../models/service_cancellations-model.js";
-import RequestChangeInfo from "../models/service-request-change-info-model.js";
+import requestChangeInfo from "../models/request-change-info-model.js";
 
 dotenv.config();
 
@@ -21,8 +21,8 @@ const requestCancelSolicitud = async (req, res) => {
 
     //Recibir los datos del form
     const {
-        account_id, 
-        service, 
+        account_id,
+        service,
         reason
     } = req.body;
     // Numero de cuenta o cui
@@ -31,24 +31,24 @@ const requestCancelSolicitud = async (req, res) => {
 
 
     //validar campos vacios
-    if(!account_id || !service || !reason){
+    if (!account_id || !service || !reason) {
         return res.status(400).json({ error: "Faltan datos por llenar." })
     }
 
     //Verificar servicio
     if (!["Cuenta", "Tarjeta"].includes(service)) {
         return res.status(400).json({ message: 'Servicio invalido' });
-    }  
+    }
 
     //Verificar que exista el numero de cuenta
     const user = await AccountModel.findOne({
         where: {
-            account_number: account_id 
-        } 
-    }); 
+            account_number: account_id
+        }
+    });
 
-    if(!user) {
-        return res.status(404).json({ message: "Cuenta de usuario no encontrado."});
+    if (!user) {
+        return res.status(404).json({ message: "Cuenta de usuario no encontrado." });
     }
 
 
@@ -60,9 +60,9 @@ const requestCancelSolicitud = async (req, res) => {
     //Colocar estado de solicitud como pendiente
     try {
         await ServiceCancellation.create({
-            account_id: parseInt(user.id, 10), 
+            account_id: parseInt(user.id, 10),
             service: service,
-            reason: reason, 
+            reason: reason,
             status: "Pendiente",
             created_at: currentDate
         })
@@ -73,9 +73,9 @@ const requestCancelSolicitud = async (req, res) => {
         console.error('Error al enviar solicitud:', error);
         res.status(500).json({ message: 'Error interno del servidor', error: error });
     }
-    
 
-    
+
+
 
 }
 
@@ -115,7 +115,7 @@ const sendrequestPrestamo = async (req, res) => {
     plazo del prestamo
     documentacion*/
     const {
-        account_id, 
+        account_id,
         type_loan,
         mount,
         tiempo,
@@ -137,20 +137,20 @@ const sendrequestPrestamo = async (req, res) => {
         return res.status(400).json({ message: 'Tipo de prestamo invalido' });
     }
 
-     //Validar tiempo
-     if (!["Meses", "Años"].includes(plazo)) {
+    //Validar tiempo
+    if (!["Meses", "Años"].includes(plazo)) {
         return res.status(400).json({ message: 'Plazo invalido' });
     }
 
     //validar existencia del usuario
     const user = await AccountModel.findOne({
         where: {
-            account_number: account_id 
-        } 
-    }); 
+            account_number: account_id
+        }
+    });
 
-    if(!user) {
-        return res.status(404).json({ message: "Cuenta de usuario no encontrado."});
+    if (!user) {
+        return res.status(404).json({ message: "Cuenta de usuario no encontrado." });
     }
 
 
@@ -183,31 +183,31 @@ const sendrequestPrestamo = async (req, res) => {
 
 }
 
-const sendRequestChangePassword = async(req, res) => {
+const sendRequestChangePassword = async (req, res) => {
 
     const {
-        account_id
-    } = req.body 
+        user_name
+    } = req.body
 
     //Validar parametros obligatorios
-    if (!account_id) {
-        return res.status(400).json({ message: "Todos los campos son obligatorios"})
+    if (!user_name) {
+        return res.status(400).json({ message: "Todos los campos son obligatorios" })
     }
 
     //validar existencia del usuario
-    const user = await AccountModel.findOne({
+    const user = await UserModel.findOne({
         where: {
-            account_number: account_id 
-        } 
-    }); 
+            user_name: user_name
+        }
+    });
 
-    if(!user) {
-        return res.status(404).json({ message: "Cuenta de usuario no encontrado."});
+    if (!user) {
+        return res.status(404).json({ message: "Cuenta de usuario no encontrado." });
     }
 
     //Type de solicitud Password
     try {
-        await RequestChangeInfo.create({
+        await requestChangeInfo.create({
             account_id: parseInt(user.id, 10),
             type: "Password",
 
@@ -223,31 +223,31 @@ const sendRequestChangePassword = async(req, res) => {
 
 }
 
-const sendRequestChangeInfo = async(req, res) => {
+const sendRequestChangeInfo = async (req, res) => {
 
     const {
-        account_id
-    } = req.body 
+        user_name
+    } = req.body
 
     //Validar parametros obligatorios
-    if (!account_id) {
-        return res.status(400).json({ message: "Todos los campos son obligatorios"})
+    if (!user_name) {
+        return res.status(400).json({ message: "Todos los campos son obligatorios" })
     }
 
     //validar existencia del usuario
-    const user = await AccountModel.findOne({
+    const user = await UserModel.findOne({
         where: {
-            account_number: account_id 
-        } 
-    }); 
+            user_name: user_name
+        }
+    });
 
-    if(!user) {
-        return res.status(404).json({ message: "Cuenta de usuario no encontrado."});
+    if (!user) {
+        return res.status(404).json({ message: "Cuenta de usuario no encontrado." });
     }
 
     //Type de solicitud Informacion
     try {
-        await RequestChangeInfo.create({
+        await requestChangeInfo.create({
             account_id: parseInt(user.id, 10),
             type: "Informacion",
 
@@ -263,16 +263,30 @@ const sendRequestChangeInfo = async(req, res) => {
 
 }
 
-const getRequestChangePasword = async(req, res) => {
+const getRequestChangePasword = async (req, res) => {
 
-    try{
-        const requestChangePassword = await RequestChangeInfo.findAll({
+    try {
+        const requestChangePassword = await requestChangeInfo.findAll({
             where: {
                 type: "Password"
             }
         })
 
-        return res.status(200).json({ Solicitudes: requestChangePassword });
+        let users = []
+
+        for (let i = 0; i < requestChangePassword.length; i++) {
+            const user = await UserModel.findOne({
+                where: {
+                    id: requestChangePassword[i].account_id
+                }
+
+            })
+
+            users.push(user)
+
+        }
+
+        return res.status(200).json({ Solicitudes: users });
 
 
 
@@ -280,21 +294,35 @@ const getRequestChangePasword = async(req, res) => {
         res.status(500).json({ message: 'Error interno', error: error.message });
     }
 
-    
+
 
 
 
 }
 
-const getRequestChangInfo = async(req, res) => {
-    try{
-        const requestChangePassword = await RequestChangeInfo.findAll({
+const getRequestChangInfo = async (req, res) => {
+    try {
+        const requestChange = await requestChangeInfo.findAll({
             where: {
                 type: "Informacion"
             }
         })
 
-        return res.status(200).json({ Solicitudes: requestChangePassword });
+        let users = []
+
+        for (let i = 0; i < requestChange.length; i++) {
+            const user = await UserModel.findOne({
+                where: {
+                    id: requestChange[i].account_id
+                }
+
+            })
+
+            users.push(user)
+
+        }
+
+        return res.status(200).json({ Solicitudes: users });
 
 
 
@@ -310,5 +338,9 @@ const getRequestChangInfo = async(req, res) => {
 export {
     requestCancelSolicitud,
     requestPrestamo,
-    sendrequestPrestamo
+    sendrequestPrestamo,
+    sendRequestChangeInfo,
+    sendRequestChangePassword,
+    getRequestChangInfo,
+    getRequestChangePasword
 }
