@@ -351,7 +351,7 @@ const createEmployee = async (req, res) => {
             signature
         } = req.body;
 
-        
+
 
         console.log(fullName)
         console.log(marital_status)
@@ -712,7 +712,7 @@ const changePassword = async (req, res) => {
     //Enviar notificacion al correo del usuario
     const detalle = "Se le ha cambiado su contraseña por la siguiente: " + password
     const contenido = "<p>" + detalle + "</p>"
-    
+
     const info = await sendEmail(userModel.email, "Acceso", detalle, contenido)
 
 
@@ -722,19 +722,22 @@ const changePassword = async (req, res) => {
 
 
 }
+
+
+
 const getEmpleados = async (req, res) => {
 
     //Obtener informacion de todos los empleados
     try {
         const empleados = await UserModel.findAll({
             where: {
-    
+
                 role: { [Op.ne]: "Supervisor" }
-    
+
             }
-        }) 
-    
-        return res.status(200).json({ empleados: empleados})
+        })
+
+        return res.status(200).json({ empleados: empleados })
 
     } catch (error) {
         console.error(error);
@@ -742,7 +745,71 @@ const getEmpleados = async (req, res) => {
     }
 
 
+
+
+}
+
+const changeInfo = async (req, res) => {
+
+    try{
+        const {
+            user_name, //para buscar el empleado
+            name,
+            phone,
+            email,
+            gender,
+            estado_civil
     
+        } = req.body
+    
+        //Validar campos
+        if (!user_name || !name || !phone || !email || !gender || !estado_civil) {
+            return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+        }
+    
+        // Verificar genero
+        if (!["Masculino", "Femenino", "Otro"].includes(gender)) {
+            return res.status(400).json({ message: 'Genero invalido' });
+        }
+    
+    
+        // Verificar estado
+        if (!["Soltero", "Casado", "Divorciado", "Viudo", "Otro"].includes(estado_civil)) {
+            return res.status(400).json({ message: 'Estado civil invalido' });
+        }
+    
+        //Validar existencia dl usuariio
+        const user = await UserModel.findOne({
+            where: {
+                user_name: user_name
+            }
+        })
+    
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+    
+        //Cambiar los datos
+        user.name = name
+        user.phone = phone
+        user.email = email
+        user.photoPath = req.photoPath
+        user.gender = gender
+        user.marital_status = estado_civil
+        await user.save();
+    
+    
+        //Enviar respuesta al frontend
+        return res.status(200).json({ message: 'User updated successfully', user: user });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal server error.", message: error });
+    }
+
+    
+
+
 
 }
 
@@ -757,5 +824,6 @@ export {
     createAdmin,
     exchangeCurrency,
     changePassword,
+    changeInfo,
     getEmpleados
 }
