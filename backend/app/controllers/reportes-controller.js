@@ -100,7 +100,7 @@ const reporte_solicitudes = async (req, res) => {
 
         const solicitudes_cards = await CardModel.findAll()
 
-        console.log(solicitudes_cards)
+       
 
         let cambios = []
         let prestamos = []
@@ -109,25 +109,40 @@ const reporte_solicitudes = async (req, res) => {
 
         for(let i = 0; i < solicitudes_cambios.length; i++) {
 
-            const user = await AccountModel.findOne({
+            const user = await UserModel.findOne({
                 where: {
-                    id: solicitudes_prestamos[i].account_id
+                    id: solicitudes_cambios[i].account_id
                 }
             })
 
+            
+
             //Cambiar la fecha
             const date = new Date(solicitudes_cambios[i].created_at * 1000);
-
+            console.log(solicitudes_cambios[i].created_at)
             const day = String(date.getDate()).padStart(2, "0");
             const month = String(date.getMonth() + 1).padStart(2, "0");
             const year = date.getFullYear();
 
+            const request_cambio = {
+                name: user.name,
+                dpi_number: user.dpi_number,
+                type_request: solicitudes_cambios[i].type,
+                created_at: `${day}/${month}/${year}`
+            }
+
+            cambios.push(request_cambio)
+
+        }
+
+        const requests = {
+            cambios: cambios
         }
 
 
 
 
-        return res.status(200).json({ message: solicitudes_cards });
+        return res.status(200).json({ message: requests });
 
 
     } catch (error) {
