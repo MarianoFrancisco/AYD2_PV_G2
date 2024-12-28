@@ -1,21 +1,36 @@
-name: CI Pipeline
+name: CI Pipeline for backend-money-bin
 
 on:
   push:
     branches:
       - main
-      - develop
-      - feature202030987_ci-cd
+      - feature202030987_ci-cd-backend
 
 jobs:
-  ci:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Docker
+        run: |
+          echo "Ensuring Docker is installed"
+          docker --version
+
+      - name: Build Docker image
+        run: |
+          docker build -t backend-money-bin:latest .
+
       - name: Run Tests
         run: |
-          echo "Running tests..."
-          echo "Tests passed!"
+          docker run --rm backend-money-bin:latest npm test
+
+      - name: Save Docker image artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-money-bin-latest
+          path: backend-money-bin-latest.tar.gz
+        run: |
+          docker save backend-money-bin:latest | gzip > backend-money-bin-latest.tar.gz
