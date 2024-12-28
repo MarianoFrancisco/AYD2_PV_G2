@@ -788,12 +788,12 @@ const changeInfo = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-    
+        console.log(req.photoPath)
         //Cambiar los datos
         user.name = name
         user.phone = phone
         user.email = email
-        user.photoPath = req.photoPath
+        user.photo_path = req.photoPath
         user.gender = gender
         user.marital_status = estado_civil
         await user.save();
