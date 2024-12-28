@@ -203,11 +203,16 @@ const sendRequestChangePassword = async (req, res) => {
         return res.status(404).json({ message: "Cuenta de usuario no encontrado." });
     }
 
+    //Generar la fecha actual
+    const currentDate = Math.floor(Date.now() / 1000);
+
+
     //Type de solicitud Password
     try {
         await requestChangeInfo.create({
             account_id: parseInt(user.id, 10),
             type: "Password",
+            created_at: currentDate
 
         })
 
@@ -243,11 +248,16 @@ const sendRequestChangeInfo = async (req, res) => {
         return res.status(404).json({ message: "Cuenta de usuario no encontrado." });
     }
 
+    //Generar la fecha actual
+    const currentDate = Math.floor(Date.now() / 1000);
+
+
     //Type de solicitud Informacion
     try {
         await requestChangeInfo.create({
             account_id: parseInt(user.id, 10),
             type: "Informacion",
+            created_at: currentDate
 
         })
 

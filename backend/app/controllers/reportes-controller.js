@@ -12,6 +12,7 @@ import CurrencyExchangeModel from "../models/currency-exchange-model.js";
 import ServiceCancellation from "../models/service_cancellations-model.js";
 import requestChangeInfo from "../models/request-change-info-model.js";
 import LoanModel from "../models/loan-model.js";
+import CardModel from "../models/card-model.js";
 
 dotenv.config();
 
@@ -82,6 +83,61 @@ const reporte_prestamos = async (req, res) => {
 
 }
 
+const reporte_solicitudes = async (req, res) => {
+    //soliciudes de cambio de contraseña
+    //Solicitudes de cambio de info
+    //Solicitudes de prestamo
+    //solicitud Cancelacion de servicio
+    //solicitud de creacion de tarjeta
+
+    try{
+
+        const solicitudes_cambios = await requestChangeInfo.findAll()
+
+        const solicitudes_prestamos = await RequestLoanModel.findAll()
+
+        const soliciudes_cancelacion = await ServiceCancellation.findAll()
+
+        const solicitudes_cards = await CardModel.findAll()
+
+        console.log(solicitudes_cards)
+
+        let cambios = []
+        let prestamos = []
+        let cancelacion = []
+        let cards = []
+
+        for(let i = 0; i < solicitudes_cambios.length; i++) {
+
+            const user = await AccountModel.findOne({
+                where: {
+                    id: solicitudes_prestamos[i].account_id
+                }
+            })
+
+            //Cambiar la fecha
+            const date = new Date(solicitudes_cambios[i].created_at * 1000);
+
+            const day = String(date.getDate()).padStart(2, "0");
+            const month = String(date.getMonth() + 1).padStart(2, "0");
+            const year = date.getFullYear();
+
+        }
+
+
+
+
+        return res.status(200).json({ message: solicitudes_cards });
+
+
+    } catch (error) {
+        res.status(500).json({ message: 'Error interno', error: error.message });
+    }
+
+    
+
+}
+
 
 
 
@@ -90,5 +146,6 @@ const reporte_prestamos = async (req, res) => {
 
 
 export {
-    reporte_prestamos
+    reporte_prestamos,
+    reporte_solicitudes
 }
