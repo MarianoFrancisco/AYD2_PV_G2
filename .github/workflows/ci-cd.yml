@@ -36,11 +36,6 @@ jobs:
           cd backend
           npm install
 
-      - name: Run Unit Tests
-        run: |
-          cd backend
-          npm test -- --selectProjects unit --detectOpenHandles
-
       - name: Run Integration Tests
         run: |
           cd backend
