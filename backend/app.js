@@ -29,6 +29,9 @@ import request from "./app/routes/requests.route.js"
 
 import createCardRouter from "./app/routes/create-card.routes.js";
 import block_card from "./app/routes/card-block.routes.js"
+import accept_loan from "./app/routes/accept-loan.routes.js"
+import accept_card from "./app/routes/accept-card.routes.js"
+import emp_term from "./app/routes/employee-termination.routes.js"
 
 const app = express();
 
@@ -69,6 +72,9 @@ const invetory = `${api}/inventory`;
 
 const createCardEndpoint = `${api}/create-card`;
 const block_card_endpoint = `${api}/block-card`;
+const accept_loan_endpoint = `${api}/accept-loan`;
+const accept_card_endpoint = `${api}/accept-card`;
+const emp_term_endpoint = `${api}/eliminar-empleado`;
 
 app.use(monitor, moni);
 app.use(invetory, inventory);
@@ -101,5 +107,8 @@ app.use(withdrawal, withdrawalRouter);
 
 app.use(createCardEndpoint, createCardRouter);
 app.use(block_card_endpoint, block_card);
+app.use(accept_loan_endpoint, accept_loan);
+app.use(accept_card_endpoint, accept_card);
+app.use(emp_term_endpoint, emp_term);
 
 export default app;
