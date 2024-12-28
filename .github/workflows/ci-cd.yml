@@ -38,8 +38,8 @@ jobs:
           npm test -- --selectProjects unit --detectOpenHandles
 
       - name: Test MySQL Connection
-      run: |
-        mysql -h ${{ secrets.MYSQL_HOST }} -u${{ secrets.MYSQL_USER }} -p${{ secrets.MYSQL_PASSWORD }} -e "SHOW DATABASES;"
+        run: |
+          mysql -h ${{ secrets.MYSQL_HOST }} -u${{ secrets.MYSQL_USER }} -p${{ secrets.MYSQL_PASSWORD }} -e "SHOW DATABASES;"
 
       - name: Run Integration Tests
         env:
