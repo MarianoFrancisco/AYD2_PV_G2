@@ -1,1 +1,76 @@
-<p>blockcards works!</p>
+<div class="container mx-auto p-6 max-w-3xl bg-gray-50 rounded-lg shadow-lg">
+    <!-- Título principal -->
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">
+      Bloqueo de Tarjetas
+    </h1>
+  
+    <!-- Número de tarjeta -->
+    <div class="mb-6">
+      <label for="cardNumber" class="block text-sm font-medium text-gray-700">
+        Número de Tarjeta
+      </label>
+      <input
+        id="cardNumber"
+        type="text"
+        [(ngModel)]="cardNumber"
+        name="cardNumber"
+        class="border-gray-300 border rounded-lg p-3 w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Ingresa el número de tarjeta"
+      />
+    </div>
+  
+    <!-- Pregunta de seguridad -->
+    <div *ngIf="securityQuestion" class="mb-6">
+      <label for="securityAnswer" class="block text-sm font-medium text-gray-700">
+        {{ securityQuestion }}
+      </label>
+      <input
+        id="securityAnswer"
+        type="text"
+        [(ngModel)]="securityAnswer"
+        name="securityAnswer"
+        class="border-gray-300 border rounded-lg p-3 w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Ingresa tu respuesta"
+      />
+    </div>
+  
+    <!-- Botón para obtener la pregunta -->
+    <div *ngIf="!securityQuestion" class="text-center">
+      <button
+        type="button"
+        (click)="fetchSecurityQuestion()"
+        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md focus:ring-2 focus:ring-blue-500"
+      >
+        Obtener Pregunta de Seguridad
+      </button>
+    </div>
+  
+    <!-- Opciones de bloqueo -->
+    <div *ngIf="securityQuestion" class="mb-6">
+      <label for="blockReason" class="block text-sm font-medium text-gray-700">
+        Motivo del Bloqueo
+      </label>
+      <select
+        id="blockReason"
+        [(ngModel)]="blockReason"
+        name="blockReason"
+        class="border-gray-300 border rounded-lg p-3 w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      >
+        <option value="Robo">Robo</option>
+        <option value="Pérdida">Pérdida</option>
+        <option value="Fraude">Fraude</option>
+      </select>
+    </div>
+  
+    <!-- Botón para bloquear tarjeta -->
+    <div *ngIf="securityQuestion" class="text-center">
+      <button
+        type="button"
+        (click)="blockCard()"
+        class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg shadow-md focus:ring-2 focus:ring-red-500"
+      >
+        Bloquear Tarjeta
+      </button>
+    </div>
+  </div>
+  
