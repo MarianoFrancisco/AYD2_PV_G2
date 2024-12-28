@@ -10,17 +10,17 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './blockcards.component.html',
   styleUrl: './blockcards.component.scss'
 })
-export class BlockcardsComponent {
+export class BlockcardsComponent  {
   cardNumber: string = '';
   securityQuestion: string | null = null;
   securityAnswer: string = '';
+  correctAnswer: string | null = null;
   blockReason: 'Robo' | 'Pérdida' | 'Fraude' = 'Robo';
   blockedAt: number = Date.now();
   cardType: 'Crédito' | 'Débito' = 'Crédito';
 
   constructor(private blockCardService: BlockCardService) {}
 
-  // Obtener la pregunta de seguridad
   fetchSecurityQuestion(): void {
     if (!this.cardNumber) {
       Swal.fire('Error', 'Por favor, ingresa el número de tarjeta.', 'error');
@@ -30,6 +30,7 @@ export class BlockcardsComponent {
     this.blockCardService.getSecurityQuestion(this.cardNumber).subscribe({
       next: (response) => {
         this.securityQuestion = response.security_question;
+        this.correctAnswer = response.security_answer;
         Swal.fire('Pregunta obtenida', 'Responde la pregunta de seguridad para continuar.', 'info');
       },
       error: () => {
@@ -38,10 +39,14 @@ export class BlockcardsComponent {
     });
   }
 
-  // Bloquear la tarjeta
   blockCard(): void {
     if (!this.securityQuestion || this.securityAnswer === '') {
       Swal.fire('Error', 'Debes responder la pregunta de seguridad.', 'error');
+      return;
+    }
+
+    if (this.securityAnswer.trim() !== this.correctAnswer) {
+      Swal.fire('Error', 'La respuesta de seguridad no es correcta.', 'error');
       return;
     }
 
@@ -62,13 +67,12 @@ export class BlockcardsComponent {
     });
   }
 
-  // Resetear el formulario
   resetForm(): void {
     this.cardNumber = '';
     this.securityQuestion = null;
+    this.correctAnswer = null;
     this.securityAnswer = '';
     this.blockReason = 'Robo';
-    this.blockedAt = Date.now();
     this.cardType = 'Crédito';
   }
 }
