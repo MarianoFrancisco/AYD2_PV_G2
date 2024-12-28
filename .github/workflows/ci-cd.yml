@@ -7,16 +7,9 @@ on:
       - feature202030987_ci-cd-backend
 
 jobs:
-  ci-cd:
+  setup-and-tests:
     runs-on: ubuntu-latest
-    environment: EC2
-
-    env:
-      MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
-      MYSQL_USER: ${{ secrets.MYSQL_USER }}
-      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-      MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
+    environment: Database
 
     steps:
       - name: Checkout code
@@ -32,16 +25,17 @@ jobs:
           cd backend
           npm install
 
-      - name: Run Unit Tests
-        run: |
-          cd backend
-          npm test -- --selectProjects unit --detectOpenHandles
-
       - name: Test MySQL Connection
+        env:
+          MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
         run: |
-          mysql -h ${{ secrets.MYSQL_HOST }} -u${{ secrets.MYSQL_USER }} -p${{ secrets.MYSQL_PASSWORD }} -e "SHOW DATABASES;"
+          mysql -h "$MYSQL_HOST" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "SHOW DATABASES;"
 
-      - name: Run Integration Tests
+      - name: Run Tests
         env:
           MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
           MYSQL_USER: ${{ secrets.MYSQL_USER }}
@@ -50,7 +44,15 @@ jobs:
           MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
         run: |
           cd backend
-          npm test -- --selectProjects integration --detectOpenHandles
+          npm test
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment: EC2
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Set up Docker
         run: |
