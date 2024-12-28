@@ -19,13 +19,9 @@ jobs:
           echo "Ensuring Docker is installed"
           docker --version
 
-      - name: Build Docker image
+      - name: Build and Test Docker image
         run: |
-          docker build -t backend-money-bin:latest -f backend/Dockerfile backend
-
-      - name: Run Tests
-        run: |
-          docker run --rm backend-money-bin:latest npm test
+          docker build -t backend-money-bin:latest .
 
       - name: Save Docker image to file
         run: |
