@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature202030987_integration-testing
 
 jobs:
   setup-and-tests:
