@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Tarjetas } from '../../../interfaces/aprobaciones';
 import { SupervisorsService } from '../../../services/supervisor/supervisors.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-loan-approve-cards',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './loan-approve-cards.component.html',
   styleUrl: './loan-approve-cards.component.scss'
 })
 export class LoanApproveCardsComponent implements OnInit {
   data: Tarjetas[] = []
+  searchFilter: string = '';
 
   constructor(private supervisorServices: SupervisorsService) { }
 
@@ -70,6 +72,13 @@ export class LoanApproveCardsComponent implements OnInit {
     })
   }
 
+  filtered(){
+    if(this.searchFilter === ''){
+      return this.data
+    }else{
+      return this.data.filter((data) => data.status === this.searchFilter)
+    }
+  }
 
   convertirFecha(timestamp: number): string {
     const date = new Date(timestamp * 1000);

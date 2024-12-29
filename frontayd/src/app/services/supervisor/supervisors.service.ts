@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Admins, Employees } from '../../interfaces/admins';
 import { Prestamos, Tarjetas } from '../../interfaces/aprobaciones';
+import { ViewServicesCancel } from '../../interfaces/cancelServices';
 
 @Injectable({
   providedIn: 'root'
@@ -62,7 +63,11 @@ updateSolicitudCards(data:{status:string}, id:number):Observable<{message : stri
   return  this.http.put<{message : string}>(`${this.urlApi}/accept-card/card/${id}`,data)
 }
 
-  getSolicitudCancelService():Observable<{empleados : Admins[]}>{
-    return  this.http.get<{empleados : Admins[]}>(`${this.urlApi}/account/getEmpleados`)
+// Solicitud de Servicios
+  getSolicitudCancelService():Observable<ViewServicesCancel[]>{
+    return  this.http.get<ViewServicesCancel[]>(`${this.urlApi}/service-cancelation/get-all-services`)
+  }
+  aprobeCancelService(data:{service_cancellation_id: number, account_id:number}):Observable<{message : string}>{
+    return this.http.post<{message : string}>(`${this.urlApi}/service-cancelation/accept-service-cancelation`, data)
   }
 }
