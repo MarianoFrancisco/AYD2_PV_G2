@@ -25,14 +25,15 @@ import clientRouter from "./app/routes/client.routes.js";
 import depositRouter from './app/routes/deposit.routes.js';
 import withdrawalRouter from './app/routes/withdrawal.routes.js';
 import databaseRouter from './app/routes/database.routes.js';
-import request from "./app/routes/requests.route.js"
-import report from "./app/routes/reportes-routes.js"
+import request from "./app/routes/requests.route.js";
+import report from "./app/routes/reportes-routes.js";
 
 import createCardRouter from "./app/routes/create-card.routes.js";
-import block_card from "./app/routes/card-block.routes.js"
-import accept_loan from "./app/routes/accept-loan.routes.js"
-import accept_card from "./app/routes/accept-card.routes.js"
-import emp_term from "./app/routes/employee-termination.routes.js"
+import block_card from "./app/routes/card-block.routes.js";
+import accept_loan from "./app/routes/accept-loan.routes.js";
+import accept_card from "./app/routes/accept-card.routes.js";
+import emp_term from "./app/routes/employee-termination.routes.js";
+import accept_serv_canel from "./app/routes/accept-service-cancelation.routes.js";
 
 const app = express();
 
@@ -77,6 +78,7 @@ const block_card_endpoint = `${api}/block-card`;
 const accept_loan_endpoint = `${api}/accept-loan`;
 const accept_card_endpoint = `${api}/accept-card`;
 const emp_term_endpoint = `${api}/eliminar-empleado`;
+const accept_serv_canel_endpoint = `${api}/service-cancelation`;
 
 app.use(monitor, moni);
 app.use(invetory, inventory);
@@ -113,5 +115,6 @@ app.use(block_card_endpoint, block_card);
 app.use(accept_loan_endpoint, accept_loan);
 app.use(accept_card_endpoint, accept_card);
 app.use(emp_term_endpoint, emp_term);
+app.use(accept_serv_canel_endpoint, accept_serv_canel);
 
 export default app;
