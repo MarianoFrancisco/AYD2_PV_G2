@@ -2,6 +2,14 @@
     <h1 class="text-3xl font-semibold mb-6 text-center text-blue-600">Solicitud de Prestamos Money Bin</h1>
   
     <div>
+      <div class="mb-3">
+        <input
+          type="text"
+          placeholder="Buscar por Estado"
+          [(ngModel)]="searchFilter"
+          class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
       <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
         <thead>
           <tr>
@@ -14,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (item of data; track $index) {
+          @for (item of filtered(); track $index) {
           <tr>
             <td class="px-6 py-4">{{item.account.name + ' ' + item.account.last_name}}</td>
             <td class="px-6 py-4">{{item.loan_type}}</td>
