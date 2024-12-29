@@ -222,7 +222,7 @@ La arquitectura en capas ofrece una estructura clara y bien definida que facilit
 Al separar las responsabilidades en capas especificas, se mejora la modularidad y se reduce el impacto de los cambios en una parte del sistema. 
 ### Arquitectura candidata (Diagrama de bloques)
 
-![Caso de uso](../Capturas/estiloarquitectonico.png)
+![Caso de uso](../Capturas/estilo_arquitectonico2.png)
 
 Los clientes y encargados/empleados podran ejecutar su aplicacion de manera local en su PC con acceso a internet y este podra visualizarse en Angular, al momento de realizar las peticiones se haran por medio de un servidor API Rest alojado en Nodejs. La base de datos se encuentra alojada en un servicio RDS de AWS.
 
