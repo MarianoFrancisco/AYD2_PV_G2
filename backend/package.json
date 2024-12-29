@@ -9,7 +9,8 @@
     "dev": "nodemon index.js",
     "test": "jest",
     "test:unit": "jest --selectProjects=unit",
-    "test:integration": "jest --selectProjects=integration"
+    "test:integration": "jest --selectProjects=integration",
+    "test:integration:individual": "node run-integration-tests.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "@babel/preset-typescript": "^7.26.0",
     "aws-sdk": "^2.1646.0",
     "backend": "file:",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
@@ -40,8 +42,7 @@
     "mysql2": "^3.10.0",
     "nodemailer": "^6.9.15",
     "path": "^0.12.7",
-    "sequelize": "^6.37.3",
-    "bcryptjs": "^2.4.3"
+    "sequelize": "^6.37.3"
   },
   "bugs": {
     "url": "https://github.com/MarianoFrancisco/AYD2_PV_G2/issues"

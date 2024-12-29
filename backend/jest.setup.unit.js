@@ -8,6 +8,10 @@ jest.mock('./app/models/withdrawal-model', () => ({
     create: jest.fn(),
 }));
 
+jest.mock('./app/models/service-payment-model', () => ({
+    create: jest.fn(),
+}));
+
 jest.mock('./app/models/account-model', () => ({
     findOne: jest.fn(),
     update: jest.fn(),
