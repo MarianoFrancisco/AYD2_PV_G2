@@ -1,0 +1,36 @@
+<div class="container mx-auto">
+    <h1 class="text-3xl font-semibold mb-6 text-center text-blue-600">Solicitud de Prestamos Money Bin</h1>
+  
+    <div>
+      <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+        <thead>
+          <tr>
+            <th class="px-6 py-4 text-left">Nombre</th>
+            <th class="px-6 py-4 text-left">Tipo</th>
+            <th class="px-6 py-4 text-left">Cantidad</th>
+            <th class="px-6 py-4 text-left">Plazo</th>
+            <th class="px-6 py-4 text-left">Estado</th>
+            <th class="px-6 py-4 text-left">Solicitado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of data; track $index) {
+          <tr>
+            <td class="px-6 py-4">{{item.account.name + ' ' + item.account.last_name}}</td>
+            <td class="px-6 py-4">{{item.loan_type}}</td>
+            <td class="px-6 py-4">{{item.requested_amount}}</td>
+            <td class="px-6 py-4">{{item.loan_term + ' ' + item.term}}</td>
+            <td class="px-6 py-4">{{item.status}}</td>
+            <td class="px-6 py-4">{{ convertirFecha(item.requested_at) }}</td>
+            <td class="px-6 py-4">
+                <div class="flex gap-2">
+                    <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg" (click)="validateLoans(item)">Ver</button>
+                </div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
