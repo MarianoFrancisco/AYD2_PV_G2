@@ -1,0 +1,55 @@
+- name: Instalar Docker
+  apt:
+    name: docker.io
+    state: present
+  become: true
+
+- name: Instalar Docker Compose
+  apt:
+    name: docker-compose
+    state: present
+  become: true
+
+- name: Copiar archivo docker-compose.yml
+  copy:
+    src: docker-compose.yml
+    dest: "{{ docker_compose_file }}"
+    owner: ubuntu
+    group: ubuntu
+    mode: '0644'
+
+- name: Limpiar recursos innecesarios de Docker
+  command: docker system prune -af
+  become: true
+
+- name: Limpiar volúmenes de Docker
+  command: docker volume prune -f
+  become: true
+
+- name: Verificar existencia del archivo Docker TAR
+  stat:
+    path: /home/ubuntu/frontend-money-bin-latest.tar.gz
+  register: docker_tar
+
+- name: Fallar si el archivo Docker TAR no existe
+  fail:
+    msg: "El archivo frontend-money-bin-latest.tar.gz no existe en /home/ubuntu"
+  when: not docker_tar.stat.exists
+
+- name: Cargar imagen Docker desde archivo
+  command: docker load -i frontend-money-bin-latest.tar.gz
+  args:
+    chdir: /home/ubuntu
+  become: true
+
+- name: Detener contenedor con Docker Compose
+  command: docker-compose -f "{{ docker_compose_file }}" down
+  args:
+    chdir: /home/ubuntu
+  become: true
+
+- name: Levantar contenedor con Docker Compose
+  command: docker-compose -f "{{ docker_compose_file }}" up -d
+  args:
+    chdir: /home/ubuntu
+  become: true

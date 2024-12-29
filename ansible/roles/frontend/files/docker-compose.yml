@@ -1,6 +1,8 @@
 version: "3.8"
+
 services:
-  angular-frontend:
-    build: .
+  frontend:
+    image: "frontend-money-bin"
     ports:
       - "80:80"
+    restart: unless-stopped

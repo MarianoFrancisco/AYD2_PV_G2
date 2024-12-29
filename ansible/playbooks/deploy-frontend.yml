@@ -1,0 +1,5 @@
+- name: Deploy Frontend
+  hosts: frontend
+  become: yes
+  roles:
+    - ../roles/frontend
