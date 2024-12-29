@@ -49,6 +49,8 @@ export class SatisfactionComponent implements OnInit {
             icon: 'success',
             title: 'Encuesta realizada',
             text: 'La encuesta se realizó con exito'
+          }).then(() => {
+            window.location.reload();
           });
         },
         error: () =>{

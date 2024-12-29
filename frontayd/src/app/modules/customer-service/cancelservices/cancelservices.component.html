@@ -1,0 +1,34 @@
+<div class="flex flex-col items-center min-h-screen bg-gray-100 p-4">
+    <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-0">Cancelación de Servicios</h1>
+        <!-- Formulario -->
+        <form class="space-y-4" [formGroup]="serviceForm" (ngSubmit)="cancelService()">
+            <div>
+                <label for="account_id" class="block text-sm font-medium text-gray-600">Cuenta: </label>
+                <input type="text" id="account_id" name="account_id" formControlName="account_id"
+                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Cuenta" required />
+            </div>
+            <div>
+                <label for="reason" class="block text-sm font-medium text-gray-600">Razón: </label>
+                <input type="text" id="reason" name="reason" formControlName="reason"
+                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Razón" required />
+            </div>
+            <div>
+                <label for="service" class="block text-sm font-medium text-gray-600">Servicio: </label>
+                <select id="service" formControlName="service" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    <option value="Cuenta">Cuenta</option>
+                    <option value="Tarjeta">Tarjeta</option>
+                </select>
+            </div>
+
+            <div class="text-center">
+                <button type="submit"
+                    class="w-full px-4 py-2 bg-blue-500 text-white font-medium rounded-lg shadow hover:bg-blue-600">
+                    Enviar Solicitud
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

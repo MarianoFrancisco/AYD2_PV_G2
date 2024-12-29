@@ -8,6 +8,11 @@ import { ComplaintsRegisterComponent } from './complaints-register/complaints-re
 import { DolarAccountComponent } from './dolar-account/dolar-account.component';
 import { SatisfactionComponent } from './satisfaction/satisfaction.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BlockcardsComponent } from './blockcards/blockcards.component';
+import { CancelservicesComponent } from './cancelservices/cancelservices.component';
+import { CreatecardComponent } from './createcard/createcard.component';
+import { LoanapplicationsComponent } from './loanapplications/loanapplications.component';
+import { RequestInfoComponent } from './request-info/request-info.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -18,7 +23,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ComplaintsRegisterComponent,
     DolarAccountComponent,
     SatisfactionComponent,
-    DashboardComponent
+    DashboardComponent,
+    BlockcardsComponent,
+    CancelservicesComponent,
+    CreatecardComponent,
+    LoanapplicationsComponent,
+    RequestInfoComponent
   ]
 })
 export class CustomerServiceModule { }

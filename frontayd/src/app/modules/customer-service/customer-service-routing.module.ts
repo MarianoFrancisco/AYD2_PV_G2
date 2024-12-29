@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AccountComponent } from './account/account.component';
@@ -7,7 +7,11 @@ import { ComplaintsRegisterComponent } from './complaints-register/complaints-re
 import { DolarAccountComponent } from './dolar-account/dolar-account.component';
 import { SatisfactionComponent } from './satisfaction/satisfaction.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { BlockcardsComponent } from './blockcards/blockcards.component';
+import { CancelservicesComponent } from './cancelservices/cancelservices.component';
+import { CreatecardComponent } from './createcard/createcard.component';
+import { LoanapplicationsComponent } from './loanapplications/loanapplications.component';
+import { RequestInfoComponent } from './request-info/request-info.component';
 const routes: Routes = [
   {
     path: 'inicio-atencion-cliente', component: DashboardComponent
@@ -26,6 +30,21 @@ const routes: Routes = [
   },
   {
     path:'encuesta-satisfaccion', component: SatisfactionComponent
+  },
+  {
+    path:'bloqueo-cartas', component: BlockcardsComponent
+  },
+  {
+    path:'cancelar-servicios', component: CancelservicesComponent
+  },
+  {
+    path:'crear-tarjetas', component: CreatecardComponent
+  },
+  {
+    path:'solicitud-prestamos-banco', component: LoanapplicationsComponent
+  },
+  {
+    path:'solicitud-informacion', component: RequestInfoComponent
   }
 ];
 

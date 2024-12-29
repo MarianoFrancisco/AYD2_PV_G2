@@ -33,5 +33,35 @@
         <p class="mt-2 text-gray-600">Modulo de Encuestas de Satisfacción.</p>
         <button [routerLink]="['/customer/encuesta-satisfaccion']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
       </div>
+
+      <div class="bg-blue-100 p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold text-blue-600">Bloquedo de Tarjetas</h2>
+        <p class="mt-2 text-gray-600">Permite a los clientes bloquear sus tarjetas en caso de robo, pérdida o sospecha
+          de fraude.</p>
+        <a routerLink="/customer/bloqueo-cartas" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+  
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Cancelar Servicios</h2>
+        <p class="mt-2 text-gray-600">Creacion de solicitudes para la cancelacion de servicios.</p>
+        <button [routerLink]="['/customer/cancelar-servicios']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
+      </div>
+
+      <div class="bg-blue-100 p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold text-blue-600">Crear Nuevas Tarjetas</h2>
+        <p class="mt-2 text-gray-600">Creación de nuevas tarjetas.</p>
+        <a routerLink="/customer/crear-tarjetas" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
+
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Prestamos al Banco</h2>
+        <p class="mt-2 text-gray-600">Creacion de solicitud de prestamos al banco.</p>
+        <button [routerLink]="['/customer/solicitud-prestamos-banco']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold">Solicitud Informacion</h2>
+        <p class="mt-2 text-gray-600">Solicitud para cambiar algun aspecto en la informacion.</p>
+        <button [routerLink]="['/customer/solicitud-informacion']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
+      </div>
     </div>
   </div>

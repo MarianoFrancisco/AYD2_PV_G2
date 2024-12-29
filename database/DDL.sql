@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS cards (
   expiry_date BIGINT NOT NULL,
   credit_limit DECIMAL(12, 2) DEFAULT NULL,
   balance DECIMAL(12, 2) DEFAULT 0,
-  active BOOLEAN DEFAULT TRUE,
+  status ENUM('Activa', 'Pendiente', 'Rechazada', 'Bloqueado') NOT NULL DEFAULT 'Pendiente',
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
 -- Tabla de bloqueos de tarjetas
@@ -202,4 +202,38 @@ CREATE TABLE IF NOT EXISTS account_updates (
   new_value TEXT,
   updated_at BIGINT NOT NULL,
   FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
+);
+
+
+-- Tabla de solicitudes de préstamos
+CREATE TABLE IF NOT EXISTS request_loan (
+  id INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único
+  account_id INT NOT NULL, -- Relación con la tabla de cuentas
+  loan_type ENUM('Personal', 'Hipotecario', 'Vehicular', 'Educativo') NOT NULL, -- Tipo de préstamo
+  requested_amount DECIMAL(12, 2) NOT NULL, -- Monto solicitado
+  loan_term INT NOT NULL, -- Plazo del préstamo (en meses o años, según definas)
+  requested_at BIGINT NOT NULL, -- Fecha y hora en formato timestamp
+  status ENUM('Pendiente', 'Aprobada', 'Rechazada') NOT NULL, -- Estado de la solicitud
+  documentation_path VARCHAR(255), -- Link donde se subirá el archivo PDF
+  FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE -- Relación con la tabla accounts
+);
+
+-- Tabla de solicitudes de modificacion informacion y contraseña
+CREATE TABLE IF NOT EXISTS request_change_info (
+  id INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único
+  account_id INT NOT NULL, -- Relación con la tabla de cuentas
+  type ENUM("Informacion", "Password") NOT NULL
+);
+-- Tabla de empleados eliminados
+CREATE TABLE IF NOT EXISTS employee_terminations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_user INT NOT NULL,
+  reason VARCHAR(255) NOT NULL,
+  signature_admin VARCHAR(255) NOT NULL,
+  created_at BIGINT NOT NULL,
+  status ENUM('Activo', 'Pendiente', 'Eliminado') NOT NULL DEFAULT 'Activo',
+  name_adm VARCHAR(100) NOT NULL,
+  phone_adm VARCHAR(15) NOT NULL,
+  email_adm VARCHAR(100) NOT NULL;
+  FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE
 );

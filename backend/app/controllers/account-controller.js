@@ -13,16 +13,14 @@ import { Op } from "sequelize";
 
 dotenv.config();
 
-
-
 const getBalance = async (req, res) => {
 
-    const UserModel = req.userModel;
+    const { id } = req.params;
 
     try {
         const accountModel = await AccountModel.findOne({
             where: {
-                account_number: UserModel.account_number
+                account_number: id
             }
         })
 
@@ -340,7 +338,7 @@ const registroQuejas = async (req, res) => {
 const createEmployee = async (req, res) => {
     try {
         console.log(req.photoPath)
-        console.log(req.pdfPath)
+        console.log(req.pdfPath) //pdf
         const {
             fullName,
             phone,
@@ -353,12 +351,10 @@ const createEmployee = async (req, res) => {
             signature
         } = req.body;
 
-        req.pdfboyd //pdf
+
 
         console.log(fullName)
         console.log(marital_status)
-
-
 
 
         // Valicadion de parametros obligatorios
@@ -447,7 +443,7 @@ const createEmployee = async (req, res) => {
             gender: gender,
             marital_status: marital_status,
             signature_path: "https://money-bin-group2.s3.us-east-1.amazonaws.com/signature/test.png",
-            second_password_hash: "",
+            second_password_hash: hashedPassword,
             created_at: currentDate
         });
 
@@ -492,12 +488,8 @@ const createAdmin = async (req, res) => {
             return res.status(400).json({ message: 'Genero invalido' });
         }
 
-        // Verificar genero
-        if (!["Masculino", "Femenino", "otro"].includes(gender)) {
-            return res.status(400).json({ message: 'Genero invalido' });
-        }
 
-        // Verificar genero
+        // Verificar estado
         if (!["Soltero", "Casado", "Divorciado", "Viudo", "Otro"].includes(marital_status)) {
             return res.status(400).json({ message: 'Estado civil invalido' });
         }
@@ -671,6 +663,157 @@ const exchangeCurrency = async (req, res) => {
     }
 };
 
+const sentPetitionPassword = async (req, res) => {
+
+}
+
+const changePassword = async (req, res) => {
+
+    const {
+        user_name
+    } = req.body;
+
+
+    //Validar campos
+    if (!user_name) {
+        return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+    }
+
+
+    //Genero una nueva contraseña
+    //generar contraseña
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+    let password = '';
+    for (let i = 0; i < 16; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        password += characters[randomIndex];
+    }
+
+    //Encriptar contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    //Validar que exista el usuario
+    const userModel = await UserModel.findOne({
+        where: {
+            user_name: user_name
+        }
+    });
+
+    if (!userModel) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+
+    //Cambiar contraseña en base de datos
+    userModel.password = hashedPassword
+    userModel.second_password_hash = hashedPassword
+    await userModel.save();
+
+
+    //Enviar notificacion al correo del usuario
+    const detalle = "Se le ha cambiado su contraseña por la siguiente: " + password
+    const contenido = "<p>" + detalle + "</p>"
+
+    const info = await sendEmail(userModel.email, "Acceso", detalle, contenido)
+
+
+    //Enviar respuesta al frontend
+    return res.status(200).json({ message: 'User updated successfully', user: userModel });
+
+
+
+}
+
+
+
+const getEmpleados = async (req, res) => {
+
+    //Obtener informacion de todos los empleados
+    try {
+        const empleados = await UserModel.findAll({
+            where: {
+
+                role: { [Op.ne]: "Supervisor" }
+
+            }
+        })
+
+        return res.status(200).json({ empleados: empleados })
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal server error." });
+    }
+
+
+
+
+}
+
+const changeInfo = async (req, res) => {
+
+    try{
+        const {
+            user_name, //para buscar el empleado
+            name,
+            phone,
+            email,
+            gender,
+            estado_civil
+    
+        } = req.body
+    
+        //Validar campos
+        if (!user_name || !name || !phone || !email || !gender || !estado_civil) {
+            return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+        }
+    
+        // Verificar genero
+        if (!["Masculino", "Femenino", "Otro"].includes(gender)) {
+            return res.status(400).json({ message: 'Genero invalido' });
+        }
+    
+    
+        // Verificar estado
+        if (!["Soltero", "Casado", "Divorciado", "Viudo", "Otro"].includes(estado_civil)) {
+            return res.status(400).json({ message: 'Estado civil invalido' });
+        }
+    
+        //Validar existencia dl usuariio
+        const user = await UserModel.findOne({
+            where: {
+                user_name: user_name
+            }
+        })
+    
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        console.log(req.photoPath)
+        //Cambiar los datos
+        user.name = name
+        user.phone = phone
+        user.email = email
+        user.photo_path = req.photoPath
+        user.gender = gender
+        user.marital_status = estado_civil
+        await user.save();
+    
+    
+        //Enviar respuesta al frontend
+        return res.status(200).json({ message: 'User updated successfully', user: user });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal server error.", message: error });
+    }
+
+    
+
+
+
+}
+
 export {
     getBalance,
     getSecurityQuestionByAccountNumber,
@@ -680,5 +823,8 @@ export {
     registroQuejas,
     createEmployee,
     createAdmin,
-    exchangeCurrency
+    exchangeCurrency,
+    changePassword,
+    changeInfo,
+    getEmpleados
 }

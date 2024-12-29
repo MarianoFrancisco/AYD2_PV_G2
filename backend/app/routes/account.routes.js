@@ -8,7 +8,10 @@ import {
     registroQuejas,
     createEmployee,
     createAdmin,
-    exchangeCurrency
+    exchangeCurrency,
+    changePassword,
+    getEmpleados,
+    changeInfo
 } from "../controllers/account-controller.js"
 import validateUserById from '../middleware/validate-user-middleware.js';
 import imageUpload from '../middleware/image-middleware.js';
@@ -26,6 +29,8 @@ router.get('/security-question', getSecurityQuestionByAccountNumber);
 router.get('/photography', getPhotographyPathByAccountNumber);
 router.post("/createAccount", imageUpload.single('photo'), uploadImageHandler, createAccount)
 router.post("/registrarQueja", imageUpload.single('photo'), registroQuejas)
+router.post("/changePassword", imageUpload.single('photo'), changePassword)
+router.post("/changeInfo", imageUpload.single("photo"),uploadImageHandler, changeInfo)
 router.post("/registrarEmpleado",
     upload.fields([
         { name: 'photo', maxCount: 1 },
@@ -42,5 +47,6 @@ router.post('/registrarAdmin',
     createAdmin)
 router.patch('/update', imageUpload.single('photo'), uploadImageHandler, updateAccountInfo);
 router.post('/exchange-coin', exchangeCurrency)
+router.get("/getEmpleados", getEmpleados)
 
 export default router;

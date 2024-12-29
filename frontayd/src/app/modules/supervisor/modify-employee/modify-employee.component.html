@@ -1,0 +1,145 @@
+<div class="container mx-auto p-6 max-w-4xl bg-gray-50 rounded-lg shadow-md mt-10">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    Modificación de Información de Empleados
+  </h1>
+
+  <div *ngIf="employeeRequests.length === 0" class="text-center text-gray-600">
+    <p>No hay solicitudes pendientes.</p>
+  </div>
+
+  <ul
+    *ngIf="employeeRequests.length > 0"
+    class="space-y-4 border-t border-gray-200 pt-4"
+  >
+    <li
+      *ngFor="let request of employeeRequests"
+      class="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition"
+    >
+      <div>
+        <p class="text-lg font-medium text-gray-800">{{ request.name }}</p>
+        <p class="text-sm text-gray-600">{{ request.role }}</p>
+      </div>
+      <button
+        (click)="selectEmployee(request)"
+        class="bg-blue-500 text-white font-medium px-4 py-2 rounded hover:bg-blue-600 transition"
+      >
+        Editar
+      </button>
+    </li>
+  </ul>
+
+  <!-- Formulario de edición -->
+  <div *ngIf="selectedEmployee" class="bg-white mt-6 p-6 rounded-lg shadow-md">
+    <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">
+      Editando: {{ selectedEmployee.name }}
+    </h2>
+
+<div class="mb-6 text-center">
+  <img
+    *ngIf="currentPhotoPath"
+    [src]="currentPhotoPath"
+    alt="Foto de {{ selectedEmployee.name }}"
+    class="w-32 h-32 object-cover rounded-full mx-auto shadow-md"
+  />
+</div>
+
+
+    <form
+      [formGroup]="employeeForm"
+      (ngSubmit)="submitUpdate()"
+      class="space-y-4"
+    >
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">
+          Nombre
+        </label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          class="border rounded-lg w-full p-2 focus:ring focus:ring-blue-200"
+        />
+      </div>
+
+      <div>
+        <label for="phone" class="block text-sm font-medium text-gray-700">
+          Teléfono
+        </label>
+        <input
+          id="phone"
+          type="text"
+          formControlName="phone"
+          class="border rounded-lg w-full p-2 focus:ring focus:ring-blue-200"
+        />
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">
+          Email
+        </label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          class="border rounded-lg w-full p-2 focus:ring focus:ring-blue-200"
+        />
+      </div>
+
+      <div>
+        <label for="gender" class="block text-sm font-medium text-gray-700">
+          Género
+        </label>
+        <select
+          id="gender"
+          formControlName="gender"
+          class="border rounded-lg w-full p-2 focus:ring focus:ring-blue-200"
+        >
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
+      </div>
+
+      <div>
+        <label
+          for="estado_civil"
+          class="block text-sm font-medium text-gray-700"
+        >
+          Estado Civil
+        </label>
+        <select
+          id="estado_civil"
+          formControlName="estado_civil"
+          class="border rounded-lg w-full p-2 focus:ring focus:ring-blue-200"
+        >
+          <option value="Soltero">Soltero</option>
+          <option value="Casado">Casado</option>
+          <option value="Divorciado">Divorciado</option>
+          <option value="Viudo">Viudo</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="photo" class="block text-sm font-medium text-gray-700">
+          Foto
+        </label>
+        <input
+          id="photo"
+          type="file"
+          (change)="onFileChange($event)"
+          class="block w-full text-sm text-gray-500 border rounded-lg p-2 focus:ring focus:ring-blue-200"
+        />
+      </div>
+      
+
+      <div class="text-right">
+        <button
+          type="submit"
+          class="bg-green-500 text-white font-medium px-4 py-2 rounded hover:bg-green-600 transition"
+        >
+          Guardar Cambios
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

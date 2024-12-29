@@ -1,0 +1,12 @@
+*.tfstate
+*.tfstate.backup
+*.tfvars
+crash.log
+*.tfplan
+terraform.tfstate.d/
+.terraform/
+
+.DS_Store
+Thumbs.db
+
+credentials.json

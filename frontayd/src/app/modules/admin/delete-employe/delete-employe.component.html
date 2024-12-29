@@ -1,0 +1,31 @@
+<div class="container mx-auto">
+  <h1 class="text-3xl font-semibold mb-6 text-center text-blue-600">Solicitud para eliminar Empleados Money Bin</h1>
+
+  <div>
+    <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+      <thead>
+        <tr>
+          <th class="px-6 py-4 text-left">Nombre</th>
+          <th class="px-6 py-4 text-left">Rol</th>
+          <th class="px-6 py-4 text-left">Creado</th>
+          <th class="px-6 py-4 text-left">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of data; track $index) {
+        <tr>
+          <td class="px-6 py-4">{{item.name}}</td>
+          <td class="px-6 py-4">{{item.role}}</td>
+          <td class="px-6 py-4">{{ convertirFecha(item.created_at) }}</td>
+          <td class="px-6 py-4">
+            <div class="flex gap-2">
+              <button class="bg-red-500 text-white px-4 py-2 rounded-lg"
+                (click)="deleteOnlyAdmins(item)">Eliminar</button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

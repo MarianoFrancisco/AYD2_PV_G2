@@ -17,4 +17,23 @@ export interface Admins {
     "second_password_updated_at": number,
     "created_at": number
 }
-  
+
+export interface Employees {
+    "id_admin": number,
+    "id_user": number,
+    "reason": string,
+    "created_at": number
+}
+
+export interface EliminaList {
+    "id": number,
+    "id_user": number,
+    "reason": string,
+    "signature_admin": string,
+    "created_at": number,
+    "status": string,
+    "name_adm": string,
+    "phone_adm": string,
+    "email_adm": string
+}
+

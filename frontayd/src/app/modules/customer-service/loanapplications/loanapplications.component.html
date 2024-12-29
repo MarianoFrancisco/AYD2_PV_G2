@@ -1,0 +1,114 @@
+<div class="container mx-auto p-4 max-w-lg bg-gray-50 rounded-lg shadow-lg mt-3">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Solicitud de Préstamo</h1>
+  
+    <form (ngSubmit)="submitLoanApplication()" class="space-y-6">
+      <div>
+        <label for="accountId" class="block text-sm font-semibold text-gray-700 mb-2">ID de Cuenta</label>
+        <input
+          id="accountId"
+          [(ngModel)]="accountId"
+          name="accountId"
+          type="text"
+          required
+          placeholder="Ingrese el ID de cuenta"
+          class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring focus:ring-blue-300"
+        />
+      </div>
+  
+      <div>
+        <label for="typeLoan" class="block text-sm font-semibold text-gray-700 mb-2">Tipo de Préstamo</label>
+        <select
+          id="typeLoan"
+          [(ngModel)]="typeLoan"
+          name="typeLoan"
+          required
+          class="w-full border border-gray-300 rounded-lg p-3 bg-white focus:outline-none focus:ring focus:ring-blue-300"
+        >
+          <option value="" disabled selected>Seleccione un tipo de préstamo</option>
+          <option value="Personal">Personal</option>
+          <option value="Hipotecario">Hipotecario</option>
+          <option value="Vehicular">Vehicular</option>
+          <option value="Educativo">Educativo</option>
+        </select>
+      </div>
+  
+      <div>
+        <label for="mount" class="block text-sm font-semibold text-gray-700 mb-2">Monto</label>
+        <input
+          id="mount"
+          [(ngModel)]="mount"
+          name="mount"
+          type="number"
+          required
+          placeholder="Ingrese el monto solicitado"
+          class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring focus:ring-blue-300"
+        />
+      </div>
+  
+      <div>
+        <label for="tiempo" class="block text-sm font-semibold text-gray-700 mb-2">Tiempo</label>
+        <input
+          id="tiempo"
+          [(ngModel)]="tiempo"
+          name="tiempo"
+          type="number"
+          required
+          placeholder="Ingrese el tiempo en números"
+          class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring focus:ring-blue-300"
+        />
+      </div>
+  
+      <div>
+        <label for="plazo" class="block text-sm font-semibold text-gray-700 mb-2">Plazo</label>
+        <select
+          id="plazo"
+          [(ngModel)]="plazo"
+          name="plazo"
+          required
+          class="w-full border border-gray-300 rounded-lg p-3 bg-white focus:outline-none focus:ring focus:ring-blue-300"
+        >
+          <option value="" disabled selected>Seleccione el plazo</option>
+          <option value="Años">Años</option>
+          <option value="Meses">Meses</option>
+        </select>
+      </div>
+  
+      <div>
+        <label for="pdf" class="block text-sm font-semibold text-gray-700 mb-2">Archivo PDF</label>
+        <input
+          id="pdf"
+          type="file"
+          (change)="handleFileInput($event)"
+          accept="application/pdf"
+          class="block w-full text-sm text-gray-500
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-lg file:border-0
+            file:text-sm file:font-semibold
+            file:bg-blue-100 file:text-blue-700
+            hover:file:bg-blue-200"
+        />
+      </div>
+  
+      <div class="text-center">
+        <button
+          type="submit"
+          class="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded-lg shadow-md transition duration-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm13 0H5v2h10V5zM5 10h10v2H5v-2zm10 5H5v2h10v-2z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          Enviar Solicitud
+        </button>
+      </div>
+    </form>
+  </div>
+  

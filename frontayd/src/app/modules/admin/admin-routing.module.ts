@@ -5,6 +5,10 @@ import { EmployeeRegisterComponent } from './employee-register/employee-register
 import { SecurityComponent } from './security/security.component';
 import { RolesComponent } from './roles/roles.component';
 import { DasboardComponent } from './dashboard/dasboard.component';
+import { EmpleyeeAdminComponent } from './empleyee-admin/empleyee-admin.component';
+import { DeleteEmployeComponent } from './delete-employe/delete-employe.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
+import { RequestInfoComponent } from '../customer-service/request-info/request-info.component';
 const routes: Routes = [
   {
   path: 'inicio-admin', component: DasboardComponent  
@@ -17,7 +21,20 @@ const routes: Routes = [
   },
   {
     path:'roles-empelado', component: RolesComponent
+  },
+  {
+    path:'administrar-empleado', component: EmpleyeeAdminComponent
+  },
+  {
+    path:'solicitud-delete-empleado', component: DeleteEmployeComponent
+  },
+  {
+    path:'cambio-contrasena', component: PasswordChangeComponent
+  },
+  {
+    path:'solicitud-cambio-info', component: RequestInfoComponent
   }
+
 
 ];
 

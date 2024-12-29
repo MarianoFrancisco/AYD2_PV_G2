@@ -1,0 +1,231 @@
+<div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Reportes</h1>
+      
+    <!-- Filtro de búsqueda global -->
+    <div class="mb-4">
+      <input
+        type="text"
+        placeholder="Buscar..."
+        [(ngModel)]="searchQuery"
+        class="p-2 border rounded-lg w-full"
+      />
+    </div>
+  
+    <!-- Reporte de Préstamos -->
+    <div class="mb-8 p-4 border rounded-lg shadow-md bg-white">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Reporte de Préstamos</h2>
+      <div class="mb-4">
+        <label for="filtroTipoPrestamo" class="text-gray-700">Filtrar por Tipo de Préstamo:</label>
+        <select [(ngModel)]="selectedTipoPrestamo" id="filtroTipoPrestamo" class="p-2 border rounded-lg w-full">
+          <option value="">Todos</option>
+          <option *ngFor="let tipo of tiposPrestamos" [value]="tipo">{{ tipo }}</option>
+        </select>
+      </div>
+      <input
+        type="text"
+        placeholder="Buscar Préstamo..."
+        [(ngModel)]="searchPrestamos"
+        class="p-2 mb-4 border rounded-lg w-full"
+      />
+      <table class="w-full table-auto border-collapse">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="px-4 py-2 text-left font-semibold">Número de Cuenta</th>
+            <th class="px-4 py-2 text-left font-semibold">Tipo de Préstamo</th>
+            <th class="px-4 py-2 text-left font-semibold">Monto Total</th>
+            <th class="px-4 py-2 text-left font-semibold">Saldo Restante</th>
+            <th class="px-4 py-2 text-left font-semibold">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prestamo of filteredPrestamos()" class="border-t">
+            <td class="px-4 py-2">{{ prestamo.Account_number }}</td>
+            <td class="px-4 py-2">{{ prestamo.loand_type }}</td>
+            <td class="px-4 py-2">{{ prestamo.total_amount }}</td>
+            <td class="px-4 py-2">{{ prestamo.remaining_balance }}</td>
+            <td class="px-4 py-2">{{ prestamo.state }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Reporte de Solicitudes -->
+    <div class="mb-8 p-4 border rounded-lg shadow-md bg-white">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Reporte de Solicitudes</h2>
+      <div class="mb-4">
+        <label for="filtroTipoSolicitud" class="text-gray-700">Filtrar por Tipo de Solicitud:</label>
+        <select [(ngModel)]="selectedTipoSolicitud" id="filtroTipoSolicitud" class="p-2 border rounded-lg w-full">
+          <option value="">Todos</option>
+          <option *ngFor="let tipo of tiposSolicitudes" [value]="tipo">{{ tipo }}</option>
+        </select>
+      </div>
+      <input
+        type="text"
+        placeholder="Buscar Solicitudes..."
+        [(ngModel)]="searchSolicitudes"
+        class="p-2 mb-4 border rounded-lg w-full"
+      />
+      <div *ngIf="reporteSolicitudes">
+        <!-- Cambios de Información -->
+        <div class="mb-4">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Cambios de Información</h3>
+          <table class="w-full table-auto border-collapse">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-4 py-2 text-left font-semibold">Nombre</th>
+                <th class="px-4 py-2 text-left font-semibold">Tipo de Solicitud</th>
+                <th class="px-4 py-2 text-left font-semibold">Fecha de Solicitud</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cambio of filteredCambios()" class="border-t">
+                <td class="px-4 py-2">{{ cambio.name }}</td>
+                <td class="px-4 py-2">{{ cambio.type_request }}</td>
+                <td class="px-4 py-2">{{ cambio.created_at }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  
+        <!-- Solicitudes de Préstamos -->
+        <div class="mb-4">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Solicitudes de Préstamos</h3>
+          <table class="w-full table-auto border-collapse">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-4 py-2 text-left font-semibold">Nombre</th>
+                <th class="px-4 py-2 text-left font-semibold">Tipo de Préstamo</th>
+                <th class="px-4 py-2 text-left font-semibold">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let prestamo of filteredPrestamosSolicitudes()" class="border-t">
+                <td class="px-4 py-2">{{ prestamo.name }} {{ prestamo.last_name }}</td>
+                <td class="px-4 py-2">{{ prestamo.type_loan }}</td>
+                <td class="px-4 py-2">{{ prestamo.status }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  
+        <!-- Cancelaciones -->
+        <div class="mb-4">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Cancelaciones</h3>
+          <table class="w-full table-auto border-collapse">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-4 py-2 text-left font-semibold">Nombre</th>
+                <th class="px-4 py-2 text-left font-semibold">Tipo de Cancelación</th>
+                <th class="px-4 py-2 text-left font-semibold">Fecha de Solicitud</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cancelacion of filteredCancelaciones()" class="border-t">
+                <td class="px-4 py-2">{{ cancelacion.name }} {{ cancelacion.last_name }}</td>
+                <td class="px-4 py-2">{{ cancelacion.type }}</td>
+                <td class="px-4 py-2">{{ cancelacion.created_at }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  
+        <!-- Solicitudes de Tarjetas -->
+        <div class="mb-4">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Solicitudes de Tarjetas</h3>
+          <table class="w-full table-auto border-collapse">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-4 py-2 text-left font-semibold">Nombre</th>
+                <th class="px-4 py-2 text-left font-semibold">Tipo de Tarjeta</th>
+                <th class="px-4 py-2 text-left font-semibold">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let card of filteredCards()" class="border-t">
+                <td class="px-4 py-2">{{ card.name }} {{ card.last_name }}</td>
+                <td class="px-4 py-2">{{ card.card_type }}</td>
+                <td class="px-4 py-2">{{ card.status }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Reporte de Transacciones -->
+    <div class="p-4 border rounded-lg shadow-md bg-white">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Reporte de Transacciones</h2>
+      <input
+        type="text"
+        placeholder="Buscar Transacciones..."
+        [(ngModel)]="searchTransacciones"
+        class="p-2 mb-4 border rounded-lg w-full"
+      />
+      <table class="w-full table-auto border-collapse">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="px-4 py-2 text-left font-semibold">Número de Cuenta</th>
+            <th class="px-4 py-2 text-left font-semibold">Nombre</th>
+            <th class="px-4 py-2 text-left font-semibold">Pago de Servicio Total</th>
+            <th class="px-4 py-2 text-left font-semibold">Pago de Préstamos Total</th>
+            <th class="px-4 py-2 text-left font-semibold">Pago de Crédito Total</th>
+            <th class="px-4 py-2 text-left font-semibold">Retiro Total</th>
+            <th class="px-4 py-2 text-left font-semibold">Depósito Total</th>
+            <th class="px-4 py-2 text-left font-semibold">Transacción Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaccion of filteredTransacciones()" class="border-t">
+
+            <td class="px-4 py-2">{{ transaccion.account_number }}</td>
+            <td class="px-4 py-2">{{ transaccion.name }} {{ transaccion.last_name }}</td>
+            <td class="px-4 py-2">{{ transaccion.pago_servicio_total }}</td>
+            <td class="px-4 py-2">{{ transaccion.pago_prestamos_total }}</td>
+            <td class="px-4 py-2">{{ transaccion.pago_credito_total }}</td>
+            <td class="px-4 py-2">{{ transaccion.retiro_total }}</td>
+            <td class="px-4 py-2">{{ transaccion.deposito_total }}</td>
+            <td class="px-4 py-2">{{ transaccion.dinero_total_cuenta }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex flex-row justify-between space-x-8 mb-8">
+        <!-- Gráfico de Distribución de Tipos de Préstamos -->
+        <div class="w-1/2 p-4 border rounded-lg shadow-md bg-white">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Distribución de Tipos de Préstamos</h2>
+          <ngx-charts-bar-vertical
+            [results]="prestamosTipoChartData"
+            [scheme]="colorScheme"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showDataLabel]="true"
+            [animations]="true"
+            [yAxisLabel]="'Cantidad'"
+            [xAxisLabel]="'Tipo de Préstamo'"
+          >
+          </ngx-charts-bar-vertical>
+        </div>
+        
+        <!-- Gráfico de Monto Total de Transacciones -->
+        <div class="w-1/2 p-4 border rounded-lg shadow-md bg-white">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Monto Total de Transacciones</h2>
+          <ngx-charts-bar-vertical
+            [results]="transaccionesMontoChartData"
+            [scheme]="colorScheme"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showDataLabel]="true"
+            [animations]="true"
+            [yAxisLabel]="'Monto Total'"
+            [xAxisLabel]="'Transacción'"
+            [yAxisTicks]="[0, 1000, 2000, 3000, 4000]"
+          >
+          </ngx-charts-bar-vertical>
+        </div>
+           
+      </div> 
+  </div>
+  
