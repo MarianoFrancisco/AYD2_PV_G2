@@ -15,6 +15,7 @@ import { ModifyEmployeeComponent } from './modify-employee/modify-employee.compo
 import { ReportesComponent } from './reportes/reportes.component';
 import { DeleteEmployeComponent } from './delete-employe/delete-employe.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { LoanApproveLoansComponent } from './loan-approve-loans/loan-approve-loans.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -32,7 +33,8 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
     ModifyEmployeeComponent,
     ReportesComponent,
     DeleteEmployeComponent,
-    PasswordChangeComponent
+    PasswordChangeComponent,
+    LoanApproveLoansComponent
   ]
 })
 export class SupervisorModule { }

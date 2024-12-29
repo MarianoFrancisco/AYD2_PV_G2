@@ -55,6 +55,11 @@
         <p class="mt-2 text-gray-600">Aprueba tarjetas de credito o monetarias para los clientes.</p>
         <a routerLink="/supervisor/prestamos-aprobar-tarjetas" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
       </div>
+      <div class="bg-blue-100 p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <h2 class="text-xl font-semibold text-blue-600">Aprobar Prestamos</h2>
+        <p class="mt-2 text-gray-600">Aprueba prestamos para los clientes.</p>
+        <a routerLink="/supervisor/prestamos-aprobar-prestamos" class="mt-4 inline-block text-blue-500 hover:underline">Ver más</a>
+      </div>
       <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
         <h2 class="text-xl font-semibold">Modificar Empleado</h2>
         <p class="mt-2 text-gray-600">Modifica o actualiza la informacion de los empleados.</p>
@@ -63,12 +68,12 @@
 
       <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
         <h2 class="text-xl font-semibold">Eliminar Empleado</h2>
-        <p class="mt-2 text-gray-600">Crea una solicitud para el administrador para eliminar empleado.</p>
+        <p class="mt-2 text-gray-600">Solicitudes para eliminar empleado.</p>
         <button [routerLink]="['/supervisor/solicitud-delete-empleado']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
       </div>
       <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
         <h2 class="text-xl font-semibold">Cambiar Contraseña</h2>
-        <p class="mt-2 text-gray-600">Crea una solicitud para el administrador para cambiar contraseña a empleado.</p>
+        <p class="mt-2 text-gray-600">Solicitudes para cambiar contraseña a empleado.</p>
         <button [routerLink]="['/supervisor/solicitud-pass-empleado']" routerLinkActive="router-link-active"  class="mt-4 inline-block text-blue-500 hover:underline">Ver más</button>
       </div>
     </div>
