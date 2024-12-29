@@ -21,6 +21,16 @@ export default {
         },
         testMatch: ['**/tests/integration/**/*.test.js'],
       },
+      {
+        displayName: 'acceptance',
+        testEnvironment: 'node',
+        moduleFileExtensions: ['js', 'json'],
+        setupFiles: ['<rootDir>/jest.setup.acceptance.js'],
+        transform: {
+          '^.+\\.js$': 'babel-jest',
+        },
+        testMatch: ['**/tests/acceptance/**/*.test.js'],
+      },
     ],
   };
   
