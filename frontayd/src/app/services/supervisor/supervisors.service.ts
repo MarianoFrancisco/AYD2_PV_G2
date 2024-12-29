@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Admins, Employees } from '../../interfaces/admins';
+import { Prestamos, Tarjetas } from '../../interfaces/aprobaciones';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,23 @@ export class SupervisorsService {
     return this.http.post<{message : string}>(`${this.urlApi}/account/changePassword`, formData)
   }
 
+
+//Solicitudes de prestamos
+getSolicitudLoans():Observable<Prestamos[]>{
+  return  this.http.get<Prestamos[]>(`${this.urlApi}/accept-loan/loan-requests-with-details`)
+}
+updateSolicitudLoans(data:{status:string}, id:number):Observable<{message : string}>{
+  return  this.http.put<{message : string}>(`${this.urlApi}/accept-loan/loan-request/${id}`,data)
+}
+
+
+//Solicitud de tarjetas
+getSolicitudCards():Observable<Tarjetas[]>{
+  return  this.http.get<Tarjetas[]>(`${this.urlApi}/accept-card/cards-with-accounts`)
+}
+updateSolicitudCards(data:{status:string}, id:number):Observable<{message : string}>{
+  return  this.http.put<{message : string}>(`${this.urlApi}/accept-card/card/${id}`,data)
+}
 
   getSolicitudCancelService():Observable<{empleados : Admins[]}>{
     return  this.http.get<{empleados : Admins[]}>(`${this.urlApi}/account/getEmpleados`)

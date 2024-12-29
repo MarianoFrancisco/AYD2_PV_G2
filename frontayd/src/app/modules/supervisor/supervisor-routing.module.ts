@@ -14,6 +14,7 @@ import { LoanApproveCardsComponent } from './loan-approve-cards/loan-approve-car
 import { ModifyEmployeeComponent } from './modify-employee/modify-employee.component';
 import { DeleteEmployeComponent } from './delete-employe/delete-employe.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { LoanApproveLoansComponent } from './loan-approve-loans/loan-approve-loans.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,9 @@ const routes: Routes = [
   },
   {
     path:'prestamos-aprobar-tarjetas', component: LoanApproveCardsComponent
+  },
+  {
+    path:'prestamos-aprobar-prestamos', component: LoanApproveLoansComponent
   },
   {
     path:'modificar-empleado', component: ModifyEmployeeComponent
