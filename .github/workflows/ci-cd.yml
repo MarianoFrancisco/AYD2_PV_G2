@@ -38,7 +38,7 @@ jobs:
           MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
         run: |
           cd backend
-          npm test -- --selectProjects integration --detectOpenHandles
+          npm run test:integration:individual --detectOpenHandles
 
   deploy:
     runs-on: ubuntu-latest

@@ -114,6 +114,7 @@ export const endpoints = {
     withdrawal: '/api/withdrawal',
     deposit: '/api/deposit',
     loanPayment: '/api/loan-payment',
+    servicePaymentsByAccount: '/api/payment-service/account'
 };
 
 // Roles
