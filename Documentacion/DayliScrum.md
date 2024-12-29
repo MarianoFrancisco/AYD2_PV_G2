@@ -1,3 +1,7 @@
+## Link grabaciones
+https://drive.google.com/drive/u/1/folders/1c9sxIzYM-cdVe3ueyDJ3eQL_XqenHjHE
+
+
 ### Sprint Daily Scrum Report Mariano Camposeco
 #### *Día 1: Modelado de Base de Datos*- Se analizó y modeló la base de datos considerando todas las posibilidades y requisitos del sistema.
 - Se definieron las relaciones, entidades y atributos necesarios para garantizar escalabilidad y eficiencia en las operaciones.
