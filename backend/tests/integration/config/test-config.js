@@ -151,4 +151,7 @@ export const accounts = {
 export const endpoints = {
     accounts: '/api/accounts',
     withdrawal: '/api/withdrawal',
+    deposit: '/api/deposit',
+    create_card: '/api/create-card',
+    service_payment_cashier: '/api/payment-service/cashier',
 };

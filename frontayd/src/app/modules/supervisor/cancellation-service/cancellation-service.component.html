@@ -6,6 +6,7 @@
         <thead>
           <tr>
             <th class="px-6 py-4 text-left">Cuenta</th>
+            <th class="px-6 py-4 text-left">Nombre</th>
             <th class="px-6 py-4 text-left">Servicio</th>
             <th class="px-6 py-4 text-left">Razón</th>
             <th class="px-6 py-4 text-left">Estado</th>
@@ -14,20 +15,21 @@
           </tr>
         </thead>
         <tbody>
-        <!--  @for (item of data; track $index) {
+        @for (item of data; track $index) {
           <tr>
-            <td class="px-6 py-4">{{item.account_id}}</td>
+            <td class="px-6 py-4">{{item.account_number}}</td>
+            <td class="px-6 py-4">{{item.name + ' ' + item.last_name}}</td>
             <td class="px-6 py-4">{{item.service}}</td>
             <td class="px-6 py-4">{{item.reason}}</td>
             <td class="px-6 py-4">{{item.status}}</td>
             <td class="px-6 py-4">{{ convertirFecha(item.created_at) }}</td>
             <td class="px-6 py-4">
                 <div class="flex gap-2">
-                    <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg" (click)="viewsDetails(item)">Detalles</button>
+                    <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg" (click)="validateCancel(item)">Validar</button>
                 </div>
             </td>
           </tr>
-          }-->
+        }
         </tbody>
       </table>
     </div>
