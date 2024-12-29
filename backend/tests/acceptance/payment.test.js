@@ -46,7 +46,7 @@ describe('Acceptance Test: Service Payment by Account', () => {
                 dpi: '1234567890123',
                 serviceName: 'Internet',
                 serviceCode: '654321',
-                amount: 500.00,
+                amount: 1.00,
                 id: 1
             });
 
