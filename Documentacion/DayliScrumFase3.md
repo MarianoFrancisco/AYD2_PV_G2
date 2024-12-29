@@ -236,3 +236,11 @@ Complicaciones
 
 ##### *Complicaciones:*
 - Estructura para mostrar solicitudes de cancelación de servicios
+
+## Registro kanban
+
+![kanban](../Capturas/kanban_fase3.jpg)
+
+## Link de los sprints
+
+https://drive.google.com/drive/u/1/folders/1c9sxIzYM-cdVe3ueyDJ3eQL_XqenHjHE
