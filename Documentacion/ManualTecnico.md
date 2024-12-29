@@ -113,9 +113,60 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 
 ![Caso de uso](../Capturas/F2/MoneyBin-Transacciones.jpg)
 
+## 5) Casos de Uso expandidos
 
 
-## 5) Matrices de trazabilidad
+**Caso de uso:** Pago servicios <br>
+**Actores:** Cliente, Cajero<br>
+***Descripcion: Este modulo permite a los clientes y cajeros realizar pagos de diferentes servicios como luz, internet, agua y telefono.***<br>
+***Curso normal de los eventos:*** <br>
+1. Primero el cliente y el cajero deberan iniciar sesion. <br>
+2. El cliente y el cajero deberan validar su identidad para evitar cualquier fraude. <br>
+3. El cliente y el cajero pueden elegir el servicio que desean pagar <br>
+4. Luego de realizar el pago el sistema le generar un comprobante con los detalles del pago <br>
+
+***Cursos alternos:*** <br>
+2. En caso de que no se valide correctamente la identidad del cajero o cliente no se procedera a realizar el pago. <br>
+
+--------------------------------------------------------
+
+**Caso de uso:** Validar identidad <br>
+**Actores:** Cliente, Cajero, Supervisor, Administrador de sistemas<br>
+***Descripcion:*** Este modulo permite a los clientes y cajeros realizar pagos de diferentes servicios como luz, internet, agua y telefono.<br>
+***Curso normal de los eventos:*** <br>
+1. Primero el cliente y el cajero deberan iniciar sesion. <br>
+2. El cliente y el cajero deberan validar su identidad para evitar cualquier fraude. <br>
+3. El cliente y el cajero pueden elegir el servicio que desean pagar <br>
+4. Luego de realizar el pago el sistema le generar un comprobante con los detalles del pago <br>
+
+------------------------------------------
+
+**Caso de uso:** Aprobacion de solicitudes <br>
+**Actores:** Administrador de sistemas<br>
+**Descripcion:** Este modulo permite a los administradores aprobar solicitudes de prestamos, solicitudes de tarjetas y solicitudes de cancelacion de servicios.<br>
+**Curso normal de los eventos:** <br>
+1. Primero el administrador de sistemas debera iniciar sesion <br>
+2. El administrador de sistemas debera validar su identidad para evitar cualquier fraude. <br>
+3. El administrador revisara las solicitudes, podra ver cualquier papeleria que haya sido enviada, informacion de los clientes como saldos pendientes. <br>
+4. El administrador podra aceptar la solicitud recibida. <br> 
+***Cursos alternos:*** <br>
+2) En caso de que el papeleo este incorrecto o haya algun saldo pendient el administrador rechazara la solicitud enviada. <br>
+-------------------------------------
+
+**Caso de uso:** Monitoreo en tiempo real<br>
+**Actores:** Supervisor<br>
+**Descripcion:** Este modulo permite a los supervisores monitorear datos de inventario y actividades que realicen los administradores y empleados<br>
+**Curso normal de los eventos:** <br>
+1. Primero el supervisor debera iniciar sesion para acceder a este modulo.<br>
+2. El administrador podra recibir alertas automaticas de las actividades de los empleados y administradores<br>
+3. El supervisor podra filtrar por fecha, empleado o actividad para buscar mas facilmente la informacion a monitorear <br>
+
+
+
+
+
+
+## 6) Matrices de trazabilidad
 
 ### Stakeholder vrs Requerimientos
 
@@ -130,7 +181,7 @@ Así mismo, el sistema incluye módulos diseñados para futuras adaptaciones, al
 ![Caso de uso](../Capturas/RequerimientoCDUF.jpg)
 
 
-## 6) Selección del o los Estilos Arquitectónicos
+## 7) Selección del o los Estilos Arquitectónicos
 
 El banco **Money Bin** requiere un diseño arquitectónico que cumpla o se alinee con las metas del banco, como son la seguridad, rendimiento, modernidad, etc. Para ello, se optó por un estilo arquitectónico basado en **capas**.
 
@@ -175,13 +226,13 @@ Al separar las responsabilidades en capas especificas, se mejora la modularidad 
 
 Los clientes y encargados/empleados podran ejecutar su aplicacion de manera local en su PC con acceso a internet y este podra visualizarse en Angular, al momento de realizar las peticiones se haran por medio de un servidor API Rest alojado en Nodejs. La base de datos se encuentra alojada en un servicio RDS de AWS.
 
-## 7) Diagrama de despliegue y componentes
+## 8) Diagrama de despliegue y componentes
 
 ![Entidad relacion](../Capturas/DiagramaDespliegueV3.png)
 
 ![Entidad relacion](../Capturas/DiagramadeComponenteFinal.png)
 
-## 8) Diagrama entidad relacion
+## 9) Diagrama entidad relacion
 
 ![Entidad relacion](../Capturas/F2/V2ENTITY.png)
 **Link:**  [Link](https://drive.google.com/file/d/1K6XSIMpArZHsAqhgD7s1YcEdYW7MxlCb/view?usp=sharing)
