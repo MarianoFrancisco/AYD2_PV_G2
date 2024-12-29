@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - development
 
 jobs:
   setup-and-tests:
@@ -39,6 +40,17 @@ jobs:
         run: |
           cd backend
           npm run test:integration:individual --detectOpenHandles
+
+      - name: Run Integration Tests
+        env:
+          MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
+        run: |
+          cd backend
+          npm run test:acceptance --detectOpenHandles
 
   deploy:
     runs-on: ubuntu-latest
