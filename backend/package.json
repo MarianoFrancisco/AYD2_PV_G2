@@ -10,7 +10,8 @@
     "test": "jest",
     "test:unit": "jest --selectProjects=unit",
     "test:integration": "jest --selectProjects=integration",
-    "test:integration:individual": "node run-integration-tests.js"
+    "test:integration:individual": "node run-integration-tests.js",
+    "test:acceptance": "jest tests/acceptance --runInBand --detectOpenHandles"
   },
   "repository": {
     "type": "git",
