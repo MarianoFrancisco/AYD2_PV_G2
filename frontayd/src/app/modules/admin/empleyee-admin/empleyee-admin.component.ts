@@ -43,7 +43,7 @@ export class EmpleyeeAdminComponent {
   }
 
   deleteAdmins(id: number) {
-    this.adminsService.deleteEmployes(id).subscribe({
+    this.adminsService.deleteEmployes({id_user:id}).subscribe({
       next: (data) => {
         console.log(data)
         Swal.fire({
