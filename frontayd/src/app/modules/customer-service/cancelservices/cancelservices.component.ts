@@ -30,27 +30,34 @@ export class CancelservicesComponent {
 
   cancelService() {
     const values = this.serviceForm.value;
-
-    if (values.account_id != '' && values.reason != '' && values.service != '') {
+  
+    if (values.account_id && values.reason && values.service) {
+      this.data = {
+        account_id: values.account_id,
+        reason: values.reason,
+        service: values.service,
+      };
+  
       this.cancerlServices.createCancelService(this.data).subscribe({
         next: (data) => {
-          console.log(data)
-          this.limpiarForm()
+          console.log(data);
+          this.limpiarForm();
           Swal.fire({
             icon: 'success',
             title: 'Cancelación de Servicio',
-            text: 'Solicitud de cancelación creada con exito.'
+            text: 'Solicitud de cancelación creada con éxito.'
           });
         },
         error: (error) => {
-          this.limpiarForm()
+          console.error(error);
+          this.limpiarForm();
           Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'No se ha podido crear la solicitud, intentalo de nuevo.'
+            text: 'No se ha podido crear la solicitud, inténtalo de nuevo.'
           });
         }
-      })
+      });
     } else {
       Swal.fire({
         icon: 'error',
@@ -58,8 +65,7 @@ export class CancelservicesComponent {
         text: 'No has ingresado todos los datos.'
       });
     }
-
-  }
+  }  
 
   limpiarForm() {
     this.serviceForm.patchValue({
